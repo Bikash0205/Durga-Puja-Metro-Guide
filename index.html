@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kolkata Durga Puja Guide</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #FFF8F0; /* A warm, festive off-white */
+        }
+        .metro-blue { background-color: #3B82F6; color: white; }
+        .metro-orange { background-color: #F97316; color: white; }
+        .metro-purple { background-color: #8B5CF6; color: white; }
+        .metro-green { background-color: #10B981; color: white; }
+        .metro-all { background-color: #4B5563; color: white; }
+
+        .pandal-card {
+            border-left-width: 6px;
+            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+            display: flex;
+            flex-direction: column;
+        }
+        .pandal-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        .card-border-blue { border-color: #3B82F6; }
+        .card-border-orange { border-color: #F97316; }
+        .card-border-purple { border-color: #8B5CF6; }
+        .card-border-green { border-color: #10B981; }
+        
+        .filter-btn {
+            transition: all 0.2s ease-in-out;
+        }
+        .filter-btn:hover {
+            transform: scale(1.05);
+        }
+        .filter-btn.active {
+            transform: scale(1.1);
+            box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.5);
+            font-weight: bold;
+        }
+        
+        .zone-heading {
+            grid-column: 1 / -1;
+            color: #C2410C;
+            border-bottom: 2px solid #FDBA74;
+            padding-bottom: 0.5rem;
+            margin-top: 1rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        /* Modal styles */
+        .modal-overlay {
+            transition: opacity 0.3s ease-in-out;
+        }
+        .modal-content {
+            transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+        }
+    </style>
+</head>
+<body class="antialiased">
+    <div class="container mx-auto p-4 sm:p-6 lg:p-8">
+        <header class="relative text-center mb-8">
+            <h1 class="text-4xl md:text-5xl font-bold text-red-800 tracking-tight">Kolkata Durga Puja Guide</h1>
+            <p class="mt-3 text-lg text-gray-600">Explore North & South pandals near you.</p>
+            <div class="absolute top-0 right-0">
+                <button id="about-btn" class="bg-white/80 backdrop-blur-sm text-red-800 font-semibold py-2 px-4 rounded-full shadow-md hover:bg-white transition-colors">About</button>
+            </div>
+        </header>
+
+        <!-- Filter Buttons -->
+        <div id="filters" class="flex flex-wrap justify-center gap-3 mb-8">
+            <button class="filter-btn active metro-all font-semibold py-2 px-6 rounded-full shadow-lg" data-line="all">All Lines</button>
+            <button class="filter-btn metro-blue font-semibold py-2 px-6 rounded-full shadow-lg" data-line="Blue">Blue Line</button>
+            <button class="filter-btn metro-green font-semibold py-2 px-6 rounded-full shadow-lg" data-line="Green">Green Line</button>
+            <button class="filter-btn metro-orange font-semibold py-2 px-6 rounded-full shadow-lg" data-line="Orange">Orange Line</button>
+            <button class="filter-btn metro-purple font-semibold py-2 px-6 rounded-full shadow-lg" data-line="Purple">Purple Line</button>
+        </div>
+
+        <!-- Pandal Grid -->
+        <div id="pandal-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Pandal cards will be inserted here by JavaScript -->
+        </div>
+    </div>
+    
+    <!-- About Modal -->
+    <div id="about-modal-overlay" class="modal-overlay fixed inset-0 bg-black bg-opacity-60 flex justify-center items-center p-4 hidden z-50">
+        <div id="about-modal-content" class="modal-content bg-white rounded-2xl shadow-2xl p-6 md:p-8 w-full max-w-md text-center transform scale-95 opacity-0">
+            <h2 class="text-3xl font-bold text-gray-800 mb-4">Pandal Guide</h2>
+            <p class="text-gray-600 leading-relaxed mb-6">This guide is designed to help you navigate the beautiful chaos of Kolkata's Durga Puja. Explore pandals, plan your trip, and enjoy the festivities!</p>
+            <p class="text-md font-semibold text-gray-900">Created by Bikash Kumar Yadav</p>
+            <button id="close-about-btn" class="mt-8 bg-red-700 text-white font-bold py-2 px-8 rounded-full hover:bg-red-800 transition-colors">Close</button>
+        </div>
+    </div>
+
+    <script>
+        const pandals = [
+            // North Kolkata
+            { id: 101, zone: 'North', name: "Bagbazar Sarbojanin", location: "Bagbazar", attraction: "One of the oldest traditional pujas with a carnival atmosphere.", line: "Blue", station: "Shyambazar", accessibility: "5-min walk", mapLink: "https://www.google.com/maps/search/?api=1&query=Bagbazar+Sarbojanin+Durgotsav" },
+            { id: 102, zone: 'North', name: "Kumartuli Park", location: "Kumartuli", attraction: "Artistic themes set in the heart of the idol-makers' colony.", line: "Blue", station: "Sovabazar Sutanuti", accessibility: "10-min walk", mapLink: "https://www.google.com/maps/search/?api=1&query=Kumartuli+Park+Sarbojanin+Durgotsab" },
+            { id: 103, zone: 'North', name: "College Square", location: "College Street", attraction: "Famous for its stunning idol reflection in the adjacent swimming pool.", line: "Blue", station: "Central", accessibility: "5-min walk", mapLink: "https://www.google.com/maps/search/?api=1&query=College+Square+Durga+Puja" },
+            { id: 104, zone: 'North', name: "Mohammad Ali Park", location: "Central Avenue", attraction: "Known for magnificent architecture and grand, replica-themed pandals.", line: "Blue", station: "Central", accessibility: "5-min walk", mapLink: "https://www.google.com/maps/search/?api=1&query=Mohammad+Ali+Park+Durga+Puja" },
+            { id: 105, zone: 'North', name: "Santosh Mitra Square", location: "Sealdah", attraction: "Famous for spectacular, often larger-than-life and trending themes.", line: "Green", station: "Sealdah", accessibility: "5-min walk", mapLink: "https://www.google.com/maps/search/?api=1&query=Santosh+Mitra+Square" },
+            { id: 106, zone: 'North', name: "Chaltabagan Lohapatty", location: "Maniktala", attraction: "Consistently award-winning pandal known for intricate and artistic themes.", line: "Blue", station: "Girish Park", accessibility: "10-min auto-rickshaw", mapLink: "https://www.google.com/maps/search/?api=1&query=Chorbagan+Sarbojanin+Durgotsav+samity(chaltabagan)" },
+            
+            // South Kolkata
+            { id: 1, zone: 'South', name: "Ekdalia Evergreen Club", location: "Gariahat", attraction: "Traditional grandeur, temple replicas, tall idols.", line: "Blue", station: "Rabindra Sarobar", accessibility: "10-15 min walk or auto", mapLink: "https://www.google.com/maps/search/?api=1&query=Ekdalia+Evergreen+Club" },
+            { id: 2, zone: 'South', name: "Suruchi Sangha", location: "New Alipore", attraction: "Cultural showcase of Indian states or international themes.", line: "Blue", station: "Kalighat / Majerhat", accessibility: "10-min auto-rickshaw", mapLink: "https://www.google.com/maps/search/?api=1&query=Suruchi+Sangha" },
+            { id: 3, zone: 'South', name: "Badamtala Ashar Sangha", location: "Kalighat", attraction: "Socially conscious themes, creative flair, artistic excellence.", line: "Blue", station: "Kalighat", accessibility: "5-10 min walk", mapLink: "https://www.google.com/maps/search/?api=1&query=Badamtala+Ashar+Sangha" },
+            { id: 4, zone: 'South', name: "Deshapriya Park", location: "Kalighat / Rashbehari", attraction: "Massive scale, record-breaking large idols, grand decorations.", line: "Blue", station: "Rabindra Sarobar / Kalighat", accessibility: "10-min walk", mapLink: "https://www.google.com/maps/search/?api=1&query=Deshapriya+Park" },
+            { id: 9, zone: 'South', name: "Bosepukur Sitala Mandir", location: "Kasba", attraction: "Quirky, thoughtful concepts, artistic expression, award-winning.", line: "Orange", station: "Hemanta Mukherjee (Ruby)", accessibility: "10-min walk or auto", mapLink: "https://www.google.com/maps/search/?api=1&query=Bosepukur+Sitala+Mandir" },
+            { id: 12, zone: 'South', name: "Tridhara Sammilani", location: "Manoharpukur", attraction: "Environment-friendly themes, tribal life, live performances.", line: "Blue", station: "Jatin Das Park", accessibility: "10-15 min walk or auto", mapLink: "https://www.google.com/maps/search/?api=1&query=Tridhara+Sammilani" },
+            { id: 14, zone: 'South', name: "Behala Club", location: "Behala", attraction: "Famous Behala puja, now more accessible via metro.", line: "Purple", station: "Behala Bazar", accessibility: "Varies; short ride from station", mapLink: "https://www.google.com/maps/search/?api=1&query=Behala+Club" },
+            { id: 16, zone: 'South', name: "Barisha Club", location: "Barisha / Behala", attraction: "Known for its unique themes and artistic merit.", line: "Purple", station: "Sakher Bazar", accessibility: "Varies; short ride from station", mapLink: "https://www.google.com/maps/search/?api=1&query=Barisha+Club" }
+        ];
+
+        // --- Element Selectors ---
+        const pandalGrid = document.getElementById('pandal-grid');
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        const aboutBtn = document.getElementById('about-btn');
+        const aboutModalOverlay = document.getElementById('about-modal-overlay');
+        const aboutModalContent = document.getElementById('about-modal-content');
+        const closeAboutBtn = document.getElementById('close-about-btn');
+
+        // --- Core Logic ---
+        function displayPandals(filterLine) {
+            pandalGrid.innerHTML = '';
+            const filteredPandals = (filterLine === 'all') ? pandals : pandals.filter(p => p.line === filterLine);
+
+            const northPandals = filteredPandals.filter(p => p.zone === 'North');
+            const southPandals = filteredPandals.filter(p => p.zone === 'South');
+
+            const createCardsForZone = (pandalList) => {
+                pandalList.forEach(pandal => {
+                    const card = document.createElement('div');
+                    card.className = `pandal-card bg-white rounded-lg shadow-md overflow-hidden ${getLineColorClass(pandal.line)}`;
+                    
+                    card.innerHTML = `
+                        <div class="p-5 flex-grow">
+                            <h3 class="text-xl font-bold text-gray-800">${pandal.name}</h3>
+                            <p class="text-sm font-medium text-gray-500 my-3">${pandal.location}</p>
+                            <p class="text-gray-700 mb-4">${pandal.attraction}</p>
+                            <div class="bg-gray-50 p-3 rounded-lg border border-gray-200">
+                                <div class="flex justify-between items-center mb-1">
+                                    <p class="text-sm font-semibold text-gray-800">🚇 Station: ${pandal.station}</p>
+                                    <span class="text-xs font-bold py-1 px-3 rounded-full ${getLineBadgeClass(pandal.line)}">${pandal.line} Line</span>
+                                </div>
+                                <p class="text-sm text-gray-600">🚶 Access: ${pandal.accessibility}</p>
+                            </div>
+                        </div>
+                        <div class="p-5 pt-4 border-t border-gray-200 bg-gray-50/50">
+                            <a href="${pandal.mapLink}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center text-sm font-semibold text-blue-600 hover:text-blue-800 transition-colors">
+                                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                                View on Map
+                            </a>
+                        </div>
+                    `;
+                    pandalGrid.appendChild(card);
+                });
+            };
+
+            if (northPandals.length > 0) {
+                const heading = document.createElement('h2');
+                heading.className = 'zone-heading text-3xl font-bold';
+                heading.textContent = 'North Kolkata';
+                pandalGrid.appendChild(heading);
+                createCardsForZone(northPandals);
+            }
+
+            if (southPandals.length > 0) {
+                const heading = document.createElement('h2');
+                heading.className = 'zone-heading text-3xl font-bold';
+                heading.textContent = 'South Kolkata';
+                pandalGrid.appendChild(heading);
+                createCardsForZone(southPandals);
+            }
+        }
+        
+        function getLineColorClass(line) {
+            switch (line) {
+                case 'Blue': return 'card-border-blue';
+                case 'Orange': return 'card-border-orange';
+                case 'Purple': return 'card-border-purple';
+                case 'Green': return 'card-border-green';
+                default: return 'card-border-gray-400';
+            }
+        }
+        function getLineBadgeClass(line) {
+             switch (line) {
+                case 'Blue': return 'metro-blue';
+                case 'Orange': return 'metro-orange';
+                case 'Purple': return 'metro-purple';
+                case 'Green': return 'metro-green';
+                default: return 'bg-gray-400 text-white';
+            }
+        }
+        
+        function showAboutModal() {
+            aboutModalOverlay.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+            setTimeout(() => {
+                aboutModalOverlay.classList.add('opacity-100');
+                aboutModalContent.classList.remove('scale-95', 'opacity-0');
+            }, 10);
+        }
+
+        function hideAboutModal() {
+            aboutModalOverlay.classList.remove('opacity-100');
+            aboutModalContent.classList.add('scale-95', 'opacity-0');
+            setTimeout(() => { aboutModalOverlay.classList.add('hidden'); document.body.style.overflow = ''; }, 300);
+        }
+
+        // --- Event Listeners ---
+        filterButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+                displayPandals(button.getAttribute('data-line'));
+            });
+        });
+
+        aboutBtn.addEventListener('click', showAboutModal);
+        closeAboutBtn.addEventListener('click', hideAboutModal);
+        aboutModalOverlay.addEventListener('click', (e) => { if (e.target === aboutModalOverlay) hideAboutModal(); });
+
+        // --- Initial Display ---
+        displayPandals('all');
+
+    </script>
+</body>
+</html>
+
