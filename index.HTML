@@ -59,27 +59,14 @@
         }
         .modal-content {
             transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
-            white-space: pre-wrap;
-        }
-        .loader {
-            border: 4px solid #f3f3f3;
-            border-top: 4px solid #DB2777;
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            animation: spin 1s linear infinite;
-        }
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
         }
     </style>
 </head>
 <body class="antialiased">
-    <div class="container mx-auto p-4 sm:p-6 lg:p-8 pb-32">
+    <div class="container mx-auto p-4 sm:p-6 lg:p-8">
         <header class="relative text-center mb-8">
             <h1 class="text-4xl md:text-5xl font-bold text-red-800 tracking-tight">Kolkata Durga Puja Guide</h1>
-            <p class="mt-3 text-lg text-gray-600">Explore North & South pandals and create a custom travel plan.</p>
+            <p class="mt-3 text-lg text-gray-600">Explore North & South pandals near you.</p>
             <div class="absolute top-0 right-0">
                 <button id="about-btn" class="bg-white/80 backdrop-blur-sm text-red-800 font-semibold py-2 px-4 rounded-full shadow-md hover:bg-white transition-colors">About</button>
             </div>
@@ -100,33 +87,6 @@
         </div>
     </div>
     
-    <!-- Planner Bar -->
-    <div id="planner-bar" class="fixed bottom-0 left-0 right-0 bg-white/80 backdrop-blur-sm shadow-t-lg p-4 transform translate-y-full transition-transform">
-        <div class="container mx-auto flex justify-between items-center">
-            <div class="font-bold text-gray-800">
-                <span id="pandal-count">0</span> Pandals Selected
-            </div>
-            <button id="generate-plan-btn" class="bg-gradient-to-r from-purple-600 to-pink-600 text-white font-bold py-3 px-6 rounded-full shadow-lg hover:scale-105 transition-transform disabled:opacity-50 disabled:cursor-not-allowed">
-                ✨ Plan My Pandal Hop
-            </button>
-        </div>
-    </div>
-    
-    <!-- Planner Modal -->
-    <div id="gemini-modal-overlay" class="modal-overlay fixed inset-0 bg-black bg-opacity-60 flex justify-center items-center p-4 hidden z-50">
-        <div id="gemini-modal-content" class="modal-content bg-white rounded-2xl shadow-2xl p-6 md:p-8 w-full max-w-2xl max-h-[90vh] overflow-y-auto transform scale-95 opacity-0">
-            <div class="flex justify-between items-center mb-4">
-                <h2 class="text-2xl font-bold text-gray-800">Your Pandal Hopping Plan</h2>
-                <button id="close-gemini-btn" class="text-gray-500 hover:text-gray-800 text-3xl">&times;</button>
-            </div>
-            <div id="gemini-output" class="text-gray-700 leading-relaxed"></div>
-             <div id="gemini-loading" class="flex flex-col items-center justify-center p-8 hidden">
-                <div class="loader mb-4"></div>
-                <p class="text-gray-600 font-semibold">Crafting your perfect plan...</p>
-            </div>
-        </div>
-    </div>
-
     <!-- About Modal -->
     <div id="about-modal-overlay" class="modal-overlay fixed inset-0 bg-black bg-opacity-60 flex justify-center items-center p-4 hidden z-50">
         <div id="about-modal-content" class="modal-content bg-white rounded-2xl shadow-2xl p-6 md:p-8 w-full max-w-md text-center transform scale-95 opacity-0">
@@ -161,18 +121,6 @@
         // --- Element Selectors ---
         const pandalGrid = document.getElementById('pandal-grid');
         const filterButtons = document.querySelectorAll('.filter-btn');
-        let selectedPandals = [];
-        
-        const plannerBar = document.getElementById('planner-bar');
-        const pandalCountEl = document.getElementById('pandal-count');
-        const generatePlanBtn = document.getElementById('generate-plan-btn');
-
-        const geminiModalOverlay = document.getElementById('gemini-modal-overlay');
-        const geminiModalContent = document.getElementById('gemini-modal-content');
-        const closeGeminiBtn = document.getElementById('close-gemini-btn');
-        const geminiOutput = document.getElementById('gemini-output');
-        const geminiLoading = document.getElementById('gemini-loading');
-
         const aboutBtn = document.getElementById('about-btn');
         const aboutModalOverlay = document.getElementById('about-modal-overlay');
         const aboutModalContent = document.getElementById('about-modal-content');
@@ -188,19 +136,13 @@
 
             const createCardsForZone = (pandalList) => {
                 pandalList.forEach(pandal => {
-                    const isSelected = selectedPandals.some(p => p.id === pandal.id);
                     const card = document.createElement('div');
                     card.className = `pandal-card bg-white rounded-lg shadow-md overflow-hidden ${getLineColorClass(pandal.line)}`;
                     
                     card.innerHTML = `
                         <div class="p-5 flex-grow">
-                            <div class="flex justify-between items-start mb-3">
-                                <h3 class="text-xl font-bold text-gray-800 pr-2">${pandal.name}</h3>
-                                <label for="pandal-${pandal.id}" class="flex items-center cursor-pointer">
-                                    <input type="checkbox" id="pandal-${pandal.id}" data-pandal-id="${pandal.id}" class="h-6 w-6 rounded-md border-gray-300 text-purple-600 focus:ring-purple-500" ${isSelected ? 'checked' : ''}>
-                                </label>
-                            </div>
-                            <p class="text-sm font-medium text-gray-500 mb-3">${pandal.location}</p>
+                            <h3 class="text-xl font-bold text-gray-800">${pandal.name}</h3>
+                            <p class="text-sm font-medium text-gray-500 my-3">${pandal.location}</p>
                             <p class="text-gray-700 mb-4">${pandal.attraction}</p>
                             <div class="bg-gray-50 p-3 rounded-lg border border-gray-200">
                                 <div class="flex justify-between items-center mb-1">
@@ -212,7 +154,7 @@
                         </div>
                         <div class="p-5 pt-4 border-t border-gray-200 bg-gray-50/50">
                             <a href="${pandal.mapLink}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center text-sm font-semibold text-blue-600 hover:text-blue-800 transition-colors">
-                                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 A 0 11-6 0 3 3 0 016 0z"></path></svg>
+                                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
                                 View on Map
                             </a>
                         </div>
@@ -236,14 +178,6 @@
                 pandalGrid.appendChild(heading);
                 createCardsForZone(southPandals);
             }
-            
-            document.querySelectorAll('input[type="checkbox"][data-pandal-id]').forEach(checkbox => {
-                checkbox.addEventListener('change', () => {
-                    const pandalId = parseInt(checkbox.dataset.pandalId);
-                    const pandal = pandals.find(p => p.id === pandalId);
-                    handlePandalSelection(pandal, checkbox);
-                });
-            });
         }
         
         function getLineColorClass(line) {
@@ -263,66 +197,6 @@
                 case 'Green': return 'metro-green';
                 default: return 'bg-gray-400 text-white';
             }
-        }
-        
-        function handlePandalSelection(pandal, checkbox) {
-            if (checkbox.checked) {
-                selectedPandals.push(pandal);
-            } else {
-                selectedPandals = selectedPandals.filter(p => p.id !== pandal.id);
-            }
-            updatePlanner();
-        }
-        
-        function updatePlanner() {
-            pandalCountEl.textContent = selectedPandals.length;
-            if (selectedPandals.length > 0) {
-                plannerBar.classList.remove('translate-y-full');
-                generatePlanBtn.disabled = selectedPandals.length < 2; 
-            } else {
-                plannerBar.classList.add('translate-y-full');
-                generatePlanBtn.disabled = true;
-            }
-        }
-
-        async function generatePandalPlan() {
-            if (selectedPandals.length < 2) { return; }
-            showGeminiModal(true);
-            const pandalNames = selectedPandals.map(p => `${p.name} in ${p.location} (${p.zone} Kolkata)`).join(', ');
-            const systemPrompt = "You are an expert travel guide for Kolkata, specializing in Durga Puja. You are friendly, enthusiastic, and provide practical, helpful advice.";
-            const userQuery = `I want to visit the following Durga Puja pandals across Kolkata: ${pandalNames}. Please create a smart, efficient itinerary for me. For your response, please include: 1. A logical order to visit the pandals to save time, considering travel between North and South Kolkata. 2. Practical travel advice (e.g., "walk," "take an auto," "use the metro from X station to Y station"). 3. Mention one or two famous street food items or stalls near the route. 4. Format the plan clearly with headings and bullet points for easy reading. 5. Start with a festive greeting like "Shubho Sharodiya!"`;
-            const apiKey = "";
-            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
-            const payload = { contents: [{ parts: [{ text: userQuery }] }], systemInstruction: { parts: [{ text: systemPrompt }] }, };
-            try {
-                const response = await fetch(apiUrl, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
-                if (!response.ok) throw new Error(`API Error: ${response.statusText}`);
-                const result = await response.json();
-                const text = result.candidates?.[0]?.content?.parts?.[0]?.text;
-                geminiOutput.textContent = text || "Sorry, I couldn't generate a plan. The response was empty. Please try again.";
-            } catch (error) {
-                console.error("Error calling Gemini API:", error);
-                geminiOutput.textContent = "There was an error generating your plan. Please check your connection and try again.";
-            } finally {
-                showGeminiModal(false);
-            }
-        }
-        
-        function showGeminiModal(isLoading) {
-            geminiModalOverlay.classList.remove('hidden');
-            document.body.style.overflow = 'hidden';
-            setTimeout(() => {
-                geminiModalOverlay.classList.add('opacity-100');
-                geminiModalContent.classList.remove('scale-95', 'opacity-0');
-            }, 10);
-            geminiLoading.classList.toggle('hidden', !isLoading);
-            geminiOutput.classList.toggle('hidden', isLoading);
-        }
-        
-        function hideGeminiModal() {
-             geminiModalOverlay.classList.remove('opacity-100');
-             geminiModalContent.classList.add('scale-95', 'opacity-0');
-             setTimeout(() => { geminiModalOverlay.classList.add('hidden'); document.body.style.overflow = ''; }, 300);
         }
         
         function showAboutModal() {
@@ -349,16 +223,11 @@
             });
         });
 
-        generatePlanBtn.addEventListener('click', generatePandalPlan);
-        closeGeminiBtn.addEventListener('click', hideGeminiModal);
-        geminiModalOverlay.addEventListener('click', (e) => { if (e.target === geminiModalOverlay) hideGeminiModal(); });
-
         aboutBtn.addEventListener('click', showAboutModal);
         closeAboutBtn.addEventListener('click', hideAboutModal);
         aboutModalOverlay.addEventListener('click', (e) => { if (e.target === aboutModalOverlay) hideAboutModal(); });
 
         // --- Initial Display ---
-        updatePlanner();
         displayPandals('all');
 
     </script>
