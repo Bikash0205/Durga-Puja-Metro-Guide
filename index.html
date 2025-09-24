@@ -66,7 +66,7 @@
     <div class="container mx-auto p-4 sm:p-6 lg:p-8">
         <header class="relative text-center mb-8">
             <h1 class="text-4xl md:text-5xl font-bold text-red-800 tracking-tight">Kolkata Durga Puja Guide</h1>
-            <p class="mt-3 text-lg text-gray-600">Explore North & South pandals near you.</p>
+            <p class="mt-3 text-lg text-gray-600">The Ultimate Pandal Hopping Guide for North & South Kolkata.</p>
             <div class="absolute top-0 right-0">
                 <button id="about-btn" class="bg-white/80 backdrop-blur-sm text-red-800 font-semibold py-2 px-4 rounded-full shadow-md hover:bg-white transition-colors">About</button>
             </div>
@@ -101,21 +101,66 @@
         const pandals = [
             // North Kolkata
             { id: 101, zone: 'North', name: "Bagbazar Sarbojanin", location: "Bagbazar", attraction: "One of the oldest traditional pujas with a carnival atmosphere.", line: "Blue", station: "Shyambazar", accessibility: "5-min walk", mapLink: "https://www.google.com/maps/search/?api=1&query=Bagbazar+Sarbojanin+Durgotsav" },
-            { id: 102, zone: 'North', name: "Kumartuli Park", location: "Kumartuli", attraction: "Artistic themes set in the heart of the idol-makers' colony.", line: "Blue", station: "Sovabazar Sutanuti", accessibility: "10-min walk", mapLink: "https://www.google.com/maps/search/?api=1&query=Kumartuli+Park+Sarbojanin+Durgotsab" },
+            { id: 102, zone: 'North', name: "Kumartuli Park Sarbojanin", location: "Kumartuli", attraction: "Artistic themes set in the heart of the idol-makers' colony.", line: "Blue", station: "Sovabazar Sutanuti", accessibility: "10-min walk", mapLink: "https://www.google.com/maps/search/?api=1&query=Kumartuli+Park+Sarbojanin+Durgotsab" },
             { id: 103, zone: 'North', name: "College Square", location: "College Street", attraction: "Famous for its stunning idol reflection in the adjacent swimming pool.", line: "Blue", station: "Central", accessibility: "5-min walk", mapLink: "https://www.google.com/maps/search/?api=1&query=College+Square+Durga+Puja" },
             { id: 104, zone: 'North', name: "Mohammad Ali Park", location: "Central Avenue", attraction: "Known for magnificent architecture and grand, replica-themed pandals.", line: "Blue", station: "Central", accessibility: "5-min walk", mapLink: "https://www.google.com/maps/search/?api=1&query=Mohammad+Ali+Park+Durga+Puja" },
             { id: 105, zone: 'North', name: "Santosh Mitra Square", location: "Sealdah", attraction: "Famous for spectacular, often larger-than-life and trending themes.", line: "Green", station: "Sealdah", accessibility: "5-min walk", mapLink: "https://www.google.com/maps/search/?api=1&query=Santosh+Mitra+Square" },
-            { id: 106, zone: 'North', name: "Chaltabagan Lohapatty", location: "Maniktala", attraction: "Consistently award-winning pandal known for intricate and artistic themes.", line: "Blue", station: "Girish Park", accessibility: "10-min auto-rickshaw", mapLink: "https://www.google.com/maps/search/?api=1&query=Chorbagan+Sarbojanin+Durgotsav+samity(chaltabagan)" },
+            { id: 106, zone: 'North', name: "Chaltabagan Lohapatty", location: "Maniktala", attraction: "Consistently award-winning pandal known for intricate themes.", line: "Blue", station: "Girish Park", accessibility: "10-min auto", mapLink: "https://www.google.com/maps/search/?api=1&query=Chaltabagan+Lohapatty+Durga+Puja" },
+            { id: 107, zone: 'North', name: "Kashi Bose Lane", location: "Shyambazar", attraction: "Known for its innovative themes and artistic installations.", line: "Blue", station: "Shyambazar", accessibility: "5-min walk", mapLink: "https://www.google.com/maps/search/?api=1&query=Kashi+Bose+Lane+Durga+Puja" },
+            { id: 108, zone: 'North', name: "Nalin Sarkar Street Sarbojanin", location: "Shyambazar", attraction: "Famous for its unique concepts and vibrant atmosphere.", line: "Blue", station: "Shyambazar", accessibility: "7-min walk", mapLink: "https://www.google.com/maps/search/?api=1&query=Nalin+Sarkar+Street+Sarbojanin+Durgotsab" },
+            { id: 109, zone: 'North', name: "Ahiritola Jubak Brinda", location: "Ahiritola", attraction: "Historic puja near the ghats, known for its traditional idol.", line: "Blue", station: "Sovabazar Sutanuti", accessibility: "10-min walk", mapLink: "https://www.google.com/maps/search/?api=1&query=Ahiritola+Jubak+Brinda" },
+            { id: 110, zone: 'North', name: "Simla Sporting Club", location: "Simla", attraction: "One of the oldest pujas, famous for traditional idol.", line: "Blue", station: "Girish Park", accessibility: "5-min walk", mapLink: "https://www.google.com/maps/search/?api=1&query=Simla+Sporting+Club+Durga+Puja" },
+            { id: 111, zone: 'North', name: "Jagat Mukherjee Park", location: "Jatindra Mohan Ave", attraction: "Award-winning pandal with innovative concepts.", line: "Blue", station: "Shyambazar", accessibility: "2-min walk", mapLink: "https://www.google.com/maps/search/?api=1&query=Jagat+Mukherjee+Park+Durga+Puja" },
+            { id: 112, zone: 'North', name: "Tala Barowari Durgotsab", location: "Tala", attraction: "Nearly a century old, known for its traditional 'Ekchala' idol.", line: "Blue", station: "Shyambazar", accessibility: "10-min auto", mapLink: "https://www.google.com/maps/search/?api=1&query=Tala+Barowari+Durgotsab" },
+            { id: 113, zone: 'North', name: "Sreebhumi Sporting Club", location: "Sreebhumi", attraction: "Spectacular, larger-than-life pandal replicas. A major crowd-puller.", line: "Orange", station: "VIP Road", accessibility: "Auto/bus required", mapLink: "https://www.google.com/maps/search/?api=1&query=Sreebhumi+Sporting+Club" },
+            { id: 114, zone: 'North', name: "Hatibagan Nabinpally", location: "Hatibagan", attraction: "Famous for grand themes in a bustling market area.", line: "Blue", station: "Shyambazar", accessibility: "5-min walk", mapLink: "https://www.google.com/maps/search/?api=1&query=Hatibagan+Nabinpally+Sarbojanin+Durgotsav" },
+            { id: 115, zone: 'North', name: "Amherst Sarbojanin Durgotsab", location: "Amherst Street", attraction: "Popular puja in Central Kolkata known for its themes.", line: "Blue", station: "Central", accessibility: "10-min walk", mapLink: "https://www.google.com/maps/search/?api=1&query=Amherst+Sarbojanin+Durgotsab" },
+            { id: 116, zone: 'North', name: "Beadon Street Sarbojanin", location: "Beadon Street", attraction: "Historic puja known for its traditional artistic style.", line: "Blue", station: "Girish Park", accessibility: "5-min walk", mapLink: "https://www.google.com/maps/search/?api=1&query=Beadon+Street+Sarbojanin+Durgotsav" },
+            { id: 117, zone: 'North', name: "Belgachia Sadharan Durgotsab", location: "Belgachia", attraction: "Well-known puja with creative pandals right near the metro.", line: "Blue", station: "Belgachia", accessibility: "2-min walk", mapLink: "https://www.google.com/maps/search/?api=1&query=Belgachia+Sadharan+Durgotsab" },
+            { id: 118, zone: 'North', name: "Chorebagan Sarbojanin", location: "Chorebagan", attraction: "Famous for its unique idols and artistic excellence.", line: "Blue", station: "Girish Park", accessibility: "5-min walk", mapLink: "https://www.google.com/maps/search/?api=1&query=Chorebagan+Sarbojanin+Durgotsab+Samity" },
+            { id: 119, zone: 'North', name: "Cossipore Shakti Sangha", location: "Cossipore", attraction: "A prominent puja in the Cossipore area with beautiful idols.", line: "Blue", station: "Dum Dum", accessibility: "10-min auto", mapLink: "https://www.google.com/maps/search/?api=1&query=Cossipore+Shakti+Sangha+Durga+Puja" },
+            { id: 120, zone: 'North', name: "Dum Dum Park Bharat Chakra", location: "Dum Dum Park", attraction: "Part of the famous Dum Dum Park trio, known for grand themes.", line: "Orange", station: "Dum Dum Park", accessibility: "5-min walk", mapLink: "https://www.google.com/maps/search/?api=1&query=Dum+Dum+Park+Bharat+Chakra" },
+            { id: 121, zone: 'North', name: "Dum Dum Park Sarbojanin", location: "Dum Dum Park", attraction: "A must-visit puja famous for its artistic pandals.", line: "Orange", station: "Dum Dum Park", accessibility: "5-min walk", mapLink: "https://www.google.com/maps/search/?api=1&query=Dum+Dum+Park+Sarbojanin+Durgotsab" },
+            { id: 122, zone: 'North', name: "Goabagan Sarodatsav Sammilani", location: "Goabagan", attraction: "Known for its traditional idol and cultural programs.", line: "Blue", station: "Girish Park", accessibility: "5-min walk", mapLink: "https://www.google.com/maps/search/?api=1&query=Goabagan+Sarodatsav+Sammilani" },
+            { id: 123, zone: 'North', name: "Halsibagan Sarbojanin", location: "Halsibagan", attraction: "Presents unique themes every year, located in North Kolkata.", line: "Blue", station: "Sovabazar Sutanuti", accessibility: "5-min walk", mapLink: "https://www.google.com/maps/search/?api=1&query=Halsibagan+Sarbojanin+Durgotsab" },
+            { id: 124, zone: 'North', name: "Kumartuli Sarbojanin", location: "Kumartuli", attraction: "Traditional puja located in the idol-makers' hub.", line: "Blue", station: "Sovabazar Sutanuti", accessibility: "10-min walk", mapLink: "https://www.google.com/maps/search/?api=1&query=Kumartuli+Sarbojanin+Durgotsab" },
+            { id: 125, zone: 'North', name: "Pathuria Ghata Pancher Palli", location: "Pathuriaghata", attraction: "Famous for its artistic merit and beautiful idols.", line: "Blue", station: "Girish Park", accessibility: "7-min walk", mapLink: "https://www.google.com/maps/search/?api=1&query=Pathuria+Ghata+Pancher+Palli" },
+            { id: 126, zone: 'North', name: "Rammohan Sammilani", location: "Amherst Street", attraction: "A prominent puja of Central Kolkata with a rich history.", line: "Blue", station: "Central", accessibility: "10-min walk", mapLink: "https://www.google.com/maps/search/?api=1&query=Rammohan+Sammilani+Durga+Puja" },
+            { id: 127, zone: 'North', name: "Sikdar Bagan Sadharan Durgotsov", location: "Sikdar Bagan", attraction: "One of the oldest pujas, known for its traditionalism.", line: "Blue", station: "Shyambazar", accessibility: "5-min walk", mapLink: "https://www.google.com/maps/search/?api=1&query=Sikdar+Bagan+Sadharan+Durgotsov" },
+            { id: 128, zone: 'North', name: "Telengabagan Sarbojanin Durgotsab", location: "Telengabagan", attraction: "Award-winning puja known for creative and social themes.", line: "Blue", station: "Belgachia", accessibility: "10-min auto", mapLink: "https://www.google.com/maps/search/?api=1&query=Telengabagan+Sarbojanin+Durgotsab" },
             
             // South Kolkata
-            { id: 1, zone: 'South', name: "Ekdalia Evergreen Club", location: "Gariahat", attraction: "Traditional grandeur, temple replicas, tall idols.", line: "Blue", station: "Rabindra Sarobar", accessibility: "10-15 min walk or auto", mapLink: "https://www.google.com/maps/search/?api=1&query=Ekdalia+Evergreen+Club" },
-            { id: 2, zone: 'South', name: "Suruchi Sangha", location: "New Alipore", attraction: "Cultural showcase of Indian states or international themes.", line: "Blue", station: "Kalighat / Majerhat", accessibility: "10-min auto-rickshaw", mapLink: "https://www.google.com/maps/search/?api=1&query=Suruchi+Sangha" },
+            { id: 1, zone: 'South', name: "Ekdalia Evergreen Club", location: "Gariahat", attraction: "Traditional grandeur, temple replicas, tall idols.", line: "Blue", station: "Kalighat", accessibility: "15-min walk or auto", mapLink: "https://www.google.com/maps/search/?api=1&query=Ekdalia+Evergreen+Club" },
+            { id: 2, zone: 'South', name: "New Alipore Suruchi Sangha", location: "New Alipore", attraction: "Cultural showcase of Indian states or international themes.", line: "Blue", station: "Majerhat", accessibility: "10-min auto", mapLink: "https://www.google.com/maps/search/?api=1&query=Suruchi+Sangha" },
             { id: 3, zone: 'South', name: "Badamtala Ashar Sangha", location: "Kalighat", attraction: "Socially conscious themes, creative flair, artistic excellence.", line: "Blue", station: "Kalighat", accessibility: "5-10 min walk", mapLink: "https://www.google.com/maps/search/?api=1&query=Badamtala+Ashar+Sangha" },
-            { id: 4, zone: 'South', name: "Deshapriya Park", location: "Kalighat / Rashbehari", attraction: "Massive scale, record-breaking large idols, grand decorations.", line: "Blue", station: "Rabindra Sarobar / Kalighat", accessibility: "10-min walk", mapLink: "https://www.google.com/maps/search/?api=1&query=Deshapriya+Park" },
-            { id: 9, zone: 'South', name: "Bosepukur Sitala Mandir", location: "Kasba", attraction: "Quirky, thoughtful concepts, artistic expression, award-winning.", line: "Orange", station: "Hemanta Mukherjee (Ruby)", accessibility: "10-min walk or auto", mapLink: "https://www.google.com/maps/search/?api=1&query=Bosepukur+Sitala+Mandir" },
-            { id: 12, zone: 'South', name: "Tridhara Sammilani", location: "Manoharpukur", attraction: "Environment-friendly themes, tribal life, live performances.", line: "Blue", station: "Jatin Das Park", accessibility: "10-15 min walk or auto", mapLink: "https://www.google.com/maps/search/?api=1&query=Tridhara+Sammilani" },
-            { id: 14, zone: 'South', name: "Behala Club", location: "Behala", attraction: "Famous Behala puja, now more accessible via metro.", line: "Purple", station: "Behala Bazar", accessibility: "Varies; short ride from station", mapLink: "https://www.google.com/maps/search/?api=1&query=Behala+Club" },
-            { id: 16, zone: 'South', name: "Barisha Club", location: "Barisha / Behala", attraction: "Known for its unique themes and artistic merit.", line: "Purple", station: "Sakher Bazar", accessibility: "Varies; short ride from station", mapLink: "https://www.google.com/maps/search/?api=1&query=Barisha+Club" }
+            { id: 4, zone: 'South', name: "Deshapriya Park", location: "Rashbehari", attraction: "Massive scale, often with record-breaking large idols.", line: "Blue", station: "Kalighat", accessibility: "10-min walk", mapLink: "https://www.google.com/maps/search/?api=1&query=Deshapriya+Park" },
+            { id: 7, zone: 'South', name: "95 Pally Jodhpur Park", location: "Jodhpur Park", attraction: "Grand and popular pandal with artistic themes.", line: "Blue", station: "Rabindra Sarobar", accessibility: "10-min auto", mapLink: "https://www.google.com/maps/search/?api=1&query=95+Pally+Jodhpur+Park" },
+            { id: 8, zone: 'South', name: "Mudiali Club", location: "Rabindra Sarobar", attraction: "Traditional and elegant puja with a serene atmosphere.", line: "Blue", station: "Rabindra Sarobar", accessibility: "5-min walk", mapLink: "https://www.google.com/maps/search/?api=1&query=Mudiali+Club" },
+            { id: 9, zone: 'South', name: "Bosepukur Talbagan", location: "Kasba", attraction: "Quirky, thoughtful concepts, artistic expression, award-winning.", line: "Orange", station: "Hemanta Mukherjee", accessibility: "10-min walk or auto", mapLink: "https://www.google.com/maps/search/?api=1&query=Bosepukur+Talbagan+Sarbojanin" },
+            { id: 11, zone: 'South', name: "Singhi Park Sarbojanin", location: "Gariahat", attraction: "A major crowd-puller with traditional and beautiful idols.", line: "Blue", station: "Kalighat", accessibility: "10-min walk", mapLink: "https://www.google.com/maps/search/?api=1&query=Singhi+Park+Sarbojanin" },
+            { id: 12, zone: 'South', name: "Tridhara Sammilani", location: "Manoharpukur", attraction: "Environment-friendly themes, tribal life, live performances.", line: "Blue", station: "Jatin Das Park", accessibility: "10-15 min walk", mapLink: "https://www.google.com/maps/search/?api=1&query=Tridhara+Sammilani" },
+            { id: 13, zone: 'South', name: "Chetla Agrani Club", location: "Chetla", attraction: "Highly acclaimed for its artistic merit and unique themes.", line: "Blue", station: "Kalighat", accessibility: "15-min auto", mapLink: "https://www.google.com/maps/search/?api=1&query=Chetla+Agrani+Club" },
+            { id: 15, zone: 'South', name: "Naktala Udayan Sangha", location: "Naktala", attraction: "Known for its thematic brilliance and has won many awards.", line: "Blue", station: "Gitanjali", accessibility: "10-min auto", mapLink: "https://www.google.com/maps/search/?api=1&query=Naktala+Udayan+Sangha" },
+            { id: 17, zone: 'South', name: "Samaj Sebi Sangha", location: "Ballygunge", attraction: "Known for its innovative social themes and artistic excellence.", line: "Blue", station: "Jatin Das Park", accessibility: "10-min walk", mapLink: "https://www.google.com/maps/search/?api=1&query=Samaj+Sebi+Sangha" },
+            { id: 201, zone: 'South', name: "66 Pally Sarbojanin", location: "Rashbehari", attraction: "Famous for its unique themes and artistic pandals.", line: "Blue", station: "Kalighat", accessibility: "5-min walk", mapLink: "https://www.google.com/maps/search/?api=1&query=66+Pally+Sarbojanin+Durgotsab" },
+            { id: 202, zone: 'South', name: "Adi Ballygunge Sarbojanin", location: "Ballygunge", attraction: "One of the oldest pujas in the area, very traditional.", line: "Blue", station: "Jatin Das Park", accessibility: "10-min walk", mapLink: "https://www.google.com/maps/search/?api=1&query=Adi+Ballygunge+Sarbojanin" },
+            { id: 203, zone: 'South', name: "Babu Bagan Sarbojanin", location: "Dhakuria", attraction: "A major crowd-puller known for its grand scale and themes.", line: "Blue", station: "Rabindra Sarobar", accessibility: "15-min auto", mapLink: "https://www.google.com/maps/search/?api=1&query=Babu+Bagan+Sarbojanin+Durgotsav" },
+            { id: 204, zone: 'South', name: "Baghajatin Tarun Sangha", location: "Baghajatin", attraction: "Popular puja in the Baghajatin area with creative themes.", line: "Blue", station: "Shahid Khudiram", accessibility: "5-min walk", mapLink: "https://www.google.com/maps/search/?api=1&query=Baghajatin+Tarun+Sangha" },
+            { id: 205, zone: 'South', name: "Ballygunge Cultural Association", location: "Ballygunge", attraction: "Famous for its traditional idol and cultural events.", line: "Blue", station: "Jatin Das Park", accessibility: "10-min walk", mapLink: "https://www.google.com/maps/search/?api=1&query=Ballygunge+Cultural+Association" },
+            { id: 206, zone: 'South', name: "Bhowanipur 75 Palli", location: "Bhowanipore", attraction: "A very popular and award-winning puja.", line: "Blue", station: "Netaji Bhavan", accessibility: "5-min walk", mapLink: "https://www.google.com/maps/search/?api=1&query=Bhowanipur+75+Palli" },
+            { id: 207, zone: 'South', name: "Bhowanipur Swadhin Sangha", location: "Bhowanipore", attraction: "Known for its innovative themes and artistic pandals.", line: "Blue", station: "Netaji Bhavan", accessibility: "5-min walk", mapLink: "https://www.google.com/maps/search/?api=1&query=Bhowanipur+Swadhin+Sangha" },
+            { id: 208, zone: 'South', name: "Dakshin Kolkata Sarbojanin", location: "Bhowanipore", attraction: "A traditional puja with a rich history.", line: "Blue", station: "Jatin Das Park", accessibility: "5-min walk", mapLink: "https://www.google.com/maps/search/?api=1&query=Dakshin+Kolkata+Sarbojanin+Durgotsab" },
+            { id: 209, zone: 'South', name: "Dhakuria Sarbojanin Durgotsab", location: "Dhakuria", attraction: "A prominent puja located near the Dhakuria bridge.", line: "Blue", station: "Rabindra Sarobar", accessibility: "10-min walk", mapLink: "https://www.google.com/maps/search/?api=1&query=Dhakuria+Sarbojanin+Durgotsab" },
+            { id: 210, zone: 'South', name: "Falguni Sangha", location: "Ballygunge", attraction: "Known for its beautiful idols and pandal decorations.", line: "Blue", station: "Kalighat", accessibility: "10-min walk", mapLink: "https://www.google.com/maps/search/?api=1&query=Falguni+Sangha+Durga+Puja" },
+            { id: 211, zone: 'South', name: "Harish Park Sarbojanin", location: "Bhowanipore", attraction: "One of the oldest pujas in the Bhowanipore area.", line: "Blue", station: "Jatin Das Park", accessibility: "5-min walk", mapLink: "https://www.google.com/maps/search/?api=1&query=Harish+Park+Sarbojanin" },
+            { id: 212, zone: 'South', name: "Kalighat Nepal Bhattacharjee St Club", location: "Kalighat", attraction: "A vibrant puja located in the heart of Kalighat.", line: "Blue", station: "Kalighat", accessibility: "5-min walk", mapLink: "https://www.google.com/maps/search/?api=1&query=Kalighat+Nepal+Bhattacharjee+Street+Club" },
+            { id: 213, zone: 'South', name: "Kasba Shakti Sangha", location: "Kasba", attraction: "Popular puja in Kasba known for its unique themes.", line: "Orange", station: "Hemanta Mukherjee", accessibility: "5-min auto", mapLink: "https://www.google.com/maps/search/?api=1&query=Kasba+Shakti+Sangha" },
+            { id: 214, zone: 'South', name: "Khidderpore 75 Pally", location: "Khidderpore", attraction: "One of the major pujas in the Khidderpore area.", line: "Green", station: "Esplanade", accessibility: "Bus/taxi required", mapLink: "https://www.google.com/maps/search/?api=1&query=Khidderpore+75+Pally" },
+            { id: 215, zone: 'South', name: "Lake Gardens Peoples Association", location: "Lake Gardens", attraction: "A beautiful community puja with artistic pandals.", line: "Blue", station: "Rabindra Sarobar", accessibility: "10-min walk", mapLink: "https://www.google.com/maps/search/?api=1&query=Lake+Gardens+Peoples+Association" },
+            { id: 216, zone: 'South', name: "Paddapukur Barwari Samity", location: "Bhowanipore", attraction: "A historic puja known for its traditional celebrations.", line: "Blue", station: "Netaji Bhavan", accessibility: "7-min walk", mapLink: "https://www.google.com/maps/search/?api=1&query=Paddapukur+Barwari+Samity" },
+            { id: 217, zone: 'South', name: "Patuli Sarbojanin Durgotsab", location: "Patuli", attraction: "A popular puja in the Patuli township area.", line: "Blue", station: "Kavi Subhash", accessibility: "5-min auto", mapLink: "https://www.google.com/maps/search/?api=1&query=Patuli+Sarbojanin+Durgotsab" },
+            { id: 218, zone: 'South', name: "Santoshpur Lake Pally", location: "Santoshpur", attraction: "Famous for its beautiful location by the lake and artistic themes.", line: "Blue", station: "Kavi Subhash", accessibility: "15-min auto", mapLink: "https://www.google.com/maps/search/?api=1&query=Santoshpur+Lake+Pally" },
+            { id: 219, zone: 'South', name: "Shibmandir Sarbojanin", location: "Manoharpukur", attraction: "Award-winning puja famous for its innovative concepts.", line: "Blue", station: "Kalighat", accessibility: "10-min walk", mapLink: "https://www.google.com/maps/search/?api=1&query=Shibmandir+Sarbojanin+Durgotsab" }
         ];
 
         // --- Element Selectors ---
@@ -131,53 +176,47 @@
             pandalGrid.innerHTML = '';
             const filteredPandals = (filterLine === 'all') ? pandals : pandals.filter(p => p.line === filterLine);
 
-            const northPandals = filteredPandals.filter(p => p.zone === 'North');
-            const southPandals = filteredPandals.filter(p => p.zone === 'South');
+            const northPandals = filteredPandals.filter(p => p.zone === 'North').sort((a,b) => a.name.localeCompare(b.name));
+            const southPandals = filteredPandals.filter(p => p.zone === 'South').sort((a,b) => a.name.localeCompare(b.name));
 
-            const createCardsForZone = (pandalList) => {
-                pandalList.forEach(pandal => {
-                    const card = document.createElement('div');
-                    card.className = `pandal-card bg-white rounded-lg shadow-md overflow-hidden ${getLineColorClass(pandal.line)}`;
+            const createCardsForZone = (pandalList, zoneName) => {
+                 if (pandalList.length > 0) {
+                    const heading = document.createElement('h2');
+                    heading.className = 'zone-heading text-3xl font-bold';
+                    heading.textContent = zoneName;
+                    pandalGrid.appendChild(heading);
                     
-                    card.innerHTML = `
-                        <div class="p-5 flex-grow">
-                            <h3 class="text-xl font-bold text-gray-800">${pandal.name}</h3>
-                            <p class="text-sm font-medium text-gray-500 my-3">${pandal.location}</p>
-                            <p class="text-gray-700 mb-4">${pandal.attraction}</p>
-                            <div class="bg-gray-50 p-3 rounded-lg border border-gray-200">
-                                <div class="flex justify-between items-center mb-1">
-                                    <p class="text-sm font-semibold text-gray-800">🚇 Station: ${pandal.station}</p>
-                                    <span class="text-xs font-bold py-1 px-3 rounded-full ${getLineBadgeClass(pandal.line)}">${pandal.line} Line</span>
+                    pandalList.forEach(pandal => {
+                        const card = document.createElement('div');
+                        card.className = `pandal-card bg-white rounded-lg shadow-md overflow-hidden ${getLineColorClass(pandal.line)}`;
+                        
+                        card.innerHTML = `
+                            <div class="p-5 flex-grow">
+                                <h3 class="text-xl font-bold text-gray-800">${pandal.name}</h3>
+                                <p class="text-sm font-medium text-gray-500 my-3">${pandal.location}</p>
+                                <p class="text-gray-700 mb-4">${pandal.attraction}</p>
+                                <div class="bg-gray-50 p-3 rounded-lg border border-gray-200">
+                                    <div class="flex justify-between items-center mb-1">
+                                        <p class="text-sm font-semibold text-gray-800">🚇 Station: ${pandal.station}</p>
+                                        <span class="text-xs font-bold py-1 px-3 rounded-full ${getLineBadgeClass(pandal.line)}">${pandal.line} Line</span>
+                                    </div>
+                                    <p class="text-sm text-gray-600">🚶 Access: ${pandal.accessibility}</p>
                                 </div>
-                                <p class="text-sm text-gray-600">🚶 Access: ${pandal.accessibility}</p>
                             </div>
-                        </div>
-                        <div class="p-5 pt-4 border-t border-gray-200 bg-gray-50/50">
-                            <a href="${pandal.mapLink}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center text-sm font-semibold text-blue-600 hover:text-blue-800 transition-colors">
-                                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
-                                View on Map
-                            </a>
-                        </div>
-                    `;
-                    pandalGrid.appendChild(card);
-                });
+                            <div class="p-5 pt-4 border-t border-gray-200 bg-gray-50/50">
+                                <a href="${pandal.mapLink}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center text-sm font-semibold text-blue-600 hover:text-blue-800 transition-colors">
+                                    <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                                    View on Map
+                                </a>
+                            </div>
+                        `;
+                        pandalGrid.appendChild(card);
+                    });
+                }
             };
 
-            if (northPandals.length > 0) {
-                const heading = document.createElement('h2');
-                heading.className = 'zone-heading text-3xl font-bold';
-                heading.textContent = 'North Kolkata';
-                pandalGrid.appendChild(heading);
-                createCardsForZone(northPandals);
-            }
-
-            if (southPandals.length > 0) {
-                const heading = document.createElement('h2');
-                heading.className = 'zone-heading text-3xl font-bold';
-                heading.textContent = 'South Kolkata';
-                pandalGrid.appendChild(heading);
-                createCardsForZone(southPandals);
-            }
+            createCardsForZone(northPandals, 'North Kolkata');
+            createCardsForZone(southPandals, 'South Kolkata');
         }
         
         function getLineColorClass(line) {
