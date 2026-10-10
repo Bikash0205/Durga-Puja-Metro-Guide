@@ -100,9 +100,10 @@
 </head>
 <body class="min-h-screen pb-28 bg-[#FFF9F2] dark:bg-festive-night text-gray-800 dark:text-gray-100 antialiased transition-colors duration-300">
 
-  <!-- Mobile Top Header -->
-  <header class="sticky top-0 z-40 bg-gradient-to-r from-festive-900 via-rose-900 to-festive-800 text-white shadow-lg">
-    <div class="max-w-md mx-auto px-4 pt-3 pb-3 flex items-center justify-between">
+  <!-- Dynamic Smart Header (Collapses on Scroll) -->
+  <header id="main-header" class="sticky top-0 z-40 bg-gradient-to-r from-festive-900 via-rose-900 to-festive-800 text-white shadow-lg transition-all duration-300">
+    <!-- Full Header Branding (Fades and collapses on scroll down) -->
+    <div id="header-brand-block" class="max-w-md mx-auto px-4 pt-3 pb-2 flex items-center justify-between transition-all duration-300">
       <div class="flex items-center space-x-2.5">
         <div class="w-9 h-9 rounded-xl bg-amber-400/20 border border-amber-300/30 flex items-center justify-center text-amber-300 text-lg shadow-inner">
           <svg class="w-5 h-5 text-amber-300" fill="currentColor" viewBox="0 0 24 24">
@@ -115,42 +116,33 @@
         </div>
       </div>
       <div class="flex items-center space-x-1.5">
-        <!-- Night Hopping Theme Toggle -->
         <button id="btn-toggle-dark" class="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 active:scale-95 flex items-center justify-center text-amber-300 text-xs border border-white/20" title="Toggle Night Mode">
           🌙
         </button>
-        <!-- SOS & Helpline Button -->
         <button id="btn-open-sos" class="px-2.5 py-1 text-xs font-bold bg-rose-700/80 hover:bg-rose-700 active:scale-95 text-white rounded-full border border-rose-400/40 transition-all flex items-center gap-1">
           <span>🚨 SOS</span>
         </button>
-        <!-- Metro Timings -->
         <button id="btn-open-metro-info" class="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 active:scale-95 flex items-center justify-center text-white text-xs border border-white/20" title="Metro Timings">
           🚇
         </button>
       </div>
     </div>
 
-    <!-- Festive Dates, Next Metro Countdown & Live Rush Strip -->
-    <div class="bg-black/35 px-4 py-2 text-[11px] text-amber-200/90 border-t border-white/10 max-w-md mx-auto space-y-1">
-      <div class="flex items-center justify-between">
-        <span class="flex items-center gap-1.5 font-medium">
-          <span class="w-2 h-2 rounded-full bg-emerald-400 inline-block animate-pulse"></span>
-          Oct 16 (Shashthi) – Oct 21 (Dashami)
-        </span>
-        <span id="live-metro-status-badge" class="px-2 py-0.5 rounded-full text-[10px] font-black bg-emerald-950/80 text-emerald-300 border border-emerald-500/30">
-          ⚡ Night Metro Active
-        </span>
-      </div>
-      <!-- Live Next Metro Countdown Ticker -->
-      <div class="flex items-center justify-between pt-1 border-t border-white/10 text-xs">
-        <div class="flex items-center gap-1.5 font-semibold text-white">
+    <!-- Essential Compact Sticky Info Strip (Remains visible as a slim bar) -->
+    <div id="header-ticker-strip" class="bg-black/35 px-4 py-1.5 text-[11px] text-amber-200/90 border-t border-white/10 max-w-md mx-auto">
+      <div class="flex items-center justify-between text-xs">
+        <div class="flex items-center gap-1.5 font-bold text-white">
           <span class="text-sm">🚇</span>
-          <span>Next Train:</span>
-          <span id="header-next-metro-line" class="px-1.5 py-0.2 rounded text-[10px] font-bold bg-blue-600 text-white">Blue Line</span>
+          <span>Next Metro:</span>
+          <span id="header-next-metro-time" class="text-amber-300 font-black">in 4 mins</span>
         </div>
-        <div class="flex items-center gap-1 font-black text-amber-300">
-          <span id="header-next-metro-time" class="tracking-wide">in 4 mins</span>
-          <span class="text-[10px] font-normal text-rose-200" id="header-metro-dest">(Dakshineswar ⇄ Kavi Subhash)</span>
+        <div class="flex items-center gap-1.5">
+          <span id="live-metro-status-badge" class="px-2 py-0.5 rounded-full text-[10px] font-black bg-emerald-950/80 text-emerald-300 border border-emerald-500/30">
+            ⚡ Night Metro Active
+          </span>
+          <button id="btn-mini-sos" class="hidden px-2 py-0.5 bg-rose-600 text-white rounded-md text-[10px] font-black">
+            🚨
+          </button>
         </div>
       </div>
     </div>
@@ -207,25 +199,7 @@
       </div>
     </div>
 
-    <!-- Primary Mode Tabs (4 Modes: Circuits, Map, Pandals, Hop List) -->
-    <div class="flex p-1 bg-amber-100/70 dark:bg-festive-nightCard rounded-2xl border border-amber-200/90 dark:border-festive-nightBorder shadow-sm">
-      <button id="tab-circuits" class="flex-1 py-2 px-2 rounded-xl text-xs font-bold transition-all text-festive-900 bg-white dark:bg-festive-night dark:text-amber-200 shadow-sm flex items-center justify-center gap-1">
-        <span>🚶 Circuits</span>
-      </button>
-      <button id="tab-live-map" class="flex-1 py-2 px-2 rounded-xl text-xs font-semibold text-gray-600 dark:text-gray-400 hover:text-gray-900 transition-all flex items-center justify-center gap-1">
-        <span>🗺️ Live Map</span>
-      </button>
-      <button id="tab-food" class="flex-1 py-2 px-2 rounded-xl text-xs font-semibold text-gray-600 dark:text-gray-400 hover:text-gray-900 transition-all flex items-center justify-center gap-1">
-        <span>🍲 Food Trail</span>
-      </button>
-      <button id="tab-pandals" class="flex-1 py-2 px-2 rounded-xl text-xs font-semibold text-gray-600 dark:text-gray-400 hover:text-gray-900 transition-all flex items-center justify-center gap-1">
-        <span>🏛️ Directory</span>
-      </button>
-      <button id="tab-itinerary" class="flex-1 py-2 px-2 rounded-xl text-xs font-semibold text-gray-600 dark:text-gray-400 hover:text-gray-900 transition-all flex items-center justify-center gap-1 relative">
-        <span>★ Hop List</span>
-        <span id="badge-hop-count" class="hidden absolute -top-1 -right-1 w-4 h-4 bg-festive-800 text-white rounded-full text-[10px] font-bold flex items-center justify-center">0</span>
-      </button>
-    </div>
+
 
     <!-- ========================================== -->
     <!-- VIEW 1: WALKING CIRCUITS (PEDESTRIAN HUB) -->
@@ -911,12 +885,6 @@
     const aiRecommendTitle = document.getElementById('ai-recommend-title');
     const btnApplyAiRoute = document.getElementById('btn-apply-ai-route');
 
-    const tabCircuits = document.getElementById('tab-circuits');
-    const tabLiveMap = document.getElementById('tab-live-map');
-    const tabFood = document.getElementById('tab-food');
-    const tabPandals = document.getElementById('tab-pandals');
-    const tabItinerary = document.getElementById('tab-itinerary');
-
     const viewCircuits = document.getElementById('view-circuits');
     const viewLiveMap = document.getElementById('view-live-map');
     const viewFood = document.getElementById('view-food');
@@ -1295,14 +1263,9 @@
       resolveOptimalRouteFromLocation(preset.lat, preset.lng, preset.name);
     }
 
-    // --- TAB SWITCHING (5 Tabs) ---
+    // --- TAB SWITCHING (Controlled from Bottom Nav) ---
     function switchTab(target) {
       [viewCircuits, viewLiveMap, viewFood, viewPandals, viewItinerary].forEach(v => v.classList.add('hidden'));
-
-      [tabCircuits, tabLiveMap, tabFood, tabPandals, tabItinerary].forEach(btn => {
-        btn.classList.remove('bg-white', 'dark:bg-festive-night', 'text-festive-900', 'dark:text-amber-200', 'shadow-sm', 'font-bold');
-        btn.classList.add('text-gray-600', 'dark:text-gray-400', 'font-semibold');
-      });
 
       [navBtnCircuits, navBtnMap, navBtnFood, navBtnPandals, navBtnItinerary].forEach(btn => {
         btn.classList.remove('text-festive-900', 'dark:text-amber-400', 'font-bold');
@@ -1311,26 +1274,21 @@
 
       if (target === 'circuits') {
         viewCircuits.classList.remove('hidden');
-        tabCircuits.classList.add('bg-white', 'dark:bg-festive-night', 'text-festive-900', 'dark:text-amber-200', 'shadow-sm', 'font-bold');
         navBtnCircuits.classList.add('text-festive-900', 'dark:text-amber-400', 'font-bold');
       } else if (target === 'map') {
         viewLiveMap.classList.remove('hidden');
-        tabLiveMap.classList.add('bg-white', 'dark:bg-festive-night', 'text-festive-900', 'dark:text-amber-200', 'shadow-sm', 'font-bold');
         navBtnMap.classList.add('text-festive-900', 'dark:text-amber-400', 'font-bold');
         initLeafletMap();
       } else if (target === 'food') {
         viewFood.classList.remove('hidden');
-        tabFood.classList.add('bg-white', 'dark:bg-festive-night', 'text-festive-900', 'dark:text-amber-200', 'shadow-sm', 'font-bold');
         navBtnFood.classList.add('text-festive-900', 'dark:text-amber-400', 'font-bold');
         renderFoodTrail();
       } else if (target === 'pandals') {
         viewPandals.classList.remove('hidden');
-        tabPandals.classList.add('bg-white', 'dark:bg-festive-night', 'text-festive-900', 'dark:text-amber-200', 'shadow-sm', 'font-bold');
         navBtnPandals.classList.add('text-festive-900', 'dark:text-amber-400', 'font-bold');
         renderPandals();
       } else if (target === 'itinerary') {
         viewItinerary.classList.remove('hidden');
-        tabItinerary.classList.add('bg-white', 'dark:bg-festive-night', 'text-festive-900', 'dark:text-amber-200', 'shadow-sm', 'font-bold');
         navBtnItinerary.classList.add('text-festive-900', 'dark:text-amber-400', 'font-bold');
         renderHopList();
       }
@@ -1833,17 +1791,48 @@
       if (e.target === modalPresets) modalPresets.classList.add('hidden');
     });
 
-    tabCircuits.addEventListener('click', () => switchTab('circuits'));
-    tabLiveMap.addEventListener('click', () => switchTab('map'));
-    tabFood.addEventListener('click', () => switchTab('food'));
-    tabPandals.addEventListener('click', () => switchTab('pandals'));
-    tabItinerary.addEventListener('click', () => switchTab('itinerary'));
-
+    // Bottom Navigation Handlers
     navBtnCircuits.addEventListener('click', () => switchTab('circuits'));
     navBtnMap.addEventListener('click', () => switchTab('map'));
     navBtnFood.addEventListener('click', () => switchTab('food'));
     navBtnPandals.addEventListener('click', () => switchTab('pandals'));
     navBtnItinerary.addEventListener('click', () => switchTab('itinerary'));
+
+    // --- SMART HEADER SCROLL CONTROLLER ---
+    // When scrolling down, smoothly hide the large branding block and keep only the essential slim strip
+    const mainHeader = document.getElementById('main-header');
+    const headerBrandBlock = document.getElementById('header-brand-block');
+    const btnMiniSos = document.getElementById('btn-mini-sos');
+
+    let lastScrollY = window.scrollY;
+
+    window.addEventListener('scroll', () => {
+      const currentScrollY = window.scrollY;
+
+      if (currentScrollY > 70) {
+        // Scrolled down: collapse branding to maximize mobile screen space
+        headerBrandBlock.style.maxHeight = '0px';
+        headerBrandBlock.style.opacity = '0';
+        headerBrandBlock.style.paddingTop = '0px';
+        headerBrandBlock.style.paddingBottom = '0px';
+        headerBrandBlock.style.overflow = 'hidden';
+        if (btnMiniSos) btnMiniSos.classList.remove('hidden');
+      } else {
+        // Near top: show full header
+        headerBrandBlock.style.maxHeight = '120px';
+        headerBrandBlock.style.opacity = '1';
+        headerBrandBlock.style.paddingTop = '0.75rem';
+        headerBrandBlock.style.paddingBottom = '0.5rem';
+        headerBrandBlock.style.overflow = 'visible';
+        if (btnMiniSos) btnMiniSos.classList.add('hidden');
+      }
+
+      lastScrollY = currentScrollY;
+    }, { passive: true });
+
+    if (btnMiniSos) {
+      btnMiniSos.addEventListener('click', () => modalSos.classList.remove('hidden'));
+    }
 
     document.getElementById('btn-recenter-map')?.addEventListener('click', () => {
       if (mapInstance) {
