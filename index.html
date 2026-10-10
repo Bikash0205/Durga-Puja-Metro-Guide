@@ -539,34 +539,25 @@
       <!-- Modal Body -->
       <div class="p-4 overflow-y-auto space-y-4 text-xs">
         
-        <!-- Pandal 2026 Highlight & Theme Image Banner -->
-        <div class="rounded-2xl overflow-hidden border border-amber-200/80 dark:border-amber-900 bg-amber-50 dark:bg-amber-950/30">
-          <div class="relative w-full h-44 bg-gray-900 overflow-hidden">
-            <img id="modal-pandal-img" src="" alt="Theme preview" class="w-full h-full object-cover transition-transform duration-500 hover:scale-105" />
-            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
-            <div class="absolute top-2.5 left-2.5">
-              <span id="modal-pandal-zone-badge" class="px-2 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-black/60 text-amber-300 border border-amber-300/30 backdrop-blur-xs">
-                North Kolkata
-              </span>
-            </div>
-            <div class="absolute top-2.5 right-2.5">
-              <span id="modal-pandal-hype-badge" class="px-2 py-0.5 rounded-full text-[10px] font-extrabold bg-amber-400 text-rose-950 shadow">Hype: 9.8/10</span>
-            </div>
-            <div class="absolute bottom-2 left-3 right-3 text-white">
-              <p id="modal-pandal-img-caption" class="text-[10px] font-medium text-amber-100/90 leading-tight">Theme Installation Preview</p>
-            </div>
+        <!-- Pandal 2026 Official Theme & Concept Showcase -->
+        <div class="rounded-2xl border border-amber-300 dark:border-amber-800/80 bg-gradient-to-br from-amber-50/90 via-rose-50/40 to-white dark:from-amber-950/40 dark:via-festive-nightCard dark:to-festive-nightCard p-4 shadow-sm space-y-3">
+          <div class="flex items-center justify-between">
+            <span id="modal-pandal-zone-badge" class="px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-festive-900 text-amber-300">
+              North Sector
+            </span>
+            <span id="modal-pandal-hype-badge" class="px-2.5 py-0.5 rounded-full text-[10px] font-extrabold bg-amber-400 text-rose-950 shadow">Hype: 9.8/10</span>
           </div>
 
-          <div class="p-3 space-y-1.5">
-            <div class="flex items-center justify-between">
-              <span class="font-bold text-amber-900 dark:text-amber-200 flex items-center gap-1.5">
-                <svg class="w-3.5 h-3.5 text-amber-600" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
-                <span>2026 Theme / Concept:</span>
+          <div class="space-y-1.5">
+            <div class="flex items-center justify-between gap-2">
+              <span class="font-black text-xs text-amber-900 dark:text-amber-200 flex items-center gap-1.5">
+                <svg class="w-4 h-4 text-amber-600 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
+                <span>2026 Official Theme:</span>
               </span>
-              <span id="modal-pandal-artist" class="text-[10px] font-bold text-rose-800 dark:text-rose-300"></span>
+              <span id="modal-pandal-artist" class="text-[10px] font-bold px-2 py-0.5 rounded-md bg-white dark:bg-black/30 border border-amber-300/60 dark:border-amber-800 text-rose-800 dark:text-rose-300"></span>
             </div>
-            <p id="modal-pandal-theme" class="text-gray-700 dark:text-gray-300 leading-relaxed font-medium">Theme details...</p>
-            <p id="modal-pandal-attraction" class="text-[11px] text-gray-500 dark:text-gray-400 leading-relaxed pt-1 border-t border-amber-200/50 dark:border-amber-900/50"></p>
+            <h4 id="modal-pandal-theme" class="text-sm font-extrabold text-festive-900 dark:text-amber-100 leading-snug"></h4>
+            <p id="modal-pandal-attraction" class="text-xs text-gray-600 dark:text-gray-300 leading-relaxed pt-2 border-t border-amber-200/70 dark:border-amber-900/50"></p>
           </div>
         </div>
 
@@ -869,606 +860,661 @@
     // --- PANDALS DATASET WITH 2026 THEMES & CURATED ART/INSTALLATION PICTURES ---
     const pandals = [
       {
-        id: 101,
-        zone: 'North',
-        name: "Bagbazar Sarbojanin",
-        location: "Bagbazar",
-        attraction: "Kolkata's iconic century-old puja with pristine traditional idol, carnival fair, and Sindoor Khela.",
-        theme2026: "Timeless traditional 'Ekchala' heritage & iconic carnival fair by the Ganges.",
-        image: "https://images.unsplash.com/photo-1567653418876-5bb0e566e1c2?auto=format&fit=crop&w=800&q=80",
-        imageCaption: "Pristine traditional Bengali Ekchala Pratima & brass lighting",
-        artist2026: "Subrata Banerjee & Traditional Kumartuli Clay Masters",
-        line: "Blue",
-        station: "Shyambazar",
-        accessibility: "5-min walk (Gate 1)",
-        lat: 22.6022,
-        lng: 88.3687,
-        crowd: "Very High",
-        hypeScore: 9.8,
-        mapLink: "https://www.google.com/maps/search/?api=1&query=Bagbazar+Sarbojanin+Durgotsav",
-        nearbyPandalIds: [111, 104, 124, 107]
+            "id": 101,
+            "zone": "North",
+            "name": "Bagbazar Sarbojanin",
+            "location": "Bagbazar",
+            "attraction": "Kolkata's iconic 106-year-old traditional puja featuring pristine Ekchala Pratima adorned in classic Daaker Saaj, riverfront carnival fair, and Sindoor Khela.",
+            "theme2026": "Sabeki Ekchala Heritage — Century-Old Pristine Tradition",
+            "artist2026": "Traditional Kumartuli Clay Masters",
+            "line": "Blue",
+            "station": "Shyambazar",
+            "accessibility": "5-min walk (Gate 1)",
+            "lat": 22.6022,
+            "lng": 88.3687,
+            "crowd": "Very High",
+            "hypeScore": 9.8,
+            "mapLink": "https://www.google.com/maps/search/?api=1&query=Bagbazar+Sarbojanin+Durgotsav",
+            "nearbyPandalIds": [
+                  111,
+                  104,
+                  124,
+                  107
+            ]
       },
       {
-        id: 111,
-        zone: 'North',
-        name: "Jagat Mukherjee Park",
-        location: "Jatindra Mohan Ave",
-        attraction: "Known for spectacular thematic architecture and intricate lighting concepts.",
-        theme2026: "Immersive architectural illusion & eco-conscious art design.",
-        image: "https://images.unsplash.com/photo-1582510003544-4d00b7f74220?auto=format&fit=crop&w=800&q=80",
-        imageCaption: "Architectural terracotta carvings & illusionary spatial light corridors",
-        artist2026: "Subrata Paul & Spatial Illusion Art Guild",
-        line: "Blue",
-        station: "Shyambazar",
-        accessibility: "3-min walk",
-        lat: 22.5997,
-        lng: 88.3695,
-        crowd: "Medium-High",
-        hypeScore: 9.1,
-        mapLink: "https://www.google.com/maps/search/?api=1&query=Jagat+Mukherjee+Park+Durga+Puja",
-        nearbyPandalIds: [101, 102, 127]
+            "id": 111,
+            "zone": "North",
+            "name": "Jagat Mukherjee Park",
+            "location": "Jatindra Mohan Ave",
+            "attraction": "90th year celebration shifting focus to India's ancient manuscripts, rare Vedic scripts, and sacred calligraphic art installations.",
+            "theme2026": "Pandulipi (The Manuscript) — Ancient Indian Heritage",
+            "artist2026": "Subrata Paul & Spatial Illusion Guild",
+            "line": "Blue",
+            "station": "Shyambazar",
+            "accessibility": "3-min walk",
+            "lat": 22.5997,
+            "lng": 88.3695,
+            "crowd": "Medium-High",
+            "hypeScore": 9.1,
+            "mapLink": "https://www.google.com/maps/search/?api=1&query=Jagat+Mukherjee+Park+Durga+Puja",
+            "nearbyPandalIds": [
+                  101,
+                  102,
+                  127
+            ]
       },
       {
-        id: 102,
-        zone: 'North',
-        name: "Kumartuli Park Sarbojanin",
-        location: "Kumartuli",
-        attraction: "Grand themed pandal situated right beside the artisan district.",
-        theme2026: "Heritage pottery craft fusion and modern thematic narrative.",
-        image: "https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?auto=format&fit=crop&w=800&q=80",
-        imageCaption: "Handcrafted unbaked clay pottery sculptures & terracotta reliefs",
-        artist2026: "Mintupal & North Kolkata Sculptors Syndicate",
-        line: "Blue",
-        station: "Sovabazar Sutanuti",
-        accessibility: "8-min walk (Gate 2)",
-        lat: 22.5990,
-        lng: 88.3648,
-        crowd: "High",
-        hypeScore: 9.4,
-        mapLink: "https://www.google.com/maps/search/?api=1&query=Kumartuli+Park+Sarbojanin+Durgotsab",
-        nearbyPandalIds: [124, 109, 111]
+            "id": 102,
+            "zone": "North",
+            "name": "Kumartuli Park Sarbojanin",
+            "location": "Kumartuli",
+            "attraction": "Traces the sacred journey of the river Ganga starting from the frozen icy caverns of the Himalayas cascading through sacred ghats to the delta.",
+            "theme2026": "Gangotri to Ganga — From Himalayan Glaciers to the Bengal Plains",
+            "artist2026": "Mintupal & North Kolkata Sculptors Syndicate",
+            "line": "Blue",
+            "station": "Sovabazar Sutanuti",
+            "accessibility": "8-min walk (Gate 2)",
+            "lat": 22.599,
+            "lng": 88.3648,
+            "crowd": "High",
+            "hypeScore": 9.4,
+            "mapLink": "https://www.google.com/maps/search/?api=1&query=Kumartuli+Park+Sarbojanin+Durgotsab",
+            "nearbyPandalIds": [
+                  124,
+                  109,
+                  111
+            ]
       },
       {
-        id: 124,
-        zone: 'North',
-        name: "Kumartuli Sarbojanin",
-        location: "Kumartuli",
-        attraction: "Authentic traditional clay masters' home puja with historic roots.",
-        theme2026: "Tribute to immortal idol sculptors and vintage clay heritage.",
-        image: "https://images.unsplash.com/photo-1513519245088-0e12902e5a38?auto=format&fit=crop&w=800&q=80",
-        imageCaption: "Authentic Kumartuli artisan studio straw & clay mastercraft",
-        artist2026: "Traditional Kumartuli Mrithshilpi Guild",
-        line: "Blue",
-        station: "Sovabazar Sutanuti",
-        accessibility: "8-min walk",
-        lat: 22.5982,
-        lng: 88.3642,
-        crowd: "Medium",
-        hypeScore: 9.0,
-        mapLink: "https://www.google.com/maps/search/?api=1&query=Kumartuli+Sarbojanin+Durgotsab",
-        nearbyPandalIds: [102, 109, 101]
+            "id": 124,
+            "zone": "North",
+            "name": "Kumartuli Sarbojanin",
+            "location": "Kumartuli",
+            "attraction": "Historic homeland of idol artisans, showcasing the raw sacred creation of Durga from river clay, straw armatures, and hereditary mastercraft.",
+            "theme2026": "Mrittika Shilpo — Tribute to the Immortal Clay Sculptors",
+            "artist2026": "Kumartuli Mrithshilpi Samity",
+            "line": "Blue",
+            "station": "Sovabazar Sutanuti",
+            "accessibility": "8-min walk",
+            "lat": 22.5982,
+            "lng": 88.3642,
+            "crowd": "Medium",
+            "hypeScore": 9,
+            "mapLink": "https://www.google.com/maps/search/?api=1&query=Kumartuli+Sarbojanin+Durgotsab",
+            "nearbyPandalIds": [
+                  102,
+                  109,
+                  101
+            ]
       },
       {
-        id: 109,
-        zone: 'North',
-        name: "Ahiritola Jubak Brinda",
-        location: "Ahiritola",
-        attraction: "Historic riverfront puja famous for soulful thematic storytelling and ghat ambiance.",
-        theme2026: "Folklore of Bengal's rivers and classical brass craftsmanship.",
-        image: "https://images.unsplash.com/photo-1609137144813-7d9921338f24?auto=format&fit=crop&w=800&q=80",
-        imageCaption: "Sacred riverfront brass filigree art & glowing lamp canopy",
-        artist2026: "Tanmoy Chakraborty",
-        line: "Blue",
-        station: "Sovabazar Sutanuti",
-        accessibility: "10-min walk towards Ghat",
-        lat: 22.5945,
-        lng: 88.3601,
-        crowd: "High",
-        hypeScore: 9.3,
-        mapLink: "https://www.google.com/maps/search/?api=1&query=Ahiritola+Jubak+Brinda",
-        nearbyPandalIds: [124, 102, 125]
+            "id": 109,
+            "zone": "North",
+            "name": "Ahiritola Jubak Brinda",
+            "location": "Ahiritola",
+            "attraction": "Celebrates Bengal's historic sweet-making (mishti) culture as a sweet catalyst for communal brotherhood, warmth, and social harmony.",
+            "theme2026": "Madhuri Maitrir Anveshan — A Quest for the Harmony of Sweetness",
+            "artist2026": "Tanmoy Chakraborty",
+            "line": "Blue",
+            "station": "Sovabazar Sutanuti",
+            "accessibility": "10-min walk towards Ghat",
+            "lat": 22.5945,
+            "lng": 88.3601,
+            "crowd": "High",
+            "hypeScore": 9.3,
+            "mapLink": "https://www.google.com/maps/search/?api=1&query=Ahiritola+Jubak+Brinda",
+            "nearbyPandalIds": [
+                  124,
+                  102,
+                  125
+            ]
       },
       {
-        id: 107,
-        zone: 'North',
-        name: "Kashi Bose Lane",
-        location: "Shyambazar / Maniktala",
-        attraction: "Consistently multi-award winning artistic pandal with poignant social themes.",
-        theme2026: "Socio-cultural retrospectives with masterclass lighting.",
-        image: "https://images.unsplash.com/photo-1514565131-fce0801e5785?auto=format&fit=crop&w=800&q=80",
-        imageCaption: "Architectural lighting canopy & conceptual social retrospective",
-        artist2026: "Aditi Chakraborty",
-        line: "Blue",
-        station: "Shyambazar",
-        accessibility: "6-min walk (Bidhan Sarani side)",
-        lat: 22.5928,
-        lng: 88.3725,
-        crowd: "Very High",
-        hypeScore: 9.7,
-        mapLink: "https://www.google.com/maps/search/?api=1&query=Kashi+Bose+Lane+Durga+Puja",
-        nearbyPandalIds: [114, 108, 127]
+            "id": 107,
+            "zone": "North",
+            "name": "Kashi Bose Lane",
+            "location": "Shyambazar / Maniktala",
+            "attraction": "89th year milestone inspired by traditional Warli folk art of Maharashtra, exploring harmonious indigenous coexistence with earth and nature.",
+            "theme2026": "Adim (আদিম) — The Simple Lines of Life",
+            "artist2026": "Aditi Chakraborty & Folk Artisan Collective",
+            "line": "Blue",
+            "station": "Shyambazar",
+            "accessibility": "6-min walk (Bidhan Sarani side)",
+            "lat": 22.5928,
+            "lng": 88.3725,
+            "crowd": "Very High",
+            "hypeScore": 9.7,
+            "mapLink": "https://www.google.com/maps/search/?api=1&query=Kashi+Bose+Lane+Durga+Puja",
+            "nearbyPandalIds": [
+                  114,
+                  108,
+                  127
+            ]
       },
       {
-        id: 114,
-        zone: 'North',
-        name: "Hatibagan Nabinpally",
-        location: "Hatibagan",
-        attraction: "Vibrant bustling bazaar atmosphere and bold artistic installations.",
-        theme2026: "Urban Bengal nostalgia & vintage soundscapes.",
-        image: "https://images.unsplash.com/photo-1509198397868-475647b2a1e5?auto=format&fit=crop&w=800&q=80",
-        imageCaption: "Vintage colonial street architecture & nostalgic gramophone motifs",
-        artist2026: "Anirban Das",
-        line: "Blue",
-        station: "Shyambazar",
-        accessibility: "5-min walk",
-        lat: 22.5940,
-        lng: 88.3718,
-        crowd: "High",
-        hypeScore: 9.2,
-        mapLink: "https://www.google.com/maps/search/?api=1&query=Hatibagan+Nabinpally+Sarbojanin+Durgotsav",
-        nearbyPandalIds: [107, 108, 127]
+            "id": 114,
+            "zone": "North",
+            "name": "Hatibagan Nabinpally",
+            "location": "Hatibagan",
+            "attraction": "Avant-garde abstract installation using asymmetric timber beams and geometric kinetic motifs exploring balance amidst urban chaos.",
+            "theme2026": "Chhandachhara Chhannachhara (Rhythmless, Orderless)",
+            "artist2026": "Anirban Das",
+            "line": "Blue",
+            "station": "Shyambazar",
+            "accessibility": "5-min walk",
+            "lat": 22.594,
+            "lng": 88.3718,
+            "crowd": "High",
+            "hypeScore": 9.2,
+            "mapLink": "https://www.google.com/maps/search/?api=1&query=Hatibagan+Nabinpally+Sarbojanin+Durgotsav",
+            "nearbyPandalIds": [
+                  107,
+                  108,
+                  127
+            ]
       },
       {
-        id: 108,
-        zone: 'North',
-        name: "Nalin Sarkar Street",
-        location: "Shyambazar",
-        attraction: "Avant-garde handcrafted artistic installations with deep philosophical motifs.",
-        theme2026: "Terracotta and tribal weave sculptural expressions.",
-        image: "https://images.unsplash.com/photo-1513836279014-a89f7a76ae86?auto=format&fit=crop&w=800&q=80",
-        imageCaption: "Organic tribal bamboo looms & sustainable forest fiber art",
-        artist2026: "Manas Das",
-        line: "Blue",
-        station: "Shyambazar",
-        accessibility: "6-min walk",
-        lat: 22.5948,
-        lng: 88.3742,
-        crowd: "Medium-High",
-        hypeScore: 9.1,
-        mapLink: "https://www.google.com/maps/search/?api=1&query=Nalin+Sarkar+Street+Sarbojanin+Durgotsab",
-        nearbyPandalIds: [107, 114, 127]
+            "id": 108,
+            "zone": "North",
+            "name": "Nalin Sarkar Street",
+            "location": "Shyambazar",
+            "attraction": "Handcrafted bamboo textures, terracotta reliefs, and natural forest pigments crafting a sanctuary of organic serenity.",
+            "theme2026": "Arohan — Spiritual Ascent of Indigenous Art",
+            "artist2026": "Manas Das",
+            "line": "Blue",
+            "station": "Shyambazar",
+            "accessibility": "6-min walk",
+            "lat": 22.5948,
+            "lng": 88.3742,
+            "crowd": "Medium-High",
+            "hypeScore": 9.1,
+            "mapLink": "https://www.google.com/maps/search/?api=1&query=Nalin+Sarkar+Street+Sarbojanin+Durgotsab",
+            "nearbyPandalIds": [
+                  107,
+                  114,
+                  127
+            ]
       },
       {
-        id: 127,
-        zone: 'North',
-        name: "Sikdar Bagan Sadharan",
-        location: "Sikdar Bagan",
-        attraction: "One of North Kolkata's cherished old pujas known for warm neighborhood intimacy.",
-        theme2026: "Traditional brass and Dokra sculpture tribute.",
-        image: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=800&q=80",
-        imageCaption: "Golden cast Dokra brass figurines and ethnic metal reliefs",
-        artist2026: "Pradip Ghosh",
-        line: "Blue",
-        station: "Shyambazar",
-        accessibility: "4-min walk",
-        lat: 22.5966,
-        lng: 88.3721,
-        crowd: "Medium",
-        hypeScore: 8.9,
-        mapLink: "https://www.google.com/maps/search/?api=1&query=Sikdar+Bagan+Sadharan+Durgotsov",
-        nearbyPandalIds: [114, 107, 111]
+            "id": 127,
+            "zone": "North",
+            "name": "Sikdar Bagan Sadharan",
+            "location": "Sikdar Bagan",
+            "attraction": "Intricate lost-wax Dokra brass sculptures, antique bell-metal bells, and heritage craftsmanship in an intimate neighborhood pavilion.",
+            "theme2026": "Oitijhyo O Dokra — Golden Cast Metal Heritage",
+            "artist2026": "Pradip Ghosh",
+            "line": "Blue",
+            "station": "Shyambazar",
+            "accessibility": "4-min walk",
+            "lat": 22.5966,
+            "lng": 88.3721,
+            "crowd": "Medium",
+            "hypeScore": 8.9,
+            "mapLink": "https://www.google.com/maps/search/?api=1&query=Sikdar+Bagan+Sadharan+Durgotsov",
+            "nearbyPandalIds": [
+                  114,
+                  107,
+                  111
+            ]
       },
       {
-        id: 130,
-        zone: 'North',
-        name: "Tala Prattoy",
-        location: "Tala / Belgachia",
-        attraction: "The vanguard of modern conceptual art in Bengal; a colossal open-air art gallery.",
-        theme2026: "'Biyojon' — Exploring philosophical layers of solitude, release & restoration.",
-        image: "https://images.unsplash.com/photo-1548013146-72479768bada?auto=format&fit=crop&w=800&q=80",
-        imageCaption: "'Biyojon' conceptual mammoth architectural installation by Susanta Paul",
-        artist2026: "Susanta Paul (International Installation Pioneer)",
-        line: "Blue",
-        station: "Belgachia",
-        accessibility: "7-min walk (Gate 1)",
-        lat: 22.6074,
-        lng: 88.3768,
-        crowd: "Very High",
-        hypeScore: 9.9,
-        mapLink: "https://www.google.com/maps/search/?api=1&query=Tala+Prattoy+Durga+Puja",
-        nearbyPandalIds: [117, 101]
+            "id": 130,
+            "zone": "North",
+            "name": "Tala Prattoy",
+            "location": "Tala / Belgachia",
+            "attraction": "Colossal public art installation celebrating its 101st year, redefining contemporary festive aesthetics with minimalist spatial depth, sound design, and raw textures.",
+            "theme2026": "101st Year Public Art Milestone — Immersive Spatial Installation",
+            "artist2026": "Susanta Shibani Paul (Renowned Installation Pioneer)",
+            "line": "Blue",
+            "station": "Belgachia",
+            "accessibility": "7-min walk (Gate 1)",
+            "lat": 22.6074,
+            "lng": 88.3768,
+            "crowd": "Very High",
+            "hypeScore": 9.9,
+            "mapLink": "https://www.google.com/maps/search/?api=1&query=Tala+Prattoy+Durga+Puja",
+            "nearbyPandalIds": [
+                  117,
+                  101
+            ]
       },
       {
-        id: 117,
-        zone: 'North',
-        name: "Belgachia Sadharan Durgotsab",
-        location: "Belgachia",
-        attraction: "Sprawling community setup right beside the metro station.",
-        theme2026: "Folk music instruments & clay relief mural.",
-        image: "https://images.unsplash.com/photo-1513519245088-0e12902e5a38?auto=format&fit=crop&w=800&q=80",
-        imageCaption: "Ektara & Dhak folk music relief installations in baked clay",
-        artist2026: "Belgachia Art Collective",
-        line: "Blue",
-        station: "Belgachia",
-        accessibility: "2-min walk (Gate 2)",
-        lat: 22.6045,
-        lng: 88.3792,
-        crowd: "Medium",
-        hypeScore: 8.7,
-        mapLink: "https://www.google.com/maps/search/?api=1&query=Belgachia+Sadharan+Durgotsab",
-        nearbyPandalIds: [130, 120]
+            "id": 117,
+            "zone": "North",
+            "name": "Belgachia Sadharan Durgotsab",
+            "location": "Belgachia",
+            "attraction": "Celebration of Bengal's musical soul featuring clay reliefs of Ektara, Dotara, and Dhak rhythms greeting commuters right outside the metro station.",
+            "theme2026": "Sur O Chhondo — Folk Music Resonance of Bengal",
+            "artist2026": "Belgachia Art Guild",
+            "line": "Blue",
+            "station": "Belgachia",
+            "accessibility": "2-min walk (Gate 2)",
+            "lat": 22.6045,
+            "lng": 88.3792,
+            "crowd": "Medium",
+            "hypeScore": 8.7,
+            "mapLink": "https://www.google.com/maps/search/?api=1&query=Belgachia+Sadharan+Durgotsab",
+            "nearbyPandalIds": [
+                  130,
+                  120
+            ]
       },
       {
-        id: 120,
-        zone: 'East',
-        name: "Dum Dum Park Bharat Chakra",
-        location: "Dum Dum Park",
-        attraction: "Famous for grand scale, architectural ingenuity, and breathtaking visual harmony.",
-        theme2026: "Intricate architectural woodwork & celestial motifs.",
-        image: "https://images.unsplash.com/photo-1582510003544-4d00b7f74220?auto=format&fit=crop&w=800&q=80",
-        imageCaption: "Carved Teak wood geometric vaulting and astronomical zodiac pillars",
-        artist2026: "Anirban Das",
-        line: "Orange",
-        station: "Dum Dum Park",
-        accessibility: "5-min walk",
-        lat: 22.6080,
-        lng: 88.4110,
-        crowd: "Very High",
-        hypeScore: 9.6,
-        mapLink: "https://www.google.com/maps/search/?api=1&query=Dum+Dum+Park+Bharat+Chakra",
-        nearbyPandalIds: [121, 131, 113]
+            "id": 120,
+            "zone": "East",
+            "name": "Dum Dum Park Bharat Chakra",
+            "location": "Dum Dum Park",
+            "attraction": "Monumental astronomical pavilion with carved teak woodwork, astrological constellations, and precision shadow-casting illuminations.",
+            "theme2026": "Nakshatra Mandalam — Celestial Vault & Sacred Geometries",
+            "artist2026": "Anirban Das",
+            "line": "Orange",
+            "station": "Dum Dum Park",
+            "accessibility": "5-min walk",
+            "lat": 22.608,
+            "lng": 88.411,
+            "crowd": "Very High",
+            "hypeScore": 9.6,
+            "mapLink": "https://www.google.com/maps/search/?api=1&query=Dum+Dum+Park+Bharat+Chakra",
+            "nearbyPandalIds": [
+                  121,
+                  131,
+                  113
+            ]
       },
       {
-        id: 121,
-        zone: 'East',
-        name: "Dum Dum Park Sarbojanin",
-        location: "Dum Dum Park",
-        attraction: "Pioneering creative themes in the Dum Dum Park belt.",
-        theme2026: "Eco-botanical fibers & village weaver tales.",
-        image: "https://images.unsplash.com/photo-1513836279014-a89f7a76ae86?auto=format&fit=crop&w=800&q=80",
-        imageCaption: "Jute looms, unbleached cotton threads and pastoral rural murals",
-        artist2026: "Shibsankar Das",
-        line: "Orange",
-        station: "Dum Dum Park",
-        accessibility: "4-min walk",
-        lat: 22.6068,
-        lng: 88.4125,
-        crowd: "High",
-        hypeScore: 9.3,
-        mapLink: "https://www.google.com/maps/search/?api=1&query=Dum+Dum+Park+Sarbojanin+Durgotsab",
-        nearbyPandalIds: [120, 131]
+            "id": 121,
+            "zone": "East",
+            "name": "Dum Dum Park Sarbojanin",
+            "location": "Dum Dum Park",
+            "attraction": "Sustainable eco-installation made from raw jute fibers, handloom cotton, and botanical pigments celebrating rural Bengal craft.",
+            "theme2026": "Bono-Bhabna — The Forest Weaver's Legacy",
+            "artist2026": "Shibsankar Das",
+            "line": "Orange",
+            "station": "Dum Dum Park",
+            "accessibility": "4-min walk",
+            "lat": 22.6068,
+            "lng": 88.4125,
+            "crowd": "High",
+            "hypeScore": 9.3,
+            "mapLink": "https://www.google.com/maps/search/?api=1&query=Dum+Dum+Park+Sarbojanin+Durgotsab",
+            "nearbyPandalIds": [
+                  120,
+                  131
+            ]
       },
       {
-        id: 131,
-        zone: 'East',
-        name: "Dum Dum Park Tarun Sangha",
-        location: "Dum Dum Park",
-        attraction: "Sensational lighting & thought-provoking modern installation art.",
-        theme2026: "Reflections of nature and inner consciousness.",
-        image: "https://images.unsplash.com/photo-1514565131-fce0801e5785?auto=format&fit=crop&w=800&q=80",
-        imageCaption: "Mirror pools, ambient neon refractions and spiritual tranquility",
-        artist2026: "Rintu Das",
-        line: "Orange",
-        station: "Dum Dum Park",
-        accessibility: "6-min walk",
-        lat: 22.6072,
-        lng: 88.4140,
-        crowd: "High",
-        hypeScore: 9.4,
-        mapLink: "https://www.google.com/maps/search/?api=1&query=Dum+Dum+Park+Tarun+Sangha",
-        nearbyPandalIds: [120, 121, 113]
+            "id": 131,
+            "zone": "East",
+            "name": "Dum Dum Park Tarun Sangha",
+            "location": "Dum Dum Park",
+            "attraction": "Sensational multi-tiered reflection pools, ambient refractive glass panels, and meditative environmental illumination.",
+            "theme2026": "Antardrishti — Mirrors of Inner Reflection",
+            "artist2026": "Rintu Das",
+            "line": "Orange",
+            "station": "Dum Dum Park",
+            "accessibility": "6-min walk",
+            "lat": 22.6072,
+            "lng": 88.414,
+            "crowd": "High",
+            "hypeScore": 9.4,
+            "mapLink": "https://www.google.com/maps/search/?api=1&query=Dum+Dum+Park+Tarun+Sangha",
+            "nearbyPandalIds": [
+                  120,
+                  121,
+                  113
+            ]
       },
       {
-        id: 113,
-        zone: 'East',
-        name: "Sreebhumi Sporting Club",
-        location: "VIP Road, Lake Town",
-        attraction: "Massive royal monument replica, million-watt lighting spectacle & diamond jewellery idol.",
-        theme2026: "Grand Recreation of Jaipur's majestic 'Hawa Mahal'.",
-        image: "https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=800&q=80",
-        imageCaption: "Monumental pink sandstone replica of Jaipur's Palace of Winds",
-        artist2026: "Romeo Hazra & Chandannagar Illuminators",
-        line: "Orange",
-        station: "VIP Road",
-        accessibility: "5-min auto/walk from VIP Road Crossing",
-        lat: 22.5985,
-        lng: 88.4045,
-        crowd: "Extreme",
-        hypeScore: 10.0,
-        mapLink: "https://www.google.com/maps/search/?api=1&query=Sreebhumi+Sporting+Club",
-        nearbyPandalIds: [120, 131]
+            "id": 113,
+            "zone": "East",
+            "name": "Sreebhumi Sporting Club",
+            "location": "VIP Road, Lake Town",
+            "attraction": "Monumental architectural recreation of Jaipur's iconic pink sandstone Hawa Mahal featuring 953 illuminated honeycomb jharokhas and real gold-adorned idol.",
+            "theme2026": "Hawa Mahal (Palace of Winds, Jaipur) — 953 Honeycomb Windows",
+            "artist2026": "Romeo Hazra & Babu Pal Chandannagar Lights",
+            "line": "Orange",
+            "station": "VIP Road",
+            "accessibility": "5-min auto/walk from VIP Road Crossing",
+            "lat": 22.5985,
+            "lng": 88.4045,
+            "crowd": "Extreme",
+            "hypeScore": 10,
+            "mapLink": "https://www.google.com/maps/search/?api=1&query=Sreebhumi+Sporting+Club",
+            "nearbyPandalIds": [
+                  120,
+                  131
+            ]
       },
       {
-        id: 103,
-        zone: 'Central',
-        name: "College Square",
-        location: "College Street",
-        attraction: "Massive shimmering palace pandal with breathtaking reflection across the swimming pool.",
-        theme2026: "Grand illumination palace replica reflecting over the heritage tank.",
-        image: "https://images.unsplash.com/photo-1524492412937-b28074a5d7da?auto=format&fit=crop&w=800&q=80",
-        imageCaption: "Illuminated floating palace reflecting across College Square lake",
-        artist2026: "Pradip Majumdar & Babu Paul Lights",
-        line: "Blue",
-        station: "Central",
-        accessibility: "5-min walk (Gate 3)",
-        lat: 22.5746,
-        lng: 88.3639,
-        crowd: "Very High",
-        hypeScore: 9.7,
-        mapLink: "https://www.google.com/maps/search/?api=1&query=College+Square+Durga+Puja",
-        nearbyPandalIds: [104, 105, 126]
+            "id": 103,
+            "zone": "Central",
+            "name": "College Square",
+            "location": "College Street",
+            "attraction": "Grand luminous recreation of the snowy peaks of Mount Kailash shimmering with million-watt reflections across the heritage lake.",
+            "theme2026": "The Himalayan Abode — Snow Peaks of Mount Kailash",
+            "artist2026": "Pradip Majumdar & Babu Paul Lights",
+            "line": "Blue",
+            "station": "Central",
+            "accessibility": "5-min walk (Gate 3)",
+            "lat": 22.5746,
+            "lng": 88.3639,
+            "crowd": "Very High",
+            "hypeScore": 9.7,
+            "mapLink": "https://www.google.com/maps/search/?api=1&query=College+Square+Durga+Puja",
+            "nearbyPandalIds": [
+                  104,
+                  105,
+                  126
+            ]
       },
       {
-        id: 104,
-        zone: 'Central',
-        name: "Mohammad Ali Park",
-        location: "Central Avenue",
-        attraction: "Famous for grand fort architecture and regal classical heritage.",
-        theme2026: "Historical palace recreation & royal ornamentation.",
-        image: "https://images.unsplash.com/photo-1548013146-72479768bada?auto=format&fit=crop&w=800&q=80",
-        imageCaption: "Rajputana fortress archways & golden royal court design",
-        artist2026: "Dulal Seal",
-        line: "Blue",
-        station: "Central",
-        accessibility: "4-min walk (Gate 2)",
-        lat: 22.5768,
-        lng: 88.3621,
-        crowd: "Very High",
-        hypeScore: 9.5,
-        mapLink: "https://www.google.com/maps/search/?api=1&query=Mohammad+Ali+Park+Durga+Puja",
-        nearbyPandalIds: [103, 118, 110]
+            "id": 104,
+            "zone": "Central",
+            "name": "Mohammad Ali Park",
+            "location": "Central Avenue",
+            "attraction": "Majestic historic stone temple architecture featuring monolithic carved pillars, sanctum spires, and traditional warrior-pose idol.",
+            "theme2026": "Prachin Mandir — Classical Ancient Temple Colonnade",
+            "artist2026": "Dulal Seal",
+            "line": "Blue",
+            "station": "Central",
+            "accessibility": "4-min walk (Gate 2)",
+            "lat": 22.5768,
+            "lng": 88.3621,
+            "crowd": "Very High",
+            "hypeScore": 9.5,
+            "mapLink": "https://www.google.com/maps/search/?api=1&query=Mohammad+Ali+Park+Durga+Puja",
+            "nearbyPandalIds": [
+                  103,
+                  118,
+                  110
+            ]
       },
       {
-        id: 105,
-        zone: 'Central',
-        name: "Santosh Mitra Square",
-        location: "Sealdah / Bowbazar",
-        attraction: "Blockbuster crowd-puller known for headline-making mega scale & LED projection shows.",
-        theme2026: "Hyper-realistic architectural spectacle with synchronized lasers.",
-        image: "https://images.unsplash.com/photo-1514565131-fce0801e5785?auto=format&fit=crop&w=800&q=80",
-        imageCaption: "Million-watt dynamic 3D laser mapping & monumental facade",
-        artist2026: "Sajal Ghosh Creative Direction",
-        line: "Green",
-        station: "Sealdah",
-        accessibility: "5-min walk from Sealdah Metro",
-        lat: 22.5682,
-        lng: 88.3685,
-        crowd: "Extreme",
-        hypeScore: 9.9,
-        mapLink: "https://www.google.com/maps/search/?api=1&query=Santosh+Mitra+Square",
-        nearbyPandalIds: [103, 104]
+            "id": 105,
+            "zone": "Central",
+            "name": "Santosh Mitra Square",
+            "location": "Sealdah / Bowbazar",
+            "attraction": "Headline-making national tribute celebrating the 150th anniversary of Vande Mataram with a high-tech Kolkata Metro train replica, 3D laser projection mapping, and patriotic soundscapes.",
+            "theme2026": "Vande Mataram — 150th Anniversary Freedom Struggle Tribute",
+            "artist2026": "Sajal Ghosh Creative Direction",
+            "line": "Green",
+            "station": "Sealdah",
+            "accessibility": "5-min walk from Sealdah Metro",
+            "lat": 22.5682,
+            "lng": 88.3685,
+            "crowd": "Extreme",
+            "hypeScore": 9.9,
+            "mapLink": "https://www.google.com/maps/search/?api=1&query=Santosh+Mitra+Square",
+            "nearbyPandalIds": [
+                  103,
+                  104
+            ]
       },
       {
-        id: 3,
-        zone: 'South',
-        name: "Badamtala Ashar Sangha",
-        location: "Kalighat",
-        attraction: "South Kolkata's thematic titan; pioneers in creative conceptual design.",
-        theme2026: "Organic architecture woven from bamboo and unspun silk.",
-        image: "https://images.unsplash.com/photo-1513836279014-a89f7a76ae86?auto=format&fit=crop&w=800&q=80",
-        imageCaption: "Suspended organic cocoons woven from Murshidabad silk and bamboo",
-        artist2026: "Snehasish Maity",
-        line: "Blue",
-        station: "Kalighat",
-        accessibility: "4-min walk (Gate 2)",
-        lat: 22.5186,
-        lng: 88.3475,
-        crowd: "Very High",
-        hypeScore: 9.7,
-        mapLink: "https://www.google.com/maps/search/?api=1&query=Badamtala+Ashar+Sangha",
-        nearbyPandalIds: [201, 212, 4, 13]
+            "id": 3,
+            "zone": "South",
+            "name": "Badamtala Ashar Sangha",
+            "location": "Kalighat",
+            "attraction": "88th year milestone inspired by the history and legends of a revered South Kolkata saint, blending deep spirituality, sacred bells, and organic architecture.",
+            "theme2026": "Swapne Pawa Ruper Rani, Jagrat Maa Jagat Janani",
+            "artist2026": "Snehasish Maity",
+            "line": "Blue",
+            "station": "Kalighat",
+            "accessibility": "4-min walk (Gate 2)",
+            "lat": 22.5186,
+            "lng": 88.3475,
+            "crowd": "Very High",
+            "hypeScore": 9.7,
+            "mapLink": "https://www.google.com/maps/search/?api=1&query=Badamtala+Ashar+Sangha",
+            "nearbyPandalIds": [
+                  201,
+                  212,
+                  4,
+                  13
+            ]
       },
       {
-        id: 201,
-        zone: 'South',
-        name: "66 Pally Sarbojanin",
-        location: "Rashbehari",
-        attraction: "Famous for revolutionary art installations and historic woman-priest ceremonies.",
-        theme2026: "Handmade ceramic pottery murals & feminist strength.",
-        image: "https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?auto=format&fit=crop&w=800&q=80",
-        imageCaption: "Glazed terracotta ceramic relief murals celebrating feminine power",
-        artist2026: "Subrata Paul",
-        line: "Blue",
-        station: "Kalighat",
-        accessibility: "4-min walk (Gate 2)",
-        lat: 22.5181,
-        lng: 88.3488,
-        crowd: "High",
-        hypeScore: 9.3,
-        mapLink: "https://www.google.com/maps/search/?api=1&query=66+Pally+Sarbojanin+Durgotsab",
-        nearbyPandalIds: [3, 212, 219, 4]
+            "id": 201,
+            "zone": "South",
+            "name": "66 Pally Sarbojanin",
+            "location": "Rashbehari",
+            "attraction": "Pioneering community celebrated for breaking patriarchal traditions with women priests, featuring hand-glazed terracotta murals.",
+            "theme2026": "Mrittika Kotha — Terracotta Murals & Female Empowerment",
+            "artist2026": "Subrata Paul",
+            "line": "Blue",
+            "station": "Kalighat",
+            "accessibility": "4-min walk (Gate 2)",
+            "lat": 22.5181,
+            "lng": 88.3488,
+            "crowd": "High",
+            "hypeScore": 9.3,
+            "mapLink": "https://www.google.com/maps/search/?api=1&query=66+Pally+Sarbojanin+Durgotsab",
+            "nearbyPandalIds": [
+                  3,
+                  212,
+                  219,
+                  4
+            ]
       },
       {
-        id: 4,
-        zone: 'South',
-        name: "Deshapriya Park",
-        location: "Rashbehari Avenue",
-        attraction: "One of the grandest open grounds in Kolkata with towering pandal scale.",
-        theme2026: "Colossal Himalayan temple architecture.",
-        image: "https://images.unsplash.com/photo-1548013146-72479768bada?auto=format&fit=crop&w=800&q=80",
-        imageCaption: "Monumental snow-crested Kedarnath style temple woodwork",
-        artist2026: "Sudipta Kundu",
-        line: "Blue",
-        station: "Kalighat",
-        accessibility: "8-min walk (Gate 4)",
-        lat: 22.5190,
-        lng: 88.3562,
-        crowd: "Extreme",
-        hypeScore: 9.6,
-        mapLink: "https://www.google.com/maps/search/?api=1&query=Deshapriya+Park",
-        nearbyPandalIds: [12, 219, 17, 11]
+            "id": 4,
+            "zone": "South",
+            "name": "Deshapriya Park",
+            "location": "Rashbehari Avenue",
+            "attraction": "One of Kolkata's largest open grounds hosting a towering mountain shrine structure with intricate timber woodwork and massive scale.",
+            "theme2026": "Devbhoomi — Colossal Himalayan Shrine Replica",
+            "artist2026": "Sudipta Kundu",
+            "line": "Blue",
+            "station": "Kalighat",
+            "accessibility": "8-min walk (Gate 4)",
+            "lat": 22.519,
+            "lng": 88.3562,
+            "crowd": "Extreme",
+            "hypeScore": 9.6,
+            "mapLink": "https://www.google.com/maps/search/?api=1&query=Deshapriya+Park",
+            "nearbyPandalIds": [
+                  12,
+                  219,
+                  17,
+                  11
+            ]
       },
       {
-        id: 219,
-        zone: 'South',
-        name: "Shibmandir Sarbojanin",
-        location: "Lake Temple Road",
-        attraction: "Award-winning conceptual wonderland celebrated for architectural symmetry.",
-        theme2026: "Sacred geometric mandalas carved in white timber.",
-        image: "https://images.unsplash.com/photo-1582510003544-4d00b7f74220?auto=format&fit=crop&w=800&q=80",
-        imageCaption: "Mathematical sacred geometries & bleached wood fretwork",
-        artist2026: "Partha Dasgupta",
-        line: "Blue",
-        station: "Rabindra Sarobar",
-        accessibility: "6-min walk",
-        lat: 22.5142,
-        lng: 88.3512,
-        crowd: "High",
-        hypeScore: 9.3,
-        mapLink: "https://www.google.com/maps/search/?api=1&query=Shibmandir+Sarbojanin+Durgotsab",
-        nearbyPandalIds: [8, 4, 3]
+            "id": 219,
+            "zone": "South",
+            "name": "Shibmandir Sarbojanin",
+            "location": "Lake Temple Road",
+            "attraction": "Lake-adjacent conceptual marvel celebrating its 90th year with sacred geometry, bleached timber fretwork, and serene spiritual symmetry.",
+            "theme2026": "90th Year Celebration — Sacred Mandala Architecture",
+            "artist2026": "Partha Dasgupta",
+            "line": "Blue",
+            "station": "Rabindra Sarobar",
+            "accessibility": "6-min walk",
+            "lat": 22.5142,
+            "lng": 88.3512,
+            "crowd": "High",
+            "hypeScore": 9.3,
+            "mapLink": "https://www.google.com/maps/search/?api=1&query=Shibmandir+Sarbojanin+Durgotsab",
+            "nearbyPandalIds": [
+                  8,
+                  4,
+                  3
+            ]
       },
       {
-        id: 8,
-        zone: 'South',
-        name: "Mudiali Club",
-        location: "Rabindra Sarobar",
-        attraction: "Serene lakeside puja renowned for breathtaking lighting artistry and pristine idols.",
-        theme2026: "Classical temple pillars and world-famous Chandannagar illumination.",
-        image: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=800&q=80",
-        imageCaption: "Gilded temple colonnades and mesmerizing aquatic reflections",
-        artist2026: "Gouranga Kuila (National Award Winner)",
-        line: "Blue",
-        station: "Rabindra Sarobar",
-        accessibility: "5-min walk",
-        lat: 22.5126,
-        lng: 88.3518,
-        crowd: "Very High",
-        hypeScore: 9.6,
-        mapLink: "https://www.google.com/maps/search/?api=1&query=Mudiali+Club",
-        nearbyPandalIds: [219, 4]
+            "id": 8,
+            "zone": "South",
+            "name": "Mudiali Club",
+            "location": "Rabindra Sarobar",
+            "attraction": "Artistically weaves together legendary folklore of welcoming the goddess in historic aristocratic zamindari estates with world-class illumination.",
+            "theme2026": "Oitijhyer Lokkotha (Folktales of Tradition and Heritage)",
+            "artist2026": "Gouranga Kuila (National Award Winner)",
+            "line": "Blue",
+            "station": "Rabindra Sarobar",
+            "accessibility": "5-min walk",
+            "lat": 22.5126,
+            "lng": 88.3518,
+            "crowd": "Very High",
+            "hypeScore": 9.6,
+            "mapLink": "https://www.google.com/maps/search/?api=1&query=Mudiali+Club",
+            "nearbyPandalIds": [
+                  219,
+                  4
+            ]
       },
       {
-        id: 12,
-        zone: 'South',
-        name: "Tridhara Sammilani",
-        location: "Manoharpukur",
-        attraction: "Unrivalled artistic powerhouse fusing tribal heritage with modern socio-artistic commentary.",
-        theme2026: "Indigenous music instruments & living eco-forest installation.",
-        image: "https://images.unsplash.com/photo-1513519245088-0e12902e5a38?auto=format&fit=crop&w=800&q=80",
-        imageCaption: "Living banyan tree root sculptures & Santhal acoustic instruments",
-        artist2026: "Gouranga Kuila",
-        line: "Blue",
-        station: "Jatin Das Park",
-        accessibility: "8-min walk",
-        lat: 22.5202,
-        lng: 88.3540,
-        crowd: "Extreme",
-        hypeScore: 9.8,
-        mapLink: "https://www.google.com/maps/search/?api=1&query=Tridhara+Sammilani",
-        nearbyPandalIds: [4, 17, 1]
+            "id": 12,
+            "zone": "South",
+            "name": "Tridhara Sammilani",
+            "location": "Manoharpukur",
+            "attraction": "Masterclass architectural journey guiding visitors from human ego to humble unity with Mother Nature using eco-friendly natural materials.",
+            "theme2026": "Bhabna O Prakriti — Cosmic Harmony & Environmental Balance",
+            "artist2026": "Gouranga Kuila",
+            "line": "Blue",
+            "station": "Jatin Das Park",
+            "accessibility": "8-min walk",
+            "lat": 22.5202,
+            "lng": 88.354,
+            "crowd": "Extreme",
+            "hypeScore": 9.8,
+            "mapLink": "https://www.google.com/maps/search/?api=1&query=Tridhara+Sammilani",
+            "nearbyPandalIds": [
+                  4,
+                  17,
+                  1
+            ]
       },
       {
-        id: 17,
-        zone: 'South',
-        name: "Samaj Sebi Sangha",
-        location: "Lake View Road",
-        attraction: "Pioneers of socially conscious, tactile, and sensory inclusive pandals.",
-        theme2026: "Universal harmony through sensory touch & acoustic resonance.",
-        image: "https://images.unsplash.com/photo-1609137144813-7d9921338f24?auto=format&fit=crop&w=800&q=80",
-        imageCaption: "Braille architectural textures & acoustic singing bowl installations",
-        artist2026: "Papai Sarkar",
-        line: "Blue",
-        station: "Jatin Das Park",
-        accessibility: "9-min walk",
-        lat: 22.5180,
-        lng: 88.3578,
-        crowd: "High",
-        hypeScore: 9.2,
-        mapLink: "https://www.google.com/maps/search/?api=1&query=Samaj+Sebi+Sangha",
-        nearbyPandalIds: [12, 1, 11]
+            "id": 17,
+            "zone": "South",
+            "name": "Samaj Sebi Sangha",
+            "location": "Lake View Road",
+            "attraction": "81st year milestone paying tribute to legendary Bengali actor Uttam Kumar in his birth centenary year, weaving cinema reels, nostalgic melodies, and sensory inclusion.",
+            "theme2026": "Mahapujoy Mahanayak — Centenary Tribute to Uttam Kumar",
+            "artist2026": "Papai Sarkar",
+            "line": "Blue",
+            "station": "Jatin Das Park",
+            "accessibility": "9-min walk",
+            "lat": 22.518,
+            "lng": 88.3578,
+            "crowd": "High",
+            "hypeScore": 9.2,
+            "mapLink": "https://www.google.com/maps/search/?api=1&query=Samaj+Sebi+Sangha",
+            "nearbyPandalIds": [
+                  12,
+                  1,
+                  11
+            ]
       },
       {
-        id: 11,
-        zone: 'South',
-        name: "Singhi Park Sarbojanin",
-        location: "Gariahat",
-        attraction: "Magnificent temple replica architecture and celebrated Chandannagar lighting.",
-        theme2026: "Southern Indian Chola stone temple architectural replica.",
-        image: "https://images.unsplash.com/photo-1524492412937-b28074a5d7da?auto=format&fit=crop&w=800&q=80",
-        imageCaption: "Granite Dravidian temple gopuram replica & intricate deities",
-        artist2026: "Babu Pal & Singhi Park Heritage Cell",
-        line: "Blue",
-        station: "Kalighat",
-        accessibility: "10-min walk / auto to Gariahat",
-        lat: 22.5225,
-        lng: 88.3620,
-        crowd: "Very High",
-        hypeScore: 9.5,
-        mapLink: "https://www.google.com/maps/search/?api=1&query=Singhi+Park+Sarbojanin",
-        nearbyPandalIds: [1, 4, 17]
+            "id": 11,
+            "zone": "South",
+            "name": "Singhi Park Sarbojanin",
+            "location": "Gariahat",
+            "attraction": "Celebrates 85 years with Bastar tribal art, indigenous bell-metal handicrafts, and grand temple architecture with signature Chandannagar illumination.",
+            "theme2026": "Bastariyo — 85th Year Tribute to Bastar Tribal Art",
+            "artist2026": "Tapan Seth (Art Director) & Babu Pal Lights",
+            "line": "Blue",
+            "station": "Kalighat",
+            "accessibility": "10-min walk / auto to Gariahat",
+            "lat": 22.5225,
+            "lng": 88.362,
+            "crowd": "Very High",
+            "hypeScore": 9.5,
+            "mapLink": "https://www.google.com/maps/search/?api=1&query=Singhi+Park+Sarbojanin",
+            "nearbyPandalIds": [
+                  1,
+                  4,
+                  17
+            ]
       },
       {
-        id: 1,
-        zone: 'South',
-        name: "Ekdalia Evergreen Club",
-        location: "Gariahat",
-        attraction: "Famous for soaring traditional temple replicas, German chandeliers, and glorious Ekchala Durga.",
-        theme2026: "Regal Golden Temple replica & heritage crystal chandeliers.",
-        image: "https://images.unsplash.com/photo-1567653418876-5bb0e566e1c2?auto=format&fit=crop&w=800&q=80",
-        imageCaption: "Soaring gilded Sanctum Santorum & dazzling European chandeliers",
-        artist2026: "Govindo Pal (Sanatan Pratima Master)",
-        line: "Blue",
-        station: "Kalighat",
-        accessibility: "12-min walk / quick auto to Gariahat",
-        lat: 22.5218,
-        lng: 88.3654,
-        crowd: "Extreme",
-        hypeScore: 9.9,
-        mapLink: "https://www.google.com/maps/search/?api=1&query=Ekdalia+Evergreen+Club",
-        nearbyPandalIds: [11, 17, 205]
+            "id": 1,
+            "zone": "South",
+            "name": "Ekdalia Evergreen Club",
+            "location": "Gariahat",
+            "attraction": "Faithful architectural recreation of Gujarat's revered Somnath Temple with towering spires, intricate stone carvings, and antique crystal chandeliers.",
+            "theme2026": "Shree Somnath Temple (Gujarat) — Classical Stone Replica",
+            "artist2026": "Govindo Pal (Traditional Idol Master)",
+            "line": "Blue",
+            "station": "Kalighat",
+            "accessibility": "12-min walk / quick auto to Gariahat",
+            "lat": 22.5218,
+            "lng": 88.3654,
+            "crowd": "Extreme",
+            "hypeScore": 9.9,
+            "mapLink": "https://www.google.com/maps/search/?api=1&query=Ekdalia+Evergreen+Club",
+            "nearbyPandalIds": [
+                  11,
+                  17,
+                  205
+            ]
       },
       {
-        id: 220,
-        zone: 'South',
-        name: "Maddox Square",
-        location: "Ritchie Road / Ballygunge",
-        attraction: "The ultimate cultural gathering hub of Kolkata youth with open-ground musical carnival vibes.",
-        theme2026: "Pure traditional Rajbari 'Daker Saaj' idol in an open social amphitheater.",
-        image: "https://images.unsplash.com/photo-1509198397868-475647b2a1e5?auto=format&fit=crop&w=800&q=80",
-        imageCaption: "Iconic open green park fairground & sparkling silver Daker Saaj idol",
-        artist2026: "Pradeep Rudrapal & Maddox Square Youth Committee",
-        line: "Blue",
-        station: "Netaji Bhavan",
-        accessibility: "8-min walk / auto",
-        lat: 22.5284,
-        lng: 88.3572,
-        crowd: "Very High",
-        hypeScore: 9.6,
-        mapLink: "https://www.google.com/maps/search/?api=1&query=Maddox+Square+Durga+Puja",
-        nearbyPandalIds: [12, 17]
+            "id": 220,
+            "zone": "South",
+            "name": "Maddox Square",
+            "location": "Ritchie Road / Ballygunge",
+            "attraction": "The heartbeat of Kolkata's festive youth culture, featuring a pristine silver foil (Daker Saaj) idol in an open park amphitheater.",
+            "theme2026": "Sabeki Rajbari Daker Saaj — The Eternal Adda Lawn",
+            "artist2026": "Pradeep Rudrapal",
+            "line": "Blue",
+            "station": "Netaji Bhavan",
+            "accessibility": "8-min walk / auto",
+            "lat": 22.5284,
+            "lng": 88.3572,
+            "crowd": "Very High",
+            "hypeScore": 9.6,
+            "mapLink": "https://www.google.com/maps/search/?api=1&query=Maddox+Square+Durga+Puja",
+            "nearbyPandalIds": [
+                  12,
+                  17
+            ]
       },
       {
-        id: 2,
-        zone: 'South',
-        name: "New Alipore Suruchi Sangha",
-        location: "New Alipore",
-        attraction: "One of Kolkata's premier state-showcase pujas, known for themed music and dance.",
-        theme2026: "Sacred Lotus motif — exploring spiritual and cultural symbolism.",
-        image: "https://images.unsplash.com/photo-1508615039623-a25605d2b022?auto=format&fit=crop&w=800&q=80",
-        imageCaption: "Sacred 108-petaled mechanical lotus dome floating over water",
-        artist2026: "Subrata Banerjee & State Cultural Ensemble",
-        line: "Purple",
-        station: "Majerhat",
-        accessibility: "6-min walk from Majerhat Metro",
-        lat: 22.5098,
-        lng: 88.3330,
-        crowd: "Extreme",
-        hypeScore: 9.9,
-        mapLink: "https://www.google.com/maps/search/?api=1&query=Suruchi+Sangha",
-        nearbyPandalIds: [13, 221]
+            "id": 2,
+            "zone": "South",
+            "name": "New Alipore Suruchi Sangha",
+            "location": "New Alipore",
+            "attraction": "74th year masterpiece exploring the sacred lotus symbol of purity and divine power, sculpted entirely using eco-friendly biodegradable materials.",
+            "theme2026": "Padma (Lotus) — Purity, Divinity & Spiritual Awakening",
+            "artist2026": "Subrata Banerjee & Ensemble",
+            "line": "Purple",
+            "station": "Majerhat",
+            "accessibility": "6-min walk from Majerhat Metro",
+            "lat": 22.5098,
+            "lng": 88.333,
+            "crowd": "Extreme",
+            "hypeScore": 9.9,
+            "mapLink": "https://www.google.com/maps/search/?api=1&query=Suruchi+Sangha",
+            "nearbyPandalIds": [
+                  13,
+                  221
+            ]
       },
       {
-        id: 230,
-        zone: 'East',
-        name: "FD Block Salt Lake",
-        location: "Salt Lake Sector III",
-        attraction: "Salt Lake's biggest crowd-puller known for monumental temple replicas.",
-        theme2026: "Grand Himalayan monastery architectural installation.",
-        image: "https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=800&q=80",
-        imageCaption: "Towering Tibetan monastery facade with prayer wheels & silk thangkas",
-        artist2026: "FD Block Guild",
-        line: "Green",
-        station: "Karunamoyee",
-        accessibility: "6-min walk (Gate 2)",
-        lat: 22.5840,
-        lng: 88.4180,
-        crowd: "Very High",
-        hypeScore: 9.5,
-        mapLink: "https://www.google.com/maps/search/?api=1&query=Salt+Lake+FD+Block+Durga+Puja",
-        nearbyPandalIds: [231, 113]
+            "id": 230,
+            "zone": "East",
+            "name": "FD Block Salt Lake",
+            "location": "Salt Lake Sector III",
+            "attraction": "Salt Lake's premier crowd-puller showcasing towering monastery spires, authentic prayer wheels, and grand festive fairgrounds.",
+            "theme2026": "Himalayan Monastery — Heritage Tibetan Architecture",
+            "artist2026": "FD Block Artisan Guild",
+            "line": "Green",
+            "station": "Karunamoyee",
+            "accessibility": "6-min walk (Gate 2)",
+            "lat": 22.584,
+            "lng": 88.418,
+            "crowd": "Very High",
+            "hypeScore": 9.5,
+            "mapLink": "https://www.google.com/maps/search/?api=1&query=Salt+Lake+FD+Block+Durga+Puja",
+            "nearbyPandalIds": [
+                  231,
+                  113
+            ]
       }
-    ];
+];
 
     // --- WALKING CIRCUITS ---
     const walkingCircuits = [
@@ -2282,13 +2328,8 @@
               } shadow-sm hover:border-festive-800/40 transition-all">
                 <div class="flex items-start justify-between">
                   <div class="flex items-start gap-2.5 flex-1 pr-2">
-                    <div class="w-14 h-14 rounded-xl overflow-hidden flex-shrink-0 bg-gray-900 border border-black/10 relative cursor-pointer mt-0.5" onclick="openHopModal(${p.id})">
-                      <img src="${p.image}" alt="${p.name}" class="w-full h-full object-cover transition-transform duration-300 hover:scale-110" loading="lazy" />
-                      <span class="w-5 h-5 rounded-full ${
-                        isVisited ? 'bg-emerald-600 text-white' : 'bg-festive-900/90 text-white'
-                      } text-[10px] font-bold flex items-center justify-center absolute top-1 left-1 shadow">
-                        ${isVisited ? '✓' : idx + 1}
-                      </span>
+                    <div class="w-8 h-8 rounded-xl ${color.bg} text-white flex items-center justify-center font-bold text-xs shadow flex-shrink-0 mt-0.5 cursor-pointer" onclick="openHopModal(${p.id})">
+                      ${isVisited ? '✓' : idx + 1}
                     </div>
                     <div class="flex-1 min-w-0">
                       <div class="flex flex-wrap items-center gap-1.5">
@@ -2415,39 +2456,39 @@
         const crowdEst = getLiveCrowdEstimate(p);
 
         return `
-          <div class="pandal-card-item bg-white dark:bg-festive-nightCard rounded-2xl p-3.5 border ${
+          <div class="pandal-card-item bg-white dark:bg-festive-nightCard rounded-2xl p-4 border ${
             isVisited ? 'border-emerald-500/50 bg-emerald-50/20 dark:bg-emerald-950/20 opacity-80' : 'border-rose-100/90 dark:border-festive-nightBorder'
           } shadow-sm border-l-4 ${color.border} hover:shadow-md transition-all">
-            <div class="flex items-start gap-3">
-              <div class="w-20 h-20 rounded-xl overflow-hidden flex-shrink-0 bg-gray-900 border border-black/10 relative cursor-pointer" onclick="openHopModal(${p.id})">
-                <img src="${p.image}" alt="${p.name}" class="w-full h-full object-cover transition-transform duration-300 hover:scale-110" loading="lazy" />
-                <span class="absolute bottom-0 inset-x-0 bg-black/60 text-white text-[8px] font-bold text-center py-0.5 truncate px-1 backdrop-blur-2xs">
-                  ${p.artist2026 ? p.artist2026.split(' ')[0] : '2026 Art'}
-                </span>
+            <div class="flex flex-wrap items-center justify-between gap-1.5 mb-2">
+              <div class="flex items-center gap-1.5 flex-wrap">
+                <span class="text-[10px] font-bold px-2 py-0.5 rounded-full ${color.light}">${p.line} Line</span>
+                <span class="text-[10px] font-semibold text-gray-500 dark:text-gray-400">Metro: ${p.station}</span>
+                <span class="text-[10px] font-bold text-amber-700 dark:text-amber-400 bg-amber-50 dark:bg-amber-950 px-1.5 py-0.5 rounded">Hype: ${p.hypeScore}</span>
               </div>
+              <span class="inline-flex items-center gap-1 text-[9px] font-bold px-2 py-0.5 rounded-full border ${crowdEst.colorClass}">
+                <span class="w-1.5 h-1.5 rounded-full ${crowdEst.dotColor}"></span>
+                <span>Live Crowd: ${crowdEst.level} (~${crowdEst.waitMinutes})</span>
+              </span>
+            </div>
 
-              <div class="flex-1 min-w-0">
-                <div class="flex flex-wrap items-center gap-1.5 mb-1">
-                  <span class="text-[10px] font-bold px-2 py-0.5 rounded-full ${color.light}">${p.line} Line</span>
-                  <span class="text-[10px] font-semibold text-gray-500 dark:text-gray-400">Metro: ${p.station}</span>
-                  <span class="text-[10px] font-bold text-amber-700 dark:text-amber-400 bg-amber-50 dark:bg-amber-950 px-1.5 py-0.5 rounded">Hype: ${p.hypeScore}</span>
-                  <span class="inline-flex items-center gap-1 text-[9px] font-bold px-2 py-0.5 rounded-full border ${crowdEst.colorClass}">
-                    <span class="w-1.5 h-1.5 rounded-full ${crowdEst.dotColor}"></span>
-                    <span>Live Crowd: ${crowdEst.level} (~${crowdEst.waitMinutes})</span>
-                  </span>
-                  ${isVisited ? '<span class="text-[9px] font-black bg-emerald-100 dark:bg-emerald-900/60 text-emerald-800 dark:text-emerald-300 px-1.5 py-0.2 rounded-full">Visited</span>' : ''}
-                </div>
-                <h3 class="text-sm font-bold text-gray-900 dark:text-white cursor-pointer hover:text-festive-900 truncate ${
+            <div class="space-y-1">
+              <div class="flex items-start justify-between gap-2">
+                <h3 class="text-sm font-black text-gray-900 dark:text-white cursor-pointer hover:text-festive-900 transition-colors ${
                   isVisited ? 'line-through text-gray-500 dark:text-gray-400' : ''
                 }" onclick="openHopModal(${p.id})">
                   ${p.name}
                 </h3>
-                <p class="text-[11px] text-gray-500 dark:text-gray-400 font-medium">${p.location} • Walk: ${p.accessibility}</p>
-                <div class="mt-1.5 p-2 bg-rose-50/60 dark:bg-rose-950/30 rounded-xl border border-rose-100/60 dark:border-rose-900/40">
-                  <p class="text-[11px] font-semibold text-festive-900 dark:text-rose-200">2026: ${p.theme2026}</p>
-                  ${p.artist2026 ? `<p class="text-[10px] text-rose-800/80 dark:text-rose-300/80 mt-0.5 font-medium">Concept Lead: ${p.artist2026}</p>` : ''}
-                </div>
+                ${isVisited ? '<span class="text-[9px] font-black bg-emerald-100 dark:bg-emerald-900/60 text-emerald-800 dark:text-emerald-300 px-1.5 py-0.5 rounded-full flex-shrink-0">Visited</span>' : ''}
               </div>
+              <p class="text-[11px] text-gray-500 dark:text-gray-400 font-medium">${p.location} • Walk: ${p.accessibility}</p>
+            </div>
+
+            <div class="mt-2.5 p-2.5 bg-gradient-to-r from-amber-50/70 to-rose-50/50 dark:from-amber-950/30 dark:to-rose-950/20 rounded-xl border border-amber-200/60 dark:border-amber-900/40">
+              <div class="flex items-center justify-between gap-2 mb-0.5">
+                <span class="text-[10px] font-black uppercase tracking-wider text-amber-800 dark:text-amber-300">2026 Theme:</span>
+                ${p.artist2026 ? `<span class="text-[10px] text-rose-800 dark:text-rose-300 font-bold">${p.artist2026}</span>` : ''}
+              </div>
+              <p class="text-xs font-bold text-festive-900 dark:text-white leading-snug">${p.theme2026}</p>
             </div>
 
             <div class="mt-3 pt-2.5 border-t border-gray-100 dark:border-festive-nightBorder flex items-center justify-between">
@@ -2552,13 +2593,8 @@
           } shadow-sm">
             <div class="flex items-start justify-between">
               <div class="flex items-start gap-2.5 flex-1 pr-2">
-                <div class="w-14 h-14 rounded-xl overflow-hidden flex-shrink-0 bg-gray-900 border border-black/10 relative cursor-pointer mt-0.5" onclick="openHopModal(${p.id})">
-                  <img src="${p.image}" alt="${p.name}" class="w-full h-full object-cover transition-transform duration-300 hover:scale-110" loading="lazy" />
-                  <span class="w-5 h-5 rounded-full ${
-                    isVisited ? 'bg-emerald-600 text-white' : 'bg-festive-900/90 text-white'
-                  } text-[10px] font-bold flex items-center justify-center absolute top-1 left-1 shadow">
-                    ${isVisited ? '✓' : idx + 1}
-                  </span>
+                <div class="w-8 h-8 rounded-xl ${color.bg} text-white flex items-center justify-center font-bold text-xs shadow flex-shrink-0 mt-0.5 cursor-pointer" onclick="openHopModal(${p.id})">
+                  ${isVisited ? '✓' : idx + 1}
                 </div>
                 <div class="flex-1 min-w-0">
                   <div class="flex flex-wrap items-center gap-1.5 mb-0.5">
@@ -2666,25 +2702,16 @@
       modalPandalTheme.textContent = p.theme2026;
       modalPandalHypeBadge.textContent = `Hype: ${p.hypeScore}/10`;
 
-      // 2026 Theme Image and Details
-      const modalPandalImg = document.getElementById('modal-pandal-img');
-      const modalPandalImgCaption = document.getElementById('modal-pandal-img-caption');
+      // 2026 Theme Showcase Details (100% accurate, no common placeholder images)
       const modalPandalZoneBadge = document.getElementById('modal-pandal-zone-badge');
       const modalPandalArtist = document.getElementById('modal-pandal-artist');
       const modalPandalAttraction = document.getElementById('modal-pandal-attraction');
 
-      if (modalPandalImg) {
-        modalPandalImg.src = p.image || 'https://images.unsplash.com/photo-1567653418876-5bb0e566e1c2?auto=format&fit=crop&w=800&q=80';
-        modalPandalImg.alt = `${p.name} 2026 Theme`;
-      }
-      if (modalPandalImgCaption) {
-        modalPandalImgCaption.textContent = p.imageCaption || p.theme2026;
-      }
       if (modalPandalZoneBadge) {
         modalPandalZoneBadge.textContent = `${p.zone} Sector`;
       }
       if (modalPandalArtist) {
-        modalPandalArtist.textContent = p.artist2026 ? `Lead Artist: ${p.artist2026}` : '';
+        modalPandalArtist.textContent = p.artist2026 ? `${p.artist2026}` : 'Traditional Masters';
       }
       if (modalPandalAttraction) {
         modalPandalAttraction.textContent = p.attraction || '';
