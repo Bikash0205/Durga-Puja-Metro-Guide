@@ -142,6 +142,7 @@
             <span id="header-next-metro-time" class="text-amber-300 font-black">in 4 mins</span>
           </div>
           <div class="flex items-center gap-1.5">
+            <button id="btn-open-last-metro" class="px-2 py-0.5 rounded-full text-[10px] font-black bg-rose-950/90 text-rose-300 border border-rose-500/40 inline-flex items-center gap-1 hover:bg-rose-900 transition-all cursor-pointer" title="Calculate cutoff for last train home"><span>🌙 Last Metro Alert</span></button>
             <span id="live-metro-status-badge" class="px-2 py-0.5 rounded-full text-[10px] font-black bg-emerald-950/80 text-emerald-300 border border-emerald-500/30 inline-flex items-center gap-1">
               <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping"></span>
               <span>Night Metro Active</span>
@@ -178,7 +179,7 @@
       </div>
 
       <!-- Action Button Group -->
-      <div class="mt-3.5 mt-3.5 pt-3 border-t border-white/15 flex gap-2 relative z-10">
+      <div class="mt-3.5 pt-3 border-t border-white/15 flex gap-2 relative z-10">
         <button
           id="btn-trigger-gps"
           class="flex-1 py-2.5 px-3 bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 active:scale-98 text-rose-950 rounded-2xl text-xs font-black shadow-lg transition-all flex items-center justify-center gap-1.5"
@@ -432,6 +433,85 @@
   <!-- MODAL: EMERGENCY & SOS HELPLINES           -->
   <!-- ========================================== -->
   <!-- ========================================== -->
+  
+  <!-- ========================================== -->
+  <!-- MODAL: LAST METRO HOME CALCULATOR & ALERTS -->
+  <!-- ========================================== -->
+  <div id="modal-last-metro" class="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm flex items-end sm:items-center justify-center p-0 sm:p-4 hidden">
+    <div class="bg-white dark:bg-festive-nightCard w-full max-w-md rounded-t-3xl sm:rounded-3xl shadow-2xl p-5 space-y-4 max-h-[85vh] overflow-y-auto">
+      
+      <div class="flex items-center justify-between border-b dark:border-festive-nightBorder pb-2.5">
+        <div class="flex items-center gap-2.5">
+          <div class="w-9 h-9 rounded-2xl bg-rose-100 dark:bg-rose-950/60 border border-rose-200 dark:border-rose-900 flex items-center justify-center text-rose-600 dark:text-rose-400 text-lg">
+            🌙
+          </div>
+          <div>
+            <h3 class="text-sm font-bold text-gray-900 dark:text-white flex items-center gap-1.5">
+              <span>Last Metro Home Alerter</span>
+              <span class="text-[9px] font-black px-1.5 py-0.2 rounded bg-amber-100 text-amber-800 dark:bg-amber-900 dark:text-amber-200">Puja Special</span>
+            </h3>
+            <p class="text-[10px] text-gray-500 dark:text-gray-400">Never get stranded late at night in Kolkata</p>
+          </div>
+        </div>
+        <button id="btn-close-last-metro" class="w-7 h-7 rounded-full bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 font-bold flex items-center justify-center text-xs">✕</button>
+      </div>
+
+      <!-- Select Your Return Line -->
+      <div class="space-y-1.5">
+        <label class="text-[11px] font-bold text-gray-700 dark:text-gray-300">Choose your return metro corridor:</label>
+        <div class="grid grid-cols-2 gap-2 text-xs">
+          <button class="last-metro-line-choice p-2.5 rounded-xl border border-blue-300 bg-blue-50/80 dark:bg-blue-950/40 dark:border-blue-800 text-left active:scale-95 transition-all selected" data-line="Blue">
+            <p class="font-bold text-blue-900 dark:text-blue-200 text-xs">Blue Line</p>
+            <p class="text-[10px] text-blue-700 dark:text-blue-300">North ⇄ South (Overnight 4 AM)</p>
+          </button>
+          <button class="last-metro-line-choice p-2.5 rounded-xl border border-emerald-300 bg-white dark:bg-festive-nightCard dark:border-emerald-900/60 text-left active:scale-95 transition-all" data-line="Green">
+            <p class="font-bold text-emerald-900 dark:text-emerald-200 text-xs">Green Line</p>
+            <p class="text-[10px] text-emerald-700 dark:text-emerald-300">Howrah ⇄ Salt Lake (12 AM)</p>
+          </button>
+          <button class="last-metro-line-choice p-2.5 rounded-xl border border-orange-300 bg-white dark:bg-festive-nightCard dark:border-orange-900/60 text-left active:scale-95 transition-all" data-line="Orange">
+            <p class="font-bold text-orange-900 dark:text-orange-200 text-xs">Orange Line</p>
+            <p class="text-[10px] text-orange-700 dark:text-orange-300">EM Bypass / Beleghata (9 PM)</p>
+          </button>
+          <button class="last-metro-line-choice p-2.5 rounded-xl border border-purple-300 bg-white dark:bg-festive-nightCard dark:border-purple-900/60 text-left active:scale-95 transition-all" data-line="Purple">
+            <p class="font-bold text-purple-900 dark:text-purple-200 text-xs">Purple Line</p>
+            <p class="text-[10px] text-purple-700 dark:text-purple-300">Joka ⇄ Majerhat (Special)</p>
+          </button>
+        </div>
+      </div>
+
+      <!-- Live Calculation Card -->
+      <div id="last-metro-result-card" class="p-3.5 bg-gradient-to-br from-festive-900 via-rose-900 to-amber-950 text-white rounded-2xl shadow-lg border border-amber-300/30 space-y-2">
+        <div class="flex items-center justify-between">
+          <span class="text-[10px] uppercase font-black tracking-wider text-amber-200">Official Last Departure</span>
+          <span id="last-metro-cutoff-badge" class="px-2 py-0.5 rounded-full text-[10px] font-black bg-emerald-500/30 text-emerald-300 border border-emerald-400/30">Active</span>
+        </div>
+        <div class="flex items-baseline justify-between">
+          <div>
+            <h4 id="last-metro-time-display" class="text-2xl font-black font-festive text-amber-100">04:00 AM</h4>
+            <p id="last-metro-subtext" class="text-[11px] text-rose-200">From Dakshineswar & Kavi Subhash</p>
+          </div>
+          <div class="text-right">
+            <span class="text-[10px] text-gray-300">Remaining time</span>
+            <p id="last-metro-countdown-box" class="text-sm font-black text-amber-300">Calculating...</p>
+          </div>
+        </div>
+
+        <div class="pt-2 border-t border-white/10 text-[11px] text-rose-100/90 leading-relaxed">
+          <p id="last-metro-guidance">• <strong>Tip:</strong> Allow at least 25 minutes of walking buffer through barricaded crowd lanes outside metro station gates.</p>
+        </div>
+      </div>
+
+      <!-- Schedule Table Accordion -->
+      <div class="p-3 bg-gray-50 dark:bg-black/40 rounded-xl border border-gray-200 dark:border-festive-nightBorder text-[11px] space-y-1.5 text-gray-700 dark:text-gray-300">
+        <p class="font-bold text-gray-900 dark:text-white">Puja Night Guidelines:</p>
+        <p>• <strong>Panchami & Shashthi:</strong> Last trains leave 11:00 PM.</p>
+        <p>• <strong>Saptami, Ashtami & Navami:</strong> Blue line runs non-stop until 4:00 AM.</p>
+        <p>• <strong>Dashami:</strong> Service terminates at 11:00 PM for idol immersion processions.</p>
+      </div>
+
+    </div>
+  </div>
+
   <!-- MODAL: CITY PRESET HUBS (WHEN NO GPS)     -->
   <!-- ========================================== -->
   <div id="modal-presets" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-end sm:items-center justify-center p-0 sm:p-4 hidden">
@@ -654,35 +734,35 @@
   <nav class="fixed bottom-0 left-0 right-0 z-40 glass-nav bg-white/90 dark:bg-festive-nightCard/95 border-t border-rose-100 dark:border-festive-nightBorder shadow-lg" style="padding-bottom: var(--safe-bottom);">
     <div class="max-w-md mx-auto px-4 py-2 flex items-center justify-between text-center">
       
-      <button id="nav-btn-circuits" class="flex-1 flex flex-col items-center py-1 text-festive-900 dark:text-amber-400 font-bold active:scale-95 transition-all">
+      <button id="nav-btn-circuits" class="nav-item-btn flex-1 flex flex-col items-center py-1.5 text-festive-900 dark:text-amber-400 font-bold active:scale-95 transition-all relative rounded-2xl">
         <svg class="w-5 h-5 mb-0.5" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/>
         </svg>
         <span class="text-[10px]">Circuits</span>
       </button>
 
-      <button id="nav-btn-map" class="flex-1 flex flex-col items-center py-1 text-gray-500 hover:text-festive-900 dark:text-gray-400 font-medium active:scale-95 transition-all">
+      <button id="nav-btn-map" class="nav-item-btn flex-1 flex flex-col items-center py-1.5 text-gray-500 hover:text-festive-900 dark:text-gray-400 font-medium active:scale-95 transition-all relative rounded-2xl">
         <svg class="w-5 h-5 mb-0.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"/>
         </svg>
         <span class="text-[10px]">Map</span>
       </button>
 
-      <button id="nav-btn-food" class="flex-1 flex flex-col items-center py-1 text-gray-500 hover:text-festive-900 dark:text-gray-400 font-medium active:scale-95 transition-all">
+      <button id="nav-btn-food" class="nav-item-btn flex-1 flex flex-col items-center py-1.5 text-gray-500 hover:text-festive-900 dark:text-gray-400 font-medium active:scale-95 transition-all relative rounded-2xl">
         <svg class="w-5 h-5 mb-0.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
         </svg>
         <span class="text-[10px]">Food Trail</span>
       </button>
 
-      <button id="nav-btn-pandals" class="flex-1 flex flex-col items-center py-1 text-gray-500 hover:text-festive-900 dark:text-gray-400 font-medium active:scale-95 transition-all">
+      <button id="nav-btn-pandals" class="nav-item-btn flex-1 flex flex-col items-center py-1.5 text-gray-500 hover:text-festive-900 dark:text-gray-400 font-medium active:scale-95 transition-all relative rounded-2xl">
         <svg class="w-5 h-5 mb-0.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 10h16M4 14h16M4 18h16"/>
         </svg>
         <span class="text-[10px]">Directory</span>
       </button>
 
-      <button id="nav-btn-itinerary" class="flex-1 flex flex-col items-center py-1 text-gray-500 hover:text-festive-900 dark:text-gray-400 font-medium active:scale-95 transition-all relative">
+      <button id="nav-btn-itinerary" class="nav-item-btn flex-1 flex flex-col items-center py-1.5 text-gray-500 hover:text-festive-900 dark:text-gray-400 font-medium active:scale-95 transition-all relative rounded-2xl">
         <svg class="w-5 h-5 mb-0.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/>
         </svg>
@@ -2138,9 +2218,28 @@
       [viewCircuits, viewLiveMap, viewFood, viewPandals, viewItinerary].forEach(v => v.classList.add('hidden'));
 
       [navBtnCircuits, navBtnMap, navBtnFood, navBtnPandals, navBtnItinerary].forEach(btn => {
-        btn.classList.remove('text-festive-900', 'dark:text-amber-400', 'font-bold');
+        btn.classList.remove('text-festive-900', 'dark:text-amber-300', 'font-bold', 'bg-rose-100/60', 'dark:bg-amber-400/10');
         btn.classList.add('text-gray-500', 'dark:text-gray-400', 'font-medium');
+        const pill = btn.querySelector('.nav-active-pill');
+        if (pill) pill.remove();
       });
+
+      
+      const activeBtnMap = {
+        circuits: navBtnCircuits,
+        map: navBtnMap,
+        food: navBtnFood,
+        pandals: navBtnPandals,
+        itinerary: navBtnItinerary
+      };
+      const activeBtn = activeBtnMap[target];
+      if (activeBtn) {
+        activeBtn.classList.remove('text-gray-500', 'dark:text-gray-400', 'font-medium');
+        activeBtn.classList.add('text-festive-900', 'dark:text-amber-300', 'font-bold', 'bg-rose-100/60', 'dark:bg-amber-400/10');
+        const pillIndicator = document.createElement('span');
+        pillIndicator.className = 'nav-active-pill absolute top-0 w-6 h-1 rounded-full bg-gradient-to-r from-amber-400 to-rose-600 shadow-xs';
+        activeBtn.appendChild(pillIndicator);
+      }
 
       if (target === 'circuits') {
         viewCircuits.classList.remove('hidden');
@@ -2317,7 +2416,7 @@
                 <svg class="w-3 h-3 text-amber-600 inline mr-1" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/></svg><span>${step.walkFromPrev}</span>
               </div>
 
-              <div class="circuit-step-card bg-white dark:bg-festive-nightCard rounded-2xl p-3.5 border ${
+              <div class="circuit-step-card relative overflow-hidden bg-white dark:bg-festive-nightCard rounded-2xl p-3.5 border ${
                 isVisited ? 'border-emerald-500/50 bg-emerald-50/20 dark:bg-emerald-950/20 opacity-80' : 'border-rose-100 dark:border-festive-nightBorder'
               } shadow-sm hover:border-festive-800/40 transition-all">
                 <div class="flex items-start justify-between">
@@ -2460,10 +2559,18 @@
         const crowdEst = getLiveCrowdEstimate(p);
 
         return `
-          <div class="pandal-card-item bg-white dark:bg-festive-nightCard rounded-2xl p-4 border ${
+          <div class="pandal-card-item relative overflow-hidden bg-white dark:bg-festive-nightCard rounded-2xl p-4 border ${
             isVisited ? 'border-emerald-500/50 bg-emerald-50/20 dark:bg-emerald-950/20 opacity-80' : 'border-rose-100/90 dark:border-festive-nightBorder'
           } shadow-sm border-l-4 ${color.border} hover:shadow-md transition-all">
-            <div class="flex flex-wrap items-center justify-between gap-1.5 mb-2">
+            <svg class="absolute top-0 right-0 w-16 h-16 pointer-events-none opacity-[0.08] dark:opacity-[0.14] text-festive-900 dark:text-amber-300" viewBox="0 0 100 100" fill="currentColor">
+  <path d="M100,0 L100,100 C75,100 50,85 40,65 C30,45 15,25 0,0 Z"/>
+  <circle cx="75" cy="25" r="12" fill="none" stroke="currentColor" stroke-width="4"/>
+  <circle cx="85" cy="15" r="5"/>
+  <circle cx="65" cy="35" r="4"/>
+  <path d="M100,50 Q70,50 60,30" fill="none" stroke="currentColor" stroke-width="3"/>
+  <path d="M50,100 Q50,70 30,60" fill="none" stroke="currentColor" stroke-width="3"/>
+</svg>
+            <div class="flex flex-wrap items-center justify-between gap-1.5 mb-2 relative z-10">
               <div class="flex items-center gap-1.5 flex-wrap">
                 <span class="text-[10px] font-bold px-2 py-0.5 rounded-full ${color.light}">${p.line} Line</span>
                 <span class="text-[10px] font-semibold text-gray-500 dark:text-gray-400">Metro: ${p.station}</span>
@@ -3258,6 +3365,101 @@ ${mapUrl}
           const waUrl = 'https://api.whatsapp.com/send?text=' + encodeURIComponent(text);
           window.open(waUrl, '_blank');
         };
+      }
+    }
+
+    
+    // --- LAST METRO HOME CALCULATOR ENGINE ---
+    let selectedLastMetroLine = 'Blue';
+
+    const modalLastMetro = document.getElementById('modal-last-metro');
+    const btnOpenLastMetro = document.getElementById('btn-open-last-metro');
+    const btnCloseLastMetro = document.getElementById('btn-close-last-metro');
+    const lastMetroTimeDisplay = document.getElementById('last-metro-time-display');
+    const lastMetroSubtext = document.getElementById('last-metro-subtext');
+    const lastMetroCountdownBox = document.getElementById('last-metro-countdown-box');
+    const lastMetroGuidance = document.getElementById('last-metro-guidance');
+
+    if (btnOpenLastMetro && modalLastMetro) {
+      btnOpenLastMetro.addEventListener('click', () => {
+        modalLastMetro.classList.remove('hidden');
+        recalculateLastMetro();
+      });
+      btnCloseLastMetro.addEventListener('click', () => modalLastMetro.classList.add('hidden'));
+      modalLastMetro.addEventListener('click', (e) => {
+        if (e.target === modalLastMetro) modalLastMetro.classList.add('hidden');
+      });
+    }
+
+    document.querySelectorAll('.last-metro-line-choice').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.last-metro-line-choice').forEach(b => {
+          b.classList.remove('selected', 'bg-blue-50/80', 'dark:bg-blue-950/40', 'border-blue-300');
+          b.classList.add('bg-white', 'dark:bg-festive-nightCard');
+        });
+        btn.classList.add('selected', 'bg-blue-50/80', 'dark:bg-blue-950/40', 'border-blue-300');
+        selectedLastMetroLine = btn.getAttribute('data-line');
+        recalculateLastMetro();
+      });
+    });
+
+    function recalculateLastMetro() {
+      if (!lastMetroTimeDisplay) return;
+      const now = new Date();
+      const currentHour = now.getHours();
+      const currentMinute = now.getMinutes();
+
+      let lastHour = 4; // default Blue line overnight
+      let displayTime = '04:00 AM';
+      let subtext = 'From Dakshineswar & Kavi Subhash (Terminal Departures)';
+      let advice = 'Blue line runs continuous overnight trains every 12 mins between 2 AM and 4 AM on Saptami–Navami.';
+
+      if (selectedLastMetroLine === 'Green') {
+        lastHour = 24; // midnight
+        displayTime = '12:00 AM (Midnight)';
+        subtext = 'Howrah Maidan ⇄ Salt Lake Sector V';
+        advice = 'Under-river tunnel closes strictly at midnight. Transfer to night bus if travelling later.';
+      } else if (selectedLastMetroLine === 'Orange') {
+        lastHour = 21; // 9 PM
+        displayTime = '09:00 PM';
+        subtext = 'Kavi Subhash ⇄ Hemanta Mukherjee / Beleghata';
+        advice = 'Orange line closes early. Switch to Blue Line at Kavi Subhash or take EM Bypass auto/taxis.';
+      } else if (selectedLastMetroLine === 'Purple') {
+        lastHour = 20; // 8 PM
+        displayTime = '08:00 PM';
+        subtext = 'Joka ⇄ Majerhat';
+        advice = 'Purple line operates limited daytime frequency. Board connecting buses at Taratala / Majerhat.';
+      }
+
+      lastMetroTimeDisplay.textContent = displayTime;
+      lastMetroSubtext.textContent = subtext;
+      if (lastMetroGuidance) lastMetroGuidance.innerHTML = '• <strong>Advice:</strong> ' + advice;
+
+      // Calculate time diff
+      let targetDate = new Date(now);
+      if (lastHour === 4) {
+        // Next 4 AM
+        if (currentHour >= 4) {
+          targetDate.setDate(targetDate.getDate() + 1);
+        }
+        targetDate.setHours(4, 0, 0, 0);
+      } else if (lastHour === 24) {
+        // Next Midnight
+        targetDate.setHours(23, 59, 59, 999);
+      } else {
+        targetDate.setHours(lastHour, 0, 0, 0);
+        if (targetDate < now) {
+          targetDate.setDate(targetDate.getDate() + 1);
+        }
+      }
+
+      const diffMs = targetDate - now;
+      if (diffMs > 0) {
+        const diffHrs = Math.floor(diffMs / (1000 * 60 * 60));
+        const diffMins = Math.floor((diffMs % (1000 * 60 * 60)) / (1000 * 60));
+        lastMetroCountdownBox.textContent = `${diffHrs}h ${diffMins}m left`;
+      } else {
+        lastMetroCountdownBox.textContent = 'Departed';
       }
     }
 
