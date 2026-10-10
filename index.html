@@ -380,15 +380,28 @@
             <h2 class="text-base font-bold text-gray-900 dark:text-white">My Custom Hopping Circuit</h2>
             <p class="text-xs text-gray-500 dark:text-gray-400">Pick any pandals to generate an optimized walking path</p>
           </div>
-          <button id="btn-clear-hoplist" class="text-xs text-rose-700 dark:text-rose-400 hover:underline font-semibold">Clear</button>
+          <div class="flex items-center gap-2">
+            <button id="btn-sort-hoplist-crowd" class="text-xs text-emerald-700 dark:text-emerald-400 hover:underline font-bold flex items-center gap-1" title="Sort your list by least crowded">
+              <svg class="w-3.5 h-3.5 text-emerald-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
+              <span>Least Crowd</span>
+            </button>
+            <span class="text-gray-300 dark:text-gray-600">•</span>
+            <button id="btn-clear-hoplist" class="text-xs text-rose-700 dark:text-rose-400 hover:underline font-semibold">Clear</button>
+          </div>
         </div>
 
         <!-- Custom Waypoint Link Trigger -->
         <div id="hoplist-action-bar" class="hidden pt-2 border-t border-gray-100 dark:border-festive-nightBorder mt-2 space-y-2">
-          <button id="btn-optimize-my-hoplist" class="w-full py-2 px-3 bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-rose-950 rounded-xl text-xs font-black shadow transition-all flex items-center justify-center gap-2">
-            <svg class="w-3.5 h-3.5 text-rose-950" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
-            <span>AI Re-order (Shortest Walking Distance)</span>
-          </button>
+          <div class="grid grid-cols-2 gap-2">
+            <button id="btn-optimize-my-hoplist" class="py-2 px-2.5 bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-rose-950 rounded-xl text-[11px] font-black shadow transition-all flex items-center justify-center gap-1.5">
+              <svg class="w-3.5 h-3.5 text-rose-950 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+              <span>Shortest Walk</span>
+            </button>
+            <button id="btn-optimize-my-hoplist-crowd" class="py-2 px-2.5 bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-400 hover:to-teal-500 text-white rounded-xl text-[11px] font-black shadow transition-all flex items-center justify-center gap-1.5">
+              <svg class="w-3.5 h-3.5 text-white flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
+              <span>Least Crowd First</span>
+            </button>
+          </div>
           <div class="grid grid-cols-2 gap-2">
             <button id="btn-open-custom-gmap" class="py-2.5 px-3 bg-gradient-to-r from-festive-900 to-rose-700 text-white rounded-xl text-xs font-bold shadow-md hover:shadow-lg active:scale-98 flex items-center justify-center gap-1.5">
               <svg class="w-3.5 h-3.5 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"/></svg>
@@ -1658,6 +1671,7 @@
             if (!p) return '';
             const isSaved = myHopList.includes(p.id);
             const isVisited = visitedPandals.includes(p.id);
+            const crowdEst = getLiveCrowdEstimate(p);
 
             return `
               <div class="pl-3.5 border-l-2 border-dashed border-amber-300 dark:border-amber-700 ml-3.5 my-1 text-[11px] font-semibold text-amber-800 dark:text-amber-400 flex items-center gap-1.5 py-0.5">
@@ -1675,10 +1689,13 @@
                       ${isVisited ? '✓' : idx + 1}
                     </span>
                     <div>
-                      <div class="flex items-center gap-2">
+                      <div class="flex flex-wrap items-center gap-1.5">
                         <h5 class="text-xs font-bold text-gray-900 dark:text-white hover:text-festive-900 transition-colors ${
                           isVisited ? 'line-through text-gray-500 dark:text-gray-400' : ''
                         }">${p.name}</h5>
+                        <span class="text-[9px] font-bold px-1.5 py-0.2 rounded-full border ${crowdEst.colorClass}">
+                          ${crowdEst.level} (~${crowdEst.waitMinutes})
+                        </span>
                         <span class="text-[10px] font-extrabold text-amber-600 dark:text-amber-400">Hype: ${p.hypeScore}</span>
                         ${isVisited ? '<span class="text-[9px] font-black bg-emerald-100 dark:bg-emerald-900/60 text-emerald-800 dark:text-emerald-300 px-1.5 py-0.2 rounded-full">Visited</span>' : ''}
                       </div>
@@ -1871,6 +1888,8 @@
       const hoplistActionBar = document.getElementById('hoplist-action-bar');
       const btnOpenCustomGmap = document.getElementById('btn-open-custom-gmap');
       const btnOptimizeHoplist = document.getElementById('btn-optimize-my-hoplist');
+      const btnOptimizeHoplistCrowd = document.getElementById('btn-optimize-my-hoplist-crowd');
+      const btnSortHoplistCrowd = document.getElementById('btn-sort-hoplist-crowd');
 
       if (myHopList.length === 0) {
         hoplistEmpty.classList.remove('hidden');
@@ -1884,9 +1903,23 @@
 
       const savedPandals = myHopList.map(id => getPandalById(id)).filter(Boolean);
 
-      btnOptimizeHoplist.onclick = () => {
-        optimizeHopListOrder();
-      };
+      if (btnOptimizeHoplist) {
+        btnOptimizeHoplist.onclick = () => {
+          optimizeHopListOrder();
+        };
+      }
+
+      if (btnOptimizeHoplistCrowd) {
+        btnOptimizeHoplistCrowd.onclick = () => {
+          optimizeHopListByCrowd();
+        };
+      }
+
+      if (btnSortHoplistCrowd) {
+        btnSortHoplistCrowd.onclick = () => {
+          optimizeHopListByCrowd();
+        };
+      }
 
       const stopNames = savedPandals.map(p => `${p.name} ${p.location} Kolkata`);
       btnOpenCustomGmap.onclick = () => {
@@ -1896,27 +1929,54 @@
 
       hoplistContainer.innerHTML = savedPandals.map((p, idx) => {
         const nextP = savedPandals[idx + 1];
+        const crowdEst = getLiveCrowdEstimate(p);
+        const isVisited = visitedPandals.includes(p.id);
 
         return `
-          <div class="bg-white dark:bg-festive-nightCard rounded-2xl p-3.5 border border-rose-100 dark:border-festive-nightBorder shadow-sm">
+          <div class="bg-white dark:bg-festive-nightCard rounded-2xl p-3.5 border ${
+            isVisited ? 'border-emerald-500/50 bg-emerald-50/20 dark:bg-emerald-950/20 opacity-80' : 'border-rose-100 dark:border-festive-nightBorder'
+          } shadow-sm">
             <div class="flex items-start justify-between">
-              <div class="flex items-start gap-2.5">
-                <span class="w-6 h-6 rounded-full bg-festive-900 text-white text-xs font-bold flex items-center justify-center flex-shrink-0 mt-0.5">
-                  ${idx + 1}
+              <div class="flex items-start gap-2.5 flex-1 pr-2">
+                <span class="w-6 h-6 rounded-full ${
+                  isVisited ? 'bg-emerald-600 text-white' : 'bg-festive-900 text-white'
+                } text-xs font-bold flex items-center justify-center flex-shrink-0 mt-0.5">
+                  ${isVisited ? '✓' : idx + 1}
                 </span>
-                <div>
-                  <h4 class="text-xs font-bold text-gray-900 dark:text-white">${p.name}</h4>
+                <div class="flex-1">
+                  <div class="flex flex-wrap items-center gap-1.5 mb-0.5">
+                    <h4 class="text-xs font-bold text-gray-900 dark:text-white cursor-pointer hover:text-festive-900 ${
+                      isVisited ? 'line-through text-gray-500 dark:text-gray-400' : ''
+                    }" onclick="openHopModal(${p.id})">${p.name}</h4>
+                    <span class="text-[9px] font-bold px-1.5 py-0.2 rounded-full border ${crowdEst.colorClass}">
+                      Crowd: ${crowdEst.level} (~${crowdEst.waitMinutes})
+                    </span>
+                    <span class="text-[10px] font-extrabold text-amber-600 dark:text-amber-400">Hype: ${p.hypeScore}</span>
+                  </div>
                   <p class="text-[11px] text-gray-500 dark:text-gray-400">${p.location} • Metro: ${p.station} (${p.line} Line)</p>
                   <p class="text-[11px] text-amber-900 dark:text-amber-200 mt-0.5 font-medium">${p.theme2026}</p>
                 </div>
               </div>
-              <button
-                onclick="toggleHopList(${p.id});"
-                class="text-gray-400 hover:text-red-600 p-1 font-bold text-sm"
-                title="Remove"
-              >
-                ✕
-              </button>
+              <div class="flex items-center gap-1">
+                <button
+                  onclick="toggleVisitedPandal(${p.id}); renderHopList();"
+                  class="px-2 py-1 rounded-lg border text-[10px] font-black transition-all ${
+                    isVisited
+                      ? 'bg-emerald-100 text-emerald-800 dark:bg-emerald-900/40 dark:text-emerald-300 border-emerald-300'
+                      : 'bg-gray-100 dark:bg-black/40 text-gray-600 dark:text-gray-400 border-gray-200 dark:border-festive-nightBorder'
+                  }"
+                  title="${isVisited ? 'Mark as Not Visited' : 'Mark as Visited'}"
+                >
+                  ${isVisited ? '✓ Visited' : 'Visited?'}
+                </button>
+                <button
+                  onclick="toggleHopList(${p.id});"
+                  class="text-gray-400 hover:text-red-600 p-1 font-bold text-sm"
+                  title="Remove from Hop List"
+                >
+                  ✕
+                </button>
+              </div>
             </div>
 
             ${nextP ? `
@@ -1935,6 +1995,19 @@
           </div>
         `;
       }).join('');
+    }
+
+    function optimizeHopListByCrowd() {
+      if (myHopList.length === 0) return;
+      const pandalObjs = myHopList.map(id => getPandalById(id)).filter(Boolean);
+      pandalObjs.sort((a, b) => {
+        const ca = getLiveCrowdEstimate(a).score;
+        const cb = getLiveCrowdEstimate(b).score;
+        return ca - cb; // Least crowded first
+      });
+      myHopList = pandalObjs.map(p => p.id);
+      saveHopList();
+      showToast("Hop list sorted: Least crowded pandals first!", "✓");
     }
 
     function optimizeHopListOrder() {
