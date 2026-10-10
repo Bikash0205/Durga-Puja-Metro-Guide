@@ -1044,8 +1044,9 @@
 
       const dynamicScore = Math.min(100, Math.round(baseWeight * timeMultiplier));
 
-      let level = 'Low';
+      let level = 'Low (Fast Entry)';
       let colorClass = 'bg-emerald-100 text-emerald-800 dark:bg-emerald-950 dark:text-emerald-300 border-emerald-300';
+      let dotColor = 'bg-emerald-500';
       let barColor = 'bg-emerald-500';
       let waitMinutes = '5–10 mins';
       let bestTime = 'Now is ideal!';
@@ -1053,18 +1054,21 @@
       if (dynamicScore >= 80) {
         level = 'Extreme Rush';
         colorClass = 'bg-rose-100 text-rose-800 dark:bg-rose-950 dark:text-rose-300 border-rose-300 animate-pulse';
+        dotColor = 'bg-rose-600 animate-ping';
         barColor = 'bg-rose-600';
         waitMinutes = '45–60 mins';
         bestTime = 'Late Night (2–4 AM)';
       } else if (dynamicScore >= 60) {
         level = 'Very High';
         colorClass = 'bg-orange-100 text-orange-800 dark:bg-orange-950 dark:text-orange-300 border-orange-300';
+        dotColor = 'bg-orange-500';
         barColor = 'bg-orange-500';
         waitMinutes = '25–40 mins';
         bestTime = 'After midnight or early morning';
       } else if (dynamicScore >= 40) {
         level = 'Moderate';
         colorClass = 'bg-amber-100 text-amber-800 dark:bg-amber-950 dark:text-amber-300 border-amber-300';
+        dotColor = 'bg-amber-500';
         barColor = 'bg-amber-500';
         waitMinutes = '15–20 mins';
         bestTime = 'Good to visit now';
@@ -1074,6 +1078,7 @@
         score: dynamicScore,
         level,
         colorClass,
+        dotColor,
         barColor,
         waitMinutes,
         bestTime
@@ -1693,8 +1698,9 @@
                         <h5 class="text-xs font-bold text-gray-900 dark:text-white hover:text-festive-900 transition-colors ${
                           isVisited ? 'line-through text-gray-500 dark:text-gray-400' : ''
                         }">${p.name}</h5>
-                        <span class="text-[9px] font-bold px-1.5 py-0.2 rounded-full border ${crowdEst.colorClass}">
-                          ${crowdEst.level} (~${crowdEst.waitMinutes})
+                        <span class="inline-flex items-center gap-1 text-[9px] font-bold px-1.5 py-0.5 rounded-full border ${crowdEst.colorClass}">
+                          <span class="w-1.5 h-1.5 rounded-full ${crowdEst.dotColor}"></span>
+                          <span>${crowdEst.level} (~${crowdEst.waitMinutes})</span>
                         </span>
                         <span class="text-[10px] font-extrabold text-amber-600 dark:text-amber-400">Hype: ${p.hypeScore}</span>
                         ${isVisited ? '<span class="text-[9px] font-black bg-emerald-100 dark:bg-emerald-900/60 text-emerald-800 dark:text-emerald-300 px-1.5 py-0.2 rounded-full">Visited</span>' : ''}
@@ -1819,8 +1825,9 @@
                   <span class="text-[10px] font-bold px-2 py-0.5 rounded-full ${color.light}">${p.line} Line</span>
                   <span class="text-[10px] font-semibold text-gray-500 dark:text-gray-400">Metro: ${p.station}</span>
                   <span class="text-[10px] font-bold text-amber-700 dark:text-amber-400 bg-amber-50 dark:bg-amber-950 px-1.5 py-0.5 rounded">Hype: ${p.hypeScore}</span>
-                  <span class="text-[9px] font-bold px-2 py-0.5 rounded-full border ${crowdEst.colorClass}">
-                    Crowd: ${crowdEst.level} (~${crowdEst.waitMinutes})
+                  <span class="inline-flex items-center gap-1 text-[9px] font-bold px-2 py-0.5 rounded-full border ${crowdEst.colorClass}">
+                    <span class="w-1.5 h-1.5 rounded-full ${crowdEst.dotColor}"></span>
+                    <span>Live Crowd: ${crowdEst.level} (~${crowdEst.waitMinutes})</span>
                   </span>
                   ${isVisited ? '<span class="text-[9px] font-black bg-emerald-100 dark:bg-emerald-900/60 text-emerald-800 dark:text-emerald-300 px-1.5 py-0.2 rounded-full">Visited</span>' : ''}
                 </div>
@@ -1948,8 +1955,9 @@
                     <h4 class="text-xs font-bold text-gray-900 dark:text-white cursor-pointer hover:text-festive-900 ${
                       isVisited ? 'line-through text-gray-500 dark:text-gray-400' : ''
                     }" onclick="openHopModal(${p.id})">${p.name}</h4>
-                    <span class="text-[9px] font-bold px-1.5 py-0.2 rounded-full border ${crowdEst.colorClass}">
-                      Crowd: ${crowdEst.level} (~${crowdEst.waitMinutes})
+                    <span class="inline-flex items-center gap-1 text-[9px] font-bold px-2 py-0.5 rounded-full border ${crowdEst.colorClass}">
+                      <span class="w-1.5 h-1.5 rounded-full ${crowdEst.dotColor}"></span>
+                      <span>Live Crowd: ${crowdEst.level} (~${crowdEst.waitMinutes})</span>
                     </span>
                     <span class="text-[10px] font-extrabold text-amber-600 dark:text-amber-400">Hype: ${p.hypeScore}</span>
                   </div>
