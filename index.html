@@ -6,6 +6,7 @@
   <meta name="theme-color" content="#881337" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <link rel="manifest" href="./manifest.json" />
   <title>Kolkata Durga Puja 2026 — AI & GPS Metro Pedestrian Guide</title>
 
   <!-- Tailwind CSS CDN -->
@@ -98,7 +99,7 @@
     }
   </style>
 </head>
-<body class="min-h-screen pb-28 bg-[#FFF9F2] dark:bg-festive-night text-gray-800 dark:text-gray-100 antialiased transition-colors duration-300">
+<body class="min-h-screen pb-36 bg-[#FFF9F2] dark:bg-festive-night text-gray-800 dark:text-gray-100 antialiased transition-colors duration-300">
 
   <!-- Smooth Smart Mobile Header (Zero Layout Shift) -->
   <header id="main-header" class="sticky top-0 z-40 bg-gradient-to-r from-festive-900 via-rose-900 to-festive-800 text-white shadow-lg overflow-hidden transition-all duration-300">
@@ -226,12 +227,21 @@
         </div>
       </div>
 
-      <!-- Station Filter Pills -->
-      <div>
-        <div class="flex items-center justify-between mb-2">
-          <label class="text-xs font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400">Pick Metro Drop Station:</label>
-          <span id="circuit-count" class="text-xs text-festive-800 dark:text-amber-400 font-semibold">6 Circuits Available</span>
+      <!-- Circuit Filter & Station Pills -->
+      <div class="space-y-2">
+        <div class="flex items-center justify-between">
+          <label class="text-xs font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400">Walking Circuits:</label>
+          <span id="circuit-count" class="text-xs text-festive-800 dark:text-amber-400 font-semibold">6 Circuits</span>
         </div>
+
+        <!-- Quick Distance Filters -->
+        <div class="flex items-center gap-1.5 overflow-x-auto pb-1 no-scrollbar text-[11px] font-semibold">
+          <button id="filter-dist-all" class="circuit-dist-filter px-2.5 py-1 rounded-full bg-festive-900 text-white shadow-xs">All Distances</button>
+          <button id="filter-dist-short" class="circuit-dist-filter px-2.5 py-1 rounded-full bg-white dark:bg-festive-nightCard border border-gray-200 dark:border-festive-nightBorder text-gray-700 dark:text-gray-300 hover:border-festive-800">🚶 Easy (< 2 km)</button>
+          <button id="filter-dist-medium" class="circuit-dist-filter px-2.5 py-1 rounded-full bg-white dark:bg-festive-nightCard border border-gray-200 dark:border-festive-nightBorder text-gray-700 dark:text-gray-300 hover:border-festive-800">🏃 Moderate (2–3 km)</button>
+          <button id="filter-dist-long" class="circuit-dist-filter px-2.5 py-1 rounded-full bg-white dark:bg-festive-nightCard border border-gray-200 dark:border-festive-nightBorder text-gray-700 dark:text-gray-300 hover:border-festive-800">🔥 Mega (3+ km)</button>
+        </div>
+
         <div id="station-pills" class="flex gap-2 overflow-x-auto pb-1.5 no-scrollbar">
           <!-- Populated by JS -->
         </div>
@@ -359,9 +369,14 @@
           <button id="btn-optimize-my-hoplist" class="w-full py-2 px-3 bg-amber-500 hover:bg-amber-600 text-rose-950 rounded-xl text-xs font-black shadow transition-all flex items-center justify-center gap-1.5">
             <span>⚡ AI Re-order (Shortest Walking Distance)</span>
           </button>
-          <button id="btn-open-custom-gmap" class="w-full py-2.5 px-4 bg-gradient-to-r from-festive-900 to-rose-700 text-white rounded-xl text-xs font-bold shadow-md hover:shadow-lg active:scale-98 flex items-center justify-center gap-2">
-            <span>🗺️ Open in Google Maps (Turn-by-Turn Walk)</span>
-          </button>
+          <div class="grid grid-cols-2 gap-2">
+            <button id="btn-open-custom-gmap" class="py-2.5 px-3 bg-gradient-to-r from-festive-900 to-rose-700 text-white rounded-xl text-xs font-bold shadow-md hover:shadow-lg active:scale-98 flex items-center justify-center gap-1.5">
+              <span>🗺️ Google Maps</span>
+            </button>
+            <button id="btn-share-hoplist-wa" class="py-2.5 px-3 bg-emerald-700 hover:bg-emerald-800 text-white rounded-xl text-xs font-bold shadow-md hover:shadow-lg active:scale-98 flex items-center justify-center gap-1.5">
+              <span>💬 WhatsApp Plan</span>
+            </button>
+          </div>
         </div>
       </div>
 
@@ -599,6 +614,12 @@
 
     </div>
   </nav>
+
+  <!-- Quick Floating Toast Feedback -->
+  <div id="quick-toast" class="fixed top-16 left-1/2 -translate-x-1/2 z-50 bg-gray-950/90 text-white text-xs font-semibold px-4 py-2 rounded-2xl shadow-xl border border-white/20 transition-all duration-300 opacity-0 pointer-events-none flex items-center gap-2">
+    <span id="quick-toast-icon">✨</span>
+    <span id="quick-toast-msg">Action completed</span>
+  </div>
 
   <!-- ========================================== -->
   <!-- APPLICATION DATA & LOGIC                   -->
@@ -869,12 +890,30 @@
     let currentActiveCircuitId = walkingCircuits[0].id;
     let selectedLineFilter = 'all';
     let selectedZoneFilter = 'all';
+    let circuitDistanceFilter = 'all';
     let sortByHype = false;
     let searchQuery = '';
     let myHopList = JSON.parse(localStorage.getItem('durgapuja_hoplist_2026') || '[]');
+    let visitedPandals = JSON.parse(localStorage.getItem('durgapuja_visited_2026') || '[]');
     let currentInspectedPandal = null;
     let mapInstance = null;
     let mapLayerGroup = null;
+
+    // Toast feedback helper
+    function showToast(message, icon = '✨') {
+      const toast = document.getElementById('quick-toast');
+      const msg = document.getElementById('quick-toast-msg');
+      const ic = document.getElementById('quick-toast-icon');
+      if (!toast) return;
+      msg.textContent = message;
+      ic.textContent = icon;
+      toast.classList.remove('opacity-0', 'pointer-events-none');
+      toast.classList.add('opacity-100');
+      setTimeout(() => {
+        toast.classList.remove('opacity-100');
+        toast.classList.add('opacity-0', 'pointer-events-none');
+      }, 2400);
+    }
 
     // --- DOM REFERENCES ---
     const btnTriggerGps = document.getElementById('btn-trigger-gps');
@@ -1302,10 +1341,37 @@
     // --- RENDER CIRCUITS ---
     function renderCircuitStationPills() {
       stationPills.innerHTML = '';
-      walkingCircuits.forEach(circuit => {
+
+      const filteredCircuits = walkingCircuits.filter(circuit => {
+        const km = parseFloat(circuit.totalDistance);
+        if (circuitDistanceFilter === 'short') return km < 2.0;
+        if (circuitDistanceFilter === 'medium') return km >= 2.0 && km <= 3.0;
+        if (circuitDistanceFilter === 'long') return km > 3.0;
+        return true;
+      });
+
+      const circuitCountEl = document.getElementById('circuit-count');
+      if (circuitCountEl) {
+        circuitCountEl.textContent = `${filteredCircuits.length} Circuit${filteredCircuits.length !== 1 ? 's' : ''}`;
+      }
+
+      if (filteredCircuits.length > 0 && !filteredCircuits.some(c => c.id === currentActiveCircuitId)) {
+        currentActiveCircuitId = filteredCircuits[0].id;
+      }
+
+      filteredCircuits.forEach(circuit => {
         const isActive = circuit.id === currentActiveCircuitId;
         const pill = document.createElement('button');
         const color = getLineColor(circuit.metroLine);
+
+        // Derive distinctive short label (e.g. "Shyambazar (Heritage)" vs "Shyambazar (Art Trail)")
+        let label = circuit.metroStation;
+        if (circuit.id === 'circuit-shyambazar-heritage') label = 'Shyambazar (Heritage)';
+        if (circuit.id === 'circuit-shyambazar-theme') label = 'Shyambazar (Art Trail)';
+        if (circuit.id === 'circuit-kalighat') label = 'Kalighat (South Mega)';
+        if (circuit.id === 'circuit-central-green') label = 'Central (College Sq)';
+        if (circuit.id === 'circuit-belgachia-tala') label = 'Belgachia (Tala Prattoy)';
+        if (circuit.id === 'circuit-dumdum-park') label = 'Dum Dum Park (Trio)';
 
         pill.className = `flex-shrink-0 px-3 py-1.5 rounded-xl text-xs font-semibold transition-all border ${
           isActive
@@ -1316,7 +1382,8 @@
         pill.innerHTML = `
           <div class="flex items-center gap-1.5">
             <span class="w-2 h-2 rounded-full ${color.bg}"></span>
-            <span>${circuit.metroStation}</span>
+            <span>${label}</span>
+            <span class="text-[10px] opacity-75 font-normal">(${circuit.totalDistance})</span>
           </div>
         `;
 
@@ -1375,14 +1442,22 @@
             </div>
           </div>
 
-          <a
-            href="${gmapWalkingUrl}"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="w-full py-2.5 px-4 bg-emerald-600 hover:bg-emerald-700 active:scale-98 text-white rounded-xl text-xs font-bold shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-2"
-          >
-            <span>🗺️ Open Full Walking Route in Google Maps</span>
-          </a>
+          <div class="grid grid-cols-2 gap-2">
+            <a
+              href="${gmapWalkingUrl}"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="py-2.5 px-3 bg-emerald-600 hover:bg-emerald-700 active:scale-98 text-white rounded-xl text-xs font-bold shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-1.5"
+            >
+              <span>🗺️ Google Maps</span>
+            </a>
+            <button
+              onclick="shareCircuitOnWhatsApp('${circuit.id}')"
+              class="py-2.5 px-3 bg-emerald-700 hover:bg-emerald-800 active:scale-98 text-white rounded-xl text-xs font-bold shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-1.5"
+            >
+              <span>💬 WhatsApp Trail</span>
+            </button>
+          </div>
         </div>
 
         <div class="space-y-2">
@@ -1405,22 +1480,30 @@
             const p = getPandalById(step.pandalId);
             if (!p) return '';
             const isSaved = myHopList.includes(p.id);
+            const isVisited = visitedPandals.includes(p.id);
 
             return `
               <div class="pl-3.5 border-l-2 border-dashed border-amber-300 dark:border-amber-700 ml-3.5 my-1 text-[11px] font-semibold text-amber-800 dark:text-amber-400 flex items-center gap-1.5 py-0.5">
                 <span>🚶 ${step.walkFromPrev}</span>
               </div>
 
-              <div class="circuit-step-card bg-white dark:bg-festive-nightCard rounded-2xl p-3.5 border border-rose-100 dark:border-festive-nightBorder shadow-sm hover:border-festive-800/40 transition-all">
+              <div class="circuit-step-card bg-white dark:bg-festive-nightCard rounded-2xl p-3.5 border ${
+                isVisited ? 'border-emerald-500/50 bg-emerald-50/20 dark:bg-emerald-950/20 opacity-80' : 'border-rose-100 dark:border-festive-nightBorder'
+              } shadow-sm hover:border-festive-800/40 transition-all">
                 <div class="flex items-start justify-between">
                   <div class="flex items-start gap-2.5 flex-1 pr-2 cursor-pointer" onclick="openHopModal(${p.id})">
-                    <span class="w-6 h-6 rounded-full bg-festive-50 dark:bg-rose-950 text-festive-900 dark:text-rose-200 border border-festive-200 text-xs font-bold flex items-center justify-center flex-shrink-0 mt-0.5">
-                      ${idx + 1}
+                    <span class="w-6 h-6 rounded-full ${
+                      isVisited ? 'bg-emerald-600 text-white' : 'bg-festive-50 dark:bg-rose-950 text-festive-900 dark:text-rose-200 border border-festive-200'
+                    } text-xs font-bold flex items-center justify-center flex-shrink-0 mt-0.5">
+                      ${isVisited ? '✓' : idx + 1}
                     </span>
                     <div>
                       <div class="flex items-center gap-2">
-                        <h5 class="text-xs font-bold text-gray-900 dark:text-white hover:text-festive-900 transition-colors">${p.name}</h5>
+                        <h5 class="text-xs font-bold text-gray-900 dark:text-white hover:text-festive-900 transition-colors ${
+                          isVisited ? 'line-through text-gray-500 dark:text-gray-400' : ''
+                        }">${p.name}</h5>
                         <span class="text-[10px] font-extrabold text-amber-600 dark:text-amber-400">★ ${p.hypeScore}</span>
+                        ${isVisited ? '<span class="text-[9px] font-black bg-emerald-100 dark:bg-emerald-900/60 text-emerald-800 dark:text-emerald-300 px-1.5 py-0.2 rounded-full">Visited</span>' : ''}
                       </div>
                       <p class="text-[11px] text-gray-500 dark:text-gray-400 font-medium">${p.location}</p>
                       <p class="text-[11px] text-amber-900 dark:text-amber-200 mt-1 font-medium bg-amber-50/80 dark:bg-amber-950/40 px-2 py-0.5 rounded-md inline-block">
@@ -1431,8 +1514,19 @@
 
                   <div class="flex flex-col items-end gap-1.5">
                     <button
+                      onclick="toggleVisitedPandal(${p.id}); renderActiveCircuit();"
+                      class="px-2 py-1 rounded-lg border text-[10px] font-black transition-all ${
+                        isVisited
+                          ? 'bg-emerald-100 text-emerald-800 dark:bg-emerald-900/40 dark:text-emerald-300 border-emerald-300'
+                          : 'bg-gray-100 dark:bg-black/40 text-gray-600 dark:text-gray-400 border-gray-200 dark:border-festive-nightBorder hover:bg-gray-200'
+                      }"
+                      title="${isVisited ? 'Mark as Not Visited' : 'Mark as Visited'}"
+                    >
+                      ${isVisited ? '✓ Visited' : 'Mark Visited'}
+                    </button>
+                    <button
                       onclick="toggleHopList(${p.id}); renderActiveCircuit();"
-                      class="p-1.5 rounded-lg border text-xs font-bold transition-all ${
+                      class="p-1 rounded-lg border text-[10px] font-bold transition-all ${
                         isSaved ? 'bg-rose-50 dark:bg-rose-900/40 text-festive-900 dark:text-rose-200 border-festive-200' : 'bg-gray-50 dark:bg-black/40 text-gray-500 hover:text-gray-800'
                       }"
                       title="${isSaved ? 'Remove from Hop List' : 'Add to Hop List'}"
@@ -1512,17 +1606,23 @@
       pandalsContainer.innerHTML = filtered.map(p => {
         const color = getLineColor(p.line);
         const isSaved = myHopList.includes(p.id);
+        const isVisited = visitedPandals.includes(p.id);
 
         return `
-          <div class="pandal-card-item bg-white dark:bg-festive-nightCard rounded-2xl p-4 border border-rose-100/90 dark:border-festive-nightBorder shadow-sm border-l-4 ${color.border} hover:shadow-md transition-all">
+          <div class="pandal-card-item bg-white dark:bg-festive-nightCard rounded-2xl p-4 border ${
+            isVisited ? 'border-emerald-500/50 bg-emerald-50/20 dark:bg-emerald-950/20 opacity-80' : 'border-rose-100/90 dark:border-festive-nightBorder'
+          } shadow-sm border-l-4 ${color.border} hover:shadow-md transition-all">
             <div class="flex items-start justify-between">
               <div class="flex-1 pr-2">
                 <div class="flex items-center gap-1.5 mb-1">
                   <span class="text-[10px] font-bold px-2 py-0.5 rounded-full ${color.light}">${p.line} Line</span>
                   <span class="text-[10px] font-semibold text-gray-500 dark:text-gray-400">🚇 ${p.station}</span>
                   <span class="text-[10px] font-bold text-amber-700 dark:text-amber-400 bg-amber-50 dark:bg-amber-950 px-1.5 py-0.5 rounded">🔥 ${p.hypeScore}</span>
+                  ${isVisited ? '<span class="text-[9px] font-black bg-emerald-100 dark:bg-emerald-900/60 text-emerald-800 dark:text-emerald-300 px-1.5 py-0.2 rounded-full">Visited</span>' : ''}
                 </div>
-                <h3 class="text-sm font-bold text-gray-900 dark:text-white cursor-pointer hover:text-festive-900" onclick="openHopModal(${p.id})">
+                <h3 class="text-sm font-bold text-gray-900 dark:text-white cursor-pointer hover:text-festive-900 ${
+                  isVisited ? 'line-through text-gray-500 dark:text-gray-400' : ''
+                }" onclick="openHopModal(${p.id})">
                   ${p.name}
                 </h3>
                 <p class="text-[11px] text-gray-500 dark:text-gray-400 font-medium">${p.location} • 🚶 ${p.accessibility}</p>
@@ -1533,21 +1633,24 @@
             </div>
 
             <div class="mt-3 pt-2.5 border-t border-gray-100 dark:border-festive-nightBorder flex items-center justify-between">
-              <div class="flex items-center gap-2">
+              <div class="flex items-center gap-1.5">
                 <button
                   onclick="openHopModal(${p.id})"
-                  class="py-1.5 px-3 bg-festive-900 hover:bg-festive-800 text-white rounded-xl text-[11px] font-bold shadow-sm active:scale-95 transition-all flex items-center gap-1"
+                  class="py-1.5 px-2.5 bg-festive-900 hover:bg-festive-800 text-white rounded-xl text-[11px] font-bold shadow-sm active:scale-95 transition-all flex items-center gap-1"
                 >
                   <span>🚶 Hop Next</span>
                 </button>
-                <a
-                  href="https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(p.name + ' ' + p.location + ' Kolkata')}&travelmode=walking"
-                  target="_blank"
-                  rel="noopener"
-                  class="py-1.5 px-2.5 bg-gray-100 dark:bg-black/40 hover:bg-gray-200 text-gray-700 dark:text-gray-300 rounded-xl text-[11px] font-semibold transition-all"
+                <button
+                  onclick="toggleVisitedPandal(${p.id}); renderPandals();"
+                  class="py-1.5 px-2 border rounded-xl text-[11px] font-bold transition-all ${
+                    isVisited
+                      ? 'bg-emerald-100 text-emerald-800 dark:bg-emerald-900/40 dark:text-emerald-300 border-emerald-300'
+                      : 'bg-gray-100 dark:bg-black/40 text-gray-600 dark:text-gray-400 border-gray-200 dark:border-festive-nightBorder'
+                  }"
+                  title="${isVisited ? 'Mark as Not Visited' : 'Mark as Visited'}"
                 >
-                  Google Map
-                </a>
+                  ${isVisited ? '✓ Visited' : 'Visited?'}
+                </button>
               </div>
 
               <button
@@ -1983,6 +2086,116 @@
     // Run every second for live countdown
     setInterval(updateLiveMetroTiming, 1000);
     updateLiveMetroTiming();
+
+    // --- VISITED PANDAL TRACKER ---
+    function toggleVisitedPandal(pandalId) {
+      const idx = visitedPandals.indexOf(pandalId);
+      const p = getPandalById(pandalId);
+      const name = p ? p.name : 'Pandal';
+      if (idx > -1) {
+        visitedPandals.splice(idx, 1);
+        showToast(`Marked ${name} as unvisited`, '🔄');
+      } else {
+        visitedPandals.push(pandalId);
+        showToast(`Awesome! ${name} marked as Visited ✓`, '🎉');
+      }
+      localStorage.setItem('durgapuja_visited_2026', JSON.stringify(visitedPandals));
+    }
+
+    // --- WHATSAPP TRAIL SHARING ---
+    function shareCircuitOnWhatsApp(circuitId) {
+      const circuit = walkingCircuits.find(c => c.id === circuitId);
+      if (!circuit) return;
+
+      const stops = circuit.steps.map((s, i) => {
+        const p = getPandalById(s.pandalId);
+        return p ? `${i + 1}. ${p.name} (${p.theme2026})` : null;
+      }).filter(Boolean);
+
+      const gmapStops = [
+        `${circuit.metroStation} Metro Station Kolkata`,
+        ...circuit.steps.map(s => {
+          const p = getPandalById(s.pandalId);
+          return p ? `${p.name} Kolkata` : null;
+        }).filter(Boolean)
+      ];
+      const mapUrl = generateGMapMultiStopUrl(gmapStops, 'walking');
+
+      const text = `🛕 *Kolkata Puja 2026 Walking Trail*: ${circuit.title}
+🚇 *Start*: ${circuit.metroStation} Metro (${circuit.exitGate})
+🏁 *Finish*: ${circuit.finishStation}
+🚶 *Distance*: ${circuit.totalDistance} (~${circuit.approxTime})
+
+*Pandals to Visit*:
+${stops.join('\n')}
+
+🗺️ *Turn-by-Turn Google Map*:
+${mapUrl}
+
+(Created via Kolkata Durga Puja Metro & Pandal Guide)`;
+
+      window.open(`https://wa.me/?text=${encodeURIComponent(text)}`, '_blank');
+      showToast('Opening WhatsApp to share walking route...', '💬');
+    }
+
+    function shareCustomHopListOnWhatsApp() {
+      if (myHopList.length === 0) return;
+      const savedPandals = myHopList.map(id => getPandalById(id)).filter(Boolean);
+      const stops = savedPandals.map((p, i) => `${i + 1}. ${p.name} (Metro: ${p.station})`);
+      const stopNames = savedPandals.map(p => `${p.name} ${p.location} Kolkata`);
+      const mapUrl = generateGMapMultiStopUrl(stopNames, 'walking');
+
+      const text = `🎉 *My Kolkata Durga Puja 2026 Hopping Plan*:
+Total ${savedPandals.length} pandals planned:
+
+${stops.join('\n')}
+
+🗺️ *Google Maps Walking Circuit*:
+${mapUrl}
+
+(Created via Kolkata Durga Puja Metro & Pandal Guide)`;
+
+      window.open(`https://wa.me/?text=${encodeURIComponent(text)}`, '_blank');
+      showToast('Opening WhatsApp to share your hop plan...', '💬');
+    }
+
+    // Circuit distance filter buttons
+    const distFilterBtns = [
+      { id: 'filter-dist-all', mode: 'all' },
+      { id: 'filter-dist-short', mode: 'short' },
+      { id: 'filter-dist-medium', mode: 'medium' },
+      { id: 'filter-dist-long', mode: 'long' }
+    ];
+
+    distFilterBtns.forEach(df => {
+      const btn = document.getElementById(df.id);
+      if (!btn) return;
+      btn.addEventListener('click', () => {
+        distFilterBtns.forEach(d => {
+          const el = document.getElementById(d.id);
+          if (el) {
+            el.className = 'circuit-dist-filter px-2.5 py-1 rounded-full bg-white dark:bg-festive-nightCard border border-gray-200 dark:border-festive-nightBorder text-gray-700 dark:text-gray-300 hover:border-festive-800 text-[11px] font-semibold';
+          }
+        });
+        btn.className = 'circuit-dist-filter px-2.5 py-1 rounded-full bg-festive-900 text-white shadow-xs text-[11px] font-semibold';
+        circuitDistanceFilter = df.mode;
+        renderCircuitStationPills();
+        renderActiveCircuit();
+      });
+    });
+
+    document.getElementById('btn-share-hoplist-wa')?.addEventListener('click', shareCustomHopListOnWhatsApp);
+
+    // Register Service Worker for Offline / Congestion Resilience
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./sw.js').then(() => {
+          console.log('Puja Metro Guide 2026 SW registered');
+        }).catch(err => {
+          console.warn('SW registration notice:', err);
+        });
+      });
+    }
 
     // --- INITIALIZATION ---
     renderCircuitStationPills();
