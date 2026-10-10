@@ -130,15 +130,29 @@
       </div>
     </div>
 
-    <!-- Festive Dates & Live Crowd Rush Strip -->
-    <div class="bg-black/30 px-4 py-1.5 text-[11px] text-amber-200/90 flex items-center justify-between border-t border-white/10 max-w-md mx-auto">
-      <span class="flex items-center gap-1.5 font-medium">
-        <span class="w-2 h-2 rounded-full bg-emerald-400 inline-block animate-pulse"></span>
-        Oct 16 (Shashthi) – Oct 21 (Dashami)
-      </span>
-      <span id="live-crowd-meter" class="text-rose-200 font-semibold flex items-center gap-1">
-        <span>🌙 Night Hopping Active</span>
-      </span>
+    <!-- Festive Dates, Next Metro Countdown & Live Rush Strip -->
+    <div class="bg-black/35 px-4 py-2 text-[11px] text-amber-200/90 border-t border-white/10 max-w-md mx-auto space-y-1">
+      <div class="flex items-center justify-between">
+        <span class="flex items-center gap-1.5 font-medium">
+          <span class="w-2 h-2 rounded-full bg-emerald-400 inline-block animate-pulse"></span>
+          Oct 16 (Shashthi) – Oct 21 (Dashami)
+        </span>
+        <span id="live-metro-status-badge" class="px-2 py-0.5 rounded-full text-[10px] font-black bg-emerald-950/80 text-emerald-300 border border-emerald-500/30">
+          ⚡ Night Metro Active
+        </span>
+      </div>
+      <!-- Live Next Metro Countdown Ticker -->
+      <div class="flex items-center justify-between pt-1 border-t border-white/10 text-xs">
+        <div class="flex items-center gap-1.5 font-semibold text-white">
+          <span class="text-sm">🚇</span>
+          <span>Next Train:</span>
+          <span id="header-next-metro-line" class="px-1.5 py-0.2 rounded text-[10px] font-bold bg-blue-600 text-white">Blue Line</span>
+        </div>
+        <div class="flex items-center gap-1 font-black text-amber-300">
+          <span id="header-next-metro-time" class="tracking-wide">in 4 mins</span>
+          <span class="text-[10px] font-normal text-rose-200" id="header-metro-dest">(Dakshineswar ⇄ Kavi Subhash)</span>
+        </div>
+      </div>
     </div>
   </header>
 
@@ -1384,18 +1398,18 @@
             </div>
           </div>
 
-          <div class="grid grid-cols-3 gap-2 py-2.5 px-3 bg-amber-50/70 dark:bg-amber-950/20 rounded-xl border border-amber-100 dark:border-amber-900 text-center">
-            <div>
-              <span class="text-[10px] uppercase font-bold text-amber-800 dark:text-amber-300">Total Walk</span>
-              <p class="text-xs font-bold text-gray-900 dark:text-white mt-0.5">${circuit.totalDistance}</p>
+          <!-- Live Next Train Widget for this Circuit's Station -->
+          <div class="p-3 bg-gradient-to-r from-blue-900/10 via-indigo-900/10 to-rose-900/10 dark:from-blue-950/40 dark:to-indigo-950/40 rounded-xl border border-blue-200 dark:border-blue-900 flex items-center justify-between">
+            <div class="flex items-center gap-2">
+              <span class="text-lg">⏱️</span>
+              <div>
+                <p class="text-[10px] uppercase font-bold text-blue-700 dark:text-blue-300">Live Frequency at ${circuit.metroStation}:</p>
+                <p class="text-xs font-bold text-gray-900 dark:text-white" id="circuit-next-train-text">Trains every 6–7 mins (Overnight till 4 AM)</p>
+              </div>
             </div>
-            <div>
-              <span class="text-[10px] uppercase font-bold text-amber-800 dark:text-amber-300">Est. Walk Time</span>
-              <p class="text-xs font-bold text-gray-900 dark:text-white mt-0.5">${circuit.approxTime}</p>
-            </div>
-            <div>
-              <span class="text-[10px] uppercase font-bold text-amber-800 dark:text-amber-300">Stops</span>
-              <p class="text-xs font-bold text-gray-900 dark:text-white mt-0.5">${circuit.steps.length} Pandals</p>
+            <div class="text-right">
+              <span class="text-[10px] text-gray-500 dark:text-gray-400">Next Departure:</span>
+              <p class="text-xs font-black text-emerald-600 dark:text-emerald-400" id="circuit-countdown-val">~3 mins</p>
             </div>
           </div>
 
@@ -1930,6 +1944,54 @@
       document.documentElement.classList.add('dark');
       btnToggleDark.textContent = '☀️';
     }
+
+    // --- LIVE NEXT METRO TIMING ENGINE ---
+    function updateLiveMetroTiming() {
+      const now = new Date();
+      const currentHour = now.getHours();
+      const currentMinute = now.getMinutes();
+
+      // Check operational state during Durga Puja
+      // Blue Line: 1:00 PM to 4:00 AM overnight
+      // Peak Headways: 6 mins (evening & night), 12 mins (off-peak late night 2 AM - 4 AM)
+      const headwayMins = (currentHour >= 18 || currentHour <= 2) ? 6 : (currentHour > 2 && currentHour < 5) ? 12 : 7;
+      
+      const minsPastHeadway = currentMinute % headwayMins;
+      const minsUntilNext = headwayMins - minsPastHeadway;
+      const secondsRemaining = 60 - now.getSeconds();
+
+      const timeDisplay = `${minsUntilNext} min${minsUntilNext > 1 ? 's' : ''} ${secondsRemaining}s`;
+
+      const headerNextMetroTime = document.getElementById('header-next-metro-time');
+      const liveMetroStatusBadge = document.getElementById('live-metro-status-badge');
+      const circuitCountdownVal = document.getElementById('circuit-countdown-val');
+
+      if (headerNextMetroTime) {
+        headerNextMetroTime.textContent = `in ${timeDisplay}`;
+      }
+
+      if (circuitCountdownVal) {
+        circuitCountdownVal.textContent = `${minsUntilNext} min${minsUntilNext > 1 ? 's' : ''}`;
+      }
+
+      // Operational status badge
+      if (liveMetroStatusBadge) {
+        if (currentHour >= 22 || currentHour <= 4) {
+          liveMetroStatusBadge.textContent = '🌙 Overnight Metro Active';
+          liveMetroStatusBadge.className = 'px-2 py-0.5 rounded-full text-[10px] font-black bg-emerald-950/80 text-emerald-300 border border-emerald-500/30';
+        } else if (currentHour >= 16 && currentHour < 22) {
+          liveMetroStatusBadge.textContent = '⚡ Peak 6-min Rush Frequency';
+          liveMetroStatusBadge.className = 'px-2 py-0.5 rounded-full text-[10px] font-black bg-amber-950/80 text-amber-300 border border-amber-500/30';
+        } else {
+          liveMetroStatusBadge.textContent = '🟢 Regular Puja Service';
+          liveMetroStatusBadge.className = 'px-2 py-0.5 rounded-full text-[10px] font-black bg-blue-950/80 text-blue-300 border border-blue-500/30';
+        }
+      }
+    }
+
+    // Run every second for live countdown
+    setInterval(updateLiveMetroTiming, 1000);
+    updateLiveMetroTiming();
 
     // --- INITIALIZATION ---
     renderCircuitStationPills();
