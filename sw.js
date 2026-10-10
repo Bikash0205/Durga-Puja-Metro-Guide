@@ -1,11 +1,16 @@
 // Durga Puja Metro Guide 2026 Service Worker
-const CACHE_NAME = 'puja-metro-2026-v1';
+const CACHE_NAME = 'puja-metro-2026-v2';
 const ASSETS_TO_CACHE = [
   './',
   './index.html',
   './manifest.json',
+  './lottie-radar.json',
+  './lottie-metro.json',
+  './lottie-sparkle.json',
+  './lottie-map-pin.json',
   'https://cdn.tailwindcss.com',
   'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js',
+  'https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js',
   'https://unpkg.com/leaflet@1.9.4/dist/leaflet.css',
   'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js'
 ];
