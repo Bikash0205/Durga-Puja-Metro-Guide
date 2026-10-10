@@ -6,7 +6,7 @@
   <meta name="theme-color" content="#881337" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-  <title>Kolkata Durga Puja 2026 — Metro & Pedestrian Walking Guide</title>
+  <title>Kolkata Durga Puja 2026 — AI & GPS Metro Pedestrian Guide</title>
 
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -29,6 +29,9 @@
       }
     }
   </script>
+
+  <!-- GSAP Animation Engine -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -56,33 +59,31 @@
       -ms-overflow-style: none;
       scrollbar-width: none;
     }
-    /* Metro line colors */
-    .line-blue { background: #2563EB; color: #fff; }
-    .line-green { background: #059669; color: #fff; }
-    .line-orange { background: #EA580C; color: #fff; }
-    .line-purple { background: #7C3AED; color: #fff; }
-    
-    .border-blue { border-left-color: #2563EB; }
-    .border-green { border-left-color: #059669; }
-    .border-orange { border-left-color: #EA580C; }
-    .border-purple { border-left-color: #7C3AED; }
 
     /* Glassmorphism bottom bar */
     .glass-nav {
-      background: rgba(255, 255, 255, 0.92);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
+      background: rgba(255, 255, 255, 0.94);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
       border-top: 1px solid rgba(244, 63, 94, 0.15);
     }
 
-    /* Pulse animation for active step */
-    @keyframes pulse-ring {
-      0% { transform: scale(0.95); opacity: 0.8; }
-      50% { transform: scale(1.2); opacity: 0.3; }
-      100% { transform: scale(0.95); opacity: 0.8; }
+    /* Shimmer effect for radar scanning */
+    @keyframes radar-sweep {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
     }
-    .pulse-dot {
-      animation: pulse-ring 2s infinite ease-in-out;
+    .radar-beam {
+      animation: radar-sweep 2.5s linear infinite;
+    }
+
+    /* Glow pulse */
+    @keyframes subtle-pulse {
+      0%, 100% { transform: scale(1); opacity: 0.9; }
+      50% { transform: scale(1.05); opacity: 1; }
+    }
+    .animate-subtle {
+      animation: subtle-pulse 3s infinite ease-in-out;
     }
   </style>
 </head>
@@ -99,7 +100,7 @@
         </div>
         <div>
           <h1 class="text-lg font-bold font-festive tracking-wide leading-tight text-amber-100">Kolkata Puja 2026</h1>
-          <p class="text-[11px] font-medium text-rose-200">Metro & Pedestrian Walk Guide</p>
+          <p class="text-[11px] font-medium text-rose-200">AI & GPS Pedestrian Hop Guide</p>
         </div>
       </div>
       <div class="flex items-center space-x-1.5">
@@ -118,28 +119,77 @@
         <span class="w-2 h-2 rounded-full bg-emerald-400 inline-block animate-pulse"></span>
         Durga Puja 2026: Oct 16 (Shashthi) – Oct 21 (Dashami)
       </span>
-      <span class="text-rose-200/90 font-semibold">All-Night Metro</span>
+      <span class="text-rose-200/90 font-semibold">Overnight Metro</span>
     </div>
   </header>
 
-  <!-- Main Container (Optimized for Mobile width, centered on tablet/desktop) -->
-  <main class="max-w-md mx-auto px-4 pt-4">
+  <!-- Main Container -->
+  <main class="max-w-md mx-auto px-4 pt-3.5 space-y-4">
+
+    <!-- HERO GPS RADAR: HOP FROM RIGHT WHERE YOU ARE -->
+    <div id="radar-hero-card" class="bg-gradient-to-br from-festive-900 via-rose-900 to-amber-950 rounded-3xl p-4 text-white shadow-xl border border-amber-300/20 relative overflow-hidden">
+      <!-- Background Ambient Glow -->
+      <div class="absolute -right-10 -bottom-10 w-36 h-36 bg-amber-500/10 rounded-full blur-2xl pointer-events-none"></div>
+
+      <div class="flex items-start justify-between relative z-10">
+        <div>
+          <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-extrabold uppercase tracking-wider bg-amber-400/20 text-amber-200 border border-amber-300/30">
+            <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+            GPS Location Optimizer
+          </span>
+          <h2 class="text-base font-bold text-white mt-1.5 leading-snug">Hop Right From Where You Are!</h2>
+          <p class="text-xs text-rose-200/90 mt-0.5 leading-relaxed">
+            Locate your nearest metro & launch an AI-optimized walking circuit through top-hyped pandals with minimal foot fatigue.
+          </p>
+        </div>
+        <div class="w-10 h-10 rounded-2xl bg-white/10 border border-white/20 flex items-center justify-center text-xl shadow-inner">
+          🧭
+        </div>
+      </div>
+
+      <!-- Action Button Group -->
+      <div class="mt-3.5 pt-3 border-t border-white/15 flex gap-2 relative z-10">
+        <button
+          id="btn-trigger-gps"
+          class="flex-1 py-2.5 px-3 bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 active:scale-98 text-rose-950 rounded-2xl text-xs font-black shadow-lg transition-all flex items-center justify-center gap-1.5"
+        >
+          <svg class="w-4 h-4 text-rose-950 animate-bounce" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+            <path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+          </svg>
+          <span id="btn-gps-text">Locate & Optimize My Hop</span>
+        </button>
+
+        <button
+          id="btn-preset-location"
+          class="py-2.5 px-3 bg-white/15 hover:bg-white/25 active:scale-98 text-white rounded-2xl text-xs font-bold border border-white/20 transition-all flex items-center justify-center gap-1"
+          title="Choose a landmark"
+        >
+          <span>City Hubs</span>
+        </button>
+      </div>
+
+      <!-- Location Status / Detection Strip -->
+      <div id="gps-status-box" class="hidden mt-3 p-3 bg-black/40 rounded-2xl border border-white/15 text-xs space-y-2">
+        <!-- Rendered by GPS script -->
+      </div>
+    </div>
 
     <!-- Primary Mode Tabs -->
-    <div class="flex p-1 bg-amber-100/60 rounded-2xl border border-amber-200/80 mb-4 shadow-sm">
-      <button id="tab-circuits" class="flex-1 py-2 px-3 rounded-xl text-xs font-bold transition-all text-festive-900 bg-white shadow-sm flex items-center justify-center gap-1.5">
+    <div class="flex p-1 bg-amber-100/70 rounded-2xl border border-amber-200/90 shadow-sm">
+      <button id="tab-circuits" class="flex-1 py-2 px-2.5 rounded-xl text-xs font-bold transition-all text-festive-900 bg-white shadow-sm flex items-center justify-center gap-1.5">
         <svg class="w-4 h-4 text-festive-800" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/>
         </svg>
         <span>Walking Circuits</span>
       </button>
-      <button id="tab-pandals" class="flex-1 py-2 px-3 rounded-xl text-xs font-semibold text-gray-600 hover:text-gray-900 transition-all flex items-center justify-center gap-1.5">
+      <button id="tab-pandals" class="flex-1 py-2 px-2.5 rounded-xl text-xs font-semibold text-gray-600 hover:text-gray-900 transition-all flex items-center justify-center gap-1.5">
         <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/>
         </svg>
         <span>All Pandals</span>
       </button>
-      <button id="tab-itinerary" class="flex-1 py-2 px-3 rounded-xl text-xs font-semibold text-gray-600 hover:text-gray-900 transition-all flex items-center justify-center gap-1.5 relative">
+      <button id="tab-itinerary" class="flex-1 py-2 px-2.5 rounded-xl text-xs font-semibold text-gray-600 hover:text-gray-900 transition-all flex items-center justify-center gap-1.5 relative">
         <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/>
         </svg>
@@ -153,27 +203,29 @@
     <!-- ========================================== -->
     <section id="view-circuits" class="space-y-4">
       
-      <!-- Circuit Hub Intro Card -->
-      <div class="bg-gradient-to-br from-amber-500/10 via-rose-500/10 to-orange-500/10 rounded-2xl p-4 border border-rose-200/60">
-        <div class="flex items-start justify-between">
-          <div>
-            <span class="inline-block px-2 py-0.5 rounded-full text-[10px] font-extrabold uppercase tracking-wider bg-rose-800 text-white mb-1.5">Pedestrian Hopping Hub</span>
-            <h2 class="text-base font-bold text-gray-900 leading-tight">Drop at a Metro, Walk Through All!</h2>
-            <p class="text-xs text-gray-600 mt-1 leading-relaxed">
-              Curated point-to-point walking paths organized by Kolkata Metro drops. One tap opens turn-by-turn walking navigation on Google Maps.
-            </p>
+      <!-- AI Recommendation Banner (Visible when GPS or preset is active) -->
+      <div id="ai-recommend-strip" class="hidden bg-gradient-to-r from-emerald-900 via-teal-900 to-festive-900 text-white rounded-2xl p-3.5 border border-emerald-400/30 shadow-md">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center gap-2">
+            <span class="text-lg">⚡</span>
+            <div>
+              <p class="text-[10px] uppercase font-extrabold tracking-wider text-emerald-300">AI Optimal Match</p>
+              <h4 id="ai-recommend-title" class="text-xs font-bold">Optimal Hopping Circuit</h4>
+            </div>
           </div>
-          <span class="text-2xl">🚶‍♂️</span>
+          <button id="btn-apply-ai-route" class="px-2.5 py-1 bg-emerald-400 hover:bg-emerald-300 text-teal-950 font-bold rounded-lg text-[10px] shadow">
+            View Trail
+          </button>
         </div>
       </div>
 
       <!-- Station Filter Pills -->
       <div>
         <div class="flex items-center justify-between mb-2">
-          <label class="text-xs font-bold uppercase tracking-wider text-gray-500">Choose Metro Drop Station:</label>
+          <label class="text-xs font-bold uppercase tracking-wider text-gray-500">Pick Metro Drop Station:</label>
           <span id="circuit-count" class="text-xs text-festive-800 font-semibold">6 Circuits Available</span>
         </div>
-        <div id="station-pills" class="flex gap-2 overflow-x-auto pb-2 no-scrollbar">
+        <div id="station-pills" class="flex gap-2 overflow-x-auto pb-1.5 no-scrollbar">
           <!-- Populated by JS -->
         </div>
       </div>
@@ -195,7 +247,7 @@
           <input
             id="pandal-search-input"
             type="text"
-            placeholder="Search pandal (e.g. Sreebhumi, Suruchi, College Sq)..."
+            placeholder="Search pandals (e.g. Sreebhumi, Suruchi, College Sq)..."
             class="w-full bg-white border border-rose-200/80 rounded-2xl py-2.5 pl-10 pr-4 text-xs font-medium placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-festive-800 focus:border-festive-800 shadow-sm"
           />
           <svg class="w-4 h-4 text-gray-400 absolute left-3.5 top-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -212,15 +264,18 @@
           <button class="line-filter-btn py-1.5 px-3 rounded-full bg-purple-100 text-purple-700 hover:bg-purple-200 whitespace-nowrap" data-line="Purple">Purple Line</button>
         </div>
 
-        <!-- Zone & Tag Quick Chips -->
+        <!-- Zone & Sort Chips -->
         <div class="flex items-center justify-between text-[11px] text-gray-500 px-1">
           <div class="flex gap-2">
-            <button id="filter-zone-all" class="font-bold text-festive-800 underline">All Zones</button>
+            <button id="filter-zone-all" class="font-bold text-festive-800 underline">All</button>
             <button id="filter-zone-north" class="hover:text-festive-800">North</button>
             <button id="filter-zone-south" class="hover:text-festive-800">South</button>
+            <button id="filter-zone-central" class="hover:text-festive-800">Central</button>
             <button id="filter-zone-east" class="hover:text-festive-800">East / VIP</button>
           </div>
-          <span id="filtered-count" class="font-semibold text-gray-700">50 pandals</span>
+          <button id="btn-sort-hype" class="font-bold text-amber-800 flex items-center gap-1 hover:underline">
+            <span>🔥 Hype Rank</span>
+          </button>
         </div>
       </div>
 
@@ -244,9 +299,12 @@
         </div>
 
         <!-- Custom Waypoint Link Trigger -->
-        <div id="hoplist-action-bar" class="hidden pt-2 border-t border-gray-100 mt-2">
+        <div id="hoplist-action-bar" class="hidden pt-2 border-t border-gray-100 mt-2 space-y-2">
+          <button id="btn-optimize-my-hoplist" class="w-full py-2 px-3 bg-amber-500 hover:bg-amber-600 text-rose-950 rounded-xl text-xs font-black shadow transition-all flex items-center justify-center gap-1.5">
+            <span>⚡ AI Re-order (Shortest Walking Distance)</span>
+          </button>
           <button id="btn-open-custom-gmap" class="w-full py-2.5 px-4 bg-gradient-to-r from-festive-900 to-rose-700 text-white rounded-xl text-xs font-bold shadow-md hover:shadow-lg active:scale-98 flex items-center justify-center gap-2">
-            <span>🗺️ Open My Route in Google Maps (Multi-Stop Walk)</span>
+            <span>🗺️ Open in Google Maps (Turn-by-Turn Walk)</span>
           </button>
         </div>
       </div>
@@ -268,6 +326,25 @@
     </section>
 
   </main>
+
+  <!-- ========================================== -->
+  <!-- MODAL: CITY PRESET HUBS (WHEN NO GPS)     -->
+  <!-- ========================================== -->
+  <div id="modal-presets" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-end sm:items-center justify-center p-0 sm:p-4 hidden">
+    <div class="bg-white w-full max-w-md rounded-t-3xl sm:rounded-3xl shadow-2xl p-5 space-y-3.5 max-h-[80vh] overflow-y-auto">
+      <div class="flex items-center justify-between border-b pb-2">
+        <h3 class="text-sm font-bold text-gray-900 flex items-center gap-1.5">
+          <span>📍</span> Choose a Starting Location in Kolkata
+        </h3>
+        <button id="btn-close-presets-modal" class="w-7 h-7 rounded-full bg-gray-100 text-gray-600 font-bold flex items-center justify-center text-xs">✕</button>
+      </div>
+      <p class="text-xs text-gray-500">Pick your current area to find the closest optimal metro station and walking route:</p>
+
+      <div id="presets-list" class="space-y-2">
+        <!-- Rendered by JS -->
+      </div>
+    </div>
+  </div>
 
   <!-- ========================================== -->
   <!-- MODAL: POINT-TO-POINT HOPPING NAVIGATOR   -->
@@ -294,8 +371,9 @@
         
         <!-- Pandal 2026 Highlight Box -->
         <div class="p-3 bg-amber-50 rounded-xl border border-amber-200">
-          <div class="flex items-center gap-1.5 font-bold text-amber-900 mb-1">
-            <span>✨ 2026 Theme / Special:</span>
+          <div class="flex items-center justify-between mb-1">
+            <span class="font-bold text-amber-900 flex items-center gap-1">✨ 2026 Theme / Installation:</span>
+            <span id="modal-pandal-hype-badge" class="px-2 py-0.5 rounded-full text-[10px] font-extrabold bg-amber-200 text-amber-900">🔥 Hype: 9.8/10</span>
           </div>
           <p id="modal-pandal-theme" class="text-gray-700 leading-relaxed font-medium">Theme details...</p>
         </div>
@@ -321,7 +399,7 @@
         <div>
           <div class="flex items-center justify-between mb-2">
             <h4 class="font-bold text-gray-900 text-xs uppercase tracking-wider">🚶 Point-to-Point: Walk Next To</h4>
-            <span class="text-[10px] text-gray-500 font-medium">Nearby within walking range</span>
+            <span class="text-[10px] text-gray-500 font-medium">Nearest neighboring pandals</span>
           </div>
           <div id="modal-nearby-list" class="space-y-2">
             <!-- Rendered by JS -->
@@ -340,7 +418,7 @@
       <div class="p-4 bg-festive-900 text-white flex items-center justify-between">
         <div class="flex items-center space-x-2">
           <span class="text-lg">🚇</span>
-          <h3 class="font-bold text-sm">Kolkata Metro Puja 2026 Schedule</h3>
+          <h3 class="font-bold text-sm">Kolkata Metro Puja 2026 Timings</h3>
         </div>
         <button id="btn-close-metro-modal" class="w-7 h-7 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center text-sm font-bold">✕</button>
       </div>
@@ -349,10 +427,10 @@
         <div class="p-3 bg-blue-50 border border-blue-200 rounded-xl">
           <h4 class="font-bold text-blue-900 mb-1 flex items-center gap-1.5">
             <span class="w-2.5 h-2.5 rounded-full bg-blue-600 inline-block"></span>
-            Blue Line (North-South): Dakshineswar ⇄ Kavi Subhash
+            Blue Line: Dakshineswar ⇄ Kavi Subhash
           </h4>
-          <p>• <strong>Saptami to Navami:</strong> Trains operate continuously overnight until 4:00 AM.</p>
-          <p>• <strong>Peak Frequency:</strong> 6 to 8 minutes during evenings and late night.</p>
+          <p>• <strong>Saptami to Navami:</strong> All-night metro operates continuously until 4:00 AM.</p>
+          <p>• <strong>Peak Frequency:</strong> 6 to 7 minutes during evenings and late night.</p>
         </div>
 
         <div class="p-3 bg-emerald-50 border border-emerald-200 rounded-xl">
@@ -360,8 +438,8 @@
             <span class="w-2.5 h-2.5 rounded-full bg-emerald-600 inline-block"></span>
             Green Line (Underwater): Howrah Maidan ⇄ Sector V
           </h4>
-          <p>• Connects Howrah Railway Station under the river to Esplanade & Salt Lake.</p>
-          <p>• Operates till midnight during peak Puja days with 10-12 min intervals.</p>
+          <p>• Cross the Hooghly underwater from Howrah Station to Esplanade & Salt Lake in minutes.</p>
+          <p>• Services extended till midnight during peak Puja nights.</p>
         </div>
 
         <div class="p-3 bg-orange-50 border border-orange-200 rounded-xl">
@@ -369,16 +447,16 @@
             <span class="w-2.5 h-2.5 rounded-full bg-orange-600 inline-block"></span>
             Orange & Purple Lines
           </h4>
-          <p>• <strong>Orange Line:</strong> Kavi Subhash ⇄ Beleghata (EM Bypass connection).</p>
-          <p>• <strong>Purple Line:</strong> Joka ⇄ Majerhat (Behala connection).</p>
+          <p>• <strong>Orange Line:</strong> Kavi Subhash ⇄ Beleghata (connects EM Bypass pandals).</p>
+          <p>• <strong>Purple Line:</strong> Joka ⇄ Majerhat (direct access for Suruchi Sangha & Behala).</p>
         </div>
 
         <div class="p-3 bg-amber-50 border border-amber-200 rounded-xl">
-          <h4 class="font-bold text-amber-900 mb-1">💡 Essential Pandal Hopping Metro Tips:</h4>
+          <h4 class="font-bold text-amber-900 mb-1">💡 Pro Tips for Night Hopping:</h4>
           <ul class="list-disc list-inside space-y-1 text-gray-700">
-            <li>Buy Metro Smart Card or use the official Metro Ride QR app to avoid long ticket queues.</li>
-            <li><strong>Esplanade Station</strong> is the primary interchange between Blue and Green Lines.</li>
-            <li>Keep water and a portable power bank; North & South Kolkata walking routes average 3–5 km per circuit.</li>
+            <li>Purchase a rechargeable Smart Card or use the Metro Ride Kolkata QR ticketing app to bypass token counter queues.</li>
+            <li><strong>Esplanade Station</strong> is the core cross-city interchange between Blue and Green Lines.</li>
+            <li>Carry water and light snacks; Kolkata walking routes average 2.5–4.5 km per circuit.</li>
           </ul>
         </div>
       </div>
@@ -395,11 +473,11 @@
       </div>
       <h3 class="text-base font-bold text-gray-900 font-festive">Kolkata Durga Puja Guide 2026</h3>
       <p class="text-gray-500 mt-1 mb-4 leading-relaxed">
-        An interactive metro & pedestrian route guide crafted for seamless pandal hopping across North, South, and Central Kolkata.
+        Full-fledged AI & GPS pedestrian routing assistant for Durga Puja revellers.
       </p>
       <div class="p-3 bg-gray-50 rounded-xl border border-gray-100 text-gray-700 mb-4">
         <p class="font-semibold text-gray-900">Original Project by Bikash Kumar Yadav</p>
-        <p class="text-[11px] text-gray-500 mt-0.5">Upgraded for 2026 with point-to-point pedestrian walking trails & smart metro circuits.</p>
+        <p class="text-[11px] text-gray-500 mt-0.5">Enhanced with GSAP animations, GPS closest-metro resolver, and point-to-point pedestrian Google Maps routes.</p>
       </div>
       <button id="btn-close-info" class="w-full py-2.5 bg-festive-900 text-white rounded-xl font-bold text-xs hover:bg-festive-800">
         Got it!
@@ -407,7 +485,7 @@
     </div>
   </div>
 
-  <!-- Bottom Floating / Tab Navigation Bar -->
+  <!-- Bottom Floating Tab Bar -->
   <nav class="fixed bottom-0 left-0 right-0 z-40 glass-nav shadow-lg" style="padding-bottom: var(--safe-bottom);">
     <div class="max-w-md mx-auto px-6 py-2 flex items-center justify-between text-center">
       
@@ -440,7 +518,55 @@
   <!-- APPLICATION DATA & LOGIC                   -->
   <!-- ========================================== -->
   <script>
-    // --- 2026 PANDAL DATASET ---
+    // --- METRO STATIONS GEOLOCATION REPOSITORY ---
+    const metroStations = [
+      { name: "Shyambazar", line: "Blue", lat: 22.6030, lng: 88.3705, circuitId: "circuit-shyambazar-heritage" },
+      { name: "Sovabazar Sutanuti", line: "Blue", lat: 22.5975, lng: 88.3670, circuitId: "circuit-shyambazar-heritage" },
+      { name: "Girish Park", line: "Blue", lat: 22.5857, lng: 88.3615, circuitId: "circuit-central-green" },
+      { name: "Mahatma Gandhi Road", line: "Blue", lat: 22.5800, lng: 88.3600, circuitId: "circuit-central-green" },
+      { name: "Central", line: "Blue", lat: 22.5746, lng: 88.3620, circuitId: "circuit-central-green" },
+      { name: "Chandni Chowk", line: "Blue", lat: 22.5670, lng: 88.3540, circuitId: "circuit-central-green" },
+      { name: "Esplanade", line: "Blue", lat: 22.5645, lng: 88.3518, circuitId: "circuit-central-green" },
+      { name: "Park Street", line: "Blue", lat: 22.5526, lng: 88.3512, circuitId: "circuit-kalighat" },
+      { name: "Maidan", line: "Blue", lat: 22.5448, lng: 88.3498, circuitId: "circuit-kalighat" },
+      { name: "Netaji Bhavan", line: "Blue", lat: 22.5325, lng: 88.3470, circuitId: "circuit-kalighat" },
+      { name: "Jatin Das Park", line: "Blue", lat: 22.5238, lng: 88.3472, circuitId: "circuit-kalighat" },
+      { name: "Kalighat", line: "Blue", lat: 22.5186, lng: 88.3465, circuitId: "circuit-kalighat" },
+      { name: "Rabindra Sarobar", line: "Blue", lat: 22.5115, lng: 88.3465, circuitId: "circuit-kalighat" },
+      { name: "Mahanayak Uttam Kumar (Tollygunge)", line: "Blue", lat: 22.4975, lng: 88.3460, circuitId: "circuit-kalighat" },
+      { name: "Gitanjali (Naktala)", line: "Blue", lat: 22.4764, lng: 88.3610, circuitId: "circuit-kalighat" },
+      { name: "Kavi Subhash (New Garia)", line: "Blue", lat: 22.4690, lng: 88.3970, circuitId: "circuit-dumdum-park" },
+      { name: "Belgachia", line: "Blue", lat: 22.6050, lng: 88.3800, circuitId: "circuit-belgachia-tala" },
+      { name: "Dum Dum", line: "Blue", lat: 22.6220, lng: 88.3930, circuitId: "circuit-dumdum-park" },
+      
+      // Green Line (Underwater & Salt Lake)
+      { name: "Howrah Maidan", line: "Green", lat: 22.5855, lng: 88.3290, circuitId: "circuit-central-green" },
+      { name: "Howrah", line: "Green", lat: 22.5835, lng: 88.3420, circuitId: "circuit-central-green" },
+      { name: "Sealdah", line: "Green", lat: 22.5682, lng: 88.3715, circuitId: "circuit-central-green" },
+      { name: "Karunamoyee", line: "Green", lat: 22.5840, lng: 88.4190, circuitId: "circuit-saltlake-green" },
+      { name: "Central Park", line: "Green", lat: 22.5885, lng: 88.4150, circuitId: "circuit-saltlake-green" },
+      { name: "Salt Lake Sector V", line: "Green", lat: 22.5800, lng: 88.4320, circuitId: "circuit-saltlake-green" },
+
+      // Orange & Purple Lines
+      { name: "Dum Dum Park", line: "Orange", lat: 22.6080, lng: 88.4090, circuitId: "circuit-dumdum-park" },
+      { name: "VIP Road", line: "Orange", lat: 22.5980, lng: 88.4060, circuitId: "circuit-dumdum-park" },
+      { name: "Hemanta Mukherjee (Ruby)", line: "Orange", lat: 22.5135, lng: 88.3995, circuitId: "circuit-kalighat" },
+      { name: "Majerhat", line: "Purple", lat: 22.5110, lng: 88.3255, circuitId: "circuit-kalighat" }
+    ];
+
+    // Popular Kolkata City Landmarks for Presets
+    const cityLandmarkPresets = [
+      { name: "Park Street / Camac Street", lat: 22.5535, lng: 88.3522, desc: "Central Kolkata shopping & dining core" },
+      { name: "Howrah Railway Station", lat: 22.5835, lng: 88.3420, desc: "Arrival point from outside Kolkata" },
+      { name: "Gariahat Crossing", lat: 22.5218, lng: 88.3654, desc: "Heart of South Kolkata shopping & pandals" },
+      { name: "Shyambazar Five-Point Crossing", lat: 22.6025, lng: 88.3710, desc: "North Kolkata heritage junction" },
+      { name: "College Street (Boi Para)", lat: 22.5746, lng: 88.3639, desc: "Academic and historic hub" },
+      { name: "Salt Lake City Centre 1", lat: 22.5890, lng: 88.4080, desc: "Sector 1 & IT Corridor gateway" },
+      { name: "New Alipore Crossing", lat: 22.5098, lng: 88.3330, desc: "South-West residential hub" },
+      { name: "Dum Dum Airport (CCU)", lat: 22.6547, lng: 88.4467, desc: "Kolkata International Airport" }
+    ];
+
+    // --- COMPLETE 2026 PANDAL DATASET ---
     const pandals = [
       // NORTH KOLKATA
       {
@@ -456,6 +582,7 @@
         lat: 22.6022,
         lng: 88.3687,
         crowd: "Very High",
+        hypeScore: 9.8,
         mapLink: "https://www.google.com/maps/search/?api=1&query=Bagbazar+Sarbojanin+Durgotsav",
         nearbyPandalIds: [111, 104, 124, 107]
       },
@@ -472,6 +599,7 @@
         lat: 22.5997,
         lng: 88.3695,
         crowd: "Medium-High",
+        hypeScore: 9.1,
         mapLink: "https://www.google.com/maps/search/?api=1&query=Jagat+Mukherjee+Park+Durga+Puja",
         nearbyPandalIds: [101, 102, 127]
       },
@@ -488,6 +616,7 @@
         lat: 22.5990,
         lng: 88.3648,
         crowd: "High",
+        hypeScore: 9.4,
         mapLink: "https://www.google.com/maps/search/?api=1&query=Kumartuli+Park+Sarbojanin+Durgotsab",
         nearbyPandalIds: [124, 109, 111]
       },
@@ -504,6 +633,7 @@
         lat: 22.5982,
         lng: 88.3642,
         crowd: "Medium",
+        hypeScore: 9.0,
         mapLink: "https://www.google.com/maps/search/?api=1&query=Kumartuli+Sarbojanin+Durgotsab",
         nearbyPandalIds: [102, 109, 101]
       },
@@ -520,6 +650,7 @@
         lat: 22.5945,
         lng: 88.3601,
         crowd: "High",
+        hypeScore: 9.3,
         mapLink: "https://www.google.com/maps/search/?api=1&query=Ahiritola+Jubak+Brinda",
         nearbyPandalIds: [124, 102, 125]
       },
@@ -536,6 +667,7 @@
         lat: 22.5928,
         lng: 88.3725,
         crowd: "Very High",
+        hypeScore: 9.7,
         mapLink: "https://www.google.com/maps/search/?api=1&query=Kashi+Bose+Lane+Durga+Puja",
         nearbyPandalIds: [114, 108, 127]
       },
@@ -552,6 +684,7 @@
         lat: 22.5940,
         lng: 88.3718,
         crowd: "High",
+        hypeScore: 9.2,
         mapLink: "https://www.google.com/maps/search/?api=1&query=Hatibagan+Nabinpally+Sarbojanin+Durgotsav",
         nearbyPandalIds: [107, 108, 127]
       },
@@ -568,6 +701,7 @@
         lat: 22.5948,
         lng: 88.3742,
         crowd: "Medium-High",
+        hypeScore: 9.1,
         mapLink: "https://www.google.com/maps/search/?api=1&query=Nalin+Sarkar+Street+Sarbojanin+Durgotsab",
         nearbyPandalIds: [107, 114, 127]
       },
@@ -584,6 +718,7 @@
         lat: 22.5966,
         lng: 88.3721,
         crowd: "Medium",
+        hypeScore: 8.9,
         mapLink: "https://www.google.com/maps/search/?api=1&query=Sikdar+Bagan+Sadharan+Durgotsov",
         nearbyPandalIds: [114, 107, 111]
       },
@@ -600,6 +735,7 @@
         lat: 22.6074,
         lng: 88.3768,
         crowd: "Very High",
+        hypeScore: 9.9,
         mapLink: "https://www.google.com/maps/search/?api=1&query=Tala+Prattoy+Durga+Puja",
         nearbyPandalIds: [117, 101]
       },
@@ -616,12 +752,13 @@
         lat: 22.6045,
         lng: 88.3792,
         crowd: "Medium",
+        hypeScore: 8.7,
         mapLink: "https://www.google.com/maps/search/?api=1&query=Belgachia+Sadharan+Durgotsab",
         nearbyPandalIds: [130, 120]
       },
       {
         id: 120,
-        zone: 'North',
+        zone: 'East',
         name: "Dum Dum Park Bharat Chakra",
         location: "Dum Dum Park",
         attraction: "Famous for grand scale, architectural ingenuity, and breathtaking visual harmony.",
@@ -632,12 +769,13 @@
         lat: 22.6080,
         lng: 88.4110,
         crowd: "Very High",
+        hypeScore: 9.6,
         mapLink: "https://www.google.com/maps/search/?api=1&query=Dum+Dum+Park+Bharat+Chakra",
         nearbyPandalIds: [121, 131, 113]
       },
       {
         id: 121,
-        zone: 'North',
+        zone: 'East',
         name: "Dum Dum Park Sarbojanin",
         location: "Dum Dum Park",
         attraction: "Pioneering creative themes in the Dum Dum Park belt.",
@@ -648,12 +786,13 @@
         lat: 22.6068,
         lng: 88.4125,
         crowd: "High",
+        hypeScore: 9.3,
         mapLink: "https://www.google.com/maps/search/?api=1&query=Dum+Dum+Park+Sarbojanin+Durgotsab",
         nearbyPandalIds: [120, 131]
       },
       {
         id: 131,
-        zone: 'North',
+        zone: 'East',
         name: "Dum Dum Park Tarun Sangha",
         location: "Dum Dum Park",
         attraction: "Sensational lighting & thought-provoking modern installation art.",
@@ -664,12 +803,13 @@
         lat: 22.6072,
         lng: 88.4140,
         crowd: "High",
+        hypeScore: 9.4,
         mapLink: "https://www.google.com/maps/search/?api=1&query=Dum+Dum+Park+Tarun+Sangha",
         nearbyPandalIds: [120, 121, 113]
       },
       {
         id: 113,
-        zone: 'North',
+        zone: 'East',
         name: "Sreebhumi Sporting Club",
         location: "VIP Road, Lake Town",
         attraction: "Massive royal monument replica, million-watt lighting spectacle & diamond jewellery idol.",
@@ -680,6 +820,7 @@
         lat: 22.5985,
         lng: 88.4045,
         crowd: "Extreme",
+        hypeScore: 10.0,
         mapLink: "https://www.google.com/maps/search/?api=1&query=Sreebhumi+Sporting+Club",
         nearbyPandalIds: [120, 131]
       },
@@ -698,6 +839,7 @@
         lat: 22.5746,
         lng: 88.3639,
         crowd: "Very High",
+        hypeScore: 9.7,
         mapLink: "https://www.google.com/maps/search/?api=1&query=College+Square+Durga+Puja",
         nearbyPandalIds: [104, 105, 126]
       },
@@ -714,6 +856,7 @@
         lat: 22.5768,
         lng: 88.3621,
         crowd: "Very High",
+        hypeScore: 9.5,
         mapLink: "https://www.google.com/maps/search/?api=1&query=Mohammad+Ali+Park+Durga+Puja",
         nearbyPandalIds: [103, 118, 110]
       },
@@ -730,6 +873,7 @@
         lat: 22.5682,
         lng: 88.3685,
         crowd: "Extreme",
+        hypeScore: 9.9,
         mapLink: "https://www.google.com/maps/search/?api=1&query=Santosh+Mitra+Square",
         nearbyPandalIds: [103, 104]
       },
@@ -746,6 +890,7 @@
         lat: 22.5855,
         lng: 88.3712,
         crowd: "High",
+        hypeScore: 9.2,
         mapLink: "https://www.google.com/maps/search/?api=1&query=Chaltabagan+Lohapatty+Durga+Puja",
         nearbyPandalIds: [110, 118]
       },
@@ -755,13 +900,14 @@
         name: "Simla Sporting Club",
         location: "Simla",
         attraction: "Historic century-old traditional idol worshiped near Swami Vivekananda's ancestral home.",
-        theme2026: "Heritage heritage ritual & Swami Vivekananda tribute.",
+        theme2026: "Heritage ritual & Swami Vivekananda tribute.",
         line: "Blue",
         station: "Girish Park",
         accessibility: "4-min walk",
         lat: 22.5872,
         lng: 88.3664,
         crowd: "Medium",
+        hypeScore: 8.8,
         mapLink: "https://www.google.com/maps/search/?api=1&query=Simla+Sporting+Club+Durga+Puja",
         nearbyPandalIds: [106, 118, 104]
       },
@@ -778,6 +924,7 @@
         lat: 22.5838,
         lng: 88.3648,
         crowd: "Medium",
+        hypeScore: 9.0,
         mapLink: "https://www.google.com/maps/search/?api=1&query=Chorebagan+Sarbojanin+Durgotsab+Samity",
         nearbyPandalIds: [110, 104]
       },
@@ -796,6 +943,7 @@
         lat: 22.5186,
         lng: 88.3475,
         crowd: "Very High",
+        hypeScore: 9.7,
         mapLink: "https://www.google.com/maps/search/?api=1&query=Badamtala+Ashar+Sangha",
         nearbyPandalIds: [201, 212, 4, 13]
       },
@@ -812,6 +960,7 @@
         lat: 22.5181,
         lng: 88.3488,
         crowd: "High",
+        hypeScore: 9.3,
         mapLink: "https://www.google.com/maps/search/?api=1&query=66+Pally+Sarbojanin+Durgotsab",
         nearbyPandalIds: [3, 212, 219, 4]
       },
@@ -828,6 +977,7 @@
         lat: 22.5198,
         lng: 88.3479,
         crowd: "Medium-High",
+        hypeScore: 9.0,
         mapLink: "https://www.google.com/maps/search/?api=1&query=Kalighat+Nepal+Bhattacharjee+Street+Club",
         nearbyPandalIds: [3, 201, 4]
       },
@@ -844,8 +994,9 @@
         lat: 22.5190,
         lng: 88.3562,
         crowd: "Extreme",
+        hypeScore: 9.6,
         mapLink: "https://www.google.com/maps/search/?api=1&query=Deshapriya+Park",
-        nearbyPandalIds: [12, 219, 14, 11]
+        nearbyPandalIds: [12, 219, 17, 11]
       },
       {
         id: 219,
@@ -860,6 +1011,7 @@
         lat: 22.5142,
         lng: 88.3512,
         crowd: "High",
+        hypeScore: 9.3,
         mapLink: "https://www.google.com/maps/search/?api=1&query=Shibmandir+Sarbojanin+Durgotsab",
         nearbyPandalIds: [8, 4, 3]
       },
@@ -876,8 +1028,9 @@
         lat: 22.5126,
         lng: 88.3518,
         crowd: "Very High",
+        hypeScore: 9.6,
         mapLink: "https://www.google.com/maps/search/?api=1&query=Mudiali+Club",
-        nearbyPandalIds: [219, 7, 209]
+        nearbyPandalIds: [219, 4]
       },
       {
         id: 12,
@@ -892,6 +1045,7 @@
         lat: 22.5202,
         lng: 88.3540,
         crowd: "Extreme",
+        hypeScore: 9.8,
         mapLink: "https://www.google.com/maps/search/?api=1&query=Tridhara+Sammilani",
         nearbyPandalIds: [4, 17, 1]
       },
@@ -908,6 +1062,7 @@
         lat: 22.5180,
         lng: 88.3578,
         crowd: "High",
+        hypeScore: 9.2,
         mapLink: "https://www.google.com/maps/search/?api=1&query=Samaj+Sebi+Sangha",
         nearbyPandalIds: [12, 1, 11]
       },
@@ -924,6 +1079,7 @@
         lat: 22.5225,
         lng: 88.3620,
         crowd: "Very High",
+        hypeScore: 9.5,
         mapLink: "https://www.google.com/maps/search/?api=1&query=Singhi+Park+Sarbojanin",
         nearbyPandalIds: [1, 4, 17]
       },
@@ -940,6 +1096,7 @@
         lat: 22.5218,
         lng: 88.3654,
         crowd: "Extreme",
+        hypeScore: 9.9,
         mapLink: "https://www.google.com/maps/search/?api=1&query=Ekdalia+Evergreen+Club",
         nearbyPandalIds: [11, 17, 205]
       },
@@ -956,6 +1113,7 @@
         lat: 22.5230,
         lng: 88.3582,
         crowd: "High",
+        hypeScore: 9.4,
         mapLink: "https://www.google.com/maps/search/?api=1&query=Ballygunge+Cultural+Association",
         nearbyPandalIds: [1, 12, 17]
       },
@@ -972,6 +1130,7 @@
         lat: 22.5284,
         lng: 88.3572,
         crowd: "Very High",
+        hypeScore: 9.6,
         mapLink: "https://www.google.com/maps/search/?api=1&query=Maddox+Square+Durga+Puja",
         nearbyPandalIds: [205, 12, 206]
       },
@@ -988,8 +1147,9 @@
         lat: 22.5262,
         lng: 88.3490,
         crowd: "High",
+        hypeScore: 9.1,
         mapLink: "https://www.google.com/maps/search/?api=1&query=Bhowanipur+75+Palli",
-        nearbyPandalIds: [220, 216, 207]
+        nearbyPandalIds: [220, 3]
       },
 
       // CHETLA & NEW ALIPORE (BLUE & PURPLE LINES)
@@ -1006,6 +1166,7 @@
         lat: 22.5175,
         lng: 88.3392,
         crowd: "Very High",
+        hypeScore: 9.7,
         mapLink: "https://www.google.com/maps/search/?api=1&query=Chetla+Agrani+Club",
         nearbyPandalIds: [3, 2, 221]
       },
@@ -1014,7 +1175,7 @@
         zone: 'South',
         name: "New Alipore Suruchi Sangha",
         location: "New Alipore",
-        attraction: "One of Kolkata's premier state-showcase pujas, known for themed theme music and dance.",
+        attraction: "One of Kolkata's premier state-showcase pujas, known for themed music and dance.",
         theme2026: "Sacred Lotus motif — exploring spiritual and cultural symbolism.",
         line: "Purple",
         station: "Majerhat",
@@ -1022,6 +1183,7 @@
         lat: 22.5098,
         lng: 88.3330,
         crowd: "Extreme",
+        hypeScore: 9.9,
         mapLink: "https://www.google.com/maps/search/?api=1&query=Suruchi+Sangha",
         nearbyPandalIds: [13, 221]
       },
@@ -1038,6 +1200,7 @@
         lat: 22.5015,
         lng: 88.3228,
         crowd: "High",
+        hypeScore: 9.4,
         mapLink: "https://www.google.com/maps/search/?api=1&query=Behala+Nutan+Dal",
         nearbyPandalIds: [2, 13]
       },
@@ -1056,24 +1219,9 @@
         lat: 22.4764,
         lng: 88.3640,
         crowd: "Very High",
+        hypeScore: 9.6,
         mapLink: "https://www.google.com/maps/search/?api=1&query=Naktala+Udayan+Sangha",
-        nearbyPandalIds: [218, 204]
-      },
-      {
-        id: 9,
-        zone: 'South',
-        name: "Bosepukur Talbagan",
-        location: "Kasba",
-        attraction: "Legendary for eccentric, thoughtful handcrafted artistic concepts.",
-        theme2026: "Eco-craft using hand-carved wood and dried seeds.",
-        line: "Orange",
-        station: "Hemanta Mukherjee",
-        accessibility: "10-min walk / auto",
-        lat: 22.5175,
-        lng: 88.3845,
-        crowd: "High",
-        mapLink: "https://www.google.com/maps/search/?api=1&query=Bosepukur+Talbagan+Sarbojanin",
-        nearbyPandalIds: [213, 203]
+        nearbyPandalIds: [3, 8]
       },
 
       // SALT LAKE & EAST (GREEN LINE)
@@ -1090,6 +1238,7 @@
         lat: 22.5840,
         lng: 88.4180,
         crowd: "Very High",
+        hypeScore: 9.5,
         mapLink: "https://www.google.com/maps/search/?api=1&query=Salt+Lake+FD+Block+Durga+Puja",
         nearbyPandalIds: [231, 113]
       },
@@ -1106,12 +1255,13 @@
         lat: 22.5892,
         lng: 88.4132,
         crowd: "Medium-High",
+        hypeScore: 9.0,
         mapLink: "https://www.google.com/maps/search/?api=1&query=Salt+Lake+BJ+Block+Durga+Puja",
         nearbyPandalIds: [230, 120]
       }
     ];
 
-    // --- CURATED 2026 PEDESTRIAN WALKING CIRCUITS ---
+    // --- CURATED WALKING CIRCUITS (OPTIMIZED PEDESTRIAN TRAILS) ---
     const walkingCircuits = [
       {
         id: 'circuit-kalighat',
@@ -1123,6 +1273,7 @@
         approxTime: "55 mins walk (excl. pandal queues)",
         shortDesc: "The heavyweight trail of South Kolkata. Walk through 6 world-famous pandals.",
         finishStation: "Kalighat or Jatin Das Park",
+        hypeAggregate: 9.8,
         steps: [
           { pandalId: 3, walkFromPrev: "4 min (300m) from Kalighat Metro Exit" },
           { pandalId: 201, walkFromPrev: "2 min (150m) straight down Rashbehari" },
@@ -1144,6 +1295,7 @@
         approxTime: "40 mins walk",
         shortDesc: "Experience historic Bengal roots, idol-making lanes & riverside serenity.",
         finishStation: "Sovabazar Sutanuti",
+        hypeAggregate: 9.5,
         steps: [
           { pandalId: 101, walkFromPrev: "5 min (400m) walk to Bagbazar Ground" },
           { pandalId: 111, walkFromPrev: "4 min (300m) to Jagat Mukherjee Park" },
@@ -1162,6 +1314,7 @@
         approxTime: "30 mins walk",
         shortDesc: "A compact walking loop packed with multi-award winning artistic installations.",
         finishStation: "Shyambazar / Girish Park",
+        hypeAggregate: 9.4,
         steps: [
           { pandalId: 127, walkFromPrev: "4 min (300m) to Sikdar Bagan" },
           { pandalId: 114, walkFromPrev: "3 min (250m) to Hatibagan Nabinpally" },
@@ -1179,6 +1332,7 @@
         approxTime: "32 mins walk",
         shortDesc: "Iconic illuminated palaces and direct connectivity to the new Green Line underwater metro.",
         finishStation: "Sealdah (Green Line)",
+        hypeAggregate: 9.7,
         steps: [
           { pandalId: 104, walkFromPrev: "4 min (300m) to Mohammad Ali Park" },
           { pandalId: 103, walkFromPrev: "6 min (500m) to College Square" },
@@ -1195,6 +1349,7 @@
         approxTime: "22 mins walk",
         shortDesc: "Witness Bengal's most ambitious conceptual installation 'Biyojon' at Tala Prattoy.",
         finishStation: "Belgachia",
+        hypeAggregate: 9.6,
         steps: [
           { pandalId: 117, walkFromPrev: "2 min (150m) to Belgachia Sadharan" },
           { pandalId: 130, walkFromPrev: "6 min (500m) to Tala Prattoy" }
@@ -1210,6 +1365,7 @@
         approxTime: "25 mins walk",
         shortDesc: "Walk effortlessly between Kolkata's three famous Dum Dum Park pandals.",
         finishStation: "Dum Dum Park (Orange Line)",
+        hypeAggregate: 9.5,
         steps: [
           { pandalId: 120, walkFromPrev: "4 min (300m) to Bharat Chakra" },
           { pandalId: 121, walkFromPrev: "3 min (200m) to Sarbojanin" },
@@ -1226,6 +1382,7 @@
         approxTime: "24 mins walk",
         shortDesc: "Wide, comfortable pavements and towering grand architecture in Salt Lake.",
         finishStation: "Central Park (Green Line)",
+        hypeAggregate: 9.3,
         steps: [
           { pandalId: 230, walkFromPrev: "6 min (450m) to FD Block Salt Lake" },
           { pandalId: 231, walkFromPrev: "7 min (550m) to BJ Block Salt Lake" }
@@ -1233,14 +1390,42 @@
       }
     ];
 
+    // --- HAVERSINE GEODISTANCE ALGORITHM ---
+    function calcDistanceKm(lat1, lon1, lat2, lon2) {
+      const R = 6371; // Earth radius in km
+      const dLat = (lat2 - lat1) * Math.PI / 180;
+      const dLon = (lon2 - lon1) * Math.PI / 180;
+      const a =
+        Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+        Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
+        Math.sin(dLon / 2) * Math.sin(dLon / 2);
+      const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+      return R * c;
+    }
+
     // --- STATE MANAGEMENT ---
+    let userLocation = null; // { lat, lng, source: 'gps' | 'preset', name: '' }
     let currentActiveCircuitId = walkingCircuits[0].id;
     let selectedLineFilter = 'all';
     let selectedZoneFilter = 'all';
+    let sortByHype = false;
     let searchQuery = '';
     let myHopList = JSON.parse(localStorage.getItem('durgapuja_hoplist_2026') || '[]');
+    let currentInspectedPandal = null;
 
     // --- DOM REFERENCES ---
+    const btnTriggerGps = document.getElementById('btn-trigger-gps');
+    const btnGpsText = document.getElementById('btn-gps-text');
+    const gpsStatusBox = document.getElementById('gps-status-box');
+    const btnPresetLocation = document.getElementById('btn-preset-location');
+    const modalPresets = document.getElementById('modal-presets');
+    const btnClosePresetsModal = document.getElementById('btn-close-presets-modal');
+    const presetsList = document.getElementById('presets-list');
+
+    const aiRecommendStrip = document.getElementById('ai-recommend-strip');
+    const aiRecommendTitle = document.getElementById('ai-recommend-title');
+    const btnApplyAiRoute = document.getElementById('btn-apply-ai-route');
+
     const tabCircuits = document.getElementById('tab-circuits');
     const tabPandals = document.getElementById('tab-pandals');
     const tabItinerary = document.getElementById('tab-itinerary');
@@ -1262,6 +1447,7 @@
     const pandalSearchInput = document.getElementById('pandal-search-input');
     const lineFilterBtns = document.querySelectorAll('.line-filter-btn');
     const filteredCountSpan = document.getElementById('filtered-count');
+    const btnSortHype = document.getElementById('btn-sort-hype');
 
     // Modals
     const modalHop = document.getElementById('modal-hop');
@@ -1270,6 +1456,7 @@
     const modalPandalName = document.getElementById('modal-pandal-name');
     const modalPandalMetro = document.getElementById('modal-pandal-metro');
     const modalPandalTheme = document.getElementById('modal-pandal-theme');
+    const modalPandalHypeBadge = document.getElementById('modal-pandal-hype-badge');
     const modalBtnWalkCurrent = document.getElementById('modal-btn-walk-current');
     const modalBtnDriveCurrent = document.getElementById('modal-btn-drive-current');
     const modalBtnToggleHoplist = document.getElementById('modal-btn-toggle-hoplist');
@@ -1282,8 +1469,6 @@
     const modalInfo = document.getElementById('modal-info');
     const btnOpenInfo = document.getElementById('btn-open-info');
     const btnCloseInfo = document.getElementById('btn-close-info');
-
-    let currentInspectedPandal = null;
 
     // --- HELPER FUNCTIONS ---
     function getPandalById(id) {
@@ -1319,52 +1504,186 @@
       return `https://www.google.com/maps/dir/?api=1&origin=${encodeURIComponent(originName + ' Kolkata')}&destination=${encodeURIComponent(destName + ' Kolkata')}&travelmode=${travelMode}`;
     }
 
-    // --- HOP LIST PERSISTENCE ---
-    function saveHopList() {
-      localStorage.setItem('durgapuja_hoplist_2026', JSON.stringify(myHopList));
-      updateHopListBadges();
-      renderHopList();
+    // --- GPS & OPTIMAL STARTING RESOLVER ---
+    function resolveOptimalRouteFromLocation(lat, lng, locName = 'Your Current Spot') {
+      // 1. Find the closest metro station
+      let closestStation = null;
+      let minStationDist = Infinity;
+
+      metroStations.forEach(st => {
+        const d = calcDistanceKm(lat, lng, st.lat, st.lng);
+        if (d < minStationDist) {
+          minStationDist = d;
+          closestStation = { ...st, distanceKm: d };
+        }
+      });
+
+      // 2. Find closest top hyped pandals (hype >= 9.5)
+      const sortedPandals = [...pandals].map(p => ({
+        ...p,
+        distanceKm: calcDistanceKm(lat, lng, p.lat, p.lng)
+      })).sort((a, b) => a.distanceKm - b.distanceKm);
+
+      const closestPandal = sortedPandals[0];
+      const hypedNearby = sortedPandals.filter(p => p.hypeScore >= 9.5 && p.distanceKm <= 5.0).slice(0, 3);
+
+      // 3. Recommended Circuit: based on closest station's circuitId, or circuit with highest hype nearby
+      const recommendedCircuit = walkingCircuits.find(c => c.id === closestStation.circuitId) || walkingCircuits[0];
+
+      // Update UI Status Box
+      gpsStatusBox.classList.remove('hidden');
+      const distStr = minStationDist < 1.0 ? `${Math.round(minStationDist * 1000)} meters` : `${minStationDist.toFixed(1)} km`;
+      const walkTimeMins = Math.round((minStationDist / 4.5) * 60);
+
+      // Multi-stop GMap direct link from user's coordinates to closest metro + top circuit pandals
+      const userOrigin = `${lat},${lng}`;
+      const firstCircuitPandal = getPandalById(recommendedCircuit.steps[0].pandalId);
+      const walkFromHereGmapUrl = generateGMapMultiStopUrl([
+        userOrigin,
+        `${closestStation.name} Metro Station Kolkata`,
+        firstCircuitPandal ? `${firstCircuitPandal.name} Kolkata` : null
+      ].filter(Boolean), 'walking');
+
+      gpsStatusBox.innerHTML = `
+        <div class="flex items-start justify-between border-b border-white/10 pb-2">
+          <div>
+            <span class="text-[10px] uppercase font-bold text-emerald-400">📍 Active Location: ${locName}</span>
+            <p class="text-xs font-bold text-white mt-0.5">
+              Closest Metro: <span class="text-amber-300 font-black">${closestStation.name}</span> (${closestStation.line} Line)
+            </p>
+            <p class="text-[11px] text-gray-300">
+              🚶 ${distStr} away (approx. ${walkTimeMins} mins walk)
+            </p>
+          </div>
+        </div>
+
+        <div class="space-y-1.5 pt-1">
+          <p class="text-[11px] font-semibold text-rose-200">
+            🔥 Closest Mega Pandal: <strong>${closestPandal.name}</strong> (${closestPandal.distanceKm.toFixed(1)} km)
+          </p>
+          ${hypedNearby.length > 0 ? `
+            <div class="text-[10px] text-amber-200/90 flex flex-wrap gap-1">
+              <span>Top nearby hyped:</span>
+              ${hypedNearby.map(hp => `<span class="bg-amber-400/20 px-1.5 py-0.5 rounded font-bold">${hp.name} (${hp.hypeScore})</span>`).join('')}
+            </div>
+          ` : ''}
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="pt-2 flex gap-2">
+          <a
+            href="${walkFromHereGmapUrl}"
+            target="_blank"
+            rel="noopener"
+            class="flex-1 py-2 px-3 bg-emerald-500 hover:bg-emerald-600 text-teal-950 font-black text-center rounded-xl shadow text-[11px] flex items-center justify-center gap-1"
+          >
+            <span>🚶 Walk to ${closestStation.name} on GMap</span>
+          </a>
+          <button
+            id="btn-switch-to-optimal-circuit"
+            class="py-2 px-3 bg-amber-400 hover:bg-amber-300 text-rose-950 font-black rounded-xl shadow text-[11px]"
+          >
+            Load Route ➔
+          </button>
+        </div>
+      `;
+
+      // Wire switch button
+      document.getElementById('btn-switch-to-optimal-circuit').onclick = () => {
+        currentActiveCircuitId = recommendedCircuit.id;
+        renderCircuitStationPills();
+        renderActiveCircuit();
+        switchTab('circuits');
+      };
+
+      // Show AI Strip
+      aiRecommendStrip.classList.remove('hidden');
+      aiRecommendTitle.textContent = `${recommendedCircuit.title} (Nearest: ${closestStation.name})`;
+      btnApplyAiRoute.onclick = () => {
+        currentActiveCircuitId = recommendedCircuit.id;
+        renderCircuitStationPills();
+        renderActiveCircuit();
+        switchTab('circuits');
+      };
+
+      // GSAP entrance tween for results
+      if (typeof gsap !== 'undefined') {
+        gsap.from("#gps-status-box", { duration: 0.5, y: -10, autoAlpha: 0, ease: "power2.out" });
+        gsap.from("#ai-recommend-strip", { duration: 0.6, scale: 0.95, autoAlpha: 0, ease: "back.out(1.5)" });
+      }
+
+      // Auto-set the active circuit pill
+      currentActiveCircuitId = recommendedCircuit.id;
+      renderCircuitStationPills();
+      renderActiveCircuit();
     }
 
-    function toggleHopList(pandalId) {
-      const idx = myHopList.indexOf(pandalId);
-      if (idx > -1) {
-        myHopList.splice(idx, 1);
-      } else {
-        myHopList.push(pandalId);
+    function handleGpsClick() {
+      if (!navigator.geolocation) {
+        alert("Geolocation is not supported by your browser. Please pick a landmark from 'City Hubs' instead.");
+        openPresetsModal();
+        return;
       }
-      saveHopList();
-      if (currentInspectedPandal && currentInspectedPandal.id === pandalId) {
-        updateModalHoplistBtn();
-      }
+
+      btnGpsText.textContent = "Scanning Kolkata Coordinates...";
+      btnTriggerGps.classList.add('opacity-80');
+
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const lat = position.coords.latitude;
+          const lng = position.coords.longitude;
+          userLocation = { lat, lng, source: 'gps', name: 'Current GPS Location' };
+          btnGpsText.textContent = "📍 Location Locked!";
+          btnTriggerGps.classList.remove('opacity-80');
+          resolveOptimalRouteFromLocation(lat, lng, 'My Current Location');
+        },
+        (error) => {
+          btnGpsText.textContent = "Locate & Optimize My Hop";
+          btnTriggerGps.classList.remove('opacity-80');
+          console.warn("Geolocation denied or unavailable:", error.message);
+          // Graceful fallback: prompt with Kolkata Landmark Hubs
+          openPresetsModal();
+        },
+        { enableHighAccuracy: true, timeout: 8000, maximumAge: 60000 }
+      );
     }
 
-    function updateHopListBadges() {
-      const count = myHopList.length;
-      if (count > 0) {
-        badgeHopCount.textContent = count;
-        badgeHopCount.classList.remove('hidden');
-        navHopDot.classList.remove('hidden');
-      } else {
-        badgeHopCount.classList.add('hidden');
-        navHopDot.classList.add('hidden');
-      }
+    function openPresetsModal() {
+      presetsList.innerHTML = cityLandmarkPresets.map((preset, idx) => `
+        <button
+          onclick="selectPresetLocation(${idx})"
+          class="w-full text-left p-3 rounded-2xl bg-gray-50 hover:bg-rose-50 border border-gray-200 hover:border-festive-800 transition-all flex items-center justify-between"
+        >
+          <div>
+            <h5 class="text-xs font-bold text-gray-900">${preset.name}</h5>
+            <p class="text-[11px] text-gray-500">${preset.desc}</p>
+          </div>
+          <span class="text-festive-800 font-bold text-xs">Select ➔</span>
+        </button>
+      `).join('');
+      modalPresets.classList.remove('hidden');
+    }
+
+    function selectPresetLocation(idx) {
+      const preset = cityLandmarkPresets[idx];
+      if (!preset) return;
+      modalPresets.classList.add('hidden');
+      userLocation = { lat: preset.lat, lng: preset.lng, source: 'preset', name: preset.name };
+      btnGpsText.textContent = `📍 Hub: ${preset.name.split('/')[0]}`;
+      resolveOptimalRouteFromLocation(preset.lat, preset.lng, preset.name);
     }
 
     // --- TAB SWITCHING ---
     function switchTab(target) {
-      // Views
       viewCircuits.classList.add('hidden');
       viewPandals.classList.add('hidden');
       viewItinerary.classList.add('hidden');
 
-      // Top Tab states
       [tabCircuits, tabPandals, tabItinerary].forEach(btn => {
         btn.classList.remove('bg-white', 'text-festive-900', 'shadow-sm', 'font-bold');
         btn.classList.add('text-gray-600', 'font-semibold');
       });
 
-      // Bottom Nav states
       [navBtnCircuits, navBtnPandals, navBtnItinerary].forEach(btn => {
         btn.classList.remove('text-festive-900', 'font-bold');
         btn.classList.add('text-gray-500', 'font-medium');
@@ -1424,7 +1743,7 @@
 
       const color = getLineColor(circuit.metroLine);
 
-      // Collect place names for Google Map multi-stop route
+      // Google Maps multi-stop URL
       const gmapStops = [
         `${circuit.metroStation} Metro Station Kolkata`,
         ...circuit.steps.map(s => {
@@ -1436,7 +1755,7 @@
 
       circuitDetailContainer.innerHTML = `
         <!-- Circuit Overview Banner -->
-        <div class="bg-white rounded-2xl p-4 border border-rose-100 shadow-sm space-y-3">
+        <div class="circuit-hero bg-white rounded-2xl p-4 border border-rose-100 shadow-sm space-y-3">
           <div class="flex items-start justify-between">
             <div>
               <div class="flex items-center gap-2 mb-1">
@@ -1444,6 +1763,7 @@
                   ${circuit.metroLine} Line
                 </span>
                 <span class="text-[11px] text-gray-500 font-medium">Exit: ${circuit.exitGate}</span>
+                <span class="text-[10px] font-bold text-amber-700 bg-amber-50 px-1.5 py-0.5 rounded">🔥 ${circuit.hypeAggregate}/10</span>
               </div>
               <h3 class="text-base font-bold text-gray-900 leading-snug">${circuit.title}</h3>
               <p class="text-xs text-gray-600 mt-1">${circuit.shortDesc}</p>
@@ -1481,7 +1801,7 @@
         <div class="space-y-2">
           <div class="flex items-center justify-between px-1">
             <h4 class="text-xs font-bold uppercase tracking-wider text-gray-600">Step-by-Step Walking Sequence:</h4>
-            <span class="text-[10px] text-gray-400">Tap any pandal to inspect / hop</span>
+            <span class="text-[10px] text-gray-400">Tap card to inspect / hop</span>
           </div>
 
           <!-- Metro Start Node -->
@@ -1508,14 +1828,17 @@
               </div>
 
               <!-- Pandal Step Card -->
-              <div class="bg-white rounded-2xl p-3.5 border border-rose-100 shadow-sm hover:border-festive-800/40 transition-all">
+              <div class="circuit-step-card bg-white rounded-2xl p-3.5 border border-rose-100 shadow-sm hover:border-festive-800/40 transition-all">
                 <div class="flex items-start justify-between">
                   <div class="flex items-start gap-2.5 flex-1 pr-2 cursor-pointer" onclick="openHopModal(${p.id})">
                     <span class="w-6 h-6 rounded-full bg-festive-50 text-festive-900 border border-festive-200 text-xs font-bold flex items-center justify-center flex-shrink-0 mt-0.5">
                       ${idx + 1}
                     </span>
                     <div>
-                      <h5 class="text-xs font-bold text-gray-900 hover:text-festive-900 transition-colors">${p.name}</h5>
+                      <div class="flex items-center gap-2">
+                        <h5 class="text-xs font-bold text-gray-900 hover:text-festive-900 transition-colors">${p.name}</h5>
+                        <span class="text-[10px] font-extrabold text-amber-600">★ ${p.hypeScore}</span>
+                      </div>
                       <p class="text-[11px] text-gray-500 font-medium">${p.location}</p>
                       <p class="text-[11px] text-amber-900 mt-1 font-medium bg-amber-50/80 px-2 py-0.5 rounded-md inline-block">
                         ✨ ${p.theme2026}
@@ -1556,18 +1879,29 @@
             </div>
             <div>
               <p class="text-xs font-bold text-gray-900">Return Station: ${circuit.finishStation}</p>
-              <p class="text-[11px] text-gray-500">Board metro home or transfer at Esplanade</p>
+              <p class="text-[11px] text-gray-500">Board metro home or transfer across network</p>
             </div>
           </div>
         </div>
       `;
+
+      // GSAP animate circuit entrance
+      if (typeof gsap !== 'undefined') {
+        gsap.from(".circuit-step-card", {
+          duration: 0.4,
+          y: 15,
+          autoAlpha: 0,
+          stagger: 0.05,
+          ease: "power2.out"
+        });
+      }
     }
 
     // --- RENDER ALL PANDALS ---
     function renderPandals() {
       const q = searchQuery.toLowerCase().trim();
 
-      const filtered = pandals.filter(p => {
+      let filtered = pandals.filter(p => {
         const matchesLine = (selectedLineFilter === 'all') || (p.line === selectedLineFilter);
         const matchesZone = (selectedZoneFilter === 'all') || (p.zone.toLowerCase() === selectedZoneFilter.toLowerCase());
         const matchesQuery = !q || (
@@ -1578,6 +1912,10 @@
         );
         return matchesLine && matchesZone && matchesQuery;
       });
+
+      if (sortByHype) {
+        filtered.sort((a, b) => b.hypeScore - a.hypeScore);
+      }
 
       filteredCountSpan.textContent = `${filtered.length} pandals`;
 
@@ -1596,13 +1934,13 @@
         const isSaved = myHopList.includes(p.id);
 
         return `
-          <div class="bg-white rounded-2xl p-4 border border-rose-100/90 shadow-sm border-l-4 ${color.border} hover:shadow-md transition-all">
+          <div class="pandal-card-item bg-white rounded-2xl p-4 border border-rose-100/90 shadow-sm border-l-4 ${color.border} hover:shadow-md transition-all">
             <div class="flex items-start justify-between">
               <div class="flex-1 pr-2">
                 <div class="flex items-center gap-1.5 mb-1">
                   <span class="text-[10px] font-bold px-2 py-0.5 rounded-full ${color.light}">${p.line} Line</span>
                   <span class="text-[10px] font-semibold text-gray-500">🚇 ${p.station}</span>
-                  <span class="text-[10px] text-gray-400">• ${p.zone}</span>
+                  <span class="text-[10px] font-bold text-amber-700 bg-amber-50 px-1.5 py-0.5 rounded">🔥 ${p.hypeScore}</span>
                 </div>
                 <h3 class="text-sm font-bold text-gray-900 cursor-pointer hover:text-festive-900" onclick="openHopModal(${p.id})">
                   ${p.name}
@@ -1645,6 +1983,17 @@
           </div>
         `;
       }).join('');
+
+      // GSAP stagger for pandals
+      if (typeof gsap !== 'undefined') {
+        gsap.from(".pandal-card-item", {
+          duration: 0.35,
+          y: 12,
+          autoAlpha: 0,
+          stagger: 0.04,
+          ease: "power1.out"
+        });
+      }
     }
 
     // --- RENDER CUSTOM HOP LIST ---
@@ -1653,6 +2002,7 @@
       const hoplistEmpty = document.getElementById('hoplist-empty');
       const hoplistActionBar = document.getElementById('hoplist-action-bar');
       const btnOpenCustomGmap = document.getElementById('btn-open-custom-gmap');
+      const btnOptimizeHoplist = document.getElementById('btn-optimize-my-hoplist');
 
       if (myHopList.length === 0) {
         hoplistEmpty.classList.remove('hidden');
@@ -1666,6 +2016,11 @@
 
       const savedPandals = myHopList.map(id => getPandalById(id)).filter(Boolean);
 
+      // AI optimize button handler: Nearest neighbor TSP
+      btnOptimizeHoplist.onclick = () => {
+        optimizeHopListOrder();
+      };
+
       // Generate multi-stop url
       const stopNames = savedPandals.map(p => `${p.name} ${p.location} Kolkata`);
       btnOpenCustomGmap.onclick = () => {
@@ -1674,7 +2029,6 @@
       };
 
       hoplistContainer.innerHTML = savedPandals.map((p, idx) => {
-        const color = getLineColor(p.line);
         const nextP = savedPandals[idx + 1];
 
         return `
@@ -1717,6 +2071,34 @@
       }).join('');
     }
 
+    // Nearest Neighbor Greedy TSP optimization for user's hop list
+    function optimizeHopListOrder() {
+      if (myHopList.length <= 2) return;
+      const unvisited = myHopList.map(id => getPandalById(id)).filter(Boolean);
+      const optimized = [];
+
+      let current = unvisited.shift();
+      optimized.push(current.id);
+
+      while (unvisited.length > 0) {
+        let bestIdx = 0;
+        let minDist = Infinity;
+        for (let i = 0; i < unvisited.length; i++) {
+          const d = calcDistanceKm(current.lat, current.lng, unvisited[i].lat, unvisited[i].lng);
+          if (d < minDist) {
+            minDist = d;
+            bestIdx = i;
+          }
+        }
+        current = unvisited.splice(bestIdx, 1)[0];
+        optimized.push(current.id);
+      }
+
+      myHopList = optimized;
+      saveHopList();
+      alert("⚡ Hop list optimized for shortest walking distance between consecutive stops!");
+    }
+
     // --- MODAL: POINT-TO-POINT HOPPING ---
     function openHopModal(pandalId) {
       const p = getPandalById(pandalId);
@@ -1726,6 +2108,7 @@
       modalPandalName.textContent = p.name;
       modalPandalMetro.textContent = `🚇 ${p.station} (${p.line} Line) • 🚶 ${p.accessibility}`;
       modalPandalTheme.textContent = p.theme2026;
+      modalPandalHypeBadge.textContent = `🔥 Hype: ${p.hypeScore}/10`;
 
       const directWalkUrl = `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(p.name + ' ' + p.location + ' Kolkata')}&travelmode=walking`;
       const directDriveUrl = `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(p.name + ' ' + p.location + ' Kolkata')}&travelmode=driving`;
@@ -1799,7 +2182,46 @@
       }
     }
 
+    // --- HOP LIST PERSISTENCE ---
+    function saveHopList() {
+      localStorage.setItem('durgapuja_hoplist_2026', JSON.stringify(myHopList));
+      updateHopListBadges();
+      renderHopList();
+    }
+
+    function toggleHopList(pandalId) {
+      const idx = myHopList.indexOf(pandalId);
+      if (idx > -1) {
+        myHopList.splice(idx, 1);
+      } else {
+        myHopList.push(pandalId);
+      }
+      saveHopList();
+      if (currentInspectedPandal && currentInspectedPandal.id === pandalId) {
+        updateModalHoplistBtn();
+      }
+    }
+
+    function updateHopListBadges() {
+      const count = myHopList.length;
+      if (count > 0) {
+        badgeHopCount.textContent = count;
+        badgeHopCount.classList.remove('hidden');
+        navHopDot.classList.remove('hidden');
+      } else {
+        badgeHopCount.classList.add('hidden');
+        navHopDot.classList.add('hidden');
+      }
+    }
+
     // --- EVENT LISTENERS ---
+    btnTriggerGps.addEventListener('click', handleGpsClick);
+    btnPresetLocation.addEventListener('click', openPresetsModal);
+    btnClosePresetsModal.addEventListener('click', () => modalPresets.classList.add('hidden'));
+    modalPresets.addEventListener('click', (e) => {
+      if (e.target === modalPresets) modalPresets.classList.add('hidden');
+    });
+
     tabCircuits.addEventListener('click', () => switchTab('circuits'));
     tabPandals.addEventListener('click', () => switchTab('pandals'));
     tabItinerary.addEventListener('click', () => switchTab('itinerary'));
@@ -1834,6 +2256,7 @@
       { id: 'filter-zone-all', zone: 'all' },
       { id: 'filter-zone-north', zone: 'north' },
       { id: 'filter-zone-south', zone: 'south' },
+      { id: 'filter-zone-central', zone: 'central' },
       { id: 'filter-zone-east', zone: 'east' }
     ];
     zoneBtns.forEach(zb => {
@@ -1848,6 +2271,14 @@
         selectedZoneFilter = zb.zone;
         renderPandals();
       });
+    });
+
+    // Hype toggle
+    btnSortHype.addEventListener('click', () => {
+      sortByHype = !sortByHype;
+      btnSortHype.classList.toggle('text-rose-900', sortByHype);
+      btnSortHype.classList.toggle('font-black', sortByHype);
+      renderPandals();
     });
 
     // Modal hop handlers
@@ -1887,6 +2318,11 @@
     renderCircuitStationPills();
     renderActiveCircuit();
     updateHopListBadges();
+
+    // Hero card GSAP animation
+    if (typeof gsap !== 'undefined') {
+      gsap.from("#radar-hero-card", { duration: 0.8, y: -20, autoAlpha: 0, ease: "power3.out" });
+    }
   </script>
 </body>
 </html>
