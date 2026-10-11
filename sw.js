@@ -1,10 +1,10 @@
 const CACHE_NAME = 'durgapuja-guide-v1';
 const ASSETS_TO_CACHE = [
-  '/',
-  '/index.html',
-  '/manifest.json',
-  '/lottie-radar.json',
-  '/lottie-map-pin.json',
+  './',
+  './index.html',
+  './manifest.json',
+  './lottie-radar.json',
+  './lottie-map-pin.json',
   'https://cdn.tailwindcss.com',
   'https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js',
   'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js',
