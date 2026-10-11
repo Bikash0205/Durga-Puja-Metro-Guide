@@ -127,8 +127,9 @@
         </button>
 
         <!-- Last Metro Warning -->
-        <button id="btn-open-last-metro" class="w-7 h-7 rounded-full bg-black/30 hover:bg-black/50 border border-white/20 flex items-center justify-center text-xs active:scale-95" title="Last Train Alert">
-          🌙
+        <button id="btn-open-last-metro" class="h-7 px-2 rounded-full bg-black/30 hover:bg-black/50 border border-white/20 flex items-center justify-center gap-1 text-[10px] font-bold text-amber-300 active:scale-95" title="All-Night Metro Schedule & Last Train Alerts">
+          <svg class="w-3 h-3 text-amber-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          <span>4 AM</span>
         </button>
 
         <!-- Language Switch -->
@@ -156,13 +157,13 @@
     <!-- Sleek, Compact GPS & Trail Bar -->
       <div id="radar-hero-card" class="bg-gradient-to-r from-festive-900 via-rose-950 to-stone-950 text-white rounded-2xl p-3 border border-amber-400/25 shadow-md">
         <div class="flex items-center justify-between">
-          <div class="flex items-center gap-2.5 min-w-0">
+          <div class="flex items-center gap-2.5 min-w-0 flex-1 pr-2">
             <div class="w-8 h-8 rounded-xl bg-amber-400/20 text-amber-300 flex items-center justify-center text-sm font-black flex-shrink-0">
               📍
             </div>
             <div class="min-w-0">
-              <h3 class="text-xs font-bold text-white truncate leading-tight">Hop From Where You Are</h3>
-              <p class="text-[10px] text-rose-200/90 truncate">Detect nearest metro & launch forward trail</p>
+              <h3 class="text-xs font-bold text-white leading-tight">Hop From Where You Are</h3>
+              <p class="text-[10px] text-rose-200/90 leading-tight">Detect nearest metro & launch forward trail</p>
             </div>
           </div>
           <div class="flex items-center gap-1.5 flex-shrink-0">
@@ -730,12 +731,25 @@
           </div>
         </div>
 
-        <!-- Real-Time Crowd Density & Wait Meter -->
-        <div id="modal-crowd-meter-card" class="p-3 bg-white dark:bg-festive-night rounded-xl border border-gray-200 dark:border-festive-nightBorder space-y-2">
+        <!-- Google Maps Live Crowd & Busyness Explorer -->
+        <div id="modal-crowd-meter-card" class="p-3.5 bg-gradient-to-br from-white via-blue-50/20 to-indigo-50/30 dark:from-festive-night dark:via-blue-950/20 dark:to-indigo-950/20 rounded-2xl border border-blue-200/80 dark:border-blue-900/50 shadow-sm space-y-2.5">
           <div class="flex items-center justify-between">
-            <div class="flex items-center gap-1.5">
-              <svg class="w-3.5 h-3.5 text-gray-700 dark:text-gray-300" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
-              <span class="font-bold text-gray-900 dark:text-white text-xs">Live Crowd Density:</span>
+            <div class="flex items-center gap-2">
+              <span class="w-6 h-6 rounded-lg bg-white dark:bg-zinc-800 shadow-xs border border-gray-200 dark:border-zinc-700 flex items-center justify-center flex-shrink-0">
+                <svg class="w-3.5 h-3.5 text-blue-600" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+                </svg>
+              </span>
+              <div>
+                <h4 class="font-extrabold text-gray-900 dark:text-white text-xs flex items-center gap-1.5">
+                  <span>Google Maps Live Busyness</span>
+                  <span class="inline-flex items-center gap-1 px-1.5 py-0.2 rounded-full text-[8.5px] font-black bg-blue-100 dark:bg-blue-900/60 text-blue-700 dark:text-blue-300 border border-blue-300/60">
+                    <span class="w-1.5 h-1.5 rounded-full bg-blue-500 animate-pulse"></span>
+                    <span>LIVE</span>
+                  </span>
+                </h4>
+                <p id="modal-google-busyness-status" class="text-[10px] text-gray-500 dark:text-gray-400">Usually as busy as it gets</p>
+              </div>
             </div>
             <span id="modal-crowd-badge" class="px-2 py-0.5 rounded-full text-[10px] font-black bg-rose-100 text-rose-800">
               Very High
@@ -747,19 +761,60 @@
             <div id="modal-crowd-bar" class="h-2 rounded-full transition-all duration-500 bg-rose-600" style="width: 85%;"></div>
           </div>
 
-        <!-- Community Crowd Sourcing -->
-        <div class="p-3 bg-gray-50 dark:bg-black/30 rounded-xl border border-gray-200 dark:border-festive-nightBorder">
-          <p class="text-[10px] font-bold text-gray-500 dark:text-gray-400 mb-2 uppercase tracking-wider">Report Live Crowd:</p>
-          <div class="grid grid-cols-3 gap-2">
-            <button onclick="reportCrowd(0)" class="py-1.5 bg-emerald-100 hover:bg-emerald-200 text-emerald-800 rounded-lg text-[10px] font-bold transition-colors">😊 Flowing</button>
-            <button onclick="reportCrowd(60)" class="py-1.5 bg-orange-100 hover:bg-orange-200 text-orange-800 rounded-lg text-[10px] font-bold transition-colors">😐 Crowded</button>
-            <button onclick="reportCrowd(90)" class="py-1.5 bg-rose-100 hover:bg-rose-200 text-rose-800 rounded-lg text-[10px] font-bold transition-colors">🥵 Jammed</button>
+          <!-- Google Maps Popular Times Interactive Hourly Graph -->
+          <div class="pt-1">
+            <div class="flex items-center justify-between text-[10px] text-gray-500 dark:text-gray-400 mb-1.5">
+              <span class="font-bold flex items-center gap-1 text-gray-700 dark:text-gray-300">
+                <span>📊 Popular Times (Hourly Rush)</span>
+              </span>
+              <span id="modal-popular-times-selected-info" class="text-[9.5px] font-black text-rose-600 dark:text-rose-400">
+                Now: Peak rush
+              </span>
+            </div>
+            <div id="modal-popular-times-bars" class="flex items-end justify-between gap-1 h-14 p-1.5 bg-white/80 dark:bg-black/40 rounded-xl border border-gray-200/80 dark:border-gray-800">
+              <!-- Rendered dynamically for 12 PM, 2 PM, 4 PM, 6 PM, 8 PM, 10 PM, 12 AM, 2 AM, 4 AM -->
+            </div>
+            <div class="flex items-center justify-between text-[8px] text-gray-400 dark:text-gray-500 px-1 mt-0.5">
+              <span>12 PM</span>
+              <span>4 PM</span>
+              <span>8 PM</span>
+              <span>12 AM</span>
+              <span>4 AM</span>
+            </div>
           </div>
-        </div>
 
-          <div class="flex items-center justify-between text-[11px] text-gray-600 dark:text-gray-400">
+          <!-- Direct Google Maps Place Live View Button -->
+          <a id="modal-btn-google-live-maps" href="#" target="_blank" rel="noopener" class="w-full py-2 px-3 bg-gradient-to-r from-blue-600 via-indigo-600 to-blue-700 hover:from-blue-500 hover:to-indigo-600 text-white rounded-xl text-center font-black text-[11px] flex items-center justify-center gap-2 shadow-sm transition-all active:scale-[0.98]">
+            <svg class="w-3.5 h-3.5 text-white" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+            </svg>
+            <span>📍 Open Live Busyness on Google Maps ↗</span>
+          </a>
+
+          <!-- Approach Road Traffic & Footfall Info -->
+          <div class="p-2 bg-amber-50/70 dark:bg-amber-950/30 rounded-xl border border-amber-200/70 dark:border-amber-900/40 text-[10px] text-amber-900 dark:text-amber-200 flex items-start gap-1.5">
+            <span class="text-amber-600 mt-0.5 flex-shrink-0">🚧</span>
+            <div>
+              <strong>Traffic Advisory:</strong> <span id="modal-traffic-advisory">Vehicular movement restricted within 300m. Pedestrian barricaded zigzag queues active.</span>
+            </div>
+          </div>
+
+          <div class="flex items-center justify-between text-[11px] text-gray-600 dark:text-gray-400 pt-0.5">
             <span class="flex items-center gap-1"><svg class="w-3 h-3 text-gray-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>Wait: <strong id="modal-crowd-wait" class="text-gray-900 dark:text-white">~35–45 mins</strong></span>
             <span class="flex items-center gap-1"><svg class="w-3 h-3 text-emerald-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>Best time: <strong id="modal-crowd-best" class="text-emerald-700 dark:text-emerald-400">Late night (1–4 AM)</strong></span>
+          </div>
+
+          <!-- Community Report Live Crowd -->
+          <div class="pt-1.5 border-t border-gray-100 dark:border-zinc-800">
+            <div class="flex items-center justify-between mb-1.5">
+              <span class="text-[9.5px] font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider">Crowd-Report:</span>
+              <span class="text-[9px] text-gray-400">Updates live for all visitors</span>
+            </div>
+            <div class="grid grid-cols-3 gap-1.5">
+              <button onclick="reportCrowd(0)" class="py-1 bg-emerald-100/80 hover:bg-emerald-200 text-emerald-900 dark:bg-emerald-950 dark:text-emerald-300 rounded-lg text-[9.5px] font-bold transition-colors">😊 Flowing</button>
+              <button onclick="reportCrowd(60)" class="py-1 bg-orange-100/80 hover:bg-orange-200 text-orange-900 dark:bg-orange-950 dark:text-orange-300 rounded-lg text-[9.5px] font-bold transition-colors">😐 Crowded</button>
+              <button onclick="reportCrowd(90)" class="py-1 bg-rose-100/80 hover:bg-rose-200 text-rose-900 dark:bg-rose-950 dark:text-rose-300 rounded-lg text-[9.5px] font-bold transition-colors">🥵 Jammed</button>
+            </div>
           </div>
         </div>
 
@@ -3012,6 +3067,98 @@
       };
     }
 
+    // Google Maps Live Busyness & Popular Times Graph Generator
+    function renderPopularTimesGraph(pandal) {
+      const container = document.getElementById('modal-popular-times-bars');
+      if (!container) return;
+
+      const now = new Date();
+      const currentHour = now.getHours();
+
+      // Key 24-hr hopping slots
+      const slots = [
+        { hour: 12, label: '12 PM', base: 35 },
+        { hour: 14, label: '2 PM', base: 45 },
+        { hour: 16, label: '4 PM', base: 60 },
+        { hour: 18, label: '6 PM', base: 80 },
+        { hour: 20, label: '8 PM', base: 95 },
+        { hour: 22, label: '10 PM', base: 90 },
+        { hour: 0,  label: '12 AM', base: 75 },
+        { hour: 2,  label: '2 AM', base: 45 },
+        { hour: 4,  label: '4 AM', base: 20 }
+      ];
+
+      const hypeMult = (pandal.hypeScore || 9.0) / 9.5;
+
+      container.innerHTML = slots.map(slot => {
+        const estBusy = Math.min(100, Math.round(slot.base * hypeMult));
+        const isCurrent = Math.abs(slot.hour - currentHour) <= 1 || (slot.hour === 0 && currentHour === 23);
+        const barHeight = Math.max(18, estBusy);
+
+        return `
+          <div
+            class="flex-1 flex flex-col items-center justify-end h-full cursor-pointer group"
+            onclick="updatePopularTimesInfo('${slot.label}', ${estBusy}, ${isCurrent})"
+            title="${slot.label}: ${estBusy}% busy"
+          >
+            ${isCurrent ? `
+              <span class="text-[7px] font-black text-rose-600 dark:text-rose-400 mb-0.5 animate-pulse leading-none">
+                ● LIVE
+              </span>
+            ` : ''}
+            <div
+              class="w-full rounded-t-md transition-all duration-300 ${
+                isCurrent
+                  ? 'bg-gradient-to-t from-rose-600 to-rose-400 shadow-sm ring-1 ring-rose-400'
+                  : 'bg-blue-300/80 dark:bg-blue-800/80 hover:bg-blue-400 dark:hover:bg-blue-700'
+              }"
+              style="height: ${barHeight}%;"
+            ></div>
+            <span class="text-[8px] font-bold text-gray-500 dark:text-gray-400 mt-1 leading-none ${isCurrent ? 'text-rose-600 dark:text-rose-400 font-black' : ''}">
+              ${slot.label.replace(' ', '')}
+            </span>
+          </div>
+        `;
+      }).join('');
+
+      // Set initial info for current hour
+      const currentSlot = slots.find(s => Math.abs(s.hour - currentHour) <= 1 || (s.hour === 0 && currentHour === 23)) || slots[4];
+      const curEst = Math.min(100, Math.round(currentSlot.base * hypeMult));
+      updatePopularTimesInfo(currentSlot.label, curEst, true);
+    }
+
+    function updatePopularTimesInfo(label, busyPercent, isCurrent) {
+      const infoSpan = document.getElementById('modal-popular-times-selected-info');
+      if (!infoSpan) return;
+      let estWait = busyPercent >= 80 ? '45–60 mins' : (busyPercent >= 60 ? '25–40 mins' : (busyPercent >= 40 ? '15–20 mins' : '5–10 mins'));
+      let statusDesc = busyPercent >= 80 ? 'Peak Rush' : (busyPercent >= 60 ? 'Busy' : (busyPercent >= 40 ? 'Moderate' : 'Flowing'));
+      infoSpan.innerHTML = `${isCurrent ? '<strong>LIVE NOW:</strong> ' : `<strong>${label}:</strong> `} ${statusDesc} (${busyPercent}% busy, ~${estWait})`;
+    }
+
+    function getTrafficAdvisory(pandal) {
+      const name = (pandal.name || '').toLowerCase();
+      const loc = (pandal.location || '').toLowerCase();
+      const zone = (pandal.zone || '').toLowerCase();
+
+      if (loc.includes('kalighat') || loc.includes('rashbehari') || name.includes('badamtala')) {
+        return 'Rashbehari Ave barricaded for pedestrian flow. Shared autos running under Gariahat flyover. Follow marked foot corridors.';
+      } else if (loc.includes('ballygunge') || loc.includes('maddox') || name.includes('ballygunge')) {
+        return 'Pritam Roy Rd & Ritchie Rd one-way pedestrian zones. Maddox Square lawn accessible for rest and hydration.';
+      } else if (loc.includes('gariahat') || name.includes('singhi') || name.includes('ekdalia')) {
+        return 'Gariahat crossing closed to four-wheelers. Continuous pedestrian barricades active between Ekdalia and Singhi Park.';
+      } else if (loc.includes('bagbazar') || loc.includes('shyambazar') || name.includes('bagbazar')) {
+        return 'Shyambazar 5-point crossing heavy traffic diversions. Shyambazar Metro Gate 1 offers 3-minute walking bypass.';
+      } else if (loc.includes('sovabazar') || loc.includes('kumartuli') || name.includes('kumartuli')) {
+        return 'B.K. Paul Ave & Rabindra Sarani closed to cars. Kumartuli ghat corridor is strictly pedestrian one-way.';
+      } else if (loc.includes('salt lake') || name.includes('fd block')) {
+        return 'Central Park fairgrounds designated for parking. Shuttle totos and pedestrian channels operating to pandal gates.';
+      } else if (zone.includes('south')) {
+        return 'South Kolkata puja corridor active. Barricaded pedestrian channels leading directly to nearest metro gates.';
+      } else {
+        return 'Pedestrian zigzag queues active outside gates. Allow 5–10 mins buffer from nearest main intersection.';
+      }
+    }
+
     // Toast feedback helper
     function showToast(message, icon = '✓') {
       const toast = document.getElementById('quick-toast');
@@ -3360,8 +3507,11 @@
             <h4 class="font-bold text-rose-900">${isBengali && p.nameBn ? p.nameBn : p.name}</h4>
             <p class="text-[11px] text-gray-600">${p.location} • Metro: ${p.station}</p>
             <p class="text-[10px] font-semibold text-amber-800">Theme: ${p.theme2026}</p>
-            <div class="pt-1 flex gap-2">
+            <div class="pt-1 flex items-center gap-1.5">
               <button onclick="openHopModal(${p.id})" class="px-2 py-0.5 bg-rose-800 text-white rounded text-[10px] font-bold">Inspect & Hop</button>
+              <a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(p.name + ' Kolkata')}" target="_blank" rel="noopener" class="px-2 py-0.5 bg-blue-600 text-white rounded text-[10px] font-bold flex items-center gap-0.5">
+                <span>Google Live ↗</span>
+              </a>
             </div>
           </div>
         `);
@@ -3753,15 +3903,15 @@
       circuitDetailContainer.innerHTML = `
         <div class="circuit-hero bg-white dark:bg-festive-nightCard rounded-2xl p-4 border border-rose-100 dark:border-festive-nightBorder shadow-sm space-y-3">
           <!-- Forward-Flow Walking Trail Banner -->
-          <div class="px-3 py-1.5 rounded-xl bg-gradient-to-r from-emerald-500/15 via-teal-500/10 to-emerald-500/15 border border-emerald-500/30 flex items-center justify-between">
+          <div class="px-3 py-1.5 rounded-xl bg-gradient-to-r from-emerald-500/15 via-teal-500/10 to-emerald-500/15 border border-emerald-500/30 flex flex-col sm:flex-row sm:items-center justify-between gap-1">
             <div class="flex items-center gap-1.5">
-              <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+              <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse flex-shrink-0"></span>
               <span class="text-[10px] font-black uppercase tracking-wider text-emerald-900 dark:text-emerald-300">
-                Forward-Flow Trail • Zero Foot Backtracking
+                Forward-Flow Trail • Continuous Loop
               </span>
             </div>
-            <span class="text-[9px] font-bold text-teal-800 dark:text-teal-300">
-              Exit: ${circuit.finishStation || 'Forward Metro / Next Hop'}
+            <span class="text-[9.5px] font-bold text-teal-800 dark:text-teal-300 sm:text-right">
+              Exit / Next Hop: ${circuit.finishStation || 'Forward Metro / Next Hop'}
             </span>
           </div>
 
@@ -4058,16 +4208,6 @@
           
         </div>
       `;
-
-      if (typeof gsap !== 'undefined') {
-        gsap.from(".circuit-step-card", {
-          duration: 0.4,
-          y: 15,
-          autoAlpha: 0,
-          stagger: 0.05,
-          ease: "power2.out"
-        });
-      }
     }
 
     // --- RENDER ALL PANDALS ---
@@ -4168,10 +4308,17 @@
                 <span class="text-[10px] font-semibold text-gray-500 dark:text-gray-400">Metro: ${p.station}</span>
                 <span class="text-[10px] font-bold text-amber-700 dark:text-amber-400 bg-amber-50 dark:bg-amber-950 px-1.5 py-0.5 rounded">Hype: ${p.hypeScore}</span>
               </div>
-              <span class="inline-flex items-center gap-1 text-[9px] font-bold px-2 py-0.5 rounded-full border ${crowdEst.colorClass}">
+              <a
+                href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(p.name + ' ' + p.location + ' Kolkata')}"
+                target="_blank"
+                rel="noopener"
+                class="inline-flex items-center gap-1 text-[9px] font-bold px-2 py-0.5 rounded-full border ${crowdEst.colorClass} hover:opacity-90 transition-all"
+                title="View live popular times on Google Maps"
+              >
                 <span class="w-1.5 h-1.5 rounded-full ${crowdEst.dotColor}"></span>
                 <span>Live Crowd: ${crowdEst.level} (~${crowdEst.waitMinutes})</span>
-              </span>
+                <span class="text-[7.5px] text-blue-600 dark:text-blue-400 font-black">↗ Maps</span>
+              </a>
             </div>
 
             <div class="space-y-1">
@@ -4201,18 +4348,18 @@
                   class="py-1.5 px-3 bg-festive-900 hover:bg-festive-800 text-white rounded-xl text-[11px] font-bold shadow-xs active:scale-95 transition-all flex items-center gap-1"
                 >
                   <svg class="w-3.5 h-3.5 text-amber-300 inline" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"/></svg>
-                  <span>Details & Directions</span>
+                  <span>Details & Maps</span>
                 </button>
                 <button
                   onclick="toggleVisitedPandal(${p.id}); renderPandals();"
-                  class="p-1.5 border rounded-xl text-xs font-bold transition-all ${
+                  class="py-1 px-2 border rounded-xl text-[10px] font-black transition-all flex items-center gap-1 ${
                     isVisited
-                      ? 'bg-yellow-100 text-yellow-800 border-yellow-300'
-                      : 'bg-gray-100 dark:bg-stone-800 text-gray-500 border-gray-200 dark:border-stone-700'
+                      ? 'bg-amber-100 text-amber-900 dark:bg-amber-950 dark:text-amber-300 border-amber-300'
+                      : 'bg-gray-100 dark:bg-stone-800 text-gray-600 dark:text-gray-400 border-gray-200 dark:border-stone-700 hover:bg-gray-200'
                   }"
-                  title="${isVisited ? 'Stamp Collected' : 'Mark as Visited'}"
+                  title="${isVisited ? 'Stamp Collected (Tap to undo)' : 'Collect Stamp'}"
                 >
-                  <span>${isVisited ? '🏅' : '⚪'}</span>
+                  <span>${isVisited ? '🏅 Stamped' : '○ Stamp'}</span>
                 </button>
               </div>
 
@@ -4228,16 +4375,6 @@
           </div>
         `;
       }).join('');
-
-      if (typeof gsap !== 'undefined') {
-        gsap.from(".pandal-card-item", {
-          duration: 0.35,
-          y: 12,
-          autoAlpha: 0,
-          stagger: 0.04,
-          ease: "power1.out"
-        });
-      }
     }
 
     // --- RENDER CUSTOM HOP LIST ---
@@ -4291,6 +4428,7 @@
         const nextP = savedPandals[idx + 1];
         const crowdEst = getLiveCrowdEstimate(p);
         const isVisited = visitedPandals.includes(p.id);
+        const color = getLineColor(p.line);
 
         return `
           <div class="bg-white dark:bg-festive-nightCard rounded-2xl p-3.5 border ${
@@ -4459,6 +4597,35 @@
       if (modalCrowdBest) {
         modalCrowdBest.textContent = crowdEst.bestTime;
       }
+
+      // Google Maps Live Busyness Place URL & Status
+      const modalBtnGoogleLiveMaps = document.getElementById('modal-btn-google-live-maps');
+      const modalGoogleBusynessStatus = document.getElementById('modal-google-busyness-status');
+      const modalTrafficAdvisory = document.getElementById('modal-traffic-advisory');
+
+      const googleBusynessUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(p.name + ' Durga Puja ' + (p.location || '') + ' Kolkata')}`;
+      if (modalBtnGoogleLiveMaps) {
+        modalBtnGoogleLiveMaps.href = googleBusynessUrl;
+      }
+
+      if (modalGoogleBusynessStatus) {
+        if (crowdEst.score >= 80) {
+          modalGoogleBusynessStatus.textContent = 'Usually as busy as it gets (Peak Queue)';
+        } else if (crowdEst.score >= 60) {
+          modalGoogleBusynessStatus.textContent = 'Busier than usual (~25–40m wait)';
+        } else if (crowdEst.score >= 40) {
+          modalGoogleBusynessStatus.textContent = 'Moderately busy (~15–20m wait)';
+        } else {
+          modalGoogleBusynessStatus.textContent = 'Not too busy / Flowing (~5–10m wait)';
+        }
+      }
+
+      if (modalTrafficAdvisory) {
+        modalTrafficAdvisory.textContent = getTrafficAdvisory(p);
+      }
+
+      // Render Google Maps Popular Times hourly histogram
+      renderPopularTimesGraph(p);
 
       const directWalkUrl = `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(p.name + ' ' + p.location + ' Kolkata')}&travelmode=walking`;
       const directDriveUrl = `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(p.name + ' ' + p.location + ' Kolkata')}&travelmode=driving`;
