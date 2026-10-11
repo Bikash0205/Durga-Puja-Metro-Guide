@@ -271,6 +271,108 @@
         </div>
 
         <!-- The Leaflet Map Container -->
+        <!-- Anti-Fatigue Circuit Mode Button -->
+        <div class="flex items-center gap-2 pt-1 pb-1">
+          <button
+            id="btn-toggle-anti-fatigue-loop"
+            class="flex-1 py-2.5 px-3 bg-gradient-to-r from-amber-400 via-amber-500 to-rose-600 hover:from-amber-300 text-rose-950 font-black rounded-2xl text-xs shadow-md transition-all flex items-center justify-center gap-1.5 active:scale-98"
+          >
+            <span class="text-sm">🔄</span>
+            <span>Kalighat ⇄ Ballygunge Loop</span>
+            <span class="px-1.5 py-0.2 rounded-full bg-rose-950 text-amber-300 text-[8.5px] uppercase font-black">Fatigue Saver</span>
+          </button>
+        </div>
+
+        <!-- Tired Human Loop Details Drawer -->
+        <div id="anti-fatigue-drawer" class="hidden p-3.5 bg-gradient-to-br from-stone-950 via-rose-950 to-amber-950 text-white rounded-2xl shadow-xl border-2 border-amber-400/40 space-y-2.5">
+          <div class="flex items-center justify-between border-b border-amber-400/20 pb-2">
+            <div class="flex items-center gap-2">
+              <span class="w-7 h-7 rounded-xl bg-amber-400/20 text-amber-300 flex items-center justify-center text-sm font-black">⚡</span>
+              <div>
+                <span class="text-[9.5px] uppercase font-black tracking-wider text-amber-300">Tired Human Loop Optimizer</span>
+                <h4 class="text-xs font-bold text-white">Kalighat ➔ Ballygunge ➔ Zero-Fatigue Return</h4>
+              </div>
+            </div>
+            <button id="btn-close-anti-fatigue" class="text-xs text-gray-400 hover:text-white font-bold p-1">✕</button>
+          </div>
+
+          <p class="text-[11px] text-rose-100/90 leading-relaxed">
+            Walked to Ballygunge and feet aching? <strong>Never retrace 3 km through crowded barricades!</strong> Here is how to complete the full circuit with zero walking fatigue:
+          </p>
+
+          <!-- 3 Quick Return Escape Options -->
+          <div class="space-y-2 text-xs">
+            <!-- Option 1: 5-min Shared Auto (Recommended) -->
+            <div class="p-2.5 rounded-xl bg-white/10 border border-amber-300/30 flex items-start justify-between">
+              <div class="pr-2">
+                <p class="font-bold text-amber-300 flex items-center gap-1.5 text-[11px]">
+                  <span>🚕 1. The 5-Min Shared Auto Hop</span>
+                  <span class="text-[8px] bg-emerald-500 text-white px-1.5 py-0.2 rounded font-black">Best Choice</span>
+                </p>
+                <p class="text-[10.5px] text-gray-200 mt-0.5 leading-snug">
+                  From Ballygunge Cultural/Hindustan Park, walk 200m to <strong>Gariahat More (under flyover)</strong>. Board shared auto direct to <strong>Kalighat Metro Gate 2</strong>.
+                </p>
+                <div class="flex items-center gap-2 mt-1 text-[9.5px] text-amber-200">
+                  <span>⏱️ 5 mins ride</span> • <span>💰 ₹12 flat fare</span> • <span>⚡ Zero walking fatigue</span>
+                </div>
+              </div>
+              <a
+                href="https://www.google.com/maps/dir/?api=1&origin=22.5195,88.3645&destination=22.5186,88.3465&travelmode=driving"
+                target="_blank"
+                rel="noopener"
+                class="py-1.5 px-2 bg-gradient-to-r from-amber-400 to-amber-500 text-rose-950 font-black rounded-lg text-[10px] text-center flex-shrink-0 shadow-xs"
+              >
+                Auto Route ➔
+              </a>
+            </div>
+
+            <!-- Option 2: 8-min walk to Jatin Das Park Metro -->
+            <div class="p-2.5 rounded-xl bg-white/10 border border-blue-400/30 flex items-start justify-between">
+              <div class="pr-2">
+                <p class="font-bold text-blue-300 flex items-center gap-1.5 text-[11px]">
+                  <span>🚇 2. Shortest Walk Escape via Jatin Das Park</span>
+                  <span class="text-[8px] bg-blue-500 text-white px-1.5 py-0.2 rounded font-black">Saves 2.2 km</span>
+                </p>
+                <p class="text-[10.5px] text-gray-200 mt-0.5 leading-snug">
+                  Why walk back to Kalighat? Walk just <strong>650m (8 mins) west down Hazra Road</strong> to Jatin Das Park Metro (Gate 2). Same Blue Line as Kalighat!
+                </p>
+                <div class="flex items-center gap-2 mt-1 text-[9.5px] text-blue-200">
+                  <span>⏱️ 8 mins walk</span> • <span>🚇 1 stop to Kalighat</span> • <span>🛡️ Shaded sidewalk</span>
+                </div>
+              </div>
+              <a
+                href="https://www.google.com/maps/dir/?api=1&origin=22.5275,88.3560&destination=22.5238,88.3472&travelmode=walking"
+                target="_blank"
+                rel="noopener"
+                class="py-1.5 px-2 bg-blue-500 hover:bg-blue-600 text-white font-bold rounded-lg text-[10px] text-center flex-shrink-0 shadow-xs"
+              >
+                Walk 8m ➔
+              </a>
+            </div>
+
+            <!-- Option 3: Shaded Rest Stop at Maddox Square -->
+            <div class="p-2.5 rounded-xl bg-white/10 border border-emerald-400/30 flex items-start justify-between">
+              <div class="pr-2">
+                <p class="font-bold text-emerald-300 flex items-center gap-1.5 text-[11px]">
+                  <span>☕ 3. Rest Oasis: Maddox Square Adda Lawn</span>
+                  <span class="text-[8px] bg-teal-500 text-white px-1.5 py-0.2 rounded font-black">Sit & Recharge</span>
+                </p>
+                <p class="text-[10.5px] text-gray-200 mt-0.5 leading-snug">
+                  Sit down on the grass at Maddox Square. Have hot tea, club kachori & cold water before heading back via shaded Ritchie Road.
+                </p>
+              </div>
+              <a
+                href="https://www.google.com/maps/dir/?api=1&destination=Maddox+Square+Kolkata&travelmode=walking"
+                target="_blank"
+                rel="noopener"
+                class="py-1.5 px-2 bg-emerald-500 hover:bg-emerald-600 text-white font-bold rounded-lg text-[10px] text-center flex-shrink-0 shadow-xs"
+              >
+                Rest Stop ➔
+              </a>
+            </div>
+          </div>
+        </div>
+
         <div id="leaflet-map" class="shadow-inner border border-gray-200 dark:border-festive-nightBorder"></div>
 
         <!-- Map Legend -->
@@ -2240,6 +2342,38 @@
 
     // --- WALKING CIRCUITS ---
     const walkingCircuits = [
+      // --- SOUTH MEGA FULL LOOP (ANTI-FATIGUE KALIGHAT <-> BALLYGUNGE) ---
+      {
+        id: "circuit-kalighat-ballygunge-loop",
+        title: "Kalighat ⇄ Ballygunge Full Loop (Zero-Fatigue Return)",
+        metroStation: "Kalighat",
+        metroLine: "Blue",
+        exitGate: "Gate 2 (Rashbehari Ave)",
+        totalDistance: "2.8 km walk + 5m Auto Return",
+        approxTime: "1 hr 45 min complete loop",
+        shortDesc: "The ultimate closed-loop circuit: Walk through 7 iconic pandals from Kalighat to Ballygunge Cultural, recharge at Maddox Square lawn, then take the 5-min shared auto (₹12) or 8-min walk to Jatin Das Park Metro to close the loop without walking exhaustion!",
+        finishStation: "Kalighat Metro (via 5-min Auto) or Jatin Das Park",
+        hypeAggregate: 9.9,
+        steps: [
+          { pandalId: 3, walkFromPrev: "4 min (300m) from Kalighat Gate 2 to Badamtala Ashar Sangha" },
+          { pandalId: 201, walkFromPrev: "2 min (150m) straight down Rashbehari to 66 Pally" },
+          { pandalId: 4, walkFromPrev: "8 min (650m) across Deshapriya Park" },
+          { pandalId: 12, walkFromPrev: "5 min (400m) down Manoharpukur into Tridhara Sammilani" },
+          { pandalId: 17, walkFromPrev: "4 min (350m) along Lake View Road into Samaj Sebi Sangha" },
+          { pandalId: 206, walkFromPrev: "5 min (400m) into Hindustan Park Sarbojanin" },
+          { pandalId: 205, walkFromPrev: "4 min (300m) into Ballygunge Cultural Association" },
+          { pandalId: 220, walkFromPrev: "6 min (450m) into Maddox Square Adda Lawn (Mid-Point Rest Oasis)" },
+          {
+            isTransit: true,
+            transitType: "auto",
+            fromStation: "Gariahat More Auto Stand (under flyover)",
+            toStation: "Kalighat Metro Station (Gate 2)",
+            line: "Auto",
+            durationMins: 5,
+            instruction: "Tired Human Return: Walk 200m to Gariahat crossing auto stand (under flyover) ➔ Board shared auto straight down Rashbehari Avenue ➔ 5 mins ride (₹12 flat) directly back to Kalighat Metro Gate 2 without walking exhaustion!"
+          }
+        ]
+      },
       {
         id: 'circuit-kalighat',
         title: "South Mega Walk: Kalighat & Gariahat Circuit",
@@ -5531,6 +5665,175 @@ ${mapUrl}
             `)
             .openOn(mapInstance);
         }, 1300);
+      }
+    }
+
+  
+    // ==========================================
+    // ANTI-FATIGUE LOOP ROUTE CONTROLLER (MAP)
+    // Kalighat <-> Ballygunge Full Closed Circuit
+    // ==========================================
+    let isAntiFatigueLoopActive = false;
+    let antiFatigueLoopLayer = null;
+
+    // Geographic waypoints for the full closed loop
+    const antiFatigueLoopData = {
+      // Outward pedestrian walking leg from Kalighat Metro to Ballygunge
+      outwardWaypoints: [
+        [22.5186, 88.3465], // Kalighat Metro Gate 2
+        [22.5190, 88.3500], // Badamtala Ashar Sangha
+        [22.5188, 88.3515], // 66 Pally
+        [22.5195, 88.3565], // Deshapriya Park
+        [22.5225, 88.3585], // Tridhara Sammilani
+        [22.5215, 88.3610], // Samaj Sebi Sangha
+        [22.5230, 88.3645], // Hindustan Park
+        [22.5240, 88.3660], // Ballygunge Cultural
+        [22.5275, 88.3560]  // Maddox Square (Rest Oasis)
+      ],
+      // 5-Min Auto return corridor down Rashbehari Avenue to Kalighat Metro
+      autoReturnWaypoints: [
+        [22.5195, 88.3645], // Gariahat Auto Stand under flyover
+        [22.5193, 88.3560], // Deshapriya Crossing
+        [22.5188, 88.3510], // Priya Cinema / 66 Pally
+        [22.5186, 88.3465]  // Kalighat Metro Gate 2
+      ],
+      // 8-Min Short walk escape to Jatin Das Park Metro
+      metroEscapeWaypoints: [
+        [22.5275, 88.3560], // Maddox Square
+        [22.5255, 88.3510], // Ritchie Rd / Hazra Crossing
+        [22.5238, 88.3472]  // Jatin Das Park Metro Gate 2
+      ]
+    };
+
+    function toggleAntiFatigueLoop(forcedState) {
+      if (typeof forcedState === 'boolean') {
+        isAntiFatigueLoopActive = forcedState;
+      } else {
+        isAntiFatigueLoopActive = !isAntiFatigueLoopActive;
+      }
+
+      const drawer = document.getElementById('anti-fatigue-drawer');
+      const toggleBtn = document.getElementById('btn-toggle-anti-fatigue-loop');
+
+      if (drawer) drawer.classList.toggle('hidden', !isAntiFatigueLoopActive);
+
+      if (toggleBtn) {
+        if (isAntiFatigueLoopActive) {
+          toggleBtn.className = 'flex-1 py-2.5 px-3 bg-gradient-to-r from-emerald-500 via-teal-600 to-emerald-700 text-white font-black rounded-2xl text-xs shadow-lg transition-all flex items-center justify-center gap-1.5 ring-2 ring-emerald-300';
+          toggleBtn.innerHTML = '<span>✓ Loop Circuit Active</span> <span class="px-1.5 py-0.2 rounded-full bg-black/30 text-emerald-200 text-[8.5px] uppercase font-black">Tap to Reset</span>';
+        } else {
+          toggleBtn.className = 'flex-1 py-2.5 px-3 bg-gradient-to-r from-amber-400 via-amber-500 to-rose-600 hover:from-amber-300 text-rose-950 font-black rounded-2xl text-xs shadow-md transition-all flex items-center justify-center gap-1.5 active:scale-98';
+          toggleBtn.innerHTML = '<span class="text-sm">🔄</span> <span>Kalighat ⇄ Ballygunge Loop</span> <span class="px-1.5 py-0.2 rounded-full bg-rose-950 text-amber-300 text-[8.5px] uppercase font-black">Fatigue Saver</span>';
+        }
+      }
+
+      if (mapInstance) {
+        if (antiFatigueLoopLayer) {
+          mapInstance.removeLayer(antiFatigueLoopLayer);
+          antiFatigueLoopLayer = null;
+        }
+
+        if (isAntiFatigueLoopActive) {
+          antiFatigueLoopLayer = L.layerGroup();
+
+          // 1. Outward Hopping Leg (Solid Blue/Rose Line)
+          const outwardLine = L.polyline(antiFatigueLoopData.outwardWaypoints, {
+            color: '#2563EB',
+            weight: 5,
+            opacity: 0.9,
+            lineJoin: 'round'
+          }).addTo(antiFatigueLoopLayer);
+
+          // 2. 5-Min Shared Auto Return Corridor (Dashed Amber Glow Line)
+          const autoLine = L.polyline(antiFatigueLoopData.autoReturnWaypoints, {
+            color: '#D97706',
+            weight: 6,
+            dashArray: '8, 8',
+            opacity: 0.95
+          }).addTo(antiFatigueLoopLayer);
+
+          // 3. 8-Min Metro Walk Escape to Jatin Das Park (Dashed Emerald Line)
+          const escapeLine = L.polyline(antiFatigueLoopData.metroEscapeWaypoints, {
+            color: '#059669',
+            weight: 4,
+            dashArray: '5, 5',
+            opacity: 0.85
+          }).addTo(antiFatigueLoopLayer);
+
+          // Custom Markers for Loop Highlights
+          // Start Marker at Kalighat Metro
+          L.circleMarker([22.5186, 88.3465], {
+            radius: 8,
+            fillColor: '#2563EB',
+            color: '#FFFFFF',
+            weight: 3,
+            fillOpacity: 1
+          }).addTo(antiFatigueLoopLayer).bindPopup(`
+            <div class="text-xs p-1">
+              <span class="text-[9px] font-black uppercase text-blue-700 bg-blue-100 px-1.5 py-0.2 rounded">Start Station</span>
+              <h5 class="font-bold text-gray-900 mt-0.5">Kalighat Metro Station (Gate 2)</h5>
+              <p class="text-[11px] text-gray-500">Walk begins eastward along Rashbehari Ave.</p>
+            </div>
+          `);
+
+          // Gariahat Auto Stand Return Marker
+          L.circleMarker([22.5195, 88.3645], {
+            radius: 8,
+            fillColor: '#D97706',
+            color: '#FFFFFF',
+            weight: 3,
+            fillOpacity: 1
+          }).addTo(antiFatigueLoopLayer).bindPopup(`
+            <div class="text-xs p-1">
+              <span class="text-[9px] font-black uppercase text-amber-900 bg-amber-100 px-1.5 py-0.2 rounded">🚕 5-Min Return Auto Stand</span>
+              <h5 class="font-bold text-gray-900 mt-0.5">Gariahat More Auto Stand (Under Flyover)</h5>
+              <p class="text-[11px] text-gray-600 mt-0.5">Tired? Board shared auto straight down Rashbehari directly to Kalighat Metro Gate 2.</p>
+              <p class="text-[10px] font-bold text-emerald-700 mt-1">₹12 flat • 5 mins • Saves 2.8 km walk!</p>
+            </div>
+          `);
+
+          // Maddox Square Rest Oasis Marker
+          L.circleMarker([22.5275, 88.3560], {
+            radius: 8,
+            fillColor: '#059669',
+            color: '#FFFFFF',
+            weight: 3,
+            fillOpacity: 1
+          }).addTo(antiFatigueLoopLayer).bindPopup(`
+            <div class="text-xs p-1">
+              <span class="text-[9px] font-black uppercase text-emerald-900 bg-emerald-100 px-1.5 py-0.2 rounded">☕ Rest Oasis</span>
+              <h5 class="font-bold text-gray-900 mt-0.5">Maddox Square Adda Lawn</h5>
+              <p class="text-[11px] text-gray-600 mt-0.5">Take a break on the grass! Cold water, tea, club kachori, and public washrooms available.</p>
+            </div>
+          `);
+
+          // Jatin Das Park Metro Escape Marker
+          L.circleMarker([22.5238, 88.3472], {
+            radius: 8,
+            fillColor: '#059669',
+            color: '#FFFFFF',
+            weight: 3,
+            fillOpacity: 1
+          }).addTo(antiFatigueLoopLayer).bindPopup(`
+            <div class="text-xs p-1">
+              <span class="text-[9px] font-black uppercase text-emerald-900 bg-emerald-100 px-1.5 py-0.2 rounded">🚇 Short Return Station</span>
+              <h5 class="font-bold text-gray-900 mt-0.5">Jatin Das Park Metro (Gate 2)</h5>
+              <p class="text-[11px] text-gray-600 mt-0.5">Only 650m walk from Hazra Rd. Board Blue Line direct home or 1 stop to Kalighat.</p>
+            </div>
+          `);
+
+          antiFatigueLoopLayer.addTo(mapInstance);
+
+          // Fit all loop bounds smoothly
+          const allCoords = [
+            ...antiFatigueLoopData.outwardWaypoints,
+            ...antiFatigueLoopData.autoReturnWaypoints,
+            ...antiFatigueLoopData.metroEscapeWaypoints
+          ];
+          mapInstance.fitBounds(allCoords, { padding: [30, 30] });
+
+          showToast("Kalighat ⇄ Ballygunge Loop active! Auto return & Metro escapes highlighted 🔄", "✓");
+        }
       }
     }
 
