@@ -342,9 +342,9 @@
             <button id="filter-zone-all" class="font-bold text-festive-800 dark:text-amber-400 underline">All</button>
             <button id="filter-zone-north" class="hover:text-festive-800">North</button>
             <button id="filter-zone-south" class="hover:text-festive-800">South</button>
-            <button id="filter-zone-ballygunge" class="hover:text-festive-800">Ballygunge</button>
             <button id="filter-zone-central" class="hover:text-festive-800">Central</button>
             <button id="filter-zone-east" class="hover:text-festive-800">East / VIP</button>
+            <button id="filter-zone-ballygunge" class="hover:text-festive-800">Ballygunge</button>
           </div>
           <div class="flex items-center gap-2">
             <button id="btn-sort-hype" class="font-bold text-amber-800 dark:text-amber-400 flex items-center gap-1 hover:underline">
@@ -787,24 +787,6 @@
     // --- ICONIC FOOD JOINTS PER METRO STOP ---
     const iconicFoodJoints = [
       {
-        station: "Ballygunge / Gariahat",
-        name: "6 Ballygunge Place",
-        dish: "Daab Chingri, Koraishutir Kochuri & Kosha Mangsho",
-        type: "Flagship Aristocratic Bengali Dining",
-        distance: "3-min walk from Ballygunge Phari / Dover Lane",
-        lat: 22.5270,
-        lng: 88.3660
-      },
-      {
-        station: "Ballygunge / Sarat Bose Rd",
-        name: "Maharani & Maharaja",
-        dish: "Club Kachori with Hing Aloo Sabzi & Hot Jalebi",
-        type: "Heritage Morning Adda Spot",
-        distance: "5-min walk from Maddox Square / Lake Market",
-        lat: 22.5225,
-        lng: 88.3535
-      },
-      {
         station: "Shyambazar",
         name: "Golbari",
         dish: "Kosha Mangsho (Spicy Mutton) & Paratha",
@@ -866,6 +848,24 @@
         distance: "4-min walk from Southern Avenue",
         lat: 22.5140,
         lng: 88.3530
+      },
+{
+        station: "Ballygunge / Gariahat",
+        name: "6 Ballygunge Place",
+        dish: "Daab Chingri, Koraishutir Kochuri & Kosha Mangsho",
+        type: "Flagship Aristocratic Bengali Dining",
+        distance: "3-min walk from Ballygunge Phari / Dover Lane",
+        lat: 22.5270,
+        lng: 88.3660
+      },
+      {
+        station: "Ballygunge / Sarat Bose Rd",
+        name: "Maharani & Maharaja",
+        dish: "Club Kachori with Hing Aloo Sabzi & Hot Jalebi",
+        type: "Heritage Morning Adda Spot",
+        distance: "5-min walk from Maddox Square / Lake Market",
+        lat: 22.5225,
+        lng: 88.3535
       }
     ];
 
@@ -893,8 +893,6 @@
 
     // City Landmark Presets
     const cityLandmarkPresets = [
-      { name: "Ballygunge Phari / Gariahat", lat: 22.5270, lng: 88.3660, desc: "Ballygunge cultural hub & shopping junction", nearestStation: "Kalighat" },
-      { name: "Maddox Square (Ritchie Rd)", lat: 22.5284, lng: 88.3572, desc: "Heart of South Kolkata youth adda & Sabeki Puja", nearestStation: "Netaji Bhavan" },
       { name: "Park Street / Camac Street", lat: 22.5535, lng: 88.3522, desc: "Central Kolkata shopping & dining core" },
       { name: "Howrah Railway Station", lat: 22.5835, lng: 88.3420, desc: "Arrival point from outside Kolkata" },
       { name: "Gariahat Crossing", lat: 22.5218, lng: 88.3654, desc: "Heart of South Kolkata shopping & pandals" },
@@ -902,7 +900,9 @@
       { name: "College Street (Boi Para)", lat: 22.5746, lng: 88.3639, desc: "Academic and historic hub" },
       { name: "Salt Lake City Centre 1", lat: 22.5890, lng: 88.4080, desc: "Sector 1 & IT Corridor gateway" },
       { name: "New Alipore Crossing", lat: 22.5098, lng: 88.3330, desc: "South-West residential hub" },
-      { name: "Dum Dum Airport (CCU)", lat: 22.6547, lng: 88.4467, desc: "Kolkata International Airport" }
+      { name: "Dum Dum Airport (CCU)", lat: 22.6547, lng: 88.4467, desc: "Kolkata International Airport" },
+{ name: "Ballygunge Phari / Gariahat", lat: 22.5270, lng: 88.3660, desc: "Ballygunge cultural hub & shopping junction", nearestStation: "Kalighat" },
+      { name: "Maddox Square (Ritchie Rd)", lat: 22.5284, lng: 88.3572, desc: "Heart of South Kolkata youth adda & Sabeki Puja", nearestStation: "Netaji Bhavan" },
     ];
 
     // --- PANDALS DATASET WITH 2026 THEMES & CURATED ART/INSTALLATION PICTURES ---
@@ -1548,7 +1548,52 @@
                   17
             ]
       },
+
       {
+            "id": 2,
+            "nameBn": "সুরুচি সংঘ",
+            "zone": "South",
+            "name": "New Alipore Suruchi Sangha",
+            "location": "New Alipore",
+            "attraction": "74th year masterpiece exploring the sacred lotus symbol of purity and divine power, sculpted entirely using eco-friendly biodegradable materials.",
+            "theme2026": "Padma (Lotus) — Purity, Divinity & Spiritual Awakening",
+            "artist2026": "Subrata Banerjee & Ensemble",
+            "line": "Purple",
+            "station": "Majerhat",
+            "accessibility": "6-min walk from Majerhat Metro",
+            "lat": 22.5098,
+            "lng": 88.333,
+            "crowd": "Extreme",
+            "hypeScore": 9.9,
+            "mapLink": "https://www.google.com/maps/search/?api=1&query=Suruchi+Sangha",
+            "nearbyPandalIds": [
+                  13,
+                  221
+            ]
+      },
+      {
+            "id": 230,
+            "nameBn": "এফডি ব্লক সল্টলেক",
+            "zone": "East",
+            "name": "FD Block Salt Lake",
+            "location": "Salt Lake Sector III",
+            "attraction": "Salt Lake's premier crowd-puller showcasing towering monastery spires, authentic prayer wheels, and grand festive fairgrounds.",
+            "theme2026": "Himalayan Monastery — Heritage Tibetan Architecture",
+            "artist2026": "FD Block Artisan Guild",
+            "line": "Green",
+            "station": "Karunamoyee",
+            "accessibility": "6-min walk (Gate 2)",
+            "lat": 22.584,
+            "lng": 88.418,
+            "crowd": "Very High",
+            "hypeScore": 9.5,
+            "mapLink": "https://www.google.com/maps/search/?api=1&query=Salt+Lake+FD+Block+Durga+Puja",
+            "nearbyPandalIds": [
+                  231,
+                  113
+            ]
+      },
+{
                 "id": 205,
                 "nameBn": "বালিগঞ্জ কালচারাল",
                 "zone": "South",
@@ -1596,94 +1641,11 @@
                           11,
                           220
                 ]
-      },
-
-      {
-            "id": 2,
-            "nameBn": "সুরুচি সংঘ",
-            "zone": "South",
-            "name": "New Alipore Suruchi Sangha",
-            "location": "New Alipore",
-            "attraction": "74th year masterpiece exploring the sacred lotus symbol of purity and divine power, sculpted entirely using eco-friendly biodegradable materials.",
-            "theme2026": "Padma (Lotus) — Purity, Divinity & Spiritual Awakening",
-            "artist2026": "Subrata Banerjee & Ensemble",
-            "line": "Purple",
-            "station": "Majerhat",
-            "accessibility": "6-min walk from Majerhat Metro",
-            "lat": 22.5098,
-            "lng": 88.333,
-            "crowd": "Extreme",
-            "hypeScore": 9.9,
-            "mapLink": "https://www.google.com/maps/search/?api=1&query=Suruchi+Sangha",
-            "nearbyPandalIds": [
-                  13,
-                  221
-            ]
-      },
-      {
-            "id": 230,
-            "nameBn": "এফডি ব্লক সল্টলেক",
-            "zone": "East",
-            "name": "FD Block Salt Lake",
-            "location": "Salt Lake Sector III",
-            "attraction": "Salt Lake's premier crowd-puller showcasing towering monastery spires, authentic prayer wheels, and grand festive fairgrounds.",
-            "theme2026": "Himalayan Monastery — Heritage Tibetan Architecture",
-            "artist2026": "FD Block Artisan Guild",
-            "line": "Green",
-            "station": "Karunamoyee",
-            "accessibility": "6-min walk (Gate 2)",
-            "lat": 22.584,
-            "lng": 88.418,
-            "crowd": "Very High",
-            "hypeScore": 9.5,
-            "mapLink": "https://www.google.com/maps/search/?api=1&query=Salt+Lake+FD+Block+Durga+Puja",
-            "nearbyPandalIds": [
-                  231,
-                  113
-            ]
       }
 ];
 
     // --- WALKING CIRCUITS ---
     const walkingCircuits = [
-      {
-              "id": "circuit-ballygunge-cultural",
-              "title": "Ballygunge Aristocratic & Cultural Trail",
-              "metroStation": "Jatin Das Park",
-              "metroLine": "Blue",
-              "exitGate": "Gate 2 (Lake View Road / Hazra)",
-              "totalDistance": "2.3 km",
-              "approxTime": "35 mins walk (compact, leafy loop)",
-              "shortDesc": "South Kolkata's most aristocratic trail: Sabeki heritage, leafy lanes, legendary adda at Maddox Square, and 75th year milestone at Ballygunge Cultural.",
-              "finishStation": "Kalighat or Gariahat",
-              "hypeAggregate": 9.7,
-              "steps": [
-                      {
-                              "pandalId": 220,
-                              "walkFromPrev": "6 min (450m) along Ritchie Road to Maddox Square"
-                      },
-                      {
-                              "pandalId": 205,
-                              "walkFromPrev": "5 min (400m) to Ballygunge Cultural (Jatin Das Rd)"
-                      },
-                      {
-                              "pandalId": 206,
-                              "walkFromPrev": "4 min (350m) to Hindustan Park"
-                      },
-                      {
-                              "pandalId": 17,
-                              "walkFromPrev": "4 min (300m) to Samaj Sebi Sangha (Lake View Rd)"
-                      },
-                      {
-                              "pandalId": 11,
-                              "walkFromPrev": "5 min (400m) to Singhi Park (Dover Terrace)"
-                      },
-                      {
-                              "pandalId": 1,
-                              "walkFromPrev": "3 min (250m) to Ekdalia Evergreen (Gariahat)"
-                      }
-              ]
-      },
       {
         id: 'circuit-kalighat',
         title: "South Mega Walk: Kalighat & Gariahat Circuit",
@@ -1791,7 +1753,45 @@
           { pandalId: 121, walkFromPrev: "3 min (200m) to Sarbojanin" },
           { pandalId: 131, walkFromPrev: "4 min (250m) to Tarun Sangha" }
         ]
-      }
+      },
+{
+              "id": "circuit-ballygunge-cultural",
+              "title": "Ballygunge Aristocratic & Cultural Trail",
+              "metroStation": "Jatin Das Park",
+              "metroLine": "Blue",
+              "exitGate": "Gate 2 (Lake View Road / Hazra)",
+              "totalDistance": "2.3 km",
+              "approxTime": "35 mins walk (compact, leafy loop)",
+              "shortDesc": "South Kolkata's most aristocratic trail: Sabeki heritage, leafy lanes, legendary adda at Maddox Square, and 75th year milestone at Ballygunge Cultural.",
+              "finishStation": "Kalighat or Gariahat",
+              "hypeAggregate": 9.7,
+              "steps": [
+                      {
+                              "pandalId": 220,
+                              "walkFromPrev": "6 min (450m) along Ritchie Road to Maddox Square"
+                      },
+                      {
+                              "pandalId": 205,
+                              "walkFromPrev": "5 min (400m) to Ballygunge Cultural (Jatin Das Rd)"
+                      },
+                      {
+                              "pandalId": 206,
+                              "walkFromPrev": "4 min (350m) to Hindustan Park"
+                      },
+                      {
+                              "pandalId": 17,
+                              "walkFromPrev": "4 min (300m) to Samaj Sebi Sangha (Lake View Rd)"
+                      },
+                      {
+                              "pandalId": 11,
+                              "walkFromPrev": "5 min (400m) to Singhi Park (Dover Terrace)"
+                      },
+                      {
+                              "pandalId": 1,
+                              "walkFromPrev": "3 min (250m) to Ekdalia Evergreen (Gariahat)"
+                      }
+              ]
+      },
     ];
 
     // --- HAVERSINE GEODISTANCE ALGORITHM ---
@@ -3158,9 +3158,9 @@
       { id: 'filter-zone-all', zone: 'all' },
       { id: 'filter-zone-north', zone: 'north' },
       { id: 'filter-zone-south', zone: 'south' },
-      { id: 'filter-zone-ballygunge', zone: 'ballygunge' },
       { id: 'filter-zone-central', zone: 'central' },
-      { id: 'filter-zone-east', zone: 'east' }
+      { id: 'filter-zone-east', zone: 'east' },
+      { id: 'filter-zone-ballygunge', zone: 'ballygunge' }
     ];
     zoneBtns.forEach(zb => {
       const el = document.getElementById(zb.id);
