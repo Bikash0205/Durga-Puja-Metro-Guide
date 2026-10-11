@@ -233,7 +233,7 @@
       <div class="space-y-2">
         <div class="flex items-center justify-between">
           <label class="text-xs font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400">Walking Circuits:</label>
-          <span id="circuit-count" class="text-xs text-festive-800 dark:text-amber-400 font-semibold">6 Circuits</span>
+          <span id="circuit-count" class="text-xs text-festive-800 dark:text-amber-400 font-semibold">7 Circuits</span>
         </div>
 
         <!-- Quick Distance Filters -->
@@ -336,12 +336,13 @@
 
         <!-- Zone & Sort Chips -->
         <div class="flex items-center justify-between text-[11px] text-gray-500 dark:text-gray-400 px-1">
-          <div class="flex items-center gap-2">
+          <div class="flex items-center gap-2 overflow-x-auto no-scrollbar whitespace-nowrap py-0.5">
             <span id="filtered-count" class="font-bold text-festive-900 dark:text-amber-300"></span>
             <span class="text-gray-300 dark:text-gray-600">|</span>
             <button id="filter-zone-all" class="font-bold text-festive-800 dark:text-amber-400 underline">All</button>
             <button id="filter-zone-north" class="hover:text-festive-800">North</button>
             <button id="filter-zone-south" class="hover:text-festive-800">South</button>
+            <button id="filter-zone-ballygunge" class="hover:text-festive-800">Ballygunge</button>
             <button id="filter-zone-central" class="hover:text-festive-800">Central</button>
             <button id="filter-zone-east" class="hover:text-festive-800">East / VIP</button>
           </div>
@@ -786,6 +787,24 @@
     // --- ICONIC FOOD JOINTS PER METRO STOP ---
     const iconicFoodJoints = [
       {
+        station: "Ballygunge / Gariahat",
+        name: "6 Ballygunge Place",
+        dish: "Daab Chingri, Koraishutir Kochuri & Kosha Mangsho",
+        type: "Flagship Aristocratic Bengali Dining",
+        distance: "3-min walk from Ballygunge Phari / Dover Lane",
+        lat: 22.5270,
+        lng: 88.3660
+      },
+      {
+        station: "Ballygunge / Sarat Bose Rd",
+        name: "Maharani & Maharaja",
+        dish: "Club Kachori with Hing Aloo Sabzi & Hot Jalebi",
+        type: "Heritage Morning Adda Spot",
+        distance: "5-min walk from Maddox Square / Lake Market",
+        lat: 22.5225,
+        lng: 88.3535
+      },
+      {
         station: "Shyambazar",
         name: "Golbari",
         dish: "Kosha Mangsho (Spicy Mutton) & Paratha",
@@ -858,8 +877,8 @@
       { name: "Central", line: "Blue", lat: 22.5746, lng: 88.3620, circuitId: "circuit-central-green" },
       { name: "Esplanade", line: "Blue", lat: 22.5645, lng: 88.3518, circuitId: "circuit-central-green" },
       { name: "Park Street", line: "Blue", lat: 22.5526, lng: 88.3512, circuitId: "circuit-kalighat" },
-      { name: "Netaji Bhavan", line: "Blue", lat: 22.5325, lng: 88.3470, circuitId: "circuit-kalighat" },
-      { name: "Jatin Das Park", line: "Blue", lat: 22.5238, lng: 88.3472, circuitId: "circuit-kalighat" },
+      { name: "Netaji Bhavan", line: "Blue", lat: 22.5325, lng: 88.3470, circuitId: "circuit-ballygunge-cultural" },
+      { name: "Jatin Das Park", line: "Blue", lat: 22.5238, lng: 88.3472, circuitId: "circuit-ballygunge-cultural" },
       { name: "Kalighat", line: "Blue", lat: 22.5186, lng: 88.3465, circuitId: "circuit-kalighat" },
       { name: "Rabindra Sarobar", line: "Blue", lat: 22.5115, lng: 88.3465, circuitId: "circuit-kalighat" },
       { name: "Gitanjali", line: "Blue", lat: 22.4764, lng: 88.3610, circuitId: "circuit-kalighat" },
@@ -874,6 +893,8 @@
 
     // City Landmark Presets
     const cityLandmarkPresets = [
+      { name: "Ballygunge Phari / Gariahat", lat: 22.5270, lng: 88.3660, desc: "Ballygunge cultural hub & shopping junction", nearestStation: "Kalighat" },
+      { name: "Maddox Square (Ritchie Rd)", lat: 22.5284, lng: 88.3572, desc: "Heart of South Kolkata youth adda & Sabeki Puja", nearestStation: "Netaji Bhavan" },
       { name: "Park Street / Camac Street", lat: 22.5535, lng: 88.3522, desc: "Central Kolkata shopping & dining core" },
       { name: "Howrah Railway Station", lat: 22.5835, lng: 88.3420, desc: "Arrival point from outside Kolkata" },
       { name: "Gariahat Crossing", lat: 22.5218, lng: 88.3654, desc: "Heart of South Kolkata shopping & pandals" },
@@ -1418,7 +1439,7 @@
             "nameBn": "ত্রিধারা সম্মিলনী",
             "zone": "South",
             "name": "Tridhara Sammilani",
-            "location": "Manoharpukur",
+            "location": "Manoharpukur, Ballygunge",
             "attraction": "Masterclass architectural journey guiding visitors from human ego to humble unity with Mother Nature using eco-friendly natural materials.",
             "theme2026": "Bhabna O Prakriti — Cosmic Harmony & Environmental Balance",
             "artist2026": "Gouranga Kuila",
@@ -1441,7 +1462,7 @@
             "nameBn": "সমাজ সেবী সংঘ",
             "zone": "South",
             "name": "Samaj Sebi Sangha",
-            "location": "Lake View Road",
+            "location": "Lake View Road, Ballygunge",
             "attraction": "81st year milestone paying tribute to legendary Bengali actor Uttam Kumar in his birth centenary year, weaving cinema reels, nostalgic melodies, and sensory inclusion.",
             "theme2026": "Mahapujoy Mahanayak — Centenary Tribute to Uttam Kumar",
             "artist2026": "Papai Sarkar",
@@ -1528,6 +1549,56 @@
             ]
       },
       {
+                "id": 205,
+                "nameBn": "বালিগঞ্জ কালচারাল",
+                "zone": "South",
+                "name": "Ballygunge Cultural Association",
+                "location": "57 Jatin Das Road, Ballygunge",
+                "attraction": "75th Platinum Jubilee celebration exploring the cosmic bonds of human emotion, coexistence, and nature harmony through organic materials, traditional brass temple bells, and serene terracotta craftsmanship.",
+                "theme2026": "Jojon (The Philosophy of Connection — Harmony of Humanity & Nature)",
+                "artist2026": "Susanta Shibani Paul",
+                "line": "Blue",
+                "station": "Jatin Das Park",
+                "accessibility": "6-min walk from Jatin Das Park Metro (Gate 2)",
+                "lat": 22.5186,
+                "lng": 88.3582,
+                "crowd": "High",
+                "hypeScore": 9.7,
+                "mapLink": "https://www.google.com/maps/search/?api=1&query=Ballygunge+Cultural+Association",
+                "nearbyPandalIds": [
+                          206,
+                          17,
+                          12,
+                          1,
+                          11
+                ]
+      },
+      {
+                "id": 206,
+                "nameBn": "হিন্দুস্তান পার্ক সার্বজনীন",
+                "zone": "South",
+                "name": "Hindustan Park Sarbojanin",
+                "location": "Hindustan Park, Ballygunge",
+                "attraction": "95-year-old women-led artistic landmark celebrated for deep intellectual themes, creating a nostalgic, introspective promenade exploring learning, childhood curiosity, and societal empathy.",
+                "theme2026": "Schooling (Nostalgia, Growth & The Learning Tree of Life)",
+                "artist2026": "Raju Sarkar & Women-Led Guild",
+                "line": "Blue",
+                "station": "Kalighat / Jatin Das Park",
+                "accessibility": "7-min walk from Gariahat Crossing or Lake View Rd",
+                "lat": 22.5202,
+                "lng": 88.3615,
+                "crowd": "Medium-High",
+                "hypeScore": 9.4,
+                "mapLink": "https://www.google.com/maps/search/?api=1&query=Hindustan+Park+Durga+Puja",
+                "nearbyPandalIds": [
+                          205,
+                          1,
+                          11,
+                          220
+                ]
+      },
+
+      {
             "id": 2,
             "nameBn": "সুরুচি সংঘ",
             "zone": "South",
@@ -1575,6 +1646,44 @@
 
     // --- WALKING CIRCUITS ---
     const walkingCircuits = [
+      {
+              "id": "circuit-ballygunge-cultural",
+              "title": "Ballygunge Aristocratic & Cultural Trail",
+              "metroStation": "Jatin Das Park",
+              "metroLine": "Blue",
+              "exitGate": "Gate 2 (Lake View Road / Hazra)",
+              "totalDistance": "2.3 km",
+              "approxTime": "35 mins walk (compact, leafy loop)",
+              "shortDesc": "South Kolkata's most aristocratic trail: Sabeki heritage, leafy lanes, legendary adda at Maddox Square, and 75th year milestone at Ballygunge Cultural.",
+              "finishStation": "Kalighat or Gariahat",
+              "hypeAggregate": 9.7,
+              "steps": [
+                      {
+                              "pandalId": 220,
+                              "walkFromPrev": "6 min (450m) along Ritchie Road to Maddox Square"
+                      },
+                      {
+                              "pandalId": 205,
+                              "walkFromPrev": "5 min (400m) to Ballygunge Cultural (Jatin Das Rd)"
+                      },
+                      {
+                              "pandalId": 206,
+                              "walkFromPrev": "4 min (350m) to Hindustan Park"
+                      },
+                      {
+                              "pandalId": 17,
+                              "walkFromPrev": "4 min (300m) to Samaj Sebi Sangha (Lake View Rd)"
+                      },
+                      {
+                              "pandalId": 11,
+                              "walkFromPrev": "5 min (400m) to Singhi Park (Dover Terrace)"
+                      },
+                      {
+                              "pandalId": 1,
+                              "walkFromPrev": "3 min (250m) to Ekdalia Evergreen (Gariahat)"
+                      }
+              ]
+      },
       {
         id: 'circuit-kalighat',
         title: "South Mega Walk: Kalighat & Gariahat Circuit",
@@ -2294,6 +2403,7 @@
         let label = circuit.metroStation;
         if (circuit.id === 'circuit-shyambazar-heritage') label = 'Shyambazar (Heritage)';
         if (circuit.id === 'circuit-shyambazar-theme') label = 'Shyambazar (Art Trail)';
+        if (circuit.id === 'circuit-ballygunge-cultural') label = 'Ballygunge (Cultural Trail)';
         if (circuit.id === 'circuit-kalighat') label = 'Kalighat (South Mega)';
         if (circuit.id === 'circuit-central-green') label = 'Central (College Sq)';
         if (circuit.id === 'circuit-belgachia-tala') label = 'Belgachia (Tala Prattoy)';
@@ -2508,7 +2618,11 @@
 
       let filtered = pandals.filter(p => {
         const matchesLine = (selectedLineFilter === 'all') || (p.line === selectedLineFilter);
-        const matchesZone = (selectedZoneFilter === 'all') || (p.zone.toLowerCase() === selectedZoneFilter.toLowerCase());
+        const matchesZone = (selectedZoneFilter === 'all') || (
+          selectedZoneFilter === 'ballygunge'
+            ? (p.location.toLowerCase().includes('ballygunge') || p.location.toLowerCase().includes('gariahat') || p.location.toLowerCase().includes('ritchie') || p.location.toLowerCase().includes('hindustan park') || p.location.toLowerCase().includes('dover') || p.location.toLowerCase().includes('lake view') || p.location.toLowerCase().includes('manoharpukur'))
+            : (p.zone.toLowerCase() === selectedZoneFilter.toLowerCase())
+        );
         const matchesQuery = !q || (
           p.name.toLowerCase().includes(q) ||
           p.location.toLowerCase().includes(q) ||
@@ -3044,6 +3158,7 @@
       { id: 'filter-zone-all', zone: 'all' },
       { id: 'filter-zone-north', zone: 'north' },
       { id: 'filter-zone-south', zone: 'south' },
+      { id: 'filter-zone-ballygunge', zone: 'ballygunge' },
       { id: 'filter-zone-central', zone: 'central' },
       { id: 'filter-zone-east', zone: 'east' }
     ];
