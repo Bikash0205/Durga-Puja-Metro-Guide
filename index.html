@@ -233,7 +233,7 @@
       <div class="space-y-2">
         <div class="flex items-center justify-between">
           <label class="text-xs font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400">Walking Circuits:</label>
-          <span id="circuit-count" class="text-xs text-festive-800 dark:text-amber-400 font-semibold">7 Circuits</span>
+          <span id="circuit-count" class="text-xs text-festive-800 dark:text-amber-400 font-semibold">8 Circuits</span>
         </div>
 
         <!-- Quick Distance Filters -->
@@ -628,6 +628,28 @@
         <button id="modal-btn-toggle-hoplist" class="w-full py-2 px-3 border border-festive-800 dark:border-festive-500 text-festive-900 dark:text-rose-300 font-bold rounded-xl flex items-center justify-center gap-2 hover:bg-festive-50 dark:hover:bg-festive-900/30">
           <span>+ Add to My Hop List</span>
         </button>
+
+        <!-- Walk to Nearest Metro & Hop to Next Sector -->
+        <div class="p-3 bg-gradient-to-r from-blue-50 to-indigo-50/60 dark:from-blue-950/30 dark:to-indigo-950/20 rounded-2xl border border-blue-200 dark:border-blue-900/50 space-y-2">
+          <div class="flex items-center justify-between">
+            <h4 class="font-bold text-blue-950 dark:text-blue-200 text-xs flex items-center gap-1.5">
+              <span>🚇 Walk to Metro & Hop More</span>
+            </h4>
+            <span class="text-[9px] font-bold text-blue-800 dark:text-blue-300 bg-blue-100 dark:bg-blue-900/60 px-1.5 py-0.2 rounded-full" id="modal-metro-line-pill">Blue Line</span>
+          </div>
+          <p class="text-[11px] text-gray-700 dark:text-gray-300 leading-relaxed" id="modal-walk-to-metro-desc">
+            Walk to closest metro to continue hopping across Kolkata without getting stuck in traffic.
+          </p>
+          <div class="grid grid-cols-2 gap-2 pt-1">
+            <a id="modal-btn-walk-to-metro" href="#" target="_blank" rel="noopener" class="py-2 px-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-center font-bold text-[10px] flex items-center justify-center gap-1 shadow-xs">
+              <svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/></svg>
+              <span>Walk to Metro Gate</span>
+            </a>
+            <button id="modal-btn-cross-city-hop" class="py-2 px-2.5 bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 text-rose-950 font-black rounded-xl text-[10px] flex items-center justify-center gap-1 shadow-xs">
+              <span>Cross-City Hop ➔</span>
+            </button>
+          </div>
+        </div>
 
         <hr class="border-gray-100 dark:border-festive-nightBorder" />
 
@@ -1754,6 +1776,57 @@
           { pandalId: 131, walkFromPrev: "4 min (250m) to Tarun Sangha" }
         ]
       },
+      {
+        "id": "circuit-ballygunge-to-north",
+        "title": "Cross-City Trail: Ballygunge ➔ Metro Transfer ➔ North Art Walk",
+        "metroStation": "Jatin Das Park",
+        "metroLine": "Blue",
+        "exitGate": "Gate 2 (Lake View Road / Hazra)",
+        "totalDistance": "3.9 km walk + 18m Metro",
+        "approxTime": "2.5 – 3.5 Hours (South + North Combo)",
+        "shortDesc": "The ultimate cross-city experience: Walk Ballygunge icons, catch Blue Line at Kalighat, and transfer underground to explore North Kolkata's grandest pandals with zero traffic!",
+        "finishStation": "Sovabazar Sutanuti",
+        "hypeAggregate": 9.8,
+        "steps": [
+          {
+            "pandalId": 220,
+            "walkFromPrev": "6 min (450m) along Ritchie Road to Maddox Square"
+          },
+          {
+            "pandalId": 205,
+            "walkFromPrev": "5 min (400m) to Ballygunge Cultural (Jatin Das Rd)"
+          },
+          {
+            "pandalId": 206,
+            "walkFromPrev": "4 min (350m) to Hindustan Park"
+          },
+          {
+            "pandalId": 1,
+            "walkFromPrev": "4 min (300m) to Ekdalia Evergreen (Gariahat)"
+          },
+          {
+            "isTransit": true,
+            "transitType": "metro",
+            "fromStation": "Kalighat",
+            "toStation": "Shyambazar",
+            "line": "Blue",
+            "durationMins": 18,
+            "instruction": "Walk 6 mins (450m) to Kalighat Metro Station (Gate 2) ➔ Board Blue Line Northbound Train ➔ 18-min fast underground ride directly to Shyambazar Station (bypassing 2+ hours of Kolkata street road jams) ➔ Exit Gate 1 into North Kolkata"
+          },
+          {
+            "pandalId": 101,
+            "walkFromPrev": "5 min (400m) walk from Shyambazar Gate 1 to Bagbazar Sarbojanin"
+          },
+          {
+            "pandalId": 102,
+            "walkFromPrev": "7 min (550m) into Kumartuli Park"
+          },
+          {
+            "pandalId": 109,
+            "walkFromPrev": "6 min (500m) to Ahiritola Jubak Brinda (Riverside Ghat)"
+          }
+        ]
+      },
 {
               "id": "circuit-ballygunge-cultural",
               "title": "Ballygunge Aristocratic & Cultural Trail",
@@ -2404,6 +2477,7 @@
         if (circuit.id === 'circuit-shyambazar-heritage') label = 'Shyambazar (Heritage)';
         if (circuit.id === 'circuit-shyambazar-theme') label = 'Shyambazar (Art Trail)';
         if (circuit.id === 'circuit-ballygunge-cultural') label = 'Ballygunge (Cultural Trail)';
+        if (circuit.id === 'circuit-ballygunge-to-north') label = 'Ballygunge ➔ North (Cross-City Hop)';
         if (circuit.id === 'circuit-kalighat') label = 'Kalighat (South Mega)';
         if (circuit.id === 'circuit-central-green') label = 'Central (College Sq)';
         if (circuit.id === 'circuit-belgachia-tala') label = 'Belgachia (Tala Prattoy)';
@@ -2515,6 +2589,34 @@
           </div>
 
           ${circuit.steps.map((step, idx) => {
+            if (step.isTransit) {
+              const transitUrl = `https://www.google.com/maps/dir/?api=1&origin=${encodeURIComponent(step.fromStation + ' Metro Station Kolkata')}&destination=${encodeURIComponent(step.toStation + ' Metro Station Kolkata')}&travelmode=transit`;
+              return `
+                <div class="my-3 p-3.5 bg-gradient-to-r from-blue-900 via-indigo-950 to-festive-900 text-white rounded-2xl border-2 border-blue-400/40 shadow-lg relative overflow-hidden">
+                  <div class="flex items-start justify-between relative z-10">
+                    <div class="flex items-center gap-2.5">
+                      <div class="w-9 h-9 rounded-xl bg-blue-500/20 border border-blue-400/40 flex items-center justify-center text-blue-300 text-lg">
+                        🚇
+                      </div>
+                      <div>
+                        <span class="text-[9px] font-black uppercase tracking-wider bg-blue-400/20 text-blue-300 border border-blue-400/30 px-1.5 py-0.5 rounded-full">Walk ➔ Metro ➔ Hop More</span>
+                        <h4 class="text-xs font-bold text-white mt-1">${step.fromStation} ➔ ${step.toStation} (${step.line} Line)</h4>
+                      </div>
+                    </div>
+                    <span class="text-[10px] font-black text-amber-300 bg-black/40 px-2 py-0.5 rounded-full border border-white/10">~${step.durationMins} mins ride</span>
+                  </div>
+                  <div class="mt-2.5 pt-2 border-t border-white/10 text-[11px] text-blue-100/90 space-y-1 relative z-10 leading-relaxed">
+                    <p>• <strong>Hop Route:</strong> ${step.instruction}</p>
+                    <p class="text-[10px] text-emerald-300 font-semibold">• <strong>Why Metro?</strong> Cuts 2+ hours of Kolkata festival road traffic between South and North!</p>
+                  </div>
+                  <div class="mt-2.5 pt-1.5 flex gap-2 relative z-10">
+                    <a href="${transitUrl}" target="_blank" rel="noopener" class="flex-1 py-1.5 px-2 bg-blue-500 hover:bg-blue-400 text-white font-bold rounded-lg text-[10px] text-center shadow">
+                      Launch Metro Transit Directions ↗
+                    </a>
+                  </div>
+                </div>
+              `;
+            }
             const p = getPandalById(step.pandalId);
             if (!p) return '';
             const isSaved = myHopList.includes(p.id);
@@ -2871,6 +2973,22 @@
                   Map Walk to Next
                 </a>
               </div>
+              ${(p.station !== nextP.station && calcDistanceKm(p.lat, p.lng, nextP.lat, nextP.lng) > 2.0) ? `
+                <div class="mt-2 p-2.5 bg-blue-50/90 dark:bg-blue-950/40 rounded-xl border border-blue-200 dark:border-blue-900/60 text-[11px] space-y-1">
+                  <div class="flex items-center justify-between text-blue-950 dark:text-blue-200 font-bold">
+                    <span class="flex items-center gap-1">🚇 Cross-Sector Metro Hop Recommended:</span>
+                    <span class="text-[10px] text-blue-700 dark:text-blue-300 font-semibold">${calcDistanceKm(p.lat, p.lng, nextP.lat, nextP.lng).toFixed(1)} km</span>
+                  </div>
+                  <p class="text-gray-600 dark:text-gray-300 text-[10px]">
+                    Walk to <strong>${p.station} Metro</strong> ➔ Ride ${p.line} Line to <strong>${nextP.station} Metro</strong> ➔ Walk to ${nextP.name}.
+                  </p>
+                  <div class="pt-0.5">
+                    <a href="https://www.google.com/maps/dir/?api=1&origin=${encodeURIComponent(p.name + ' Kolkata')}&destination=${encodeURIComponent(nextP.name + ' Kolkata')}&travelmode=transit" target="_blank" rel="noopener" class="text-[10px] font-bold text-blue-600 dark:text-blue-400 hover:underline">
+                      Launch Combined Metro & Walking Directions ↗
+                    </a>
+                  </div>
+                </div>
+              ` : ''}
             ` : ''}
           </div>
         `;
@@ -2972,6 +3090,34 @@
       modalBtnDriveCurrent.href = directDriveUrl;
 
       updateModalHoplistBtn();
+
+      // Setup Walk-to-Metro details
+      const modalMetroLinePill = document.getElementById('modal-metro-line-pill');
+      const modalWalkToMetroDesc = document.getElementById('modal-walk-to-metro-desc');
+      const modalBtnWalkToMetro = document.getElementById('modal-btn-walk-to-metro');
+      const modalBtnCrossCityHop = document.getElementById('modal-btn-cross-city-hop');
+
+      if (modalMetroLinePill) modalMetroLinePill.textContent = `${p.line} Line`;
+      if (modalWalkToMetroDesc) {
+        modalWalkToMetroDesc.innerHTML = `From <strong>${isBengali && p.nameBn ? p.nameBn : p.name}</strong>, walk <strong>${p.accessibility}</strong> to <strong>${p.station} Metro Station</strong> to catch trains.`;
+      }
+      if (modalBtnWalkToMetro) {
+        modalBtnWalkToMetro.href = `https://www.google.com/maps/dir/?api=1&origin=${encodeURIComponent(p.name + ' Kolkata')}&destination=${encodeURIComponent(p.station + ' Metro Station Kolkata')}&travelmode=walking`;
+      }
+      if (modalBtnCrossCityHop) {
+        modalBtnCrossCityHop.onclick = () => {
+          closeHopModal();
+          // If in South / Ballygunge, suggest cross-city to North
+          if (p.zone === 'South' || p.location.toLowerCase().includes('ballygunge')) {
+            currentActiveCircuitId = 'circuit-ballygunge-to-north';
+          } else {
+            currentActiveCircuitId = 'circuit-ballygunge-cultural';
+          }
+          renderCircuitStationPills();
+          renderActiveCircuit();
+          switchTab('circuits');
+        };
+      }
 
       const nearby = (p.nearbyPandalIds || []).map(id => getPandalById(id)).filter(Boolean);
 
