@@ -344,6 +344,7 @@
             <button id="filter-zone-south" class="hover:text-festive-800">South</button>
             <button id="filter-zone-central" class="hover:text-festive-800">Central</button>
             <button id="filter-zone-east" class="hover:text-festive-800">East / VIP</button>
+            <button id="filter-zone-heritage" class="hover:text-festive-800">🏛️ Bonedi Heritage</button>
             <button id="filter-zone-ballygunge" class="hover:text-festive-800">Ballygunge</button>
           </div>
           <div class="flex items-center gap-2">
@@ -426,6 +427,193 @@
       <div id="hoplist-container" class="space-y-2.5">
         <!-- List of added pandals -->
       </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- VIEW: BONEDI BARI (ARISTOCRATIC HERITAGE)  -->
+    <!-- ========================================== -->
+    <section id="view-bonedi" class="hidden space-y-4">
+
+      <!-- Royal Heritage Hero Banner -->
+      <div class="bg-gradient-to-br from-stone-950 via-rose-950 to-amber-950 dark:from-black dark:via-festive-night dark:to-stone-950 rounded-3xl p-5 text-white shadow-2xl border-2 border-amber-400/40 relative overflow-hidden">
+        <!-- Vintage Motif Glow Background -->
+        <div class="absolute -right-8 -top-8 w-40 h-40 bg-amber-500/15 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="absolute -left-8 -bottom-8 w-40 h-40 bg-rose-500/15 rounded-full blur-3xl pointer-events-none"></div>
+
+        <div class="relative z-10 space-y-3">
+          <div class="flex items-center justify-between">
+            <span class="inline-flex items-center gap-1 px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-wider bg-amber-400/20 text-amber-300 border border-amber-300/40 shadow-xs">
+              <span class="text-xs">🏛️</span> 260+ Years Zamindar Heritage
+            </span>
+            <span class="px-2.5 py-0.5 rounded-full text-[10px] font-black bg-gradient-to-r from-amber-400 to-amber-500 text-rose-950 shadow">
+              Day Visits (8 AM – 8 PM)
+            </span>
+          </div>
+
+          <div>
+            <h2 class="text-xl font-black font-festive text-amber-100 tracking-tight leading-snug">
+              বনেদি বাড়ির দুর্গাপূজা • Aristocratic Heritage Walk
+            </h2>
+            <p class="text-xs text-rose-200/90 dark:text-gray-300 mt-1 leading-relaxed">
+              Step into Kolkata's historic zamindar mansions (Thakurdalan), pure Ekchala idols in Daaker Saaj, Belgian cut-glass chandeliers, and sacred cannon-fire rituals dating back to 1757.
+            </p>
+          </div>
+
+          <!-- Quick Stats Bar -->
+          <div class="grid grid-cols-3 gap-2 pt-2 border-t border-amber-400/20 text-center">
+            <div class="bg-white/10 dark:bg-black/30 rounded-2xl py-2 px-1 border border-amber-300/20">
+              <span class="block text-xs font-black text-amber-300 font-festive">8 Mansions</span>
+              <span class="text-[9.5px] text-gray-300">Centuries Old</span>
+            </div>
+            <div class="bg-white/10 dark:bg-black/30 rounded-2xl py-2 px-1 border border-amber-300/20">
+              <span class="block text-xs font-black text-amber-300 font-festive">2 Curated Trails</span>
+              <span class="text-[9.5px] text-gray-300">North & South</span>
+            </div>
+            <div class="bg-white/10 dark:bg-black/30 rounded-2xl py-2 px-1 border border-amber-300/20">
+              <span class="block text-xs font-black text-amber-300 font-festive">100% Metro</span>
+              <span class="text-[9.5px] text-gray-300">Walkable Gates</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Route Switcher Tabs -->
+      <div class="space-y-2">
+        <div class="flex items-center justify-between">
+          <label class="text-xs font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400">Select Heritage Trail:</label>
+          <span id="bonedi-trail-badge" class="text-xs text-festive-800 dark:text-amber-400 font-semibold">6 Historic Stops</span>
+        </div>
+
+        <div class="grid grid-cols-2 gap-2 text-xs font-bold">
+          <button id="btn-bonedi-trail-north" class="bonedi-trail-tab py-2.5 px-3 rounded-2xl border-2 border-amber-500 bg-festive-900 text-white shadow-md flex items-center justify-center gap-1.5 transition-all text-left">
+            <span>👑 North Rajbari Trail</span>
+          </button>
+          <button id="btn-bonedi-trail-south" class="bonedi-trail-tab py-2.5 px-3 rounded-2xl border border-gray-200 dark:border-festive-nightBorder bg-white dark:bg-festive-nightCard text-gray-700 dark:text-gray-300 hover:border-amber-500 flex items-center justify-center gap-1.5 transition-all text-left">
+            <span>⚜️ South & Janbazar Trail</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Active Trail Overview & Action Strip -->
+      <div id="bonedi-route-summary-card" class="bg-white dark:bg-festive-nightCard rounded-2xl p-4 border border-amber-200 dark:border-amber-900/60 shadow-sm space-y-3">
+        <div class="flex items-start justify-between">
+          <div>
+            <span class="text-[10px] font-extrabold uppercase tracking-wider text-rose-800 dark:text-rose-300" id="bonedi-trail-subtitle">North Kolkata Zamindar Circuit</span>
+            <h3 class="text-sm font-extrabold text-gray-900 dark:text-white mt-0.5" id="bonedi-trail-title">Shovabazar ➔ Dorjeepara ➔ Thanthania ➔ Laha Bari</h3>
+            <p class="text-xs text-gray-500 dark:text-gray-400 mt-0.5" id="bonedi-trail-metrics">Total Walk: 2.1 km • ~1 hr 45 min • Start: Shovabazar Metro (Gate 2)</p>
+          </div>
+          <span class="w-9 h-9 rounded-2xl bg-amber-100 dark:bg-amber-950/60 border border-amber-300 dark:border-amber-800 flex items-center justify-center text-amber-700 dark:text-amber-300 font-black text-sm flex-shrink-0">
+            🏛️
+          </span>
+        </div>
+
+        <!-- Master Trail Action Buttons -->
+        <div class="grid grid-cols-2 gap-2 pt-2 border-t border-gray-100 dark:border-festive-nightBorder">
+          <a id="btn-bonedi-master-gmap" href="#" target="_blank" rel="noopener" class="py-2.5 px-3 bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 text-rose-950 font-black rounded-xl text-center text-xs flex items-center justify-center gap-1.5 shadow-sm">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"/></svg>
+            <span>Google Maps Route</span>
+          </a>
+          <button id="btn-bonedi-add-all-hop" class="py-2.5 px-3 border border-festive-800 dark:border-amber-400 text-festive-900 dark:text-amber-300 hover:bg-festive-50 dark:hover:bg-amber-400/10 font-bold rounded-xl text-center text-xs flex items-center justify-center gap-1.5 transition-all">
+            <span>+ Add Trail to Hop List</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Step-by-Step Heritage Mansion Timeline -->
+      <div id="bonedi-steps-container" class="space-y-3">
+        <!-- Rendered by JS -->
+      </div>
+
+      <!-- Bonedi Bari Cultural Guide & Visiting Etiquette -->
+      <div class="bg-gradient-to-br from-amber-50 via-rose-50/50 to-white dark:from-amber-950/30 dark:via-festive-nightCard dark:to-festive-nightCard rounded-3xl p-4 border border-amber-300 dark:border-amber-800/80 shadow-sm space-y-3">
+        <div class="flex items-center gap-2">
+          <span class="w-7 h-7 rounded-xl bg-amber-500/20 text-amber-700 dark:text-amber-300 flex items-center justify-center text-sm font-bold">📜</span>
+          <h4 class="text-xs font-black uppercase tracking-wider text-amber-900 dark:text-amber-200">
+            Bonedi Bari Visiting Etiquette & Sacred Protocols
+          </h4>
+        </div>
+
+        <div class="space-y-2 text-xs text-gray-700 dark:text-gray-300 leading-relaxed">
+          <div class="p-2.5 bg-white/80 dark:bg-black/30 rounded-2xl border border-amber-200/60 dark:border-amber-900/40 space-y-1">
+            <p class="font-bold text-gray-900 dark:text-white flex items-center gap-1.5">
+              <span>⏰ Sacred Visiting Hours (Active Ancestral Residences):</span>
+            </p>
+            <p class="text-[11px] text-gray-600 dark:text-gray-400">
+              Unlike public theme pandals open all night, Bonedi Baris are private family homes. Best visited during <strong>8:00 AM – 1:00 PM</strong> (Morning Puja & Pushpanjali) and <strong>4:30 PM – 8:30 PM</strong> (Sandhya Arati & Dhunuchi Naach). Courtyards close between 1:30 PM – 4:00 PM for Bhog preparation.
+            </p>
+          </div>
+
+          <div class="p-2.5 bg-white/80 dark:bg-black/30 rounded-2xl border border-amber-200/60 dark:border-amber-900/40 space-y-1">
+            <p class="font-bold text-gray-900 dark:text-white flex items-center gap-1.5">
+              <span>🥿 Footwear & Sanctum Sanctity:</span>
+            </p>
+            <p class="text-[11px] text-gray-600 dark:text-gray-400">
+              Please remove footwear before stepping onto carpeted Thakurdalan areas. Strictly avoid stepping onto the consecrated raised sanctum altar (বেদী / Vedi) where family priests conduct rituals.
+            </p>
+          </div>
+
+          <div class="p-2.5 bg-white/80 dark:bg-black/30 rounded-2xl border border-amber-200/60 dark:border-amber-900/40 space-y-1">
+            <p class="font-bold text-gray-900 dark:text-white flex items-center gap-1.5">
+              <span>📸 Photography Rules:</span>
+            </p>
+            <p class="text-[11px] text-gray-600 dark:text-gray-400">
+              Courtyard photography is welcomed, but <strong>flash photography is strictly forbidden</strong>. Never block priests or family members during offering rituals.
+            </p>
+          </div>
+
+          <div class="p-2.5 bg-white/80 dark:bg-black/30 rounded-2xl border border-amber-200/60 dark:border-amber-900/40 space-y-1">
+            <p class="font-bold text-gray-900 dark:text-white flex items-center gap-1.5">
+              <span>✨ Unique Rituals to Witness:</span>
+            </p>
+            <p class="text-[11px] text-gray-600 dark:text-gray-400">
+              • <strong>Shovabazar:</strong> Cannon firing to mark the onset of Sandhi Puja.<br/>
+              • <strong>Dorjeepara Mitra Bari:</strong> Unique horse-faced lion (Ashwamukhi Singha).<br/>
+              • <strong>Thanthania Dutta Bari & Laha Bari:</strong> Peaceful Hara-Gauri posture without Mahishasura.<br/>
+              • <strong>Mallick Bari:</strong> Sacred release of Nilkantha birds on Dashami.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Vintage Sweet & Food Joints Along the Heritage Walk -->
+      <div class="bg-white dark:bg-festive-nightCard rounded-3xl p-4 border border-gray-200 dark:border-festive-nightBorder shadow-sm space-y-2.5">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center gap-2">
+            <span class="w-6 h-6 rounded-lg bg-rose-100 dark:bg-rose-950 text-rose-700 dark:text-rose-300 flex items-center justify-center text-xs font-bold">🍬</span>
+            <h4 class="text-xs font-black uppercase tracking-wider text-gray-900 dark:text-white">
+              Heritage Food & Sweet Stops En Route
+            </h4>
+          </div>
+          <span class="text-[10px] text-amber-600 dark:text-amber-400 font-bold">100+ Years Old</span>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
+          <div class="p-2.5 rounded-2xl bg-gray-50 dark:bg-black/30 border border-gray-200 dark:border-festive-nightBorder flex items-center justify-between">
+            <div>
+              <p class="font-bold text-gray-900 dark:text-white">Nakur Chandra Nandy</p>
+              <p class="text-[10px] text-rose-700 dark:text-rose-400 font-medium">Jalbhara Sandesh & Parijat (Hedua)</p>
+            </div>
+            <a href="https://www.google.com/maps/dir/?api=1&destination=Girish+Chandra+Dey+and+Nakur+Chandra+Nandy+Kolkata&travelmode=walking" target="_blank" rel="noopener" class="text-[10px] text-blue-600 dark:text-blue-400 font-bold hover:underline">Walk</a>
+          </div>
+
+          <div class="p-2.5 rounded-2xl bg-gray-50 dark:bg-black/30 border border-gray-200 dark:border-festive-nightBorder flex items-center justify-between">
+            <div>
+              <p class="font-bold text-gray-900 dark:text-white">Mitra Cafe</p>
+              <p class="text-[10px] text-rose-700 dark:text-rose-400 font-medium">Fish Diamond Fry & Kabiraji (Shovabazar)</p>
+            </div>
+            <a href="https://www.google.com/maps/dir/?api=1&destination=Mitra+Cafe+Shobhabazar+Kolkata&travelmode=walking" target="_blank" rel="noopener" class="text-[10px] text-blue-600 dark:text-blue-400 font-bold hover:underline">Walk</a>
+          </div>
+
+          <div class="p-2.5 rounded-2xl bg-gray-50 dark:bg-black/30 border border-gray-200 dark:border-festive-nightBorder flex items-center justify-between">
+            <div>
+              <p class="font-bold text-gray-900 dark:text-white">Putiram Sweets</p>
+              <p class="text-[10px] text-rose-700 dark:text-rose-400 font-medium">Radhaballavi & Dalpuri (College St)</p>
+            </div>
+            <a href="https://www.google.com/maps/dir/?api=1&destination=Putiram+College+Street+Kolkata&travelmode=walking" target="_blank" rel="noopener" class="text-[10px] text-blue-600 dark:text-blue-400 font-bold hover:underline">Walk</a>
+          </div>
+        </div>
+      </div>
+
     </section>
 
   </main>
@@ -755,13 +943,21 @@
 
   <!-- Bottom Floating Tab Bar -->
   <nav class="fixed bottom-0 left-0 right-0 z-40 glass-nav bg-white/90 dark:bg-festive-nightCard/95 border-t border-rose-100 dark:border-festive-nightBorder shadow-lg" style="padding-bottom: var(--safe-bottom);">
-    <div class="max-w-md mx-auto px-4 py-2 flex items-center justify-between text-center">
+    <div class="max-w-md mx-auto px-1.5 py-1.5 flex items-center justify-between text-center">
       
-      <button id="nav-btn-circuits" class="nav-item-btn flex-1 flex flex-col items-center py-1.5 text-festive-900 dark:text-amber-400 font-bold active:scale-95 transition-all relative rounded-2xl">
+      <button id="nav-btn-circuits" class="nav-item-btn flex-1 flex flex-col items-center py-1 text-festive-900 dark:text-amber-400 font-bold active:scale-95 transition-all relative rounded-2xl">
         <svg class="w-5 h-5 mb-0.5" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/>
         </svg>
-        <span class="text-[10px]">Circuits</span>
+        <span class="text-[9.5px]">Circuits</span>
+      </button>
+
+      <button id="nav-btn-bonedi" class="nav-item-btn flex-1 flex flex-col items-center py-1 text-gray-500 hover:text-festive-900 dark:text-gray-400 font-medium active:scale-95 transition-all relative rounded-2xl">
+        <svg class="w-5 h-5 mb-0.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/>
+        </svg>
+        <span class="text-[9.5px] leading-tight">Bonedi Bari</span>
+        <span class="absolute -top-0.5 right-1 px-1 py-0.2 bg-gradient-to-r from-amber-500 to-rose-600 text-white text-[7px] font-black rounded-full shadow-xs leading-none">Royal</span>
       </button>
 
       <button id="nav-btn-map" class="nav-item-btn flex-1 flex flex-col items-center py-1.5 text-gray-500 hover:text-festive-900 dark:text-gray-400 font-medium active:scale-95 transition-all relative rounded-2xl">
@@ -1615,6 +1811,191 @@
                   113
             ]
       },
+      // --- BONEDI BARI (ARISTOCRATIC HERITAGE MANSIONS) ---
+      {
+            "id": 301,
+            "nameBn": "শোভাবাজার রাজবাড়ি (বড় তরফ)",
+            "zone": "Heritage",
+            "name": "Shovabazar Rajbari (Boro Taraf)",
+            "location": "36 Raja Nabakrishna Street, Sovabazar",
+            "attraction": "Founded in 1757 by Raja Nabakrishna Deb right after Plassey. Celebrated Natmandir courtyard, majestic pillars, traditional Ekchala protima with pure silver foil Daaker Saaj, and cannon firing during Sandhi Puja.",
+            "theme2026": "Heritage 1757 — Traditional Ekchala & Royal Natmandir",
+            "artist2026": "Hereditary Rajbari Sculptors & Craftsmen",
+            "line": "Blue",
+            "station": "Shovabazar Sutanuti",
+            "accessibility": "3-min walk (Gate 2, 250m)",
+            "lat": 22.5982,
+            "lng": 88.3663,
+            "crowd": "Moderate",
+            "hypeScore": 9.9,
+            "mapLink": "https://www.google.com/maps/search/?api=1&query=Sovabazar+Rajbari+Boro+Taraf+Kolkata",
+            "isBonediBari": true,
+            "estYear": 1757,
+            "founder": "Raja Nabakrishna Deb",
+            "visitingHours": "8:00 AM – 1:00 PM & 4:30 PM – 8:30 PM",
+            "highlight": "Oldest puja in trail, attended by Lord Clive in 1757, cannon firing during Sandhi Puja"
+      },
+      {
+            "id": 302,
+            "nameBn": "শোভাবাজার রাজবাড়ি (ছোট তরফ)",
+            "zone": "Heritage",
+            "name": "Shovabazar Rajbari (Choto Taraf)",
+            "location": "33 Raja Nabakrishna Street, Sovabazar",
+            "attraction": "Built in 1790 by Raja Nabakrishna Deb for his biological son Rajkrishna Deb, located directly opposite Boro Taraf. Magnificent colonnaded Thakurdalan with double-height arches, silver ornaments, and hereditary dhak rhythms.",
+            "theme2026": "Classical Aristocratic Thakurdalan — 236 Years of Devotion",
+            "artist2026": "Generational Kumartuli Clay Masters",
+            "line": "Blue",
+            "station": "Shovabazar Sutanuti",
+            "accessibility": "3-min walk (Gate 2, 280m)",
+            "lat": 22.5986,
+            "lng": 88.3668,
+            "crowd": "Moderate",
+            "hypeScore": 9.8,
+            "mapLink": "https://www.google.com/maps/search/?api=1&query=Sovabazar+Rajbari+Chhoto+Taraf+Kolkata",
+            "isBonediBari": true,
+            "estYear": 1790,
+            "founder": "Raja Nabakrishna Deb (for Rajkrishna Deb)",
+            "visitingHours": "8:00 AM – 1:00 PM & 4:30 PM – 8:30 PM",
+            "highlight": "Grand double-height arched courtyard directly across the street from Boro Taraf"
+      },
+      {
+            "id": 303,
+            "nameBn": "দর্জিপাড়া মিত্র বাড়ি",
+            "zone": "Heritage",
+            "name": "Dorjeepara Mitra Bari",
+            "location": "59 Beadon Street / Dorjeepara",
+            "attraction": "Founded in 1807 by Radhakrishna Mitra. Renowned across Bengal for its unique Ashwa-mukhi Singha (horse-headed lion mount of Ma Durga), monumental multi-tiered naivedya pyramids, and 3-story antique Thakurdalan with Belgium cut-glass chandeliers.",
+            "theme2026": "Ashwa-mukhi Singha & Historic Belgium Glass Thakurdalan",
+            "artist2026": "Hereditary Mitra Bari Artisans",
+            "line": "Blue",
+            "station": "Shovabazar Sutanuti",
+            "accessibility": "7-min walk (Gate 1 / Beadon St, 550m)",
+            "lat": 22.5915,
+            "lng": 88.3652,
+            "crowd": "Moderate",
+            "hypeScore": 9.8,
+            "mapLink": "https://www.google.com/maps/search/?api=1&query=Dorjeepara+Mitra+Bari+Durga+Puja+Kolkata",
+            "isBonediBari": true,
+            "estYear": 1807,
+            "founder": "Radhakrishna Mitra",
+            "visitingHours": "8:00 AM – 1:00 PM & 4:30 PM – 8:30 PM",
+            "highlight": "Unique horse-faced lion (Ashwamukhi Singha) & towering Belgian cut-glass chandeliers"
+      },
+      {
+            "id": 304,
+            "nameBn": "ছাতুবাবু লাতুবাবু রামদুলাল দে সরকার বাড়ি",
+            "zone": "Heritage",
+            "name": "Chatu Babu Latu Babu Bari",
+            "location": "67E Beadon Street, Hedua",
+            "attraction": "Started in 1770 by pioneer millionaire merchant Ramdulal Dey (Sarkar), carried on by sons Chatu Babu & Latu Babu. Unique iconographic tradition: Jaya and Vijaya (Durga's companions) flank Ma Durga above Lakshmi and Saraswati on the Chalchitra.",
+            "theme2026": "Jaya-Vijaya Ekchala Tradition — 256-Year Merchant Legacy",
+            "artist2026": "Traditional Kumartuli Clay Masters",
+            "line": "Blue",
+            "station": "Girish Park",
+            "accessibility": "5-min walk (Gate 2 / Hedua, 450m)",
+            "lat": 22.5898,
+            "lng": 88.3685,
+            "crowd": "Moderate",
+            "hypeScore": 9.7,
+            "mapLink": "https://www.google.com/maps/search/?api=1&query=Chatu+Babu+Latu+Babu+Durga+Puja+Kolkata",
+            "isBonediBari": true,
+            "estYear": 1770,
+            "founder": "Ramdulal Dey (Sarkar), Chatu Babu & Latu Babu",
+            "visitingHours": "8:00 AM – 1:00 PM & 4:30 PM – 8:30 PM",
+            "highlight": "Jaya & Vijaya flanking Durga instead of only Lakshmi & Saraswati"
+      },
+      {
+            "id": 305,
+            "nameBn": "ঠনঠনিয়া দত্ত বাড়ি",
+            "zone": "Heritage",
+            "name": "Thanthania Dutta Bari",
+            "location": "3 Bidhan Sarani / College Street crossing",
+            "attraction": "Founded in 1855 by Dwarakanath Dutta. Unique iconography where Durga sits peacefully on Lord Shiva's lap in the serene Hara-Gauri posture without slaying the demon. Celebrated for soul-stirring Dhunuchi Arati and Chandrapuli sweets.",
+            "theme2026": "Serene Hara-Gauri Posture — Peaceful Non-Demon Iconography",
+            "artist2026": "Generational Family Clay Sculptors",
+            "line": "Blue",
+            "station": "Central",
+            "accessibility": "8-min walk (Gate 2 / MG Road, 600m)",
+            "lat": 22.5830,
+            "lng": 88.3658,
+            "crowd": "Moderate",
+            "hypeScore": 9.7,
+            "mapLink": "https://www.google.com/maps/search/?api=1&query=Thanthania+Dutta+Bari+Durga+Puja+Kolkata",
+            "isBonediBari": true,
+            "estYear": 1855,
+            "founder": "Dwarakanath Dutta",
+            "visitingHours": "8:00 AM – 1:00 PM & 4:30 PM – 8:30 PM",
+            "highlight": "Durga seated on Lord Shiva's lap (Hara-Gauri posture) with no weapons or demon"
+      },
+      {
+            "id": 306,
+            "nameBn": "লাহা বাড়ি",
+            "zone": "Heritage",
+            "name": "Laha Bari",
+            "location": "2A Bidhan Sarani / 1 Bechu Chatterjee Street",
+            "attraction": "200+ year-old aristocratic merchant family puja founded by Pran Krishna Laha. Strict Vaishnava tradition: No animal sacrifice, pure vegetarian satvik offerings (chhanar payesh, kheer, fruits). Goddess Durga sits on a lotus on Shiva's lap.",
+            "theme2026": "Vaishnavite Hara-Gauri Tradition — Pure Satvik Offerings",
+            "artist2026": "Hereditary Laha Family Artisans",
+            "line": "Blue",
+            "station": "Central",
+            "accessibility": "8-min walk (Gate 2, 650m)",
+            "lat": 22.5815,
+            "lng": 88.3645,
+            "crowd": "Moderate",
+            "hypeScore": 9.8,
+            "mapLink": "https://www.google.com/maps/search/?api=1&query=Laha+Bari+Durga+Puja+Kolkata",
+            "isBonediBari": true,
+            "estYear": 1800,
+            "founder": "Pran Krishna Laha & Kristo Das Laha",
+            "visitingHours": "8:00 AM – 1:00 PM & 4:30 PM – 8:30 PM",
+            "highlight": "Strict Vaishnava satvik puja, idol seated on lotus on Shiva's lap"
+      },
+      {
+            "id": 307,
+            "nameBn": "রানি রাসমণি বাড়ি (জানবাজার)",
+            "zone": "Heritage",
+            "name": "Rani Rashmoni Bari (Janbazar)",
+            "location": "13/18B S.N. Banerjee Road, Janbazar",
+            "attraction": "Founded in 1790 by Pritaram Das and nurtured by legendary philanthropist Lokmata Rani Rashmoni. Sri Ramakrishna Paramahamsa himself worshipped here! Features massive colonnaded Natmandir and grand Dashami celebrations.",
+            "theme2026": "Janbazar Rajbari Heritage — Sri Ramakrishna's Sacred Visits",
+            "artist2026": "Hereditary Clay Artists",
+            "line": "Blue",
+            "station": "Esplanade",
+            "accessibility": "4-min walk (Gate 1 / S.N. Banerjee Rd, 350m)",
+            "lat": 22.5620,
+            "lng": 88.3548,
+            "crowd": "Moderate",
+            "hypeScore": 9.8,
+            "mapLink": "https://www.google.com/maps/search/?api=1&query=Rani+Rashmoni+Bari+Janbazar+Kolkata",
+            "isBonediBari": true,
+            "estYear": 1790,
+            "founder": "Pritaram Das & Lokmata Rani Rashmoni",
+            "visitingHours": "8:00 AM – 1:00 PM & 4:30 PM – 8:30 PM",
+            "highlight": "Worshipped by Sri Ramakrishna Paramahamsa, massive historic pillared Natmandir"
+      },
+      {
+            "id": 308,
+            "nameBn": "মল্লিক বাড়ি (ভবানীপুর)",
+            "zone": "Heritage",
+            "name": "Mallick Bari (Bhowanipore)",
+            "location": "Mohini Mohan Road, Bhowanipore",
+            "attraction": "Ancestral residence of veteran actors Ranjit Mallick and Koel Mallick. Dating back centuries to Guptipara and established in Bhowanipore in 1860. Pristine traditional Ekchala protima, sacred family rituals, release of clay Nilkantha birds, open to respectful visitors.",
+            "theme2026": "Sabeki Nilkantha Tradition — 160-Year Bhowanipore Legacy",
+            "artist2026": "Traditional Kumartuli Masters",
+            "line": "Blue",
+            "station": "Netaji Bhavan",
+            "accessibility": "5-min walk (Gate 1 / Mohini Mohan Rd, 400m)",
+            "lat": 22.5285,
+            "lng": 88.3475,
+            "crowd": "Moderate",
+            "hypeScore": 9.8,
+            "mapLink": "https://www.google.com/maps/search/?api=1&query=Mallick+Bari+Durga+Puja+Bhowanipore+Kolkata",
+            "isBonediBari": true,
+            "estYear": 1860,
+            "founder": "Radha Gobinda Mallick",
+            "visitingHours": "8:00 AM – 1:00 PM & 4:30 PM – 8:30 PM",
+            "highlight": "Famous ancestral home of Ranjit & Koel Mallick, Nilkantha bird ritual, Ekchala pratima"
+      },
 {
                 "id": 205,
                 "nameBn": "বালিগঞ্জ কালচারাল",
@@ -1776,7 +2157,55 @@
           { pandalId: 131, walkFromPrev: "4 min (250m) to Tarun Sangha" }
         ]
       },
+            // --- BONEDI BARI SPECIAL HERITAGE CIRCUITS ---
       {
+        id: "circuit-bonedi-north",
+        title: "North Kolkata Aristocratic Mansions (উত্তর কলকাতা রাজবাড়ি পরিক্রমা)",
+        metroStation: "Shovabazar Sutanuti",
+        metroLine: "Blue",
+        exitGate: "Gate 2 (Raja Nabakrishna St)",
+        totalDistance: "2.1 km",
+        approxTime: "1 hr 45 min walk & visit",
+        shortDesc: "Walk through Kolkata's legendary 260+ year-old zamindar mansions: Shovabazar Rajbari, Dorjeepara Mitra Bari, Chatu Babu Latu Babu, Thanthania Dutta Bari & Laha Bari.",
+        finishStation: "Central",
+        hypeAggregate: 9.9,
+        isHeritage: true,
+        steps: [
+          { pandalId: 301, walkFromPrev: "3 min (250m) from Shovabazar Gate 2 to Boro Taraf" },
+          { pandalId: 302, walkFromPrev: "1 min (80m) across the street to Choto Taraf" },
+          { pandalId: 303, walkFromPrev: "7 min (550m) along Beadon St into Dorjeepara Mitra Bari" },
+          { pandalId: 304, walkFromPrev: "5 min (400m) east to Chatu Babu Latu Babu Bari" },
+          { pandalId: 305, walkFromPrev: "8 min (600m) down Bidhan Sarani to Thanthania Dutta Bari" },
+          { pandalId: 306, walkFromPrev: "3 min (200m) down Bidhan Sarani to Laha Bari (Central Metro is 250m ahead)" }
+        ]
+      },
+      {
+        id: "circuit-bonedi-south",
+        title: "South & Janbazar Heritage Trail (ভবানীপুর ও জানবাজার ঐতিহ্য পরিক্রমা)",
+        metroStation: "Netaji Bhavan",
+        metroLine: "Blue",
+        exitGate: "Gate 1 (Ashutosh Mukherjee Rd)",
+        totalDistance: "1.4 km walk + 8m Metro",
+        approxTime: "1 hr 15 min",
+        shortDesc: "Experience Mallick Bari in Bhowanipore, then take a rapid 8-minute Blue Line hop to Esplanade for Rani Rashmoni's historic Janbazar mansion.",
+        finishStation: "Esplanade",
+        hypeAggregate: 9.8,
+        isHeritage: true,
+        steps: [
+          { pandalId: 308, walkFromPrev: "5 min (400m) from Netaji Bhavan Gate 1 to Mallick Bari" },
+          {
+            isTransit: true,
+            transitType: "metro",
+            fromStation: "Netaji Bhavan",
+            toStation: "Esplanade",
+            line: "Blue",
+            durationMins: 8,
+            instruction: "Walk 400m back to Netaji Bhavan Metro ➔ Board Blue Line Northbound Train ➔ 8-min direct ride to Esplanade Station ➔ Exit Gate 1 into Janbazar"
+          },
+          { pandalId: 307, walkFromPrev: "4 min (350m) from Esplanade Gate 1 down S.N. Banerjee Rd to Rani Rashmoni Bari" }
+        ]
+      },
+{
         "id": "circuit-ballygunge-to-north",
         "title": "Cross-City Trail: Ballygunge ➔ Metro Transfer ➔ North Art Walk",
         "metroStation": "Jatin Das Park",
@@ -2017,12 +2446,14 @@
     const viewFood = document.getElementById('view-food');
     const viewPandals = document.getElementById('view-pandals');
     const viewItinerary = document.getElementById('view-itinerary');
+    const viewBonedi = document.getElementById('view-bonedi');
 
     const navBtnCircuits = document.getElementById('nav-btn-circuits');
     const navBtnMap = document.getElementById('nav-btn-map');
     const navBtnFood = document.getElementById('nav-btn-food');
     const navBtnPandals = document.getElementById('nav-btn-pandals');
     const navBtnItinerary = document.getElementById('nav-btn-itinerary');
+    const navBtnBonedi = document.getElementById('nav-btn-bonedi');
     const navHopDot = document.getElementById('nav-hop-dot');
     const badgeHopCount = document.getElementById('badge-hop-count');
 
@@ -2397,9 +2828,10 @@
 
     // --- TAB SWITCHING (Controlled from Bottom Nav) ---
     function switchTab(target) {
-      [viewCircuits, viewLiveMap, viewFood, viewPandals, viewItinerary].forEach(v => v.classList.add('hidden'));
+      [viewCircuits, viewLiveMap, viewFood, viewPandals, viewItinerary, viewBonedi].forEach(v => v && v.classList.add('hidden'));
 
-      [navBtnCircuits, navBtnMap, navBtnFood, navBtnPandals, navBtnItinerary].forEach(btn => {
+      [navBtnCircuits, navBtnBonedi, navBtnMap, navBtnFood, navBtnPandals, navBtnItinerary].forEach(btn => {
+        if (!btn) return;
         btn.classList.remove('text-festive-900', 'dark:text-amber-300', 'font-bold', 'bg-rose-100/60', 'dark:bg-amber-400/10');
         btn.classList.add('text-gray-500', 'dark:text-gray-400', 'font-medium');
         const pill = btn.querySelector('.nav-active-pill');
@@ -2409,6 +2841,7 @@
       
       const activeBtnMap = {
         circuits: navBtnCircuits,
+        bonedi: navBtnBonedi,
         map: navBtnMap,
         food: navBtnFood,
         pandals: navBtnPandals,
@@ -2442,6 +2875,10 @@
         viewItinerary.classList.remove('hidden');
         navBtnItinerary.classList.add('text-festive-900', 'dark:text-amber-400', 'font-bold');
         renderHopList();
+      } else if (target === 'bonedi') {
+        if (viewBonedi) viewBonedi.classList.remove('hidden');
+        if (navBtnBonedi) navBtnBonedi.classList.add('text-festive-900', 'dark:text-amber-400', 'font-bold');
+        renderBonediView();
       }
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
@@ -2477,6 +2914,8 @@
         if (circuit.id === 'circuit-shyambazar-heritage') label = 'Shyambazar (Heritage)';
         if (circuit.id === 'circuit-shyambazar-theme') label = 'Shyambazar (Art Trail)';
         if (circuit.id === 'circuit-ballygunge-cultural') label = 'Ballygunge (Cultural Trail)';
+        if (circuit.id === 'circuit-bonedi-north') label = '🏛️ Shovabazar (Bonedi Bari)';
+        if (circuit.id === 'circuit-bonedi-south') label = '🏛️ Bhowanipore (Bonedi Heritage)';
         if (circuit.id === 'circuit-ballygunge-to-north') label = 'Ballygunge ➔ North (Cross-City Hop)';
         if (circuit.id === 'circuit-kalighat') label = 'Kalighat (South Mega)';
         if (circuit.id === 'circuit-central-green') label = 'Central (College Sq)';
@@ -2721,9 +3160,11 @@
       let filtered = pandals.filter(p => {
         const matchesLine = (selectedLineFilter === 'all') || (p.line === selectedLineFilter);
         const matchesZone = (selectedZoneFilter === 'all') || (
-          selectedZoneFilter === 'ballygunge'
-            ? (p.location.toLowerCase().includes('ballygunge') || p.location.toLowerCase().includes('gariahat') || p.location.toLowerCase().includes('ritchie') || p.location.toLowerCase().includes('hindustan park') || p.location.toLowerCase().includes('dover') || p.location.toLowerCase().includes('lake view') || p.location.toLowerCase().includes('manoharpukur'))
-            : (p.zone.toLowerCase() === selectedZoneFilter.toLowerCase())
+          selectedZoneFilter === 'heritage'
+            ? (p.isBonediBari || p.zone.toLowerCase() === 'heritage')
+            : (selectedZoneFilter === 'ballygunge'
+              ? (p.location.toLowerCase().includes('ballygunge') || p.location.toLowerCase().includes('gariahat') || p.location.toLowerCase().includes('ritchie') || p.location.toLowerCase().includes('hindustan park') || p.location.toLowerCase().includes('dover') || p.location.toLowerCase().includes('lake view') || p.location.toLowerCase().includes('manoharpukur'))
+              : (p.zone.toLowerCase() === selectedZoneFilter.toLowerCase()))
         );
         const matchesQuery = !q || (
           p.name.toLowerCase().includes(q) ||
@@ -3231,6 +3672,7 @@
 
     // Bottom Navigation Handlers
     navBtnCircuits.addEventListener('click', () => switchTab('circuits'));
+    if (navBtnBonedi) navBtnBonedi.addEventListener('click', () => switchTab('bonedi'));
     navBtnMap.addEventListener('click', () => switchTab('map'));
     navBtnFood.addEventListener('click', () => switchTab('food'));
     navBtnPandals.addEventListener('click', () => switchTab('pandals'));
@@ -3306,6 +3748,7 @@
       { id: 'filter-zone-south', zone: 'south' },
       { id: 'filter-zone-central', zone: 'central' },
       { id: 'filter-zone-east', zone: 'east' },
+      { id: 'filter-zone-heritage', zone: 'heritage' },
       { id: 'filter-zone-ballygunge', zone: 'ballygunge' }
     ];
     zoneBtns.forEach(zb => {
@@ -3732,6 +4175,242 @@ ${mapUrl}
     if (typeof gsap !== 'undefined') {
       gsap.from("#radar-hero-card", { duration: 0.8, y: -20, autoAlpha: 0, ease: "power3.out" });
     }
+  
+    // ==========================================
+    // BONEDI BARI SPECIAL HERITAGE ROUTE LOGIC
+    // ==========================================
+    let activeBonediTrail = 'north'; // 'north' or 'south'
+
+    const bonediTrailsData = {
+      north: {
+        id: 'north',
+        circuitId: 'circuit-bonedi-north',
+        title: 'Shovabazar ➔ Dorjeepara ➔ Thanthania ➔ Laha Bari',
+        subtitle: 'North Kolkata Zamindar Circuit (উত্তর কলকাতা রাজবাড়ি পরিক্রমা)',
+        metrics: 'Total Walk: 2.1 km • ~1 hr 45 min • Start: Shovabazar Metro (Gate 2) • Finish: Central / MG Road',
+        stopIds: [301, 302, 303, 304, 305, 306],
+        stepTips: {
+          301: 'Exit Gate 2, walk along Raja Nabakrishna St to the grand courtyard of Boro Taraf.',
+          302: 'Cross Raja Nabakrishna St to Choto Taraf at 33 Raja Nabakrishna St.',
+          303: 'Walk south down Rabindra Sarani to Beadon Street into Dorjeepara Mitra Bari.',
+          304: 'Walk east along Beadon Street towards Hedua to Ramdulal Sarkar Bari.',
+          305: 'Walk south along Bidhan Sarani past Thanthania Kali Mandir to Dutta Bari.',
+          306: 'Walk down Bidhan Sarani to Bechu Chatterjee St into Laha Bari. Central Metro is 250m ahead.'
+        },
+        transitAfterStep: null
+      },
+      south: {
+        id: 'south',
+        circuitId: 'circuit-bonedi-south',
+        title: 'Mallick Bari (Bhowanipore) & Rani Rashmoni Bari (Janbazar)',
+        subtitle: 'South & Janbazar Heritage Trail (ভবানীপুর ও জানবাজার ঐতিহ্য পরিক্রমা)',
+        metrics: 'Total Walk: 1.4 km • ~1 hr 15 min • Start: Netaji Bhavan (Gate 1) • Finish: Esplanade',
+        stopIds: [308, 307],
+        stepTips: {
+          308: 'Exit Netaji Bhavan Gate 1, walk down Mohini Mohan Road to Mallick Bari.',
+          307: 'Exit Esplanade Gate 1, walk down S.N. Banerjee Road to Janbazar Rani Rashmoni Bari.'
+        },
+        transitAfterStep: 308
+      }
+    };
+
+    function renderBonediView() {
+      const trail = bonediTrailsData[activeBonediTrail] || bonediTrailsData.north;
+      
+      const tabNorth = document.getElementById('btn-bonedi-trail-north');
+      const tabSouth = document.getElementById('btn-bonedi-trail-south');
+      const badgeCount = document.getElementById('bonedi-trail-badge');
+      const titleEl = document.getElementById('bonedi-trail-title');
+      const subTitleEl = document.getElementById('bonedi-trail-subtitle');
+      const metricsEl = document.getElementById('bonedi-trail-metrics');
+      const masterGmapBtn = document.getElementById('btn-bonedi-master-gmap');
+
+      if (tabNorth && tabSouth) {
+        if (activeBonediTrail === 'north') {
+          tabNorth.className = 'bonedi-trail-tab py-2.5 px-3 rounded-2xl border-2 border-amber-500 bg-festive-900 text-white shadow-md flex items-center justify-center gap-1.5 transition-all text-left';
+          tabSouth.className = 'bonedi-trail-tab py-2.5 px-3 rounded-2xl border border-gray-200 dark:border-festive-nightBorder bg-white dark:bg-festive-nightCard text-gray-700 dark:text-gray-300 hover:border-amber-500 flex items-center justify-center gap-1.5 transition-all text-left';
+        } else {
+          tabSouth.className = 'bonedi-trail-tab py-2.5 px-3 rounded-2xl border-2 border-amber-500 bg-festive-900 text-white shadow-md flex items-center justify-center gap-1.5 transition-all text-left';
+          tabNorth.className = 'bonedi-trail-tab py-2.5 px-3 rounded-2xl border border-gray-200 dark:border-festive-nightBorder bg-white dark:bg-festive-nightCard text-gray-700 dark:text-gray-300 hover:border-amber-500 flex items-center justify-center gap-1.5 transition-all text-left';
+        }
+      }
+
+      if (badgeCount) badgeCount.textContent = `${trail.stopIds.length} Historic Stops`;
+      if (titleEl) titleEl.textContent = trail.title;
+      if (subTitleEl) subTitleEl.textContent = trail.subtitle;
+      if (metricsEl) metricsEl.textContent = trail.metrics;
+
+      // Master Google Maps Walking URL
+      if (masterGmapBtn) {
+        const stops = trail.stopIds.map(id => getPandalById(id)).filter(Boolean);
+        if (stops.length > 0) {
+          const waypoints = stops.map(s => `${s.name} Kolkata`);
+          masterGmapBtn.href = generateGMapMultiStopUrl(waypoints, 'walking');
+        }
+      }
+
+      renderBonediSteps(trail);
+    }
+
+    function renderBonediSteps(trail) {
+      const container = document.getElementById('bonedi-steps-container');
+      if (!container) return;
+
+      const stops = trail.stopIds.map(id => getPandalById(id)).filter(Boolean);
+
+      let html = stops.map((p, index) => {
+        const isInHop = myHopList.includes(p.id);
+        const stepNum = index + 1;
+        const walkTip = trail.stepTips[p.id] || `Exit ${p.station} Metro Gate and follow pedestrian signage.`;
+
+        let cardHtml = `
+          <div class="bonedi-step-card bg-white dark:bg-festive-nightCard rounded-3xl p-4 border border-amber-200 dark:border-amber-900/60 shadow-sm space-y-3 relative overflow-hidden">
+            <!-- Brass Heritage Watermark Stamp -->
+            <div class="absolute -right-3 -bottom-3 text-6xl font-black text-amber-500/10 select-none pointer-events-none">
+              ${p.estYear || '1757'}
+            </div>
+
+            <!-- Header Row -->
+            <div class="flex items-start justify-between relative z-10">
+              <div class="flex items-center gap-2.5">
+                <span class="w-8 h-8 rounded-2xl bg-gradient-to-br from-amber-400 to-amber-600 text-rose-950 font-black text-xs flex items-center justify-center shadow-md flex-shrink-0">
+                  #${stepNum}
+                </span>
+                <div>
+                  <div class="flex items-center gap-1.5 flex-wrap">
+                    <span class="text-[9px] font-black uppercase tracking-wider px-2 py-0.2 rounded-full bg-amber-100 dark:bg-amber-950 text-amber-900 dark:text-amber-200 border border-amber-300 dark:border-amber-800">
+                      Est. ${p.estYear || 'Historic'}
+                    </span>
+                    <span class="text-[9px] font-bold text-gray-500 dark:text-gray-400">
+                      ${p.station} Metro (${p.accessibility.split('(')[0].trim()})
+                    </span>
+                  </div>
+                  <h4 class="text-sm font-black text-gray-900 dark:text-white mt-0.5 leading-snug">
+                    ${p.nameBn} <span class="text-xs font-bold text-gray-600 dark:text-gray-400 block sm:inline">(${p.name})</span>
+                  </h4>
+                </div>
+              </div>
+            </div>
+
+            <!-- Historical Highlight & Architecture Note -->
+            <div class="p-2.5 rounded-2xl bg-amber-50/70 dark:bg-black/30 border border-amber-200/50 dark:border-amber-900/30 text-xs space-y-1 relative z-10">
+              <p class="font-bold text-amber-950 dark:text-amber-200 flex items-center gap-1">
+                <span>👑 Founder & Legacy:</span>
+                <span class="font-normal text-gray-700 dark:text-gray-300">${p.founder || 'Aristocratic Zamindar Lineage'}</span>
+              </p>
+              <p class="text-[11px] text-gray-600 dark:text-gray-400 leading-relaxed">
+                ${p.attraction}
+              </p>
+              <p class="text-[10px] text-rose-800 dark:text-rose-300 font-semibold pt-1 border-t border-amber-200/40 dark:border-amber-900/40 flex items-center gap-1">
+                <span>⭐ Highlight:</span> <span>${p.highlight || p.theme2026}</span>
+              </p>
+            </div>
+
+            <!-- Walking Tip from previous / metro -->
+            <div class="flex items-start gap-1.5 text-[11px] text-gray-600 dark:text-gray-400 relative z-10">
+              <svg class="w-3.5 h-3.5 text-emerald-600 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/></svg>
+              <span><strong>Walk Route:</strong> ${walkTip}</span>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="grid grid-cols-3 gap-1.5 pt-2 border-t border-gray-100 dark:border-festive-nightBorder relative z-10">
+              <a
+                href="${p.mapLink || ('https://www.google.com/maps/dir/?api=1&destination=' + encodeURIComponent(p.name + ' Kolkata') + '&travelmode=walking')}"
+                target="_blank"
+                rel="noopener"
+                class="py-2 px-2 bg-amber-500 hover:bg-amber-400 text-rose-950 font-black rounded-xl text-center text-[10px] flex items-center justify-center gap-1 shadow-xs"
+              >
+                <svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/></svg>
+                <span>Walk Here</span>
+              </a>
+
+              <button
+                onclick="openHopModal(${p.id})"
+                class="py-2 px-2 bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-800 dark:text-gray-200 font-bold rounded-xl text-center text-[10px] flex items-center justify-center gap-1"
+              >
+                <span>Details & Lore</span>
+              </button>
+
+              <button
+                onclick="toggleHopListFromBonedi(${p.id})"
+                id="btn-bonedi-hop-${p.id}"
+                class="py-2 px-1.5 ${isInHop ? 'bg-rose-100 dark:bg-rose-950 text-rose-800 dark:text-rose-200 border border-rose-300' : 'border border-festive-800 dark:border-amber-400 text-festive-900 dark:text-amber-300'} font-bold rounded-xl text-center text-[10px] flex items-center justify-center gap-0.5"
+              >
+                <span>${isInHop ? '✓ In Hop List' : '+ Hop List'}</span>
+              </button>
+            </div>
+          </div>
+        `;
+
+        // Check if transit card needed after this stop
+        if (trail.transitAfterStep === p.id) {
+          cardHtml += `
+            <div class="my-2 p-3.5 bg-gradient-to-r from-blue-900 via-indigo-900 to-purple-900 text-white rounded-2xl shadow-lg border border-blue-400/30 space-y-2">
+              <div class="flex items-center justify-between">
+                <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[9px] font-black uppercase tracking-wider bg-blue-400/20 text-blue-200 border border-blue-300/30">
+                  🚇 Blue Line Metro Hop
+                </span>
+                <span class="text-[10px] font-bold text-amber-300">8 mins ride (4 stops)</span>
+              </div>
+              <div>
+                <h4 class="text-xs font-bold text-white">Board Blue Line: Netaji Bhavan ➔ Esplanade</h4>
+                <p class="text-[11px] text-blue-200/90 mt-0.5">
+                  Walk 400m back to Netaji Bhavan Metro, board Northbound train to Esplanade, exit Gate 1 for Rani Rashmoni Bari.
+                </p>
+              </div>
+              <a href="https://www.google.com/maps/dir/?api=1&origin=Netaji+Bhavan+Metro+Station+Kolkata&destination=Esplanade+Metro+Station+Kolkata&travelmode=transit" target="_blank" rel="noopener" class="inline-flex items-center gap-1 text-[10px] text-amber-300 font-bold hover:underline">
+                <span>Open Metro Directions in Google Maps ➔</span>
+              </a>
+            </div>
+          `;
+        }
+
+        return cardHtml;
+      }).join('');
+
+      container.innerHTML = html;
+    }
+
+    function toggleHopListFromBonedi(pandalId) {
+      toggleHopList(pandalId);
+      const btn = document.getElementById(`btn-bonedi-hop-${pandalId}`);
+      if (btn) {
+        const isInHop = myHopList.includes(pandalId);
+        btn.className = `py-2 px-1.5 ${isInHop ? 'bg-rose-100 dark:bg-rose-950 text-rose-800 dark:text-rose-200 border border-rose-300' : 'border border-festive-800 dark:border-amber-400 text-festive-900 dark:text-amber-300'} font-bold rounded-xl text-center text-[10px] flex items-center justify-center gap-0.5`;
+        btn.innerHTML = `<span>${isInHop ? '✓ In Hop List' : '+ Hop List'}</span>`;
+      }
+    }
+
+    function addAllBonediTrailToHopList() {
+      const trail = bonediTrailsData[activeBonediTrail] || bonediTrailsData.north;
+      let addedCount = 0;
+      trail.stopIds.forEach(id => {
+        if (!myHopList.includes(id)) {
+          myHopList.push(id);
+          addedCount++;
+        }
+      });
+      localStorage.setItem('myHopList_2026', JSON.stringify(myHopList));
+      updateHopListBadges();
+      renderBonediView();
+      showToast(`Added ${addedCount} Bonedi Baris to Hop List! 🏛️`, '✓');
+    }
+
+    // Bind Bonedi trail switcher tabs & buttons
+    document.addEventListener('DOMContentLoaded', () => {
+      document.getElementById('btn-bonedi-trail-north')?.addEventListener('click', () => {
+        activeBonediTrail = 'north';
+        renderBonediView();
+      });
+
+      document.getElementById('btn-bonedi-trail-south')?.addEventListener('click', () => {
+        activeBonediTrail = 'south';
+        renderBonediView();
+      });
+
+      document.getElementById('btn-bonedi-add-all-hop')?.addEventListener('click', addAllBonediTrailToHopList);
+    });
+
   </script>
 </body>
 </html>
