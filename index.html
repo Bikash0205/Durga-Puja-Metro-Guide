@@ -260,20 +260,19 @@
 
         <!-- The Leaflet Map Container -->
         <!-- Anti-Fatigue Circuit Mode Button -->
-        <div class="space-y-1.5 pt-1 pb-1">
-          <div class="flex items-center gap-2">
-            <button
-              id="btn-toggle-anti-fatigue-loop"
-              class="flex-1 py-2.5 px-3 bg-gradient-to-r from-emerald-500 via-teal-600 to-emerald-700 text-white font-black rounded-2xl text-xs shadow-lg transition-all flex items-center justify-center gap-1.5 ring-2 ring-emerald-300"
-            >
-              <span id="btn-loop-status-text">✓ Anti-Fatigue Loop Active</span>
-              <span class="px-1.5 py-0.2 rounded-full bg-black/30 text-emerald-200 text-[8.5px] uppercase font-black">Tap to Reset</span>
-            </button>
+        <!-- Clean Map Controls Bar -->
+        <div class="space-y-2 pt-1 pb-1">
+          <!-- Quick Map Layer Toggle Chips -->
+          <div class="flex items-center gap-1.5 overflow-x-auto pb-0.5 no-scrollbar" id="map-quick-layer-chips">
+            <button onclick="toggleMapLayerFilter('all')" id="chip-layer-all" class="px-2.5 py-1 rounded-xl text-[10px] font-black bg-festive-900 text-white shadow-2xs whitespace-nowrap">All Pandals</button>
+            <button onclick="toggleMapLayerFilter('bonedi')" id="chip-layer-bonedi" class="px-2.5 py-1 rounded-xl text-[10px] font-bold bg-amber-100 text-amber-900 border border-amber-300 whitespace-nowrap">👑 Bonedi Baris</button>
+            <button onclick="toggleMapLayerFilter('washrooms')" id="chip-layer-washrooms" class="px-2.5 py-1 rounded-xl text-[10px] font-bold bg-teal-100 text-teal-900 border border-teal-300 whitespace-nowrap">🚻 Washrooms</button>
+            <button onclick="toggleMapLayerFilter('metro')" id="chip-layer-metro" class="px-2.5 py-1 rounded-xl text-[10px] font-bold bg-blue-100 text-blue-900 border border-blue-300 whitespace-nowrap">🚇 Metros</button>
           </div>
 
-          <!-- Horizontal Circuit Selector for Map Loop -->
+          <!-- Horizontal Walking Trail Selector (Naturally Optimal) -->
           <div class="flex items-center gap-1.5 overflow-x-auto pb-1 no-scrollbar pt-0.5" id="map-circuit-chips">
-            <!-- Dynamically populated by JS for all circuits -->
+            <!-- Populated by JS -->
           </div>
         </div>
 
@@ -2272,17 +2271,17 @@
 
     // --- WALKING CIRCUITS ---
     const walkingCircuits = [
-      // --- SOUTH MEGA FULL LOOP (ANTI-FATIGUE KALIGHAT <-> BALLYGUNGE) ---
+      // --- SOUTH FORWARD TRAIL (KALIGHAT TO BALLYGUNGE) ---
       {
         id: "circuit-kalighat-ballygunge-loop",
-        title: "Kalighat ⇄ Ballygunge Full Loop (Zero-Fatigue Return)",
+        title: "Kalighat to Ballygunge Forward Trail",
         metroStation: "Kalighat",
         metroLine: "Blue",
         exitGate: "Gate 2 (Rashbehari Ave)",
-        totalDistance: "2.8 km walk + 5m Auto Return",
-        approxTime: "1 hr 45 min complete loop",
-        shortDesc: "The ultimate closed-loop circuit: Walk through 7 iconic pandals from Kalighat to Ballygunge Cultural, recharge at Maddox Square lawn, then take the 5-min shared auto (₹12) or 8-min walk to Jatin Das Park Metro to close the loop without walking exhaustion!",
-        finishStation: "Kalighat Metro (via 5-min Auto) or Jatin Das Park",
+        totalDistance: "2.8 km forward walk",
+        approxTime: "1 hr 30 min pedestrian walk",
+        shortDesc: "The ultimate forward pedestrian trail: Walk sequentially through iconic pandals from Kalighat to Ballygunge Cultural, recharge at Maddox Square lawn, then exit forward at Jatin Das Park Metro or hop directly into adjacent Ballygunge!",
+        finishStation: "Jatin Das Park Metro (Gate 2)",
         hypeAggregate: 9.9,
         steps: [
           { pandalId: 3, walkFromPrev: "4 min (300m) from Kalighat Gate 2 to Badamtala Ashar Sangha" },
@@ -2568,14 +2567,14 @@
     // UNIVERSAL ANTI-FATIGUE ROUTE REPOSITORY (ALL 11 CIRCUITS)
     // ==========================================
     const antiFatigueLoopsData = {
-      // 1. Kalighat ⇄ Ballygunge Full Loop
+      // 1. Kalighat to Ballygunge Forward Trail
       "circuit-kalighat-ballygunge-loop": {
         circuitId: "circuit-kalighat-ballygunge-loop",
-        title: "Kalighat ⇄ Ballygunge Full Loop",
-        shortName: "Kalighat ⇄ Ballygunge",
+        title: "Kalighat to Ballygunge Forward Trail",
+        shortName: "Kalighat ➔ Ballygunge",
         startStation: "Kalighat (Gate 2)",
         startCoords: [22.5186, 88.3465],
-        finishStation: "Kalighat (via 5-min Auto) / Jatin Das Park",
+        finishStation: "Jatin Das Park Metro (Gate 2)",
         outwardWaypoints: [
           [22.5186, 88.3465], [22.5190, 88.3500], [22.5188, 88.3515],
           [22.5195, 88.3565], [22.5225, 88.3585], [22.5215, 88.3610],
@@ -4064,9 +4063,10 @@
           </div>
           <button
             onclick="viewCircuitOnMapWithLoop('${circuit.id}')"
-            class="w-full py-2.5 px-3 bg-gradient-to-r from-amber-500 via-rose-600 to-amber-600 text-white font-black rounded-xl text-xs shadow-md transition-all flex items-center justify-center gap-1.5 active:scale-98"
+            class="w-full py-2.5 px-3 bg-gradient-to-r from-festive-900 via-rose-900 to-festive-800 hover:from-festive-800 text-amber-200 font-bold rounded-xl text-xs shadow-md transition-all flex items-center justify-center gap-1.5 active:scale-98"
           >
-            <span>🔄 View Anti-Fatigue Closed Loop & Return on Map</span>
+            <svg class="w-4 h-4 text-amber-300" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"/></svg>
+            <span>View Walking Trail on Live Map</span>
           </button>
         </div>
 
@@ -4205,10 +4205,10 @@
                     <span class="w-7 h-7 rounded-xl bg-amber-400/20 text-amber-300 flex items-center justify-center text-sm font-black">⚡</span>
                     <div>
                       <div class="flex items-center gap-1.5 flex-wrap">
-                        <span class="text-[9.5px] uppercase font-black tracking-wider text-amber-300">Anti-Fatigue Loop Optimizer</span>
-                        <span class="px-1.5 py-0.2 rounded-full bg-emerald-500/30 text-emerald-300 text-[8px] font-black uppercase border border-emerald-400/30">${loop.fatigueSaved}</span>
+                        <span class="text-[9.5px] uppercase font-black tracking-wider text-amber-300">Forward Exit & Transit Link</span>
+                        <span class="px-1.5 py-0.2 rounded-full bg-emerald-500/30 text-emerald-300 text-[8px] font-black uppercase border border-emerald-400/30">Zero Foot Backtracking</span>
                       </div>
-                      <h4 class="text-xs font-bold text-white leading-snug">Zero-Fatigue Return to Start: ${loop.startStation}</h4>
+                      <h4 class="text-xs font-bold text-white leading-snug">Trail Finish & Exit at ${loop.finishStation}</h4>
                     </div>
                   </div>
                 </div>
@@ -4308,9 +4308,9 @@
 
                 <button
                   onclick="viewCircuitOnMapWithLoop('${circuit.id}')"
-                  class="w-full py-2.5 px-3 bg-gradient-to-r from-emerald-500 via-teal-600 to-emerald-700 text-white font-black rounded-xl text-xs shadow-md transition-all flex items-center justify-center gap-1.5 active:scale-98"
+                  class="w-full py-2.5 px-3 bg-white/15 hover:bg-white/25 text-white font-bold rounded-xl text-xs shadow-sm transition-all flex items-center justify-center gap-1.5 active:scale-98"
                 >
-                  <span>🗺️ View Forward Flow & Exit on Interactive Map</span>
+                  <span>🗺️ View on Live Map</span>
                 </button>
               </div>
             `;
@@ -6525,19 +6525,35 @@ ${mapUrl}
       const data = antiFatigueLoopsData[circuitId] || antiFatigueLoopsData["circuit-kalighat-ballygunge-loop"];
       if (!data) return;
 
+      // City-wide continuous hopping cycle map
+      const nextTrailMap = {
+        'circuit-kalighat-ballygunge-loop': { id: 'circuit-ballygunge-cultural', title: 'Ballygunge Cultural Trail', nextNh: 'Ballygunge & Dover' },
+        'circuit-kalighat': { id: 'circuit-ballygunge-cultural', title: 'Ballygunge Cultural Trail', nextNh: 'Ballygunge & Dover' },
+        'circuit-ballygunge-cultural': { id: 'circuit-bonedi-south', title: 'Bhowanipore & Janbazar Trail', nextNh: 'Bhowanipore & Janbazar' },
+        'circuit-bonedi-south': { id: 'circuit-central-green', title: 'Central & College Sq Trail', nextNh: 'College Square & Central' },
+        'circuit-central-green': { id: 'circuit-shyambazar-heritage', title: 'Bagbazar & Kumartuli Ghats', nextNh: 'North Bagbazar & Kumartuli' },
+        'circuit-shyambazar-heritage': { id: 'circuit-shyambazar-theme', title: 'Hatibagan & Kashi Bose Lane', nextNh: 'North Hatibagan Art' },
+        'circuit-shyambazar-theme': { id: 'circuit-bonedi-north', title: 'North Rajbari Mansions', nextNh: 'Sovabazar Heritage' },
+        'circuit-bonedi-north': { id: 'circuit-belgachia-tala', title: 'Tala Prattoy & Belgachia', nextNh: 'Tala & Belgachia' },
+        'circuit-belgachia-tala': { id: 'circuit-dumdum-park', title: 'Dum Dum Park Trio', nextNh: 'Dum Dum Park & VIP Rd' },
+        'circuit-dumdum-park': { id: 'circuit-kalighat-ballygunge-loop', title: 'Kalighat ⇄ Ballygunge Loop', nextNh: 'South Kalighat (Full City Loop)' },
+        'circuit-ballygunge-to-north': { id: 'circuit-shyambazar-heritage', title: 'Bagbazar & Kumartuli Ghats', nextNh: 'North Bagbazar & Kumartuli' }
+      };
+      const nextTrail = nextTrailMap[circuitId];
+
       container.innerHTML = `
         <div class="flex items-center justify-between border-b border-amber-400/20 pb-2">
           <div class="flex items-center gap-2">
-            <span class="w-7 h-7 rounded-xl bg-amber-400/20 text-amber-300 flex items-center justify-center text-sm font-black">⚡</span>
+            <span class="w-7 h-7 rounded-xl bg-amber-400/20 text-amber-300 flex items-center justify-center text-sm font-black">🚶</span>
             <div>
               <div class="flex items-center gap-1.5 flex-wrap">
-                <span class="text-[9.5px] uppercase font-black tracking-wider text-amber-300">Tired Human Loop Optimizer</span>
-                <span class="px-1.5 py-0.2 rounded-full bg-emerald-500/30 text-emerald-300 text-[8px] font-black uppercase border border-emerald-400/30">${data.fatigueSaved}</span>
+                <span class="text-[9.5px] uppercase font-black tracking-wider text-amber-300">Active Walking Trail</span>
+                <span class="px-1.5 py-0.2 rounded-full bg-emerald-500/30 text-emerald-300 text-[8px] font-black uppercase border border-emerald-400/30">Forward Flow</span>
               </div>
               <h4 class="text-xs font-bold text-white leading-snug">${data.title}</h4>
             </div>
           </div>
-          <button id="btn-close-anti-fatigue" onclick="toggleAntiFatigueLoop(false)" class="text-xs text-gray-400 hover:text-white font-bold p-1">✕</button>
+          <span class="text-[10px] text-rose-200/80 font-bold">${data.startStation} ➔ ${data.finishStation}</span>
         </div>
 
         <p class="text-[11px] text-rose-100/90 leading-relaxed">
@@ -6613,8 +6629,27 @@ ${mapUrl}
           </div>
         </div>
 
+        ${nextTrail ? `
+          <!-- Continuous Trail Hopping Connection -->
+          <div class="p-2.5 rounded-xl bg-gradient-to-r from-amber-500/20 via-rose-500/20 to-amber-500/20 border border-amber-300/40 flex items-center justify-between gap-2">
+            <div class="min-w-0 pr-1">
+              <span class="text-[9px] uppercase font-black tracking-wider text-amber-300 flex items-center gap-1">
+                <span>🚀 Continuous Trail Hop</span>
+              </span>
+              <h5 class="text-xs font-bold text-white truncate mt-0.5">${nextTrail.title}</h5>
+              <p class="text-[10px] text-rose-200">Connects directly into ${nextTrail.nextNh} (No backtracking)</p>
+            </div>
+            <button
+              onclick="switchMapAntiFatigueCircuit('${nextTrail.id}')"
+              class="px-3 py-1.5 rounded-xl bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 text-rose-950 font-black text-[10.5px] shadow-sm flex items-center gap-1 active:scale-95 flex-shrink-0"
+            >
+              <span>Hop Next ➔</span>
+            </button>
+          </div>
+        ` : ''}
+
         <div class="pt-1 flex items-center justify-between text-[10px] text-amber-200/90 font-semibold border-t border-amber-400/20">
-          <span>🔵 Outward Trail</span>
+          <span>🔵 Walking Trail</span>
           <span>🚕 Dashed Gold = Auto Corridor</span>
           <span>🚇 Dashed Green = Metro Link</span>
         </div>
@@ -6679,33 +6714,13 @@ ${mapUrl}
     function renderCircuitAntiFatigueLoop(circuitId, forcedState) {
       const targetId = circuitId || activeAntiFatigueCircuitId || 'circuit-kalighat-ballygunge-loop';
       activeAntiFatigueCircuitId = targetId;
-
-      if (typeof forcedState === 'boolean') {
-        isAntiFatigueLoopActive = forcedState;
-      }
+      isAntiFatigueLoopActive = true;
 
       const loopData = antiFatigueLoopsData[targetId] || antiFatigueLoopsData["circuit-kalighat-ballygunge-loop"];
       const drawer = document.getElementById('anti-fatigue-drawer');
-      const toggleBtn = document.getElementById('btn-toggle-anti-fatigue-loop');
-      const statusText = document.getElementById('btn-loop-status-text');
+      if (drawer) drawer.classList.remove('hidden');
 
-      if (drawer) drawer.classList.toggle('hidden', !isAntiFatigueLoopActive);
-
-      if (toggleBtn) {
-        if (isAntiFatigueLoopActive) {
-          toggleBtn.className = 'flex-1 py-2.5 px-3 bg-gradient-to-r from-emerald-500 via-teal-600 to-emerald-700 text-white font-black rounded-2xl text-xs shadow-lg transition-all flex items-center justify-center gap-1.5 ring-2 ring-emerald-300';
-          if (statusText) statusText.textContent = `✓ Loop Active: ${loopData ? loopData.shortName : 'Universal'}`;
-          toggleBtn.innerHTML = `<span id="btn-loop-status-text">✓ Loop Active: ${loopData ? loopData.shortName : 'Universal'}</span> <span class="px-1.5 py-0.2 rounded-full bg-black/30 text-emerald-200 text-[8.5px] uppercase font-black">Tap to Reset</span>`;
-        } else {
-          toggleBtn.className = 'flex-1 py-2.5 px-3 bg-gradient-to-r from-amber-400 via-amber-500 to-rose-600 hover:from-amber-300 text-rose-950 font-black rounded-2xl text-xs shadow-md transition-all flex items-center justify-center gap-1.5 active:scale-98';
-          toggleBtn.innerHTML = `<span class="text-sm">🔄</span> <span>Enable Anti-Fatigue Loop</span> <span class="px-1.5 py-0.2 rounded-full bg-rose-950 text-amber-300 text-[8.5px] uppercase font-black">Fatigue Saver</span>`;
-        }
-      }
-
-      if (isAntiFatigueLoopActive) {
-        renderAntiFatigueDrawerContent(targetId);
-      }
-
+      renderAntiFatigueDrawerContent(targetId);
       renderMapCircuitChips();
 
       if (mapInstance && loopData) {
@@ -6822,25 +6837,20 @@ ${mapUrl}
           ];
           mapInstance.fitBounds(allCoords, { padding: [30, 30] });
 
-          showToast(`${loopData.shortName} Loop active! Return hubs & escapes framed 🔄`, "✓");
+          showToast(`${loopData.shortName} trail loaded 🗺️`, "✓");
         }
       }
     }
 
     // Backward compatibility wrapper for old toggle calls
     function toggleAntiFatigueLoop(forcedState) {
-      if (typeof forcedState === 'boolean') {
-        isAntiFatigueLoopActive = forcedState;
-      } else {
-        isAntiFatigueLoopActive = !isAntiFatigueLoopActive;
-      }
-      renderCircuitAntiFatigueLoop(activeAntiFatigueCircuitId, isAntiFatigueLoopActive);
+      isAntiFatigueLoopActive = true;
+      renderCircuitAntiFatigueLoop(activeAntiFatigueCircuitId, true);
     }
 
-    // Initialize chips & loop on load
+    // Initialize chips & optimal trail on load
     document.addEventListener('DOMContentLoaded', () => {
       renderMapCircuitChips();
-      document.getElementById('btn-toggle-anti-fatigue-loop')?.addEventListener('click', () => toggleAntiFatigueLoop());
     });
 
   </script>
