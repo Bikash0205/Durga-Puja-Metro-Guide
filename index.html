@@ -281,6 +281,51 @@
           <span class="flex items-center gap-1.5"><span class="w-3 h-3 rounded-full bg-rose-700 inline-block"></span> Pandals</span>
           <span class="flex items-center gap-1.5"><span class="w-3 h-3 rounded-full bg-amber-500 inline-block"></span> Food Joints</span>
         </div>
+
+        <!-- Active Map Cluster Banner -->
+        <div id="map-active-nh-banner" class="hidden p-3.5 bg-gradient-to-r from-festive-900 via-rose-900 to-amber-950 text-white rounded-2xl shadow-lg border border-amber-300/30 space-y-2">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-2">
+              <span class="w-7 h-7 rounded-xl bg-amber-400/20 border border-amber-300/30 flex items-center justify-center text-xs text-amber-300">📍</span>
+              <div>
+                <span class="text-[9.5px] uppercase font-black tracking-wider text-amber-300" id="map-active-nh-eyebrow">Active Cluster</span>
+                <h4 id="map-active-nh-title" class="text-xs font-bold text-white">Neighbourhood Name</h4>
+              </div>
+            </div>
+            <span id="map-active-nh-count" class="text-[10px] font-black bg-amber-400 text-rose-950 px-2 py-0.5 rounded-full shadow-xs">0 Pandals</span>
+          </div>
+          <div class="grid grid-cols-2 gap-2 pt-1 border-t border-white/15 text-[10.5px]">
+            <button id="map-btn-view-in-dir" class="py-2 px-2.5 bg-white/20 hover:bg-white/30 text-white font-bold rounded-xl text-center transition-all">
+              View in Directory ➔
+            </button>
+            <button id="map-btn-view-circuit" class="py-2 px-2.5 bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 text-rose-950 font-black rounded-xl text-center transition-all shadow-xs">
+              Walking Circuit ➔
+            </button>
+          </div>
+        </div>
+
+        <!-- ========================================== -->
+        <!-- JUMP TO A NEIGHBOURHOOD (CLUSTER CARDS)     -->
+        <!-- ========================================== -->
+        <div class="pt-3 border-t border-gray-100 dark:border-festive-nightBorder space-y-2">
+          <div class="flex items-center justify-between">
+            <div>
+              <p class="text-[10px] font-black uppercase tracking-wider text-rose-800 dark:text-rose-400">MORE MAPS</p>
+              <h3 class="text-base font-extrabold font-festive text-gray-900 dark:text-white leading-tight">Jump to a neighbourhood</h3>
+            </div>
+            <button id="btn-reset-map-nh" class="hidden text-xs text-rose-700 dark:text-amber-400 font-bold hover:underline flex items-center gap-1">
+              <span>✕ All Areas</span>
+            </button>
+          </div>
+          <p class="text-xs text-gray-500 dark:text-gray-400 leading-relaxed">
+            Tap any neighbourhood to fly the map directly to that cluster, isolate local pandals, and find nearest metro drop-offs.
+          </p>
+
+          <div id="neighbourhood-grid-map" class="grid grid-cols-2 gap-2 pt-1">
+            <!-- Dynamically populated -->
+          </div>
+        </div>
+
       </div>
     </section>
 
@@ -323,6 +368,23 @@
           <svg class="w-4 h-4 text-gray-400 absolute left-3.5 top-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
           </svg>
+        </div>
+
+        <!-- JUMP TO A NEIGHBOURHOOD CLUSTER DRAWER IN DIRECTORY -->
+        <div class="bg-white dark:bg-festive-nightCard rounded-2xl p-3 border border-amber-200/60 dark:border-festive-nightBorder space-y-2">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-1.5">
+              <span class="text-xs">📍</span>
+              <span class="text-[10px] font-black uppercase tracking-wider text-rose-800 dark:text-amber-400">Jump to a neighbourhood</span>
+            </div>
+            <div id="dir-active-nh-badge" class="hidden items-center gap-1.5 text-[10px] font-black bg-rose-100 dark:bg-rose-950 text-rose-800 dark:text-rose-200 px-2.5 py-0.5 rounded-full border border-rose-300 dark:border-rose-800">
+              <span id="dir-active-nh-name"></span>
+              <button id="btn-clear-dir-nh" class="text-xs font-black hover:text-rose-950 dark:hover:text-white ml-0.5" title="Clear filter">✕</button>
+            </div>
+          </div>
+          <div id="neighbourhood-grid-dir" class="grid grid-cols-2 gap-1.5 max-h-56 overflow-y-auto no-scrollbar pr-0.5">
+            <!-- Dynamically populated -->
+          </div>
         </div>
 
         <!-- Line Filters -->
@@ -2572,8 +2634,13 @@
         `);
       });
 
-      // 3. Pandal Markers with Dynamic Crowd Density
-      pandals.forEach(p => {
+      // 3. Pandal Markers with Dynamic Crowd Density (Filtered by Neighbourhood if active)
+      const activeNh = neighbourhoodsData.find(nh => nh.id === activeMapNeighbourhoodId);
+      const pandalsToRender = activeNh
+        ? pandals.filter(p => activeNh.pandalIds.includes(p.id))
+        : pandals;
+
+      pandalsToRender.forEach(p => {
         const crowdEst = getLiveCrowdEstimate(p);
         const pMarker = L.circleMarker([p.lat, p.lng], {
           radius: 7,
@@ -3172,7 +3239,10 @@
           p.station.toLowerCase().includes(q) ||
           p.theme2026.toLowerCase().includes(q)
         );
-        return matchesLine && matchesZone && matchesQuery;
+        const matchesNeighbourhood = !selectedNeighbourhoodId || (
+          neighbourhoodsData.find(nh => nh.id === selectedNeighbourhoodId)?.pandalIds.includes(p.id)
+        );
+        return matchesLine && matchesZone && matchesQuery && matchesNeighbourhood;
       });
 
       if (sortByHype) {
@@ -4410,6 +4480,248 @@ ${mapUrl}
 
       document.getElementById('btn-bonedi-add-all-hop')?.addEventListener('click', addAllBonediTrailToHopList);
     });
+
+  
+    // ==========================================
+    // KOLKATA NEIGHBOURHOODS DATA & CONTROLLER
+    // (Inspired by The Pujo Company's cluster architecture)
+    // ==========================================
+    const neighbourhoodsData = [
+      {
+        id: "bagbazar-shyambazar",
+        name: "Bagbazar & Shyambazar",
+        metro: "Shyambazar",
+        circuitId: "circuit-shyambazar-heritage",
+        pandalIds: [101, 111, 108, 127],
+        center: [22.6015, 88.3695],
+        zoom: 15
+      },
+      {
+        id: "kumartuli-sovabazar",
+        name: "Kumartuli, Ahiritola & Sovabazar",
+        metro: "Sovabazar Sutanuti",
+        circuitId: "circuit-bonedi-north",
+        pandalIds: [102, 124, 109, 301, 302],
+        center: [22.5990, 88.3650],
+        zoom: 15
+      },
+      {
+        id: "hatibagan-beadon",
+        name: "Hatibagan & Beadon St",
+        metro: "Shyambazar / Girish Park",
+        circuitId: "circuit-shyambazar-theme",
+        pandalIds: [114, 107, 303, 304],
+        center: [22.5930, 88.3680],
+        zoom: 15
+      },
+      {
+        id: "tala-belgachia",
+        name: "Tala & Belgachia",
+        metro: "Belgachia",
+        circuitId: "circuit-belgachia-tala",
+        pandalIds: [130, 117],
+        center: [22.6050, 88.3800],
+        zoom: 15
+      },
+      {
+        id: "dumdum-laketown",
+        name: "Dum Dum & Lake Town",
+        metro: "Dum Dum Park / VIP Rd",
+        circuitId: "circuit-dumdum-park",
+        pandalIds: [120, 121, 131, 113],
+        center: [22.6030, 88.4070],
+        zoom: 15
+      },
+      {
+        id: "collegest-sealdah",
+        name: "College St & Sealdah",
+        metro: "Central / Sealdah",
+        circuitId: "circuit-central-green",
+        pandalIds: [103, 104, 105, 305, 306, 307],
+        center: [22.5780, 88.3640],
+        zoom: 15
+      },
+      {
+        id: "kalighat-rashbehari",
+        name: "Kalighat & Rashbehari",
+        metro: "Kalighat",
+        circuitId: "circuit-kalighat",
+        pandalIds: [3, 201, 4, 8, 219],
+        center: [22.5200, 88.3500],
+        zoom: 15
+      },
+      {
+        id: "gariahat-dhakuria",
+        name: "Gariahat & Dhakuria",
+        metro: "Kalighat / Jatin Das Park",
+        circuitId: "circuit-kalighat",
+        pandalIds: [11, 1, 12, 17],
+        center: [22.5210, 88.3630],
+        zoom: 15
+      },
+      {
+        id: "bhowanipore-hazra",
+        name: "Bhowanipore & Hazra",
+        metro: "Netaji Bhavan",
+        circuitId: "circuit-bonedi-south",
+        pandalIds: [308, 220],
+        center: [22.5290, 88.3480],
+        zoom: 15
+      },
+      {
+        id: "newalipore-behala",
+        name: "New Alipore & Behala",
+        metro: "Majerhat",
+        circuitId: "circuit-kalighat",
+        pandalIds: [2],
+        center: [22.5110, 88.3300],
+        zoom: 15
+      },
+      {
+        id: "saltlake-sector3",
+        name: "Salt Lake & Sector III",
+        metro: "Karunamoyee",
+        circuitId: "circuit-central-green",
+        pandalIds: [230],
+        center: [22.5850, 88.4150],
+        zoom: 15
+      },
+      {
+        id: "ballygunge-dover",
+        name: "Ballygunge & Dover / Maddox",
+        metro: "Jatin Das Park / Kalighat",
+        circuitId: "circuit-ballygunge-cultural",
+        pandalIds: [205, 206, 220, 12, 17],
+        center: [22.5250, 88.3620],
+        zoom: 15
+      }
+    ];
+
+    let selectedNeighbourhoodId = null; // for Directory filtering
+    let activeMapNeighbourhoodId = null; // for Map focus
+
+    function renderNeighbourhoodCards(containerId, isMapMode = false) {
+      const container = document.getElementById(containerId);
+      if (!container) return;
+
+      const activeId = isMapMode ? activeMapNeighbourhoodId : selectedNeighbourhoodId;
+
+      container.innerHTML = neighbourhoodsData.map(nh => {
+        const isSelected = activeId === nh.id;
+        const count = nh.pandalIds.length;
+
+        return `
+          <button
+            onclick="${isMapMode ? `selectNeighbourhoodForMap('${nh.id}')` : `selectNeighbourhoodForDirectory('${nh.id}')`}"
+            class="neighbourhood-card text-left p-2.5 rounded-2xl border transition-all cursor-pointer flex items-center justify-between ${
+              isSelected
+                ? 'bg-rose-50/90 dark:bg-amber-950/40 border-2 border-festive-800 dark:border-amber-400 text-rose-950 dark:text-amber-100 shadow-sm scale-101'
+                : 'bg-white dark:bg-festive-nightCard border-gray-200 dark:border-festive-nightBorder hover:border-festive-700 dark:hover:border-amber-500 text-gray-800 dark:text-gray-200 shadow-2xs'
+            }"
+          >
+            <div class="pr-2 min-w-0 flex-1">
+              <h5 class="text-xs font-bold leading-snug truncate ${isSelected ? 'text-festive-900 dark:text-amber-200 font-black' : ''}">
+                ${nh.name}
+              </h5>
+              <p class="text-[9.5px] text-blue-600 dark:text-blue-400 font-semibold truncate mt-0.5">
+                🚇 ${nh.metro}
+              </p>
+            </div>
+            <span class="text-xs font-black font-mono ${
+              isSelected
+                ? 'bg-festive-900 text-amber-300'
+                : 'bg-gray-100 dark:bg-black/30 text-gray-500 dark:text-gray-400'
+            } px-2 py-0.5 rounded-full flex-shrink-0">
+              ${count}
+            </span>
+          </button>
+        `;
+      }).join('');
+    }
+
+    function selectNeighbourhoodForMap(nhId) {
+      const nh = neighbourhoodsData.find(n => n.id === nhId);
+      if (!nh) return;
+
+      activeMapNeighbourhoodId = nh.id;
+      renderNeighbourhoodCards('neighbourhood-grid-map', true);
+
+      const resetBtn = document.getElementById('btn-reset-map-nh');
+      if (resetBtn) resetBtn.classList.remove('hidden');
+
+      const banner = document.getElementById('map-active-nh-banner');
+      const bannerTitle = document.getElementById('map-active-nh-title');
+      const bannerCount = document.getElementById('map-active-nh-count');
+      if (banner && bannerTitle && bannerCount) {
+        banner.classList.remove('hidden');
+        bannerTitle.textContent = `${nh.name} (Metro: ${nh.metro})`;
+        bannerCount.textContent = `${nh.pandalIds.length} Pandals`;
+      }
+
+      if (mapInstance) {
+        mapInstance.flyTo(nh.center, nh.zoom, { duration: 1.2 });
+      }
+
+      renderMapMarkers();
+      showToast(`Map zoomed to ${nh.name}! 📍`, '✓');
+    }
+
+    function resetMapNeighbourhood() {
+      activeMapNeighbourhoodId = null;
+      renderNeighbourhoodCards('neighbourhood-grid-map', true);
+
+      const resetBtn = document.getElementById('btn-reset-map-nh');
+      if (resetBtn) resetBtn.classList.add('hidden');
+
+      const banner = document.getElementById('map-active-nh-banner');
+      if (banner) banner.classList.add('hidden');
+
+      if (mapInstance) {
+        mapInstance.flyTo([22.5600, 88.3639], 12, { duration: 1.0 });
+      }
+
+      renderMapMarkers();
+    }
+
+    function selectNeighbourhoodForDirectory(nhId) {
+      if (selectedNeighbourhoodId === nhId) {
+        selectedNeighbourhoodId = null;
+      } else {
+        selectedNeighbourhoodId = nhId;
+      }
+
+      updateDirectoryNeighbourhoodUI();
+      renderPandals();
+
+      const nh = neighbourhoodsData.find(n => n.id === nhId);
+      if (nh && selectedNeighbourhoodId) {
+        showToast(`Filtered to ${nh.name} (${nh.pandalIds.length} pujas) 📍`, '✓');
+      }
+    }
+
+    function updateDirectoryNeighbourhoodUI() {
+      renderNeighbourhoodCards('neighbourhood-grid-dir', false);
+      const badge = document.getElementById('dir-active-nh-badge');
+      const nameEl = document.getElementById('dir-active-nh-name');
+
+      if (badge && nameEl) {
+        if (selectedNeighbourhoodId) {
+          const nh = neighbourhoodsData.find(n => n.id === selectedNeighbourhoodId);
+          nameEl.textContent = nh ? nh.name : '';
+          badge.classList.remove('hidden');
+          badge.classList.add('flex');
+        } else {
+          badge.classList.add('hidden');
+          badge.classList.remove('flex');
+        }
+      }
+    }
+
+    function clearDirectoryNeighbourhood() {
+      selectedNeighbourhoodId = null;
+      updateDirectoryNeighbourhoodUI();
+      renderPandals();
+    }
 
   </script>
 </body>
