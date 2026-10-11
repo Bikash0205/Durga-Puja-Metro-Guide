@@ -280,6 +280,7 @@
           <span class="flex items-center gap-1.5"><span class="w-3 h-3 rounded-full bg-orange-600 inline-block"></span> Orange Line</span>
           <span class="flex items-center gap-1.5"><span class="w-3 h-3 rounded-full bg-rose-700 inline-block"></span> Pandals</span>
           <span class="flex items-center gap-1.5"><span class="w-3 h-3 rounded-full bg-amber-500 inline-block"></span> Food Joints</span>
+          <span class="flex items-center gap-1.5"><span class="w-3 h-3 rounded-full bg-teal-500 inline-block"></span> 🚻 Washrooms</span>
         </div>
 
         <!-- Active Map Cluster Banner -->
@@ -677,6 +678,106 @@
       </div>
 
     </section>
+    <!-- ========================================== -->
+    <!-- VIEW: WASHROOMS & NEARBY RESTROOM FINDER   -->
+    <!-- ========================================== -->
+    <section id="view-washroom" class="hidden space-y-4">
+
+      <!-- Hero Locator Banner -->
+      <div class="bg-gradient-to-br from-teal-950 via-cyan-950 to-emerald-950 dark:from-black dark:via-teal-950 dark:to-stone-950 rounded-3xl p-5 text-white shadow-2xl border-2 border-teal-400/30 relative overflow-hidden">
+        <!-- Glow effects -->
+        <div class="absolute -right-10 -top-10 w-44 h-44 bg-cyan-500/15 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="absolute -left-10 -bottom-10 w-44 h-44 bg-emerald-500/15 rounded-full blur-3xl pointer-events-none"></div>
+
+        <div class="relative z-10 space-y-3">
+          <div class="flex items-center justify-between">
+            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-wider bg-teal-400/20 text-teal-300 border border-teal-300/30 shadow-xs">
+              <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+              Live GPS Sanitation Radar
+            </span>
+            <span class="px-2.5 py-0.5 rounded-full text-[10px] font-black bg-emerald-400 text-teal-950 shadow">
+              28+ Verified Locations
+            </span>
+          </div>
+
+          <div>
+            <h2 class="text-xl font-black font-festive text-teal-100 tracking-tight leading-snug">
+              নিকটবর্তী শৌচাগার • Washrooms Nearby
+            </h2>
+            <p class="text-xs text-teal-200/90 dark:text-gray-300 mt-1 leading-relaxed">
+              Find clean, hygienic public restrooms, Metro station facilities, KMC Smart Deluxe toilets, and air-conditioned mall washrooms closest to your current spot.
+            </p>
+          </div>
+
+          <!-- GPS Detection Action Button -->
+          <div class="pt-2 border-t border-teal-400/20 flex flex-col sm:flex-row gap-2">
+            <button
+              id="btn-detect-washrooms-gps"
+              class="flex-1 py-2.5 px-4 bg-gradient-to-r from-teal-400 to-emerald-400 hover:from-teal-300 hover:to-emerald-300 active:scale-98 text-teal-950 font-black rounded-2xl text-xs shadow-lg transition-all flex items-center justify-center gap-2"
+            >
+              <svg class="w-4 h-4 text-teal-950" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+              <span>Detect My Location & Sort Nearest</span>
+            </button>
+          </div>
+
+          <!-- Reference Location Banner -->
+          <div id="washroom-ref-status" class="p-2.5 bg-black/40 rounded-2xl border border-white/10 text-xs flex items-center justify-between">
+            <div class="flex items-center gap-2 min-w-0">
+              <span class="text-emerald-400 font-bold">📍</span>
+              <span id="washroom-ref-text" class="text-[11px] text-gray-200 truncate font-medium">Sorted by distance from: Central Kolkata</span>
+            </div>
+            <span id="washroom-closest-badge" class="text-[10px] font-black text-amber-300 bg-amber-400/20 px-2 py-0.5 rounded-full flex-shrink-0">Nearest ~180m</span>
+          </div>
+
+          <!-- Quick City Hub Selector -->
+          <div class="space-y-1">
+            <label class="text-[10px] font-bold uppercase tracking-wider text-teal-300">Or simulate starting from hub:</label>
+            <div class="flex gap-1.5 overflow-x-auto no-scrollbar pb-1 text-[10px] font-bold">
+              <button class="washroom-hub-pill px-2.5 py-1 rounded-full bg-white/15 hover:bg-white/25 text-white whitespace-nowrap active:scale-95" data-hub="Kalighat" data-lat="22.5185" data-lng="88.3480">Kalighat</button>
+              <button class="washroom-hub-pill px-2.5 py-1 rounded-full bg-white/15 hover:bg-white/25 text-white whitespace-nowrap active:scale-95" data-hub="Gariahat" data-lat="22.5195" data-lng="88.3645">Gariahat</button>
+              <button class="washroom-hub-pill px-2.5 py-1 rounded-full bg-white/15 hover:bg-white/25 text-white whitespace-nowrap active:scale-95" data-hub="Shyambazar" data-lat="22.6025" data-lng="88.3698">Shyambazar</button>
+              <button class="washroom-hub-pill px-2.5 py-1 rounded-full bg-white/15 hover:bg-white/25 text-white whitespace-nowrap active:scale-95" data-hub="Sovabazar" data-lat="22.5985" data-lng="88.3665">Sovabazar</button>
+              <button class="washroom-hub-pill px-2.5 py-1 rounded-full bg-white/15 hover:bg-white/25 text-white whitespace-nowrap active:scale-95" data-hub="College St" data-lat="22.5760" data-lng="88.3630">College St</button>
+              <button class="washroom-hub-pill px-2.5 py-1 rounded-full bg-white/15 hover:bg-white/25 text-white whitespace-nowrap active:scale-95" data-hub="Ballygunge" data-lat="22.5280" data-lng="88.3660">Ballygunge</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Washroom Category Filter Chips -->
+      <div class="space-y-2">
+        <div class="flex items-center justify-between">
+          <label class="text-xs font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400">Filter Washrooms:</label>
+          <span id="washroom-count-badge" class="text-xs text-teal-800 dark:text-teal-400 font-semibold">28 Locations</span>
+        </div>
+
+        <div class="flex items-center gap-1.5 overflow-x-auto pb-1 no-scrollbar text-xs font-semibold">
+          <button id="washroom-filter-all" class="washroom-type-btn px-3 py-1.5 rounded-full bg-teal-900 text-white shadow-xs whitespace-nowrap">All (28)</button>
+          <button id="washroom-filter-metro" class="washroom-type-btn px-3 py-1.5 rounded-full bg-white dark:bg-festive-nightCard border border-gray-200 dark:border-festive-nightBorder text-gray-700 dark:text-gray-300 hover:border-teal-700 whitespace-nowrap">🚇 Metro Stations</button>
+          <button id="washroom-filter-kmc" class="washroom-type-btn px-3 py-1.5 rounded-full bg-white dark:bg-festive-nightCard border border-gray-200 dark:border-festive-nightBorder text-gray-700 dark:text-gray-300 hover:border-teal-700 whitespace-nowrap">🏛️ KMC Smart (₹5)</button>
+          <button id="washroom-filter-mall" class="washroom-type-btn px-3 py-1.5 rounded-full bg-white dark:bg-festive-nightCard border border-gray-200 dark:border-festive-nightBorder text-gray-700 dark:text-gray-300 hover:border-teal-700 whitespace-nowrap">🏢 Malls & AC (Cleanest)</button>
+          <button id="washroom-filter-accessible" class="washroom-type-btn px-3 py-1.5 rounded-full bg-white dark:bg-festive-nightCard border border-gray-200 dark:border-festive-nightBorder text-gray-700 dark:text-gray-300 hover:border-teal-700 whitespace-nowrap">♿ Wheelchair Ramp</button>
+        </div>
+      </div>
+
+      <!-- Sorted Washroom List Container -->
+      <div id="washrooms-container" class="space-y-3">
+        <!-- Rendered dynamically by JS -->
+      </div>
+
+      <!-- Sanitation Advice & Guidelines Accordion -->
+      <div class="bg-white dark:bg-festive-nightCard rounded-3xl p-4 border border-gray-200 dark:border-festive-nightBorder shadow-sm space-y-2.5 text-xs">
+        <h4 class="font-bold text-gray-900 dark:text-white flex items-center gap-1.5 text-xs">
+          <span>💡</span> Kolkata Puja Hygiene & Sanitation Tips
+        </h4>
+        <div class="space-y-1.5 text-[11px] text-gray-600 dark:text-gray-400 leading-relaxed">
+          <p>• <strong>Metro Station Restrooms:</strong> All Blue, Green, Orange line stations have functional washrooms on concourse levels. Open during night metro service hours (up to 4:00 AM on Saptami–Navami).</p>
+          <p>• <strong>KMC Smart Toilets:</strong> Pay & use (usually ₹5 nominal). Staffed by dedicated municipal cleaning attendants with separate ladies' and gents' cubicles.</p>
+          <p>• <strong>Shopping Complexes (Forum, Quest, South City):</strong> Cleanest, air-conditioned, complimentary facilities with baby diaper-changing stations.</p>
+        </div>
+      </div>
+
+    </section>
 
   </main>
 
@@ -879,6 +980,26 @@
           <span>+ Add to My Hop List</span>
         </button>
 
+        <!-- Pandal Nearest Washroom Card -->
+        <div class="p-3 bg-gradient-to-r from-teal-50 to-emerald-50 dark:from-teal-950/40 dark:to-emerald-950/30 rounded-2xl border border-teal-200 dark:border-teal-900/50 space-y-1.5">
+          <div class="flex items-center justify-between">
+            <h4 class="font-bold text-teal-950 dark:text-teal-200 text-xs flex items-center gap-1.5">
+              <span>🚻 Nearest Clean Washroom</span>
+            </h4>
+            <span id="modal-washroom-distance" class="text-[9.5px] font-black text-teal-800 dark:text-teal-300 bg-teal-100 dark:bg-teal-900/60 px-2 py-0.2 rounded-full"></span>
+          </div>
+          <p id="modal-washroom-name" class="text-[11px] text-gray-700 dark:text-gray-300 font-medium"></p>
+          <div class="flex items-center justify-between pt-1">
+            <a id="modal-btn-walk-washroom" href="#" target="_blank" rel="noopener" class="py-1.5 px-3 bg-teal-600 hover:bg-teal-700 text-white font-bold text-[10px] rounded-xl flex items-center gap-1 shadow-xs">
+              <svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/></svg>
+              <span>Walk to Washroom</span>
+            </a>
+            <button onclick="switchTab('washroom')" class="text-[10px] text-teal-700 dark:text-teal-300 font-bold hover:underline">
+              See All Washrooms ➔
+            </button>
+          </div>
+        </div>
+
         <!-- Walk to Nearest Metro & Hop to Next Sector -->
         <div class="p-3 bg-gradient-to-r from-blue-50 to-indigo-50/60 dark:from-blue-950/30 dark:to-indigo-950/20 rounded-2xl border border-blue-200 dark:border-blue-900/50 space-y-2">
           <div class="flex items-center justify-between">
@@ -1018,8 +1139,16 @@
         <svg class="w-5 h-5 mb-0.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/>
         </svg>
-        <span class="text-[9.5px] leading-tight">Bonedi Bari</span>
+        <span class="text-[9px] leading-tight">Bonedi</span>
         <span class="absolute -top-0.5 right-1 px-1 py-0.2 bg-gradient-to-r from-amber-500 to-rose-600 text-white text-[7px] font-black rounded-full shadow-xs leading-none">Royal</span>
+      </button>
+
+      <button id="nav-btn-washroom" class="nav-item-btn flex-1 flex flex-col items-center py-1 text-gray-500 hover:text-festive-900 dark:text-gray-400 font-medium active:scale-95 transition-all relative rounded-2xl">
+        <svg class="w-5 h-5 mb-0.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+        </svg>
+        <span class="text-[9px] leading-tight">Washroom</span>
+        <span class="absolute -top-0.5 right-1 px-1 py-0.2 bg-teal-600 text-white text-[7px] font-black rounded-full shadow-xs leading-none">GPS</span>
       </button>
 
       <button id="nav-btn-map" class="nav-item-btn flex-1 flex flex-col items-center py-1.5 text-gray-500 hover:text-festive-900 dark:text-gray-400 font-medium active:scale-95 transition-all relative rounded-2xl">
@@ -2509,6 +2638,7 @@
     const viewPandals = document.getElementById('view-pandals');
     const viewItinerary = document.getElementById('view-itinerary');
     const viewBonedi = document.getElementById('view-bonedi');
+    const viewWashroom = document.getElementById('view-washroom');
 
     const navBtnCircuits = document.getElementById('nav-btn-circuits');
     const navBtnMap = document.getElementById('nav-btn-map');
@@ -2516,6 +2646,7 @@
     const navBtnPandals = document.getElementById('nav-btn-pandals');
     const navBtnItinerary = document.getElementById('nav-btn-itinerary');
     const navBtnBonedi = document.getElementById('nav-btn-bonedi');
+    const navBtnWashroom = document.getElementById('nav-btn-washroom');
     const navHopDot = document.getElementById('nav-hop-dot');
     const badgeHopCount = document.getElementById('badge-hop-count');
 
@@ -2639,6 +2770,32 @@
       const pandalsToRender = activeNh
         ? pandals.filter(p => activeNh.pandalIds.includes(p.id))
         : pandals;
+
+      // 4. Washrooms Markers
+      washroomsData.forEach(w => {
+        const wMarker = L.circleMarker([w.lat, w.lng], {
+          radius: 4.5,
+          fillColor: '#0D9488',
+          color: '#ffffff',
+          weight: 1.5,
+          opacity: 1,
+          fillOpacity: 0.95
+        }).addTo(mapLayerGroup);
+
+        wMarker.bindPopup(`
+          <div class="text-xs space-y-1">
+            <span class="inline-block text-[9px] font-black uppercase tracking-wider px-1.5 py-0.2 rounded bg-teal-100 text-teal-800">
+              ${w.typeLabel}
+            </span>
+            <h5 class="font-bold text-gray-900">${w.name}</h5>
+            <p class="text-[11px] text-gray-500">${w.area} • Rating: ★ ${w.cleanlinessRating}</p>
+            <p class="text-[10px] text-gray-600">🕒 ${w.hours}</p>
+            <a href="https://www.google.com/maps/dir/?api=1&destination=${w.lat},${w.lng}&travelmode=walking" target="_blank" rel="noopener" class="text-[10px] text-teal-700 font-bold block mt-1 hover:underline">
+              Walk to Washroom ➔
+            </a>
+          </div>
+        `);
+      });
 
       pandalsToRender.forEach(p => {
         const crowdEst = getLiveCrowdEstimate(p);
@@ -2895,9 +3052,10 @@
 
     // --- TAB SWITCHING (Controlled from Bottom Nav) ---
     function switchTab(target) {
-      [viewCircuits, viewLiveMap, viewFood, viewPandals, viewItinerary, viewBonedi].forEach(v => v && v.classList.add('hidden'));
+      [viewCircuits, viewLiveMap, viewFood, viewPandals, viewItinerary, viewBonedi, viewWashroom].forEach(v => v && v.classList.add('hidden'));
 
-      [navBtnCircuits, navBtnBonedi, navBtnMap, navBtnFood, navBtnPandals, navBtnItinerary].forEach(btn => {
+      [navBtnCircuits, navBtnBonedi, navBtnWashroom, navBtnMap, navBtnFood, navBtnPandals, navBtnItinerary].forEach(btn => {
+        if (!btn) return;
         if (!btn) return;
         btn.classList.remove('text-festive-900', 'dark:text-amber-300', 'font-bold', 'bg-rose-100/60', 'dark:bg-amber-400/10');
         btn.classList.add('text-gray-500', 'dark:text-gray-400', 'font-medium');
@@ -2909,6 +3067,7 @@
       const activeBtnMap = {
         circuits: navBtnCircuits,
         bonedi: navBtnBonedi,
+        washroom: navBtnWashroom,
         map: navBtnMap,
         food: navBtnFood,
         pandals: navBtnPandals,
@@ -2946,6 +3105,10 @@
         if (viewBonedi) viewBonedi.classList.remove('hidden');
         if (navBtnBonedi) navBtnBonedi.classList.add('text-festive-900', 'dark:text-amber-400', 'font-bold');
         renderBonediView();
+      } else if (target === 'washroom') {
+        if (viewWashroom) viewWashroom.classList.remove('hidden');
+        if (navBtnWashroom) navBtnWashroom.classList.add('text-festive-900', 'dark:text-amber-400', 'font-bold');
+        renderWashroomView();
       }
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
@@ -3743,6 +3906,7 @@
     // Bottom Navigation Handlers
     navBtnCircuits.addEventListener('click', () => switchTab('circuits'));
     if (navBtnBonedi) navBtnBonedi.addEventListener('click', () => switchTab('bonedi'));
+    if (navBtnWashroom) navBtnWashroom.addEventListener('click', () => switchTab('washroom'));
     navBtnMap.addEventListener('click', () => switchTab('map'));
     navBtnFood.addEventListener('click', () => switchTab('food'));
     navBtnPandals.addEventListener('click', () => switchTab('pandals'));
@@ -4721,6 +4885,653 @@ ${mapUrl}
       selectedNeighbourhoodId = null;
       updateDirectoryNeighbourhoodUI();
       renderPandals();
+    }
+
+  
+    // ==========================================
+    // KOLKATA PUJA WASHROOMS & RESTROOMS DATA
+    // ==========================================
+    const washroomsData = [
+      {
+        id: "w-kalighat-metro",
+        name: "Kalighat Metro Concourse Washroom",
+        area: "Kalighat / Rashbehari",
+        type: "metro",
+        typeLabel: "🚇 Metro Facility",
+        lat: 22.5185,
+        lng: 88.3480,
+        nearestMetro: "Kalighat (Gate 2)",
+        cleanlinessRating: 4.6,
+        fee: "Free / Token Entry",
+        hours: "6:00 AM – 4:00 AM (Puja Night Special)",
+        features: ["Wheelchair Ramp", "Ladies & Gents", "Running Water"],
+        notes: "Located on main concourse level near ticket counters. Cleaned regularly during festive operations."
+      },
+      {
+        id: "w-deshapriya-kmc",
+        name: "Deshapriya Park KMC Public Toilet",
+        area: "Rashbehari Avenue",
+        type: "kmc",
+        typeLabel: "🏛️ KMC Smart Pay & Use",
+        lat: 22.5190,
+        lng: 88.3570,
+        nearestMetro: "Kalighat / Jatin Das Park (6 min walk)",
+        cleanlinessRating: 4.3,
+        fee: "₹5 Nominal",
+        hours: "24/7 during Puja Nights",
+        features: ["Dedicated Ladies Cubicles", "Attendant on Duty", "Running Water & Soap"],
+        notes: "Located at South-East gate of Deshapriya Park. Upgraded sanitation complex with extra mobile units."
+      },
+      {
+        id: "w-gariahat-crossing-kmc",
+        name: "Gariahat Crossing KMC Deluxe Toilet",
+        area: "Gariahat Crossing",
+        type: "kmc",
+        typeLabel: "🏛️ KMC Deluxe Facility",
+        lat: 22.5195,
+        lng: 88.3645,
+        nearestMetro: "Kalighat (12 min walk / Auto)",
+        cleanlinessRating: 4.5,
+        fee: "₹5 Nominal",
+        hours: "24/7 during Puja",
+        features: ["Wheelchair Accessible", "Ladies Cubicles", "Western Toilets", "Water & Soap"],
+        notes: "Located under Gariahat flyover near Rashbehari crossing. Very convenient for Singhi Park & Ekdalia."
+      },
+      {
+        id: "w-gariahat-ac-market",
+        name: "Gariahat AC Market Restrooms",
+        area: "Gariahat",
+        type: "mall",
+        typeLabel: "🏢 Commercial AC Restrooms",
+        lat: 22.5190,
+        lng: 88.3655,
+        nearestMetro: "Kalighat (12 min walk)",
+        cleanlinessRating: 4.7,
+        fee: "Free for Visitors",
+        hours: "10:00 AM – 11:30 PM",
+        features: ["Air Conditioned", "High Hygiene", "Ladies & Gents", "Mirror & Hand Wash"],
+        notes: "Located on upper floors of AC Market complex. Clean, well maintained and brightly lit."
+      },
+      {
+        id: "w-maddox-square",
+        name: "Maddox Square Ground Sanitation Complex",
+        area: "Ritchie Road / Ballygunge",
+        type: "kmc",
+        typeLabel: "🏛️ Ground Sanitation Unit",
+        lat: 22.5275,
+        lng: 88.3560,
+        nearestMetro: "Netaji Bhavan (8 min walk)",
+        cleanlinessRating: 4.2,
+        fee: "Free / Municipal",
+        hours: "24/7 during Puja",
+        features: ["Ladies & Gents", "Running Water", "Floodlit"],
+        notes: "Located inside the park perimeter near south gate. Essential for Maddox Square adda crowd."
+      },
+      {
+        id: "w-ballygunge-phari-kmc",
+        name: "Ballygunge Phari KMC Deluxe Toilet",
+        area: "Ballygunge Phari / Dover",
+        type: "kmc",
+        typeLabel: "🏛️ KMC Deluxe Toilet",
+        lat: 22.5280,
+        lng: 88.3660,
+        nearestMetro: "Jatin Das Park / Kalighat (15 min)",
+        cleanlinessRating: 4.4,
+        fee: "₹5 Nominal",
+        hours: "6:00 AM – 1:00 AM",
+        features: ["Separate Ladies Cubicles", "Soap Available", "Clean Attendant"],
+        notes: "Located near Dover Road crossing and 6 Ballygunge Place lane. Convenient for Ballygunge Cultural."
+      },
+      {
+        id: "w-quest-mall",
+        name: "Quest Mall Luxury Restrooms",
+        area: "Park Circus / Ballygunge",
+        type: "mall",
+        typeLabel: "🏢 Luxury Mall Facility",
+        lat: 22.5390,
+        lng: 88.3650,
+        nearestMetro: "Rabindra Sadan / Park Street (10 min)",
+        cleanlinessRating: 4.9,
+        fee: "Free for Visitors",
+        hours: "10:30 AM – 11:30 PM",
+        features: ["Air Conditioned", "Disabled Friendly", "Baby Care Room", "5-Star Cleanliness"],
+        notes: "Located on all retail floors. Pristine hygiene, premium hand wash and dedicated sanitation attendants."
+      },
+      {
+        id: "w-forum-courtyard",
+        name: "Forum Courtyard Mall Restrooms",
+        area: "Elgin Road, Bhowanipore",
+        type: "mall",
+        typeLabel: "🏢 Mall Restroom (High Cleanliness)",
+        lat: 22.5375,
+        lng: 88.3490,
+        nearestMetro: "Netaji Bhavan (Gate 1, 3 min walk)",
+        cleanlinessRating: 4.8,
+        fee: "Free for Visitors",
+        hours: "10:30 AM – 11:00 PM",
+        features: ["Wheelchair Ramp", "Air Conditioned", "Baby Changing", "Liquid Soap & Tissue"],
+        notes: "Just 250m from Netaji Bhavan Metro. Super clean facilities for visitors in Bhowanipore area."
+      },
+      {
+        id: "w-netaji-bhavan-metro",
+        name: "Netaji Bhavan Metro Washroom",
+        area: "Bhowanipore",
+        type: "metro",
+        typeLabel: "🚇 Metro Facility",
+        lat: 22.5325,
+        lng: 88.3470,
+        nearestMetro: "Netaji Bhavan (Gate 1)",
+        cleanlinessRating: 4.5,
+        fee: "Free / Token Entry",
+        hours: "6:00 AM – 4:00 AM",
+        features: ["Wheelchair Accessible", "Ladies & Gents", "Running Water"],
+        notes: "Located inside the concourse level. Ideal before heading to Mallick Bari or northern Bhowanipore."
+      },
+      {
+        id: "w-jatin-das-metro",
+        name: "Jatin Das Park Metro Washroom",
+        area: "Hazra / Lake View",
+        type: "metro",
+        typeLabel: "🚇 Metro Facility",
+        lat: 22.5238,
+        lng: 88.3475,
+        nearestMetro: "Jatin Das Park (Gate 2)",
+        cleanlinessRating: 4.4,
+        fee: "Free / Token Entry",
+        hours: "6:00 AM – 4:00 AM",
+        features: ["Ladies & Gents", "Running Water", "Disabled Friendly"],
+        notes: "Concourse level. Quick access to Hazra Park, Tridhara, and Ballygunge walking route."
+      },
+      {
+        id: "w-rabindra-sarobar-metro",
+        name: "Rabindra Sarobar Metro Washroom",
+        area: "Southern Avenue / Lake",
+        type: "metro",
+        typeLabel: "🚇 Metro Facility",
+        lat: 22.5115,
+        lng: 88.3460,
+        nearestMetro: "Rabindra Sarobar (Gate 1)",
+        cleanlinessRating: 4.5,
+        fee: "Free / Token Entry",
+        hours: "6:00 AM – 4:00 AM",
+        features: ["Ladies & Gents", "Running Water", "Wheelchair Ramp"],
+        notes: "Concourse level. Very convenient for Mudiali Club & Shibmandir visitors."
+      },
+      {
+        id: "w-shyambazar-metro",
+        name: "Shyambazar Metro Concourse Washroom",
+        area: "Shyambazar Five-Point",
+        type: "metro",
+        typeLabel: "🚇 Metro Facility",
+        lat: 22.6025,
+        lng: 88.3698,
+        nearestMetro: "Shyambazar (Gate 1 & 2)",
+        cleanlinessRating: 4.6,
+        fee: "Free / Token Entry",
+        hours: "6:00 AM – 4:00 AM",
+        features: ["Wheelchair Ramp", "Ladies & Gents", "Water & Soap"],
+        notes: "Concourse level at five-point crossing. Major hub for Bagbazar, Jagat Mukherjee, and Hatibagan."
+      },
+      {
+        id: "w-bagbazar-ghat-kmc",
+        name: "Bagbazar Ghat KMC Bio-Toilets",
+        area: "Bagbazar Ghat",
+        type: "kmc",
+        typeLabel: "🏛️ KMC Riverfront Sanitation",
+        lat: 22.6035,
+        lng: 88.3640,
+        nearestMetro: "Shyambazar (8 min walk)",
+        cleanlinessRating: 4.2,
+        fee: "₹5 Nominal",
+        hours: "24/7 during Puja",
+        features: ["Ladies & Gents", "Attendant on Duty", "Running Water"],
+        notes: "Located near Bagbazar Sarbojanin carnival ground and riverfront ferry terminal."
+      },
+      {
+        id: "w-sovabazar-metro",
+        name: "Sovabazar Sutanuti Metro Washroom",
+        area: "Sovabazar / Kumartuli",
+        type: "metro",
+        typeLabel: "🚇 Metro Facility",
+        lat: 22.5985,
+        lng: 88.3665,
+        nearestMetro: "Sovabazar Sutanuti (Gate 2)",
+        cleanlinessRating: 4.5,
+        fee: "Free / Token Entry",
+        hours: "6:00 AM – 4:00 AM",
+        features: ["Ladies & Gents", "Running Water", "Wheelchair Accessible"],
+        notes: "Concourse level. Essential washroom stop for Kumartuli Park and Shovabazar Rajbari."
+      },
+      {
+        id: "w-kumartuli-ghat-kmc",
+        name: "Kumartuli Ghat Public Toilet",
+        area: "Kumartuli Riverside",
+        type: "kmc",
+        typeLabel: "🏛️ KMC Public Toilet",
+        lat: 22.5995,
+        lng: 88.3620,
+        nearestMetro: "Sovabazar Sutanuti (7 min walk)",
+        cleanlinessRating: 4.1,
+        fee: "₹5 Nominal",
+        hours: "6:00 AM – 11:00 PM",
+        features: ["Separate Ladies Area", "Running Water"],
+        notes: "Near Banamali Sarkar Street and idol immersion ghat."
+      },
+      {
+        id: "w-hedua-park-kmc",
+        name: "Hedua Park (Azad Hind Bag) KMC Toilet",
+        area: "Hedua / Beadon Street",
+        type: "kmc",
+        typeLabel: "🏛️ KMC Park Sanitation Unit",
+        lat: 22.5900,
+        lng: 88.3690,
+        nearestMetro: "Girish Park (5 min walk)",
+        cleanlinessRating: 4.3,
+        fee: "₹5 Nominal",
+        hours: "6:00 AM – 11:30 PM",
+        features: ["Dedicated Ladies Cubicles", "Attendant on Duty"],
+        notes: "North gate of Hedua Park on Beadon St. Convenient for Chatu Babu Latu Babu & Mitra Bari."
+      },
+      {
+        id: "w-girish-park-metro",
+        name: "Girish Park Metro Washroom",
+        area: "Girish Park / Central Ave",
+        type: "metro",
+        typeLabel: "🚇 Metro Facility",
+        lat: 22.5865,
+        lng: 88.3610,
+        nearestMetro: "Girish Park (Gate 1)",
+        cleanlinessRating: 4.4,
+        fee: "Free / Token Entry",
+        hours: "6:00 AM – 4:00 AM",
+        features: ["Ladies & Gents", "Running Water"],
+        notes: "Concourse level. Quick access for Dorjeepara and Vivekananda road pandals."
+      },
+      {
+        id: "w-college-square-kmc",
+        name: "College Square KMC Deluxe Toilet",
+        area: "College Street",
+        type: "kmc",
+        typeLabel: "🏛️ KMC Deluxe Complex",
+        lat: 22.5760,
+        lng: 88.3630,
+        nearestMetro: "Central (5 min walk)",
+        cleanlinessRating: 4.4,
+        fee: "₹5 Nominal",
+        hours: "24/7 during Puja",
+        features: ["Ladies & Gents", "Wheelchair Accessible", "Soap Available"],
+        notes: "Located on Bidhan Sarani perimeter of College Square swimming pool. Ideal during illuminations."
+      },
+      {
+        id: "w-central-metro",
+        name: "Central Metro Station Washroom",
+        area: "Central / Bowbazar",
+        type: "metro",
+        typeLabel: "🚇 Metro Facility",
+        lat: 22.5730,
+        lng: 88.3610,
+        nearestMetro: "Central (Gate 2)",
+        cleanlinessRating: 4.5,
+        fee: "Free / Token Entry",
+        hours: "6:00 AM – 4:00 AM",
+        features: ["Wheelchair Ramp", "Ladies & Gents", "Running Water"],
+        notes: "Concourse level. Gateway for College Square, Mohammad Ali Park, and Thanthania Dutta Bari."
+      },
+      {
+        id: "w-sealdah-metro",
+        name: "Sealdah Metro Station Restrooms",
+        area: "Sealdah / Bowbazar",
+        type: "metro",
+        typeLabel: "🚇 Green Line Modern Facility",
+        lat: 22.5680,
+        lng: 88.3710,
+        nearestMetro: "Sealdah Metro",
+        cleanlinessRating: 4.9,
+        fee: "Free / Token Entry",
+        hours: "6:00 AM – 12:00 AM",
+        features: ["Wheelchair Accessible", "Baby Care Room", "High Hygiene", "Automatic Taps"],
+        notes: "Ultra-modern Green Line facility with spotless maintenance. Convenient for Santosh Mitra Square."
+      },
+      {
+        id: "w-esplanade-metro",
+        name: "Esplanade Metro Multi-Corridor Washroom",
+        area: "Esplanade / Janbazar",
+        type: "metro",
+        typeLabel: "🚇 Metro Interchange Facility",
+        lat: 22.5630,
+        lng: 88.3530,
+        nearestMetro: "Esplanade (Gate 1)",
+        cleanlinessRating: 4.6,
+        fee: "Free / Token Entry",
+        hours: "6:00 AM – 4:00 AM",
+        features: ["Large Capacity", "Disabled Accessible", "Ladies Area", "Attendants"],
+        notes: "Major interchange station between Blue and Green lines. Multiple cubicles with continuous upkeep."
+      },
+      {
+        id: "w-park-street-metro",
+        name: "Park Street Metro Washroom",
+        area: "Park Street / Allen Park",
+        type: "metro",
+        typeLabel: "🚇 Metro Facility",
+        lat: 22.5510,
+        lng: 88.3510,
+        nearestMetro: "Park Street (Gate 1)",
+        cleanlinessRating: 4.5,
+        fee: "Free / Token Entry",
+        hours: "6:00 AM – 4:00 AM",
+        features: ["Ladies & Gents", "Running Water"],
+        notes: "Concourse level near north gates. Convenient for central Kolkata night walks."
+      },
+      {
+        id: "w-tala-park-kmc",
+        name: "Tala Park / Belgachia KMC Smart Toilet",
+        area: "Tala / Belgachia",
+        type: "kmc",
+        typeLabel: "🏛️ KMC Smart Toilet",
+        lat: 22.6060,
+        lng: 88.3810,
+        nearestMetro: "Belgachia (4 min walk)",
+        cleanlinessRating: 4.5,
+        fee: "₹5 Nominal",
+        hours: "24/7 during Puja",
+        features: ["Wheelchair Ramp", "Ladies & Gents", "Liquid Soap"],
+        notes: "Located on Indra Biswas Road corner near Tala Prattoy. Essential for North Kolkata mega-art trail."
+      },
+      {
+        id: "w-belgachia-metro",
+        name: "Belgachia Metro Concourse Washroom",
+        area: "Belgachia",
+        type: "metro",
+        typeLabel: "🚇 Metro Facility",
+        lat: 22.6050,
+        lng: 88.3790,
+        nearestMetro: "Belgachia (Gate 1)",
+        cleanlinessRating: 4.4,
+        fee: "Free / Token Entry",
+        hours: "6:00 AM – 4:00 AM",
+        features: ["Ladies & Gents", "Running Water"],
+        notes: "Directly inside station concourse. Quick stop before or after Tala Prattoy."
+      },
+      {
+        id: "w-laketown-clocktower",
+        name: "Lake Town Clock Tower KMC Smart Toilet",
+        area: "VIP Road / Lake Town",
+        type: "kmc",
+        typeLabel: "🏛️ VIP Road Smart Unit",
+        lat: 22.6000,
+        lng: 88.4020,
+        nearestMetro: "VIP Road Metro (4 min walk)",
+        cleanlinessRating: 4.6,
+        fee: "₹5 Nominal",
+        hours: "24/7 during Puja",
+        features: ["Ladies & Gents", "Wheelchair Friendly", "Soap Available"],
+        notes: "Located near Lake Town clock tower foot-bridge. Primary facility for Sreebhumi Sporting visitors."
+      },
+      {
+        id: "w-karunamoyee-metro",
+        name: "Karunamoyee Metro Station Washroom",
+        area: "Salt Lake Sector II",
+        type: "metro",
+        typeLabel: "🚇 Green Line Station Facility",
+        lat: 22.5840,
+        lng: 88.4190,
+        nearestMetro: "Karunamoyee",
+        cleanlinessRating: 4.7,
+        fee: "Free / Token Entry",
+        hours: "6:00 AM – 12:00 AM",
+        features: ["Wheelchair Ramp", "Baby Care", "High Hygiene", "Ladies Area"],
+        notes: "Elevated station concourse. Very convenient for FD Block, Central Park, and Salt Lake pandals."
+      },
+      {
+        id: "w-dakshinapan",
+        name: "Dakshinapan Shopping Complex Restrooms",
+        area: "Dhakuria",
+        type: "mall",
+        typeLabel: "🏢 Municipal Commercial Restroom",
+        lat: 22.5070,
+        lng: 88.3650,
+        nearestMetro: "Rabindra Sarobar / Kalighat (Auto / 15 min)",
+        cleanlinessRating: 4.4,
+        fee: "Free / Nominal",
+        hours: "11:00 AM – 10:00 PM",
+        features: ["Ladies & Gents", "Madhusudan Mancha Side", "Running Water"],
+        notes: "Clean public facility inside the open-air heritage shopping plaza near Dhakuria flyover."
+      },
+      {
+        id: "w-south-city-mall",
+        name: "South City Mall Ultra-Clean Restrooms",
+        area: "Prince Anwar Shah Rd / Jodhpur Park",
+        type: "mall",
+        typeLabel: "🏢 Premier Mall Facility",
+        lat: 22.4990,
+        lng: 88.3615,
+        nearestMetro: "Rabindra Sarobar / Tollygunge (10 min)",
+        cleanlinessRating: 4.9,
+        fee: "Free for Visitors",
+        hours: "10:30 AM – 11:30 PM",
+        features: ["Wheelchair Accessible", "Baby Care", "5-Star Sanitation", "Tissue & Hot Air Dryer"],
+        notes: "All retail levels. Cleanest sanctuary for families hopping south Kolkata / Jodhpur Park pujas."
+      }
+    ];
+
+    let washroomTypeFilter = 'all'; // 'all', 'metro', 'kmc', 'mall', 'accessible'
+    let currentWashroomRefLoc = null; // { lat, lng, name }
+
+    function getActiveWashroomLocation() {
+      if (currentWashroomRefLoc) return currentWashroomRefLoc;
+      if (userLocation && userLocation.lat && userLocation.lng) return userLocation;
+      return { lat: 22.5400, lng: 88.3550, name: "Kolkata Central" };
+    }
+
+    function renderWashroomView() {
+      const container = document.getElementById('washrooms-container');
+      if (!container) return;
+
+      const refLoc = getActiveWashroomLocation();
+      const statusText = document.getElementById('washroom-ref-text');
+      const closestBadge = document.getElementById('washroom-closest-badge');
+      const countBadge = document.getElementById('washroom-count-badge');
+
+      // Calculate distance for all washrooms
+      const withDistance = washroomsData.map(w => {
+        const d = calcDistanceKm(refLoc.lat, refLoc.lng, w.lat, w.lng);
+        const mins = Math.max(1, Math.round((d / 4.5) * 60));
+        const distStr = d < 1.0 ? `${Math.round(d * 1000)} m` : `${d.toFixed(2)} km`;
+        return {
+          ...w,
+          distanceKm: d,
+          distanceStr: distStr,
+          walkMins: mins
+        };
+      });
+
+      // Sort by distance ascending (nearest first)
+      withDistance.sort((a, b) => a.distanceKm - b.distanceKm);
+
+      // Apply filter
+      let filtered = withDistance;
+      if (washroomTypeFilter === 'metro') {
+        filtered = withDistance.filter(w => w.type === 'metro');
+      } else if (washroomTypeFilter === 'kmc') {
+        filtered = withDistance.filter(w => w.type === 'kmc');
+      } else if (washroomTypeFilter === 'mall') {
+        filtered = withDistance.filter(w => w.type === 'mall');
+      } else if (washroomTypeFilter === 'accessible') {
+        filtered = withDistance.filter(w => w.features.some(f => f.toLowerCase().includes('wheelchair') || f.toLowerCase().includes('disabled')));
+      }
+
+      if (statusText) {
+        statusText.textContent = `Sorted by distance from: ${refLoc.name || 'Your Location'}`;
+      }
+      if (closestBadge && withDistance.length > 0) {
+        closestBadge.textContent = `Nearest: ${withDistance[0].distanceStr} (${withDistance[0].walkMins} min walk)`;
+      }
+      if (countBadge) {
+        countBadge.textContent = `${filtered.length} Washroom${filtered.length !== 1 ? 's' : ''}`;
+      }
+
+      if (filtered.length === 0) {
+        container.innerHTML = `
+          <div class="text-center py-10 bg-white dark:bg-festive-nightCard rounded-3xl p-6 border border-dashed border-gray-300 dark:border-festive-nightBorder">
+            <p class="text-sm font-bold text-gray-800 dark:text-gray-200">No washrooms found for this filter</p>
+            <p class="text-xs text-gray-500 mt-1">Try selecting 'All' or change your reference hub.</p>
+          </div>
+        `;
+        return;
+      }
+
+      container.innerHTML = filtered.map((w, idx) => {
+        const isClosest = idx === 0 && washroomTypeFilter === 'all';
+        const gmapWalkingUrl = `https://www.google.com/maps/dir/?api=1&origin=${refLoc.lat},${refLoc.lng}&destination=${w.lat},${w.lng}&travelmode=walking`;
+
+        return `
+          <div class="washroom-card rounded-3xl p-4 transition-all ${
+            isClosest
+              ? 'bg-gradient-to-br from-teal-50 via-cyan-50 to-white dark:from-teal-950/40 dark:via-festive-nightCard dark:to-festive-nightCard border-2 border-teal-500 shadow-md scale-101'
+              : 'bg-white dark:bg-festive-nightCard border border-gray-200 dark:border-festive-nightBorder shadow-sm'
+          } space-y-2.5 relative overflow-hidden">
+            
+            ${isClosest ? `
+              <div class="absolute -right-8 -top-8 w-24 h-24 bg-teal-400/10 rounded-full blur-xl pointer-events-none"></div>
+            ` : ''}
+
+            <!-- Card Header -->
+            <div class="flex items-start justify-between relative z-10">
+              <div class="flex items-start gap-2.5">
+                <span class="w-8 h-8 rounded-2xl ${
+                  isClosest ? 'bg-teal-600 text-white' : 'bg-teal-100 dark:bg-teal-950 text-teal-800 dark:text-teal-300'
+                } font-black text-xs flex items-center justify-center flex-shrink-0 shadow-xs">
+                  ${isClosest ? '⚡' : '#' + (idx + 1)}
+                </span>
+                <div>
+                  <div class="flex items-center gap-1.5 flex-wrap">
+                    <span class="text-[9.5px] font-black uppercase tracking-wider px-2 py-0.2 rounded-full ${
+                      w.type === 'metro'
+                        ? 'bg-blue-100 text-blue-800 dark:bg-blue-950 dark:text-blue-300'
+                        : w.type === 'mall'
+                          ? 'bg-purple-100 text-purple-800 dark:bg-purple-950 dark:text-purple-300'
+                          : 'bg-emerald-100 text-emerald-800 dark:bg-emerald-950 dark:text-emerald-300'
+                    }">
+                      ${w.typeLabel}
+                    </span>
+                    <span class="text-[10px] font-bold text-gray-500 dark:text-gray-400">
+                      ★ ${w.cleanlinessRating}/5 Cleanliness
+                    </span>
+                  </div>
+                  <h4 class="text-xs font-black text-gray-900 dark:text-white mt-0.5 leading-snug">
+                    ${w.name}
+                  </h4>
+                  <p class="text-[11px] text-gray-500 dark:text-gray-400">
+                    ${w.area} • Metro: ${w.nearestMetro}
+                  </p>
+                </div>
+              </div>
+
+              <!-- Distance & Walk Time Pill -->
+              <div class="text-right flex-shrink-0">
+                <span class="block text-xs font-black text-teal-700 dark:text-teal-300">
+                  ${w.distanceStr}
+                </span>
+                <span class="text-[9.5px] font-bold text-gray-400">
+                  ~${w.walkMins} min walk
+                </span>
+              </div>
+            </div>
+
+            <!-- Notes & Highlights -->
+            <p class="text-[11px] text-gray-600 dark:text-gray-300 bg-gray-50 dark:bg-black/30 p-2.5 rounded-2xl border border-gray-100 dark:border-festive-nightBorder leading-relaxed">
+              ${w.notes}
+            </p>
+
+            <!-- Features and Facilities Badges -->
+            <div class="flex items-center gap-1 flex-wrap text-[9.5px]">
+              <span class="px-2 py-0.5 rounded-lg bg-gray-100 dark:bg-black/40 text-gray-700 dark:text-gray-300 font-semibold">
+                🕒 ${w.hours}
+              </span>
+              <span class="px-2 py-0.5 rounded-lg bg-gray-100 dark:bg-black/40 text-gray-700 dark:text-gray-300 font-semibold">
+                💰 ${w.fee}
+              </span>
+              ${w.features.map(f => `
+                <span class="px-2 py-0.5 rounded-lg bg-teal-50 dark:bg-teal-950/60 text-teal-800 dark:text-teal-300 font-semibold border border-teal-200/50 dark:border-teal-900/40">
+                  ✓ ${f}
+                </span>
+              `).join('')}
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="grid grid-cols-2 gap-2 pt-1 border-t border-gray-100 dark:border-festive-nightBorder">
+              <a
+                href="${gmapWalkingUrl}"
+                target="_blank"
+                rel="noopener"
+                class="py-2 px-3 bg-gradient-to-r from-teal-500 to-emerald-500 hover:from-teal-400 hover:to-emerald-400 active:scale-98 text-teal-950 font-black rounded-xl text-center text-xs flex items-center justify-center gap-1.5 shadow-xs"
+              >
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/></svg>
+                <span>Walk to Washroom</span>
+              </a>
+
+              <button
+                onclick="focusWashroomOnMap(${w.lat}, ${w.lng}, '${w.name.replace(/'/g, "\\'")}')"
+                class="py-2 px-3 bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-800 dark:text-gray-200 font-bold rounded-xl text-center text-xs flex items-center justify-center gap-1"
+              >
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"/></svg>
+                <span>Show on Map</span>
+              </button>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function triggerWashroomGpsDetection() {
+      const btn = document.getElementById('btn-detect-washrooms-gps');
+      if (btn) btn.innerHTML = '<span>Locating your GPS...</span>';
+
+      if (!navigator.geolocation) {
+        showToast('Geolocation not supported by your browser', '✕');
+        if (btn) btn.innerHTML = '<span>Detect My Location & Sort Nearest</span>';
+        return;
+      }
+
+      navigator.geolocation.getCurrentPosition(
+        (pos) => {
+          userLocation = {
+            lat: pos.coords.latitude,
+            lng: pos.coords.longitude,
+            source: 'gps',
+            name: 'Your Current Spot'
+          };
+          currentWashroomRefLoc = userLocation;
+          if (btn) btn.innerHTML = '<span>✓ Location Locked & Sorted</span>';
+          renderWashroomView();
+          showToast('GPS locked: Washrooms sorted from nearest to furthest! 🚻', '✓');
+        },
+        (err) => {
+          console.warn('Washroom GPS error:', err);
+          showToast('GPS unavailable. Using city center default.', 'ℹ');
+          if (btn) btn.innerHTML = '<span>Detect My Location & Sort Nearest</span>';
+        },
+        { enableHighAccuracy: true, timeout: 8000, maximumAge: 60000 }
+      );
+    }
+
+    function focusWashroomOnMap(lat, lng, name) {
+      switchTab('map');
+      if (mapInstance) {
+        mapInstance.flyTo([lat, lng], 16, { duration: 1.2 });
+        setTimeout(() => {
+          L.popup()
+            .setLatLng([lat, lng])
+            .setContent(`
+              <div class="text-xs p-1">
+                <span class="text-[9px] font-black uppercase text-teal-800 bg-teal-100 px-1.5 py-0.2 rounded">🚻 Clean Washroom</span>
+                <h5 class="font-bold text-gray-900 mt-0.5">${name}</h5>
+                <a href="https://www.google.com/maps/dir/?api=1&destination=${lat},${lng}&travelmode=walking" target="_blank" rel="noopener" class="text-[10px] text-teal-700 font-bold block mt-1 hover:underline">Walk Here (Google Maps) ➔</a>
+              </div>
+            `)
+            .openOn(mapInstance);
+        }, 1300);
+      }
     }
 
   </script>
